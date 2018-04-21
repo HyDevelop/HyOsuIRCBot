@@ -3,6 +3,7 @@ package cc.moecraft.irc.osubot;
 import cc.moecraft.api.Config;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/21 创建!
@@ -35,7 +36,7 @@ public class BotConfig extends Config
      */
     public void setUsername(String username)
     {
-        set("AccountProperties.Username", username);
+        addDefault("AccountProperties.Username", username);
     }
 
     /**
@@ -55,10 +56,12 @@ public class BotConfig extends Config
      */
     public void setPassword(String password)
     {
-        set("AccountProperties.Password", password);
+        addDefault("AccountProperties.Password", password);
     }
 
     /**
+     * TODO: 写用户系统的权限组系统替代这个管理员系统
+     *
      * 获取配置中的管理员用户名列表
      * @return 管理员用户名列表
      */
@@ -73,7 +76,7 @@ public class BotConfig extends Config
      */
     public void setAdminUsernames(ArrayList<String> adminUsernames)
     {
-        set("BotProperties.AdminUsernames", adminUsernames);
+        addDefault("BotProperties.AdminUsernames", adminUsernames);
     }
 
     @Override
@@ -91,6 +94,9 @@ public class BotConfig extends Config
     {
         setUsername("ChangeThisToTheUsername");
         setPassword("ChangeThisToThePassword");
+        setAdminUsernames(new ArrayList<>(Arrays.asList("Hykilpikonna", "dullwolf")));
+
+        addDefault("BotProperties.CommandPrefix", "!");
         save();
     }
 }

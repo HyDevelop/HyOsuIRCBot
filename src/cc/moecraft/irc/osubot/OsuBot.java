@@ -33,11 +33,14 @@ public class OsuBot extends PircBot
     @Override
     public void onMessage(String channel, String sender, String login, String hostname, String message)
     {
-        if (message.equalsIgnoreCase("time"))
-        {
-            String time = new java.util.Date().toString();
-            sendMessage(channel, sender + ": The time is now " + time);
-        }
+        Main.getLogger().debug("收到消息: ");
+        Main.getLogger().debug("- Channel:  " + channel);
+        Main.getLogger().debug("- Sender:   " + sender);
+        Main.getLogger().debug("- Login:    " + login);
+        Main.getLogger().debug("- HostName: " + hostname);
+        Main.getLogger().debug("- Message:  " + message);
+
+        Main.getCommandManager().runCommand(message, sender);
     }
 
     /**
