@@ -1,9 +1,11 @@
 package cc.moecraft.irc.osubot;
 
 import cc.moecraft.irc.osubot.command.CommandManager;
-import org.jibble.pircbot.IrcException;
+import org.pircbotx.PircBotX;
+import org.pircbotx.exception.IrcException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /*
     有什么好的想法随时写在这里!
@@ -24,6 +26,7 @@ import java.io.IOException;
     ▷ [ ] 用户系统
         ▷ [ ] 权限组
     ▷ [ ] 语言文件
+        ▷ [ ] 用来回复消息的类
     ▷ [?] 后台log转发...?
  */
 
@@ -42,7 +45,7 @@ public class Main
     private static BotConfig config;
 
     // 机器人对象
-    private static OsuBot osuBot;
+    private static PircBotX osuBot;
 
     // 指令管理器
     private static CommandManager commandManager;
@@ -59,20 +62,19 @@ public class Main
 
         BotProperties properties = new BotProperties()
                 .setUsername(config.getUsername())
-                .setIrcServerAddress("irc.ppy.sh")
-                .setIrcServerPort(6667)
-                .setIrcServerPassword(config.getPassword());
+                .setIrcServerAddress(config.getString("ServerProperties.Address"))
+                .setIrcServerPort(config.getInt("ServerProperties.Port"))
+                .setIrcServerPassword(config.getPassword())
+                .setBotAdminUsername(config.getAdminUsernames())
+                .setAutoJoinChannels((ArrayList<String>) config.getStringList("BotProperties.AutoJoinChannels"));
 
         // 创建对象
-        osuBot = new OsuBot(properties);
+        osuBot = new PircBotX(properties.toPircConfiguration());
         commandManager = new CommandManager();
         logger = new DebugLogger("HyOsuIRCBot", debug);
 
-        // 用来测试
-        osuBot.setVerbose(debug);
-
         // 连接服务器
-        osuBot.connect();
+        osuBot.startBot();
 
         // 想创建机器人的频道但是发现osu的irc服务器禁用了创建...
         // 这里用于在本地服务器测试
@@ -84,7 +86,7 @@ public class Main
         return config;
     }
 
-    public static OsuBot getOsuBot()
+    public static PircBotX getOsuBot()
     {
         return osuBot;
     }

@@ -1,6 +1,10 @@
 package cc.moecraft.irc.osubot;
 
+import cc.moecraft.irc.osubot.listener.CommandListener;
+import org.pircbotx.Configuration;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/20 创建!
@@ -16,8 +20,25 @@ public class BotProperties
     private int ircServerPort;          // 服务器端口
     private String ircServerPassword;   // 服务器密码 ( Osu其实是Osu的irc账号的独立密码 )
 
+    // 服务器连接设置 ( 连接, 但是不必须有的参数 )
+    private ArrayList<String> autoJoinChannels; // 自动加入的频道
+
     // 服务器管理设置 ( 不必须有的参数 )
     private ArrayList<String> botAdminUsername; // 管理员用户名列表
+
+    public Configuration toPircConfiguration()
+    {
+        Configuration.Builder configurationBuilder =  new Configuration.Builder()
+                .setName(username)
+                .addServer(ircServerAddress, ircServerPort)
+                .addListener(new CommandListener());
+
+        if (autoJoinChannels != null) configurationBuilder.addAutoJoinChannels(autoJoinChannels);
+
+        if (ircServerPassword == null || ircServerPassword.equals(""))
+            return configurationBuilder.buildConfiguration();
+        else return configurationBuilder.setServerPassword(ircServerPassword).buildConfiguration();
+    }
 
     public String getUsername()
     {
@@ -71,6 +92,17 @@ public class BotProperties
     public BotProperties setBotAdminUsername(ArrayList<String> botAdminUsername)
 	{
         this.botAdminUsername = botAdminUsername;
+        return this;
+    }
+
+    public ArrayList<String> getAutoJoinChannels()
+    {
+        return autoJoinChannels;
+    }
+
+    public BotProperties setAutoJoinChannels(ArrayList<String> autoJoinChannels)
+    {
+        this.autoJoinChannels = autoJoinChannels;
         return this;
     }
 }

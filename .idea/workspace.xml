@@ -2,13 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="436588e7-b1a8-4076-94af-099b49bb7de3" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/DebugLogger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/command/Command.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/command/CommandManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/commons_lang3_3_7.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/pircbotx_2_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/slf4j_api_1_7_25.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/slf4j_simple_1_7_25.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/listener/CommandListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/HyOsuIRCBot.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/HyOsuIRCBot.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/pircbot.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HyOsuIRCBot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/HyOsuIRCBot.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pircbot.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HyOsuIRCBot/cc/moecraft/irc/osubot/BotConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HyOsuIRCBot/cc/moecraft/irc/osubot/BotConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HyOsuIRCBot/cc/moecraft/irc/osubot/BotProperties.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HyOsuIRCBot/cc/moecraft/irc/osubot/BotProperties.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HyOsuIRCBot/cc/moecraft/irc/osubot/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HyOsuIRCBot/cc/moecraft/irc/osubot/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HyOsuIRCBot/cc/moecraft/irc/osubot/OsuBot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HyOsuIRCBot/cc/moecraft/irc/osubot/command/Command.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HyOsuIRCBot/cc/moecraft/irc/osubot/command/Command.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HyOsuIRCBot/cc/moecraft/irc/osubot/command/CommandManager$RunResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HyOsuIRCBot/cc/moecraft/irc/osubot/command/CommandManager$RunResult.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HyOsuIRCBot/cc/moecraft/irc/osubot/command/CommandManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HyOsuIRCBot/cc/moecraft/irc/osubot/command/CommandManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/BotConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/BotConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/BotProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/BotProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/DebugLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/DebugLogger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/OsuBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/OsuBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/OsuBot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/command/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/command/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/command/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/command/CommandManager.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,8 +40,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="632">
-              <caret line="99" column="5" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
+            <state relative-caret-position="224">
+              <caret line="23" column="14" lean-forward="true" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1210#1211#0" expanded="true" />
@@ -40,15 +57,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommandManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CommandManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/command/CommandManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="653">
-              <caret line="82" column="7" selection-start-line="82" selection-start-column="7" selection-end-line="82" selection-end-column="7" />
+            <state relative-caret-position="-192">
+              <caret line="69" column="73" lean-forward="true" selection-start-line="69" selection-start-column="73" selection-end-line="69" selection-end-column="73" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#371#372#0" expanded="true" />
                 <element signature="e#416#417#0" expanded="true" />
+                <element signature="e#3146#3147#0" expanded="true" />
+                <element signature="e#3225#3226#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -57,11 +76,34 @@
       <file leaf-file-name="BotProperties.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/BotProperties.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+            <state relative-caret-position="316">
+              <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
               <folding>
-                <element signature="e#1534#1535#0" expanded="true" />
-                <element signature="e#1573#1574#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommandListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/listener/CommandListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="530">
+              <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DebugLogger.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/DebugLogger.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="55" column="53" selection-start-line="55" selection-start-column="53" selection-end-line="55" selection-end-column="53" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -70,9 +112,10 @@
       <file leaf-file-name="Command.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/command/Command.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
-              <caret line="39" column="23" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
+            <state relative-caret-position="38">
+              <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="e#657#658#0" expanded="true" />
                 <element signature="e#702#703#0" expanded="true" />
                 <element signature="e#983#984#0" expanded="true" />
@@ -91,36 +134,12 @@
       <file leaf-file-name="BotConfig.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/BotConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="653">
-              <caret line="98" column="47" selection-start-line="98" selection-start-column="20" selection-end-line="98" selection-end-column="47" />
+            <state relative-caret-position="359">
+              <caret line="102" column="50" lean-forward="true" selection-start-line="102" selection-start-column="20" selection-end-line="102" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#readConfig#0;class#BotConfig#0" />
                 <element signature="method#writeConfig#0;class#BotConfig#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OsuBot.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/OsuBot.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="42" column="61" lean-forward="true" selection-start-line="42" selection-start-column="61" selection-end-line="42" selection-end-column="61" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DebugLogger.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/DebugLogger.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1197">
-              <caret line="66" column="7" lean-forward="true" selection-start-line="66" selection-start-column="7" selection-end-line="66" selection-end-column="7" />
-              <folding>
-                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -149,13 +168,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/BotProperties.java" />
-        <option value="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/command/Command.java" />
         <option value="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/BotConfig.java" />
-        <option value="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/command/CommandManager.java" />
-        <option value="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/Main.java" />
         <option value="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/OsuBot.java" />
+        <option value="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/BotProperties.java" />
         <option value="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/DebugLogger.java" />
+        <option value="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/command/Command.java" />
+        <option value="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/listener/CommandListener.java" />
+        <option value="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/Main.java" />
+        <option value="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/command/CommandManager.java" />
       </list>
     </option>
   </component>
@@ -231,6 +251,16 @@
               <item name="osubot" type="462c0819:PsiDirectoryNode" />
               <item name="command" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="HyOsuIRCBot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HyOsuIRCBot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="cc" type="462c0819:PsiDirectoryNode" />
+              <item name="moecraft" type="462c0819:PsiDirectoryNode" />
+              <item name="irc" type="462c0819:PsiDirectoryNode" />
+              <item name="osubot" type="462c0819:PsiDirectoryNode" />
+              <item name="listener" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -244,13 +274,13 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/commons-lang3-3.7.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.14868541" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -344,12 +374,12 @@
       <option name="presentableId" value="Default" />
       <updated>1524269724144</updated>
       <workItem from="1524269730487" duration="8449000" />
-      <workItem from="1524333227290" duration="8872000" />
+      <workItem from="1524333227290" duration="15460000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17321000" />
+    <option name="totallyTimeSpent" value="23909000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -357,6 +387,7 @@
     <layout>
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" x="557" y="311" width="1876" height="230" id="TODO" order="3" weight="0.27292112" />
+      <window_info anchor="bottom" id="Messages" order="6" weight="0.3281075" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info id="Image Layers" order="5" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
@@ -364,11 +395,11 @@
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32922733" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32997763" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32922733" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23081024" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23081024" />
       <window_info anchor="right" id="Database" order="8" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -376,7 +407,6 @@
       <window_info anchor="right" id="Theme Preview" order="9" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Messages" order="6" weight="0.32849163" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32960895" />
@@ -386,6 +416,38 @@
       <window_info anchor="bottom" id="Java Enterprise" order="10" />
       <window_info id="Web" order="7" side_tool="true" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Designer" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32922733" />
+      <window_info id="Image Layers" order="5" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32960895" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="6" weight="0.32849163" />
+      <window_info anchor="right" x="557" y="311" width="1876" height="230" id="TODO" order="3" weight="0.27292112" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Java Enterprise" order="10" />
+      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32922733" />
+      <window_info anchor="right" id="Maven Projects" order="7" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23081024" />
+      <window_info anchor="right" id="Database" order="8" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="right" id="Palette&#9;" order="5" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -446,6 +508,8 @@
           <caret line="36" column="9" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#611#612#0" expanded="true" />
+            <element signature="e#647#648#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -457,10 +521,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/OsuBot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1100">
+          <caret line="58" column="44" lean-forward="true" selection-start-line="58" selection-start-column="44" selection-end-line="58" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#611#612#0" expanded="true" />
+            <element signature="e#647#648#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/BotConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="653">
-          <caret line="98" column="47" selection-start-line="98" selection-start-column="20" selection-end-line="98" selection-end-column="47" />
+        <state relative-caret-position="359">
+          <caret line="102" column="50" lean-forward="true" selection-start-line="102" selection-start-column="20" selection-end-line="102" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#readConfig#0;class#BotConfig#0" />
@@ -471,8 +547,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="632">
-          <caret line="99" column="5" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
+        <state relative-caret-position="224">
+          <caret line="23" column="14" lean-forward="true" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1210#1211#0" expanded="true" />
@@ -487,34 +563,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/command/CommandManager.java">
+    <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/BotProperties.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="653">
-          <caret line="82" column="7" selection-start-line="82" selection-start-column="7" selection-end-line="82" selection-end-column="7" />
+        <state relative-caret-position="316">
+          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#371#372#0" expanded="true" />
-            <element signature="e#416#417#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/BotProperties.java">
+    <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/DebugLogger.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+        <state relative-caret-position="247">
+          <caret line="55" column="53" selection-start-line="55" selection-start-column="53" selection-end-line="55" selection-end-column="53" />
           <folding>
-            <element signature="e#1534#1535#0" expanded="true" />
-            <element signature="e#1573#1574#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/command/Command.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="39" column="23" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
+        <state relative-caret-position="38">
+          <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="e#657#658#0" expanded="true" />
             <element signature="e#702#703#0" expanded="true" />
             <element signature="e#983#984#0" expanded="true" />
@@ -529,22 +603,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/DebugLogger.java">
+    <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/listener/CommandListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1197">
-          <caret line="66" column="7" lean-forward="true" selection-start-line="66" selection-start-column="7" selection-end-line="66" selection-end-column="7" />
+        <state relative-caret-position="530">
+          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/OsuBot.java">
+    <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/command/CommandManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="42" column="61" lean-forward="true" selection-start-line="42" selection-start-column="61" selection-end-line="42" selection-end-column="61" />
+        <state relative-caret-position="-192">
+          <caret line="69" column="73" lean-forward="true" selection-start-line="69" selection-start-column="73" selection-end-line="69" selection-end-column="73" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#371#372#0" expanded="true" />
+            <element signature="e#416#417#0" expanded="true" />
+            <element signature="e#3146#3147#0" expanded="true" />
+            <element signature="e#3225#3226#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -568,7 +646,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited />
+          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -609,7 +687,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -629,7 +706,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>MoeConfigurationLib</last-edited>
+          <last-edited>commons-lang3-3.7</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
