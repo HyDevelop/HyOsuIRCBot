@@ -1,6 +1,8 @@
 package cc.moecraft.irc.osubot;
 
 import cc.moecraft.irc.osubot.command.CommandManager;
+import cc.moecraft.irc.osubot.command.commands.CommandHelp;
+import cc.moecraft.irc.osubot.command.commands.CommandPing;
 import org.pircbotx.PircBotX;
 import org.pircbotx.exception.IrcException;
 
@@ -74,6 +76,10 @@ public class Main
         osuBot = new PircBotX(properties.toPircConfiguration());
         commandManager = new CommandManager();
         logger = new DebugLogger("HyOsuIRCBot", debug);
+
+        // 注册指令 //TODO: 优化
+        commandManager.registerCommand(new CommandHelp());
+        commandManager.registerCommand(new CommandPing());
 
         // 连接服务器
         osuBot.startBot();
