@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="436588e7-b1a8-4076-94af-099b49bb7de3" name="Default" comment="" />
+    <list default="true" id="436588e7-b1a8-4076-94af-099b49bb7de3" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cc/moecraft/irc/osubot/Main.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,10 +17,14 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="32" column="60" selection-start-line="32" selection-start-column="60" selection-end-line="32" selection-end-column="60" />
+            <state relative-caret-position="418">
+              <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1210#1211#0" expanded="true" />
+                <element signature="e#1239#1240#0" expanded="true" />
+                <element signature="e#1283#1284#0" expanded="true" />
+                <element signature="e#1312#1313#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -263,15 +269,16 @@
       <option name="presentableId" value="Default" />
       <updated>1524269724144</updated>
       <workItem from="1524269730487" duration="8449000" />
-      <workItem from="1524333227290" duration="18000" />
+      <workItem from="1524333227290" duration="2091000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8467000" />
+    <option name="totallyTimeSpent" value="10540000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" x="557" y="311" width="1876" height="230" id="TODO" order="3" weight="0.27292112" />
@@ -281,7 +288,7 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.32922733" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32922733" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32997763" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info id="Capture Tool" order="2" />
@@ -323,6 +330,10 @@
           <caret line="32" column="60" lean-forward="true" selection-start-line="32" selection-start-column="60" selection-end-line="32" selection-end-column="60" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
+            <element signature="e#1239#1240#0" expanded="true" />
+            <element signature="e#1283#1284#0" expanded="true" />
+            <element signature="e#1312#1313#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -395,10 +406,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cc/moecraft/irc/osubot/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="32" column="60" selection-start-line="32" selection-start-column="60" selection-end-line="32" selection-end-column="60" />
+        <state relative-caret-position="418">
+          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
+            <element signature="e#1239#1240#0" expanded="true" />
+            <element signature="e#1283#1284#0" expanded="true" />
+            <element signature="e#1312#1313#0" expanded="true" />
           </folding>
         </state>
       </provider>

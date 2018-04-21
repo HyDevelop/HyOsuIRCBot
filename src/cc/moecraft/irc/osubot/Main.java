@@ -4,6 +4,25 @@ import org.jibble.pircbot.IrcException;
 
 import java.io.IOException;
 
+/*
+    有什么好的想法随时写在这里!
+
+    ▷: 排队
+    ▶: 开发中
+
+    [ ]: 未完成
+    [?]: 不确定
+    [-]: 部分完成
+    [D]: 需要测试
+    [X]: 完成
+
+    TODO:
+    ▶ [ ] 注册个机器人账号 ( 还在等ppy回复邮件... )
+    ▶ [ ] 指令系统
+       ▷ [?] 所有的指令!
+    ▷ [?] 后台log转发...?
+ */
+
 /**
  * 此类由 Hykilpikonna 在 2018/04/20 创建!
  * Created by Hykilpikonna on 2018/04/20!
@@ -12,6 +31,7 @@ import java.io.IOException;
  */
 public class Main
 {
+    // 版本 ( 不懂怎样配置Github版本...
     public static final String VERSION = "0.0.1";
 
     // 配置文件 ( 用来存用于IRC登陆的账号密码 )
