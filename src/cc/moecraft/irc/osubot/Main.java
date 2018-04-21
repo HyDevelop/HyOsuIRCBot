@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot;
 
+import cc.moecraft.irc.osubot.command.CommandManager;
 import org.jibble.pircbot.IrcException;
 
 import java.io.IOException;
@@ -20,6 +21,9 @@ import java.io.IOException;
     ▶ [ ] 注册个机器人账号 ( 还在等ppy回复邮件... )
     ▶ [ ] 指令系统
        ▷ [?] 所有的指令!
+    ▷ [ ] 用户系统
+        ▷ [ ] 权限组
+    ▷ [ ] 语言文件
     ▷ [?] 后台log转发...?
  */
 
@@ -37,8 +41,15 @@ public class Main
     // 配置文件 ( 用来存用于IRC登陆的账号密码 )
     private static BotConfig config;
 
+    // 机器人对象
     private static OsuBot osuBot;
 
+    // 指令管理器
+    private static CommandManager commandManager;
+    
+    // Logger
+    private static DebugLogger logger;
+    
     // 是否开启测试
     private static boolean debug = true;
 
@@ -52,8 +63,10 @@ public class Main
                 .setIrcServerPort(6667)
                 .setIrcServerPassword(config.getPassword());
 
-        // 创建机器人对象
+        // 创建对象
         osuBot = new OsuBot(properties);
+        commandManager = new CommandManager();
+        logger = new DebugLogger("HyOsuIRCBot", debug);
 
         // 用来测试
         osuBot.setVerbose(debug);
@@ -62,6 +75,7 @@ public class Main
         osuBot.connect();
 
         // 想创建机器人的频道但是发现osu的irc服务器禁用了创建...
+        // 这里用于在本地服务器测试
         // osuBot.joinChannel("#bots");
     }
 
@@ -73,5 +87,15 @@ public class Main
     public static OsuBot getOsuBot()
     {
         return osuBot;
+    }
+
+    public static CommandManager getCommandManager()
+	{
+        return commandManager;
+    }
+
+    public static DebugLogger getLogger()
+	{
+        return logger;
     }
 }
