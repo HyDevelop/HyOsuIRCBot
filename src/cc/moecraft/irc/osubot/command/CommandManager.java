@@ -67,7 +67,7 @@ public class CommandManager
         {
             if (channel == null) // 如果是私聊, 回复提示
             {
-                event.respondPrivateMessage("[HyOsuBot] NOT A COMMAND: 不是指令 ( 输入" + getPrefix() + "help显示帮助 )"); // TODO: 建用来发消息的类
+                Main.getMessenger().respond(event, "NOT A COMMAND: 不是指令 ( 输入" + getPrefix() + "help显示帮助 )");
             }
 
             return RunResult.NOT_A_COMMAND;
@@ -81,7 +81,7 @@ public class CommandManager
 
         if (!registeredCommands.containsKey(command))
         {
-            event.respondPrivateMessage("[HyOsuBot] UNKNOWN COMMAND: 未知指令 ( 输入" + getPrefix() + "help显示帮助 )"); // TODO: 建用来发消息的类
+            Main.getMessenger().respond(event, "UNKNOWN COMMAND: 未知指令 ( 输入" + getPrefix() + "help显示帮助 )");
             return RunResult.COMMAND_NOT_FOUND;
         }
 

@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot.command.commands;
 
+import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
@@ -23,6 +24,6 @@ public class CommandPing extends Command
     @Override
     public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        event.respond("Pong!");
+        Main.getMessenger().respond(event, "Pong!");
     }
 }

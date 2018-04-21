@@ -17,6 +17,6 @@ public class Messenger
 
     public void respond(GenericMessageEvent event, String text)
     {
-
+        event.respond(text);
     }
 }
