@@ -81,11 +81,7 @@ public class CommandManager
 
         if (!registeredCommands.containsKey(command))
         {
-            if (channel == null)
-            {
-                event.respondPrivateMessage("[HyOsuBot] UNKNOWN COMMAND: 未知指令 ( 输入" + getPrefix() + "help显示帮助 )"); // TODO: 建用来发消息的类
-            }
-
+            event.respondPrivateMessage("[HyOsuBot] UNKNOWN COMMAND: 未知指令 ( 输入" + getPrefix() + "help显示帮助 )"); // TODO: 建用来发消息的类
             return RunResult.COMMAND_NOT_FOUND;
         }
 
