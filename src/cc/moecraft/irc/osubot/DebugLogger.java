@@ -53,7 +53,7 @@ public class DebugLogger
      */
     public void log(String s)
     {
-        System.out.println(String.format("%s[%s%s%s][%s%s%s]%s%s", WHITE, PURPLE, getCurrentTime(), WHITE, BLUE, pre, WHITE, RESET, s));
+        System.out.println(String.format("%s[%s%s%s] [%s%s%s] %s%s", WHITE, PURPLE, getCurrentTime(), WHITE, BLUE, pre, WHITE, RESET, s));
     }
 
     public String getCurrentTime()
@@ -71,7 +71,7 @@ public class DebugLogger
         {
             StackTraceElement stackTrace = Thread.currentThread().getStackTrace()[2];
 
-            log(String.format("%s[%sDEBUG%s(%s%s.%s.%s%s)]%s%s", WHITE, RED, WHITE, YELLOW, stackTrace.getClassName(), stackTrace.getMethodName(), stackTrace.getLineNumber(), WHITE, CYAN, s));
+            log(String.format("%s[%sDEBUG%s(%s%s.%s.%s%s)] %s%s", WHITE, RED, WHITE, YELLOW, stackTrace.getClassName(), stackTrace.getMethodName(), stackTrace.getLineNumber(), WHITE, CYAN, s));
         }
     }
 }

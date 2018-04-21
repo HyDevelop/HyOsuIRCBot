@@ -1,5 +1,9 @@
 package cc.moecraft.irc.osubot.command;
 
+import org.pircbotx.Channel;
+import org.pircbotx.User;
+import org.pircbotx.hooks.types.GenericMessageEvent;
+
 import java.util.ArrayList;
 
 /**
@@ -35,11 +39,13 @@ public abstract class Command
 
     /**
      * 执行指令
-     * @param senderUsername 发送者的irc用户名 ( 在osu的irc服务器的话就是osu的用户名 )
+     * @param event 事件
+     * @param sender 发送者的irc用户 ( 在osu的irc服务器的话用户名就是osu的用户名 )
+     * @param channel 频道
      * @param command 指令名 ( 不包含指令参数 )
      * @param args 指令参数 ( 不包含指令名 )
      */
-    public abstract void run(String senderUsername, String command, ArrayList<String> args); //TODO 添加用户系统并把这个String类的用户改成CommandSender类的用户
+    public abstract void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args); //TODO 添加用户系统并把这个User类的用户改成CommandSender类的用户
 
     public String getName()
     {

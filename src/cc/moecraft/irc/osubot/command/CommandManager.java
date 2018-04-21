@@ -2,6 +2,10 @@ package cc.moecraft.irc.osubot.command;
 
 import cc.moecraft.irc.osubot.Main;
 import com.sun.org.apache.xerces.internal.impl.dv.dtd.NOTATIONDatatypeValidator;
+import org.pircbotx.Channel;
+import org.pircbotx.User;
+import org.pircbotx.hooks.events.MessageEvent;
+import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,8 +43,8 @@ public class CommandManager
         }
         else
         {
-            registeredCommands.put(command.getName(), command);
-            command.getAlias().forEach(alias -> registeredCommands.put(alias, command));
+            registeredCommands.put(command.getName().toLowerCase(), command);
+            command.getAlias().forEach(alias -> registeredCommands.put(alias.toLowerCase(), command));
             return true;
         }
     }
@@ -49,28 +53,46 @@ public class CommandManager
      * 自动找到注册过的指令对象运行
      *
      * 例子:
-     *  !echo hi there
+     *  !ecHO hi there
      *
+     * @param event 事件
      * @param fullCommand 完整指令
-     * @param username 用户名
+     * @param user 用户名
+     * @param channel 频道
      * @return 执行结果
      */
-    public RunResult runCommand(String fullCommand, String username)
+    public RunResult runCommand(GenericMessageEvent event, String fullCommand, User user, Channel channel)
     {
-        if (!isCommand(fullCommand)) return RunResult.NOT_A_COMMAND;
+        if (!isCommand(fullCommand))
+        {
+            if (channel == null) // 如果是私聊, 回复提示
+            {
+                event.respondPrivateMessage("[HyOsuBot] NOT A COMMAND: 不是指令 ( 输入" + getPrefix() + "help显示帮助 )"); // TODO: 建用来发消息的类
+            }
 
-        // String "!echo hi" -> ArrayList ["!echo", "hi", "there"]
+            return RunResult.NOT_A_COMMAND;
+        }
+
+        // String "!ecHO hi" -> ArrayList ["!ecHO", "hi", "there"]
         ArrayList<String> args = new ArrayList<>(Arrays.asList(fullCommand.split(" ")));
 
         // "echo"
-        String command = args.get(0).replace(Main.getConfig().getString("BotProperties.CommandPrefix"), "");
+        String command = args.get(0).replace(getPrefix(), "").toLowerCase();
 
-        if (!registeredCommands.containsKey(command)) return RunResult.COMMAND_NOT_FOUND;
+        if (!registeredCommands.containsKey(command))
+        {
+            if (channel == null)
+            {
+                event.respondPrivateMessage("[HyOsuBot] UNKNOWN COMMAND: 未知指令 ( 输入" + getPrefix() + "help显示帮助 )"); // TODO: 建用来发消息的类
+            }
+
+            return RunResult.COMMAND_NOT_FOUND;
+        }
 
         // ["hi", "there"]
         args.remove(0);
 
-        registeredCommands.get(command).run(username, command, args);  // TODO: 判断用户有没有权限
+        registeredCommands.get(command).run(event, user, channel, command, args);  // TODO: 判断用户有没有权限
 
         return RunResult.SUCCESS;
     }
@@ -88,5 +110,14 @@ public class CommandManager
     public boolean isCommand(String text)
     {
         return text.startsWith(Main.getConfig().getString("BotProperties.CommandPrefix"));
+    }
+
+    /**
+     * 获取指令前缀
+     * @return 指令前缀
+     */
+    public String getPrefix()
+    {
+        return Main.getConfig().getString("BotProperties.CommandPrefix");
     }
 }

@@ -92,11 +92,15 @@ public class BotConfig extends Config
     @Override
     public void writeDefaultConfig()
     {
+        addDefault("ServerProperties.Address", "irc.ppy.sh");
+        addDefault("ServerProperties.Port", 6667);
+
         setUsername("ChangeThisToTheUsername");
         setPassword("ChangeThisToThePassword");
         setAdminUsernames(new ArrayList<>(Arrays.asList("Hykilpikonna", "dullwolf")));
 
         addDefault("BotProperties.CommandPrefix", "!");
+        addDefault("BotProperties.AutoJoinChannels", new String[]{"#general", "#chinese"});
         save();
     }
 }

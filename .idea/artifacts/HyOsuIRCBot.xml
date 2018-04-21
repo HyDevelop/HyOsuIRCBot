@@ -3,7 +3,6 @@
     <output-path>$PROJECT_DIR$/out/artifacts/HyOsuIRCBot</output-path>
     <root id="archive" name="HyOsuIRCBot.jar">
       <element id="module-output" name="HyOsuIRCBot" />
-      <element id="library" level="project" name="pircbot" />
       <element id="library" level="project" name="com.google.guava:guava:18.0" />
       <element id="library" level="project" name="MoeConfigurationLib" />
     </root>
