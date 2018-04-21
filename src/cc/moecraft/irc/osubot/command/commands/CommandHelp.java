@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot.command.commands;
 
+import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
@@ -24,6 +25,6 @@ public class CommandHelp extends Command
     @Override
     public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        event.respond("还没有帮助!");
+        Main.getMessenger().respond(event, "还没有帮助!");
     }
 }

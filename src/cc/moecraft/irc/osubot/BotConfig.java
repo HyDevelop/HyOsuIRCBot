@@ -15,7 +15,7 @@ public class BotConfig extends Config
 {
     public BotConfig()
     {
-        super(Main.VERSION, "HyOsuBot", "Config", "yml", false, false, true);
+        super(Main.VERSION, Main.PATH, "Config", "yml", false, true, true);
 
         System.out.println("配置文件路径: " + getConfigFile().getAbsolutePath());
     }

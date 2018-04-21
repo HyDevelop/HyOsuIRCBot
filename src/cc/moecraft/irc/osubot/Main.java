@@ -3,6 +3,7 @@ package cc.moecraft.irc.osubot;
 import cc.moecraft.irc.osubot.command.CommandManager;
 import cc.moecraft.irc.osubot.command.commands.CommandHelp;
 import cc.moecraft.irc.osubot.command.commands.CommandPing;
+import cc.moecraft.irc.osubot.language.Messenger;
 import org.pircbotx.PircBotX;
 import org.pircbotx.exception.IrcException;
 
@@ -13,7 +14,7 @@ import java.util.ArrayList;
     有什么好的想法随时写在这里!
 
     ▷: 排队
-    ▶: 开发中
+    ▶: 开发中/完成
 
     [ ]: 未完成
     [?]: 不确定
@@ -24,13 +25,22 @@ import java.util.ArrayList;
     TODO: 以下所有...
     ▶ [ ] 注册个机器人账号 ( 还在等ppy回复邮件... )
     ▶ [-] 指令系统
-       ▷ [D] 框架
-       ▷ [ ] 帮助指令
-       ▷ [ ] 列出所有指令的指令
+        ▶ [-] 框架
+            ▶ [X] 基础框架
+            ▷ [ ] 检测权限 ( 需要权限组 )
+        ▷ [-] 帮助指令
+            ▷ [X] 帮助指令
+            ▷ [ ] 帮助内容 ( 需要语言文件 )
+        ▷ [ ] 列出所有指令的指令
     ▷ [ ] 用户系统
         ▷ [ ] 权限组
-    ▷ [ ] 语言文件
-        ▷ [ ] 用来回复消息的类
+        ▷ [ ] 检测新用户
+            ▷ [ ] 新用户提示设置语言
+    ▶ [ ] 语言文件
+        ▶ [ ] 读取语言文件
+        ▷ [ ] 分用户设置语言
+        ▷ [-] 用来回复消息的类
+            ▷ [ ] 直接用语言文件码回复消息
     ▷ [?] 后台log转发...?
  */
 
@@ -45,6 +55,9 @@ public class Main
     // 版本 ( 不懂怎样配置Github版本...
     public static final String VERSION = "0.0.1";
 
+    // 配置/语言文件路径
+    public static final String PATH = "HyOsuBot";
+
     // 配置文件 ( 用来存用于IRC登陆的账号密码 )
     private static BotConfig config;
 
@@ -56,6 +69,9 @@ public class Main
     
     // Logger
     private static DebugLogger logger;
+    
+    // 消息发送器
+    private static Messenger messenger;
     
     // 是否开启测试
     private static boolean debug = true;
@@ -76,6 +92,7 @@ public class Main
         osuBot = new PircBotX(properties.toPircConfiguration());
         commandManager = new CommandManager();
         logger = new DebugLogger("HyOsuIRCBot", debug);
+        messenger = new Messenger();
 
         // 注册指令 //TODO: 优化
         commandManager.registerCommand(new CommandHelp());
@@ -107,5 +124,10 @@ public class Main
     public static DebugLogger getLogger()
 	{
         return logger;
+    }
+
+    public static Messenger getMessenger()
+	{
+        return messenger;
     }
 }
