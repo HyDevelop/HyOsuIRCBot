@@ -1,16 +1,5 @@
-
-.idea/artifacts/HyOsuIRCBot.xml
-.idea/libraries/com_google_guava_guava_18_0.xml
 *.iml
 *.xml
 *.yml
 *.class
-out/production/HyOsuIRCBot/org/pircbotx/package.html
-out/production/HyOsuIRCBot/org/pircbotx/hooks/types/package.html
-out/production/HyOsuIRCBot/org/pircbotx/hooks/package.html
-out/production/HyOsuIRCBot/org/pircbotx/hooks/managers/package.html
-out/production/HyOsuIRCBot/org/pircbotx/hooks/events/package.html
-out/production/HyOsuIRCBot/org/pircbotx/exception/package.html
 *.html
-*.html
-src/org/pircbotx/package.html
