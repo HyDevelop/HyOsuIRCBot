@@ -34,7 +34,7 @@ public class PermissionConfig extends Config
         String currentPrefix = GROUPS_PREFIX + group.getGroupName() + ".";
 
         set(currentPrefix + "ContainingGroups", groupListToNameList(group.getContainings()));
-        set(currentPrefix + "Permissions", group.getThisGroupPermissions());
+        set(currentPrefix + "Permissions", permissionListToNameList(group.getThisGroupPermissions()));
 
         save();
     }
@@ -87,6 +87,20 @@ public class PermissionConfig extends Config
         ArrayList<String> result = new ArrayList<>();
 
         groups.forEach(permissionGroup -> result.add(permissionGroup.getGroupName()));
+
+        return result;
+    }
+
+    /**
+     * 权限列表转换到权限名字列表
+     * @param permissions 权限列表
+     * @return 权限名字列表
+     */
+    private ArrayList<String> permissionListToNameList(ArrayList<Permission> permissions)
+    {
+        ArrayList<String> result = new ArrayList<>();
+
+        permissions.forEach(permissionGroup -> result.add(permissionGroup.toString()));
 
         return result;
     }
