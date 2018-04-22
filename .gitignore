@@ -3,3 +3,5 @@
 *.yml
 *.class
 *.html
+target/*
+*.xml___jb_tmp___
