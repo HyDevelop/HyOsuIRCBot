@@ -19,7 +19,7 @@ public class CommandTime extends Command
 {
     public CommandTime()
     {
-        super("time", new ArrayList<>(Arrays.asList("currenttime", "ct", "sj", "时间")));
+        super("time", "currenttime", "ct", "sj", "时间");
     }
 
     @Override

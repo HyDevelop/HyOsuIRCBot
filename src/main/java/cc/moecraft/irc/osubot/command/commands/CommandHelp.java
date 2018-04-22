@@ -28,7 +28,7 @@ public class CommandHelp extends Command
 
     public CommandHelp()
     {
-        super("help", new ArrayList<>(Arrays.asList("?", "帮助")));
+        super("help", "?", "帮助");
     }
 
     @Override

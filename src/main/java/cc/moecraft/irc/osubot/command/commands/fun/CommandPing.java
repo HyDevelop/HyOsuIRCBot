@@ -18,7 +18,7 @@ public class CommandPing extends Command
 {
     public CommandPing()
     {
-        super("ping", new ArrayList<>());
+        super("ping");
     }
 
     @Override

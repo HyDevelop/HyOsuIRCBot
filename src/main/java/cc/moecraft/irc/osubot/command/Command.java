@@ -5,6 +5,7 @@ import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/21 创建!
@@ -35,6 +36,16 @@ public abstract class Command
     public Command(String name)
     {
         this(name, new ArrayList<>());
+    }
+
+    /**
+     * 指令构造器封装
+     * @param name 指令名
+     * @param alias 其他指令名
+     */
+    public Command(String name, String ... alias)
+    {
+        this(name, new ArrayList<>(Arrays.asList(alias)));
     }
 
     /**
