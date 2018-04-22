@@ -1,0 +1,122 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>cc.moecraft</groupId>
+  <artifactId>ircBot</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>osuBot</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.jboot</groupId>
+      <artifactId>jboot</artifactId>
+      <version>1.4.8</version>
+    </dependency>
+
+    <!--验证器-->
+    <dependency>
+      <groupId>com.baidu.unbiz</groupId>
+      <artifactId>fluent-validator</artifactId>
+      <version>1.0.6</version>
+    </dependency>
+    <!--验证器-->
+
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>1.21</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <encoding>UTF-8</encoding>
+          <!--必须添加compilerArgument配置，才能使用JFinal的Controller方法带参数的功能-->
+          <compilerArgument>-parameters</compilerArgument>
+        </configuration>
+      </plugin>
+
+
+    </plugins>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources/</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/*.yml</include>
+          <include>**/*.xml</include>
+        </includes>
+      </resource>
+    </resources>
+
+  </build>
+
+  <!-- 集中定义依赖版本号 -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
+  <profiles>
+    <!--本地开发环境-->
+    <profile>
+      <id>dev</id>
+      <!--指定默认环境参数-->
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <jboot.server.port>8082</jboot.server.port>
+        <jboot.mode>dev</jboot.mode>
+        <jboot.rpc.hystrixEnable>false</jboot.rpc.hystrixEnable>
+        <jboot.datasource.url>jdbc:mysql://xxx:3306/testSql?useUnicode=true&amp;characterEncoding=utf-8</jboot.datasource.url>
+        <jboot.datasource.user>root</jboot.datasource.user>
+        <jboot.datasource.password>password</jboot.datasource.password>
+        <jboot.datasource.maximumPoolSize>10</jboot.datasource.maximumPoolSize>
+        <jboot.redis.host>xxx</jboot.redis.host>
+        <jboot.redis.password>xxx</jboot.redis.password>
+        <jboot.rpc.host>xxx:2181</jboot.rpc.host>
+        <jboot.log>true</jboot.log>
+      </properties>
+    </profile>
+
+    <!--正式环境-->
+    <profile>
+      <id>product</id>
+      <properties>
+        <jboot.server.port>8082</jboot.server.port>
+        <jboot.mode>product</jboot.mode>
+        <jboot.rpc.hystrixEnable>false</jboot.rpc.hystrixEnable>
+        <jboot.datasource.url>jdbc:mysql://正式环境IP:3306/数据库名?useUnicode=true&amp;characterEncoding=utf-8</jboot.datasource.url>
+        <jboot.datasource.user>root</jboot.datasource.user>
+        <jboot.datasource.password>数据库密码</jboot.datasource.password>
+        <jboot.datasource.maximumPoolSize>10</jboot.datasource.maximumPoolSize>
+        <jboot.redis.host>Redis的IP</jboot.redis.host>
+        <jboot.redis.password>Redis密码</jboot.redis.password>
+        <jboot.rpc.host>正式环境IP:2181</jboot.rpc.host>
+        <jboot.log>false</jboot.log>
+      </properties>
+    </profile>
+
+  </profiles>
+
+</project>
