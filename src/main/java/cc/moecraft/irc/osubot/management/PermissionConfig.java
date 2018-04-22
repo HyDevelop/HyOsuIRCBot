@@ -4,10 +4,7 @@ import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.yaml.Config;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/22 创建!
@@ -131,7 +128,29 @@ public class PermissionConfig extends Config
     @Override
     public void writeDefaultConfig()
     {
-        //TODO: 默认权限组
+        // 默认用户权限分3组:
+        //  default:    irc.user.regular.*
+        //  VIP:        irc.user.vip.* ( 继承 default )
+        //  Supporter:  irc.user.sup.* ( 继承 vip )
+
+        // 默认管理权限分2组:
+        //  Admin:      irc.admin.*
+        //  Manager:    irc.admin.managing.*
+
+        PermissionGroup defaultGroup = new PermissionGroup("default").setPermissions("irc.user.regular.*");
+        PermissionGroup vip = new PermissionGroup("vip").setPermissions("irc.user.vip.*").setContainings(defaultGroup);
+        PermissionGroup supporter = new PermissionGroup("supporter").setPermissions("irc.user.sup.*").setContainings(vip);
+
+        PermissionGroup admin = new PermissionGroup("admin").setPermissions("irc.admin.*");
+        PermissionGroup manager = new PermissionGroup("manager").setPermissions("irc.admin.managing.*");
+
+        setDefaultGroup(defaultGroup);
+
+        setGroup(defaultGroup);
+        setGroup(vip);
+        setGroup(supporter);
+        setGroup(admin);
+        setGroup(manager);
     }
 
     public PermissionGroup getDefaultGroup()

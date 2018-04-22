@@ -1,6 +1,7 @@
 package cc.moecraft.irc.osubot.management;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/22 创建!
@@ -62,6 +63,16 @@ public class PermissionGroup
         return this;
     }
 
+    public PermissionGroup setPermissions(String ... permissions)
+    {
+        ArrayList<Permission> result = new ArrayList<>();
+
+        Arrays.asList(permissions).forEach(permission -> result.add(new Permission(permission)));
+
+        this.permissions = result;
+        return this;
+    }
+
     public ArrayList<PermissionGroup> getContainings()
     {
         return containings;
@@ -70,6 +81,12 @@ public class PermissionGroup
     public PermissionGroup setContainings(ArrayList<PermissionGroup> containings)
     {
         this.containings = containings;
+        return this;
+    }
+
+    public PermissionGroup setContainings(PermissionGroup ... containings)
+    {
+        this.containings = new ArrayList<>(Arrays.asList(containings));
         return this;
     }
 
