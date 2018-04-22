@@ -17,6 +17,9 @@ public class PermissionGroup
     public PermissionGroup(String groupName)
     {
         this.groupName = groupName;
+
+        containings = new ArrayList<>();
+        permissions = new ArrayList<>();
     }
 
     /**
