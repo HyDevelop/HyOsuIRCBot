@@ -28,6 +28,7 @@ public class CommandReload extends Command
         long start = System.currentTimeMillis();
 
         Main.getConfig().reload();
+        Main.getPermissionConfig().reload();
 
         Main.getMessenger().respond(event, "重载完成! 耗时: " + (System.currentTimeMillis() - start) + "ms");
     }
