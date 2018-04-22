@@ -20,7 +20,7 @@ public class CommandCommands extends Command
 {
     public CommandCommands()
     {
-        super("commands", new ArrayList<>(Arrays.asList("cmds", "cmd", "listcmd", "指令")));
+        super("commands", "cmds", "cmd", "listcmd", "指令");
     }
 
     @Override

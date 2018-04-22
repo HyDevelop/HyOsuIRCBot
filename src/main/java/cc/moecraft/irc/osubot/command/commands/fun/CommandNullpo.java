@@ -18,7 +18,7 @@ public class CommandNullpo extends Command
 {
     public CommandNullpo()
     {
-        super("nullpo", new ArrayList<>(Arrays.asList("nurupo")));
+        super("nullpo", "nurupo");
     }
 
     @Override
