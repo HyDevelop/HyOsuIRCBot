@@ -291,7 +291,9 @@ public class InputParser implements Closeable {
 	 */
 	public void handleLine(@NonNull String rawLine) throws IOException, IrcException {
 		String line = CharMatcher.WHITESPACE.trimFrom(rawLine);
-		log.info(INPUT_MARKER, line);
+
+		// MODIFIED: To avoid quit message
+		if (!line.contains("QUIT")) log.info(INPUT_MARKER, line);
 
 		// Parse out v3Tags before
 		ImmutableMap.Builder<String, String> tags = ImmutableMap.builder();
@@ -579,7 +581,7 @@ public class InputParser implements Closeable {
 			// Someone is sending a notice.
 			configuration.getListenerManager().onEvent(new NoticeEvent(bot, source, sourceUser, channel, target, message));
 		} else if (command.equals("QUIT")) {
-			UserChannelDaoSnapshot daoSnapshot;
+			/*UserChannelDaoSnapshot daoSnapshot;
 			UserSnapshot sourceSnapshot;
 			if (configuration.isSnapshotsEnabled()) {
 				daoSnapshot = bot.getUserChannelDao().createSnapshot();
@@ -594,7 +596,7 @@ public class InputParser implements Closeable {
 			if (!source.getNick().equals(bot.getNick()))
 				//Someone else
 				bot.getUserChannelDao().removeUser(sourceUser);
-			configuration.getListenerManager().onEvent(new QuitEvent(bot, daoSnapshot, source, sourceSnapshot, reason));
+			configuration.getListenerManager().onEvent(new QuitEvent(bot, daoSnapshot, source, sourceSnapshot, reason));*/
 		} else if (command.equals("KICK")) {
 			// Somebody has been kicked from a channel.
 			UserHostmask recipientHostmask = bot.getConfiguration().getBotFactory().createUserHostmask(bot, message);
