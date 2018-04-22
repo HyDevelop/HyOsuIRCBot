@@ -7,10 +7,7 @@ import cc.moecraft.irc.osubot.command.commands.fun.CommandEcho;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandNullpo;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandPing;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandTime;
-import cc.moecraft.irc.osubot.command.commands.management.CommandGroups;
-import cc.moecraft.irc.osubot.command.commands.management.CommandReload;
-import cc.moecraft.irc.osubot.command.commands.management.CommandRestart;
-import cc.moecraft.irc.osubot.command.commands.management.CommandUserPermission;
+import cc.moecraft.irc.osubot.command.commands.management.*;
 import cc.moecraft.irc.osubot.language.Messenger;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
 import io.jboot.Jboot;
@@ -132,6 +129,7 @@ public class Main {
         commandManager.registerCommand(new CommandGroups());
         commandManager.registerCommand(new CommandEcho());
         commandManager.registerCommand(new CommandUserPermission());
+        commandManager.registerCommand(new CommandSetAdmin());
 
         // 连接服务器
         osuBot.startBot();

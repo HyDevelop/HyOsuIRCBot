@@ -52,6 +52,7 @@ public class CommandUserPermission extends Command
         if (args.get(0).equals("info"))
         {
             Main.getMessenger().respond(event, "用户" + args.get(1) + "信息:");
+            Main.getMessenger().respond(event, "- 管理员:     " + target.isAdmin());
             Main.getMessenger().respond(event, "- 继承权限组: " + PermissionConfig.groupListToNameList(target.getGroups()));
             Main.getMessenger().respond(event, "- 所有权限:   " + PermissionConfig.permissionListToNameList(target.getAllPermissions()));
             return;
