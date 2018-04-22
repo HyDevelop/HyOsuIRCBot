@@ -93,7 +93,7 @@ public class CommandManager
 
         if (!new OsuUser(user.getNick()).hasPermission(commandToRun.permissionRequired()))
         {
-            Main.getMessenger().respond(event, "NO PERM: 无法执行" + getPrefix() + command + ", 缺少权限:" + commandToRun.permissionRequired());
+            Main.getMessenger().respond(event, "NO PERM: 无法执行" + getPrefix() + command + ", 因为缺少权限");
             return RunResult.NO_PERMISSION;
         }
 

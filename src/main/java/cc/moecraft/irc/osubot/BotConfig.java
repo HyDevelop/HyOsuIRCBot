@@ -80,7 +80,8 @@ public class BotConfig extends Config
      */
     public void setAdminUsernames(ArrayList<String> adminUsernames)
     {
-        addDefault("BotProperties.AdminUsernames", adminUsernames);
+        set("BotProperties.AdminUsernames", adminUsernames);
+        save();
     }
 
     @Override
