@@ -10,6 +10,7 @@ import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/22 创建!
@@ -39,7 +40,11 @@ public class CommandUserPermission extends Command
     @Override
     public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        if (args.size() < 2) return;
+        if (args.size() < 2)
+        {
+            Main.getMessenger().respond(event, "指令参数错误");
+            return;
+        }
 
         OsuUser target = new OsuUser(args.get(1));
         // TODO: 用Osu的API判断用户是否存在
@@ -61,9 +66,15 @@ public class CommandUserPermission extends Command
                 return;
             }
 
+            AtomicBoolean haveGroup = new AtomicBoolean(false);
+
+            target.getGroups().forEach(permissionGroup1 -> {
+                if (permissionGroup1.equals(permissionGroup)) haveGroup.set(true);
+            });
+
             if (args.get(0).equals("add"))
             {
-                if (target.getGroups().contains(permissionGroup))
+                if (haveGroup.get())
                 {
                     Main.getMessenger().respond(event, "添加失败, 玩家" + target.getUsername() + "已拥有权限组" + permissionGroup.getGroupName());
                     return;
@@ -77,12 +88,12 @@ public class CommandUserPermission extends Command
             }
             else if (args.get(0).equals("remove"))
             {
-                if (target.getGroups().contains(permissionGroup))
+                if (!haveGroup.get())
                 {
                     Main.getMessenger().respond(event, "移除失败, 玩家" + target.getUsername() + "没有权限组" + permissionGroup.getGroupName());
                     return;
                 }
-                
+
                 target.getGroups().remove(permissionGroup);
                 Main.getPermissionConfig().setUserPermissionGroups(target);
 

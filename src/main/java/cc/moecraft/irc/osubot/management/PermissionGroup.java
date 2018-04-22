@@ -99,4 +99,15 @@ public class PermissionGroup
     {
         this.groupName = groupName;
     }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj instanceof PermissionGroup)
+        {
+            PermissionGroup permissionGroup = (PermissionGroup) obj;
+            return permissionGroup.getGroupName().equals(getGroupName());
+        }
+        return false;
+    }
 }
