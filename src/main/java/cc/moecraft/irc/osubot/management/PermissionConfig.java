@@ -6,6 +6,7 @@ import cc.moecraft.yaml.Config;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,7 +17,8 @@ import java.util.Map;
  */
 public class PermissionConfig extends Config
 {
-    public Map<String, PermissionGroup> loadedGroups;
+    private Map<String, PermissionGroup> loadedGroups;
+    private PermissionGroup defaultGroup;
 
     public static final String GROUPS_PREFIX = "Groups.";
     public static final String USERS_PREFIX = "Users.";
@@ -116,6 +118,8 @@ public class PermissionConfig extends Config
         loadedGroups = new HashMap<>();
 
         getKeys(GROUPS_PREFIX.replace(".", "")).forEach(key -> loadedGroups.put(key, getGroup(key)));
+
+        defaultGroup = getGroup(getString("DefaultGroup"));
     }
 
     @Override
@@ -128,5 +132,19 @@ public class PermissionConfig extends Config
     public void writeDefaultConfig()
     {
         //TODO: 默认权限组
+    }
+
+    public PermissionGroup getDefaultGroup()
+    {
+        return defaultGroup;
+    }
+
+    public void setDefaultGroup(PermissionGroup defaultGroup)
+    {
+        this.defaultGroup = defaultGroup;
+
+        set("DefaultGroup", defaultGroup.getGroupName());
+
+        save();
     }
 }

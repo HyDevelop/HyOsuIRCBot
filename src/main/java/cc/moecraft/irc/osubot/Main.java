@@ -9,6 +9,7 @@ import cc.moecraft.irc.osubot.command.commands.fun.CommandTime;
 import cc.moecraft.irc.osubot.command.commands.management.CommandReload;
 import cc.moecraft.irc.osubot.command.commands.management.CommandRestart;
 import cc.moecraft.irc.osubot.language.Messenger;
+import cc.moecraft.irc.osubot.management.PermissionConfig;
 import io.jboot.Jboot;
 import org.pircbotx.PircBotX;
 import org.pircbotx.exception.IrcException;
@@ -87,6 +88,9 @@ public class Main {
     // 消息发送器
     private static Messenger messenger;
 
+    // 权限配置文件
+    private static PermissionConfig permissionConfig;
+
     // 是否开启测试
     private static boolean debug = true;
 
@@ -144,5 +148,10 @@ public class Main {
 
     public static Messenger getMessenger() {
         return messenger;
+    }
+
+    public static PermissionConfig getPermissionConfig()
+    {
+        return permissionConfig;
     }
 }
