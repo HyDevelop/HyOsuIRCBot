@@ -6,6 +6,8 @@ import cc.moecraft.irc.osubot.command.commands.CommandHelp;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandNullpo;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandPing;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandTime;
+import cc.moecraft.irc.osubot.command.commands.management.CommandReload;
+import cc.moecraft.irc.osubot.command.commands.management.CommandRestart;
 import cc.moecraft.irc.osubot.language.Messenger;
 import io.jboot.Jboot;
 import org.pircbotx.PircBotX;
@@ -112,6 +114,8 @@ public class Main {
         commandManager.registerCommand(new CommandCommands());
         commandManager.registerCommand(new CommandTime());
         commandManager.registerCommand(new CommandNullpo());
+        commandManager.registerCommand(new CommandReload());
+        commandManager.registerCommand(new CommandRestart());
 
         // 连接服务器
         osuBot.startBot();
