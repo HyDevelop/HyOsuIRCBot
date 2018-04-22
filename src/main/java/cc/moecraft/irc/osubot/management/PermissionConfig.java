@@ -47,6 +47,7 @@ public class PermissionConfig extends Config
     {
         String currentPrefix = GROUPS_PREFIX + group.getGroupName() + ".";
 
+        set(GROUPS_PREFIX + group.getGroupName(), null);
         set(currentPrefix + "ContainingGroups", null);
         set(currentPrefix + "Permissions", null);
 
@@ -82,7 +83,7 @@ public class PermissionConfig extends Config
      * @param groups 权限组列表
      * @return 权限组名字列表
      */
-    private ArrayList<String> groupListToNameList(ArrayList<PermissionGroup> groups)
+    public static ArrayList<String> groupListToNameList(ArrayList<PermissionGroup> groups)
     {
         ArrayList<String> result = new ArrayList<>();
 
@@ -96,7 +97,7 @@ public class PermissionConfig extends Config
      * @param permissions 权限列表
      * @return 权限名字列表
      */
-    private ArrayList<String> permissionListToNameList(ArrayList<Permission> permissions)
+    public static ArrayList<String> permissionListToNameList(ArrayList<Permission> permissions)
     {
         ArrayList<String> result = new ArrayList<>();
 

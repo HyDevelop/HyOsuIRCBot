@@ -4,6 +4,7 @@ import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.language.Messenger;
 import cc.moecraft.irc.osubot.management.Permission;
+import cc.moecraft.irc.osubot.management.PermissionConfig;
 import cc.moecraft.irc.osubot.management.PermissionGroup;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
@@ -26,6 +27,7 @@ public class CommandGroups extends Command
 
     /**
      * 指令帮助:
+     *  - !grp info [名字]                   查询权限组 2
      *  - !grp create [名字]                 创建权限组 2
      *  - !grp remove [名字]                 移除权限组 2
      *  - !grp perm add [名字] [权限]        添加权限   4
@@ -42,7 +44,7 @@ public class CommandGroups extends Command
     @Override
     public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        if (args.size() == 2)  // 创建或者移除权限组
+        if (args.size() == 2)  // 创建移除查询权限组
         {
             if (args.get(0).equals("create"))
             {
@@ -65,7 +67,7 @@ public class CommandGroups extends Command
             {
                 if (Main.getPermissionConfig().getGroup(args.get(1)) != null)
                 {
-                    PermissionGroup group = new PermissionGroup(args.get(1));
+                    PermissionGroup group = Main.getPermissionConfig().getGroup(args.get(1));
 
                     Main.getPermissionConfig().removeGroup(group);
 
@@ -78,8 +80,26 @@ public class CommandGroups extends Command
                     return;
                 }
             }
+            else if (args.get(0).equals("info"))
+            {
+                if (Main.getPermissionConfig().getGroup(args.get(1)) != null)
+                {
+                    PermissionGroup group = Main.getPermissionConfig().getGroup(args.get(1));
+
+                    Main.getMessenger().respond(event, "权限组" + args.get(1) + "信息:");
+                    Main.getMessenger().respond(event, "- 继承权限组: " + PermissionConfig.groupListToNameList(group.getContainings()));
+                    Main.getMessenger().respond(event, "- 单独权限:   " + PermissionConfig.permissionListToNameList(group.getThisGroupPermissions()));
+                    Main.getMessenger().respond(event, "- 所有权限:   " + PermissionConfig.permissionListToNameList(group.getAllPermissions()));
+                    return;
+                }
+                else
+                {
+                    Main.getMessenger().respond(event, "无法查询, 权限组" + args.get(1) + "不存在");
+                    return;
+                }
+            }
         }
-        else if (args.size() == 4)
+        else if (args.size() == 4) // 编辑权限组
         {
             if (Main.getPermissionConfig().getGroup(args.get(2)) != null)
             {
