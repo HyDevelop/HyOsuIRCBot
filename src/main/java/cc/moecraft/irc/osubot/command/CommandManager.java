@@ -95,7 +95,9 @@ public class CommandManager
 
     public enum RunResult
     {
-        NOT_A_COMMAND, COMMAND_NOT_FOUND, SUCCESS
+        NOT_A_COMMAND, COMMAND_NOT_FOUND,
+        NO_PERMISSION,
+        SUCCESS
     }
 
     /**
