@@ -1,5 +1,7 @@
 package cc.moecraft.irc.osubot.management;
 
+import cc.moecraft.irc.osubot.Main;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,9 +12,8 @@ import java.util.Map;
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
  */
-public class Permissible
+public abstract class Permissible
 {
-    private boolean admin; // 管理员无视任何权限检测
     private ArrayList<PermissionGroup> groups;
 
     /**
@@ -22,7 +23,7 @@ public class Permissible
      */
     public boolean hasPermission(String permission)
     {
-        if (admin) return true;
+        if (isAdmin()) return true;
 
         for (Permission eachPermission : getAllPermissions())
             if (eachPermission.hasPermission(permission)) return true;
@@ -42,15 +43,9 @@ public class Permissible
         return result;
     }
 
-    public boolean isAdmin()
-    {
-        return admin;
-    }
+    public abstract boolean isAdmin();
 
-    public void setAdmin(boolean admin)
-    {
-        this.admin = admin; //TODO: 配置文件
-    }
+    public abstract void setAdmin(boolean admin);
 
     public ArrayList<PermissionGroup> getGroups()
     {
