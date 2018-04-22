@@ -3,6 +3,7 @@ package cc.moecraft.irc.osubot.command.commands.management;
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.language.Messenger;
+import cc.moecraft.irc.osubot.management.Permission;
 import cc.moecraft.irc.osubot.management.PermissionGroup;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
@@ -50,10 +51,12 @@ public class CommandGroups extends Command
                     PermissionGroup group = new PermissionGroup(args.get(1));
 
                     Main.getPermissionConfig().setGroup(group);
+
+                    Main.getMessenger().respond(event, "权限组" + args.get(1) + "已成功创建");
                 }
                 else
                 {
-                    Main.getMessenger().respond(event, "无法创建, 权限组已存在");
+                    Main.getMessenger().respond(event, "无法创建, 权限组" + args.get(1) + "已存在");
                 }
             }
             else if (args.get(0).equals("remove"))
@@ -63,16 +66,110 @@ public class CommandGroups extends Command
                     PermissionGroup group = new PermissionGroup(args.get(1));
 
                     Main.getPermissionConfig().removeGroup(group);
+
+                    Main.getMessenger().respond(event, "权限组" + args.get(1) + "已成功删除");
                 }
                 else
                 {
-                    Main.getMessenger().respond(event, "无法移除, 权限组不存在");
+                    Main.getMessenger().respond(event, "无法移除, 权限组" + args.get(1) + "不存在");
                 }
             }
         }
         else if (args.size() == 4)
         {
+            if (Main.getPermissionConfig().getGroup(args.get(2)) != null)
+            {
+                PermissionGroup group = Main.getPermissionConfig().getGroup(args.get(2));
 
+                if (args.get(0).equals("perm"))
+                {
+                    Permission permission = new Permission(args.get(3));
+
+                    if (args.get(1).equals("add"))
+                    {
+                        if (!group.getThisGroupPermissions().contains(permission))
+                        {
+                            group.getThisGroupPermissions().add(permission);
+
+                            Main.getPermissionConfig().setGroup(group);
+
+                            Main.getMessenger().respond(event, "已添加权限: " + permission.toString());
+                            return;
+                        }
+                        else
+                        {
+                            Main.getMessenger().respond(event, "无法添加, 权限" + permission.toString() + "已存在");
+                            return;
+                        }
+                    }
+                    else if (args.get(1).equals("remove"))
+                    {
+                        if (group.getThisGroupPermissions().contains(permission))
+                        {
+                            group.getThisGroupPermissions().remove(permission);
+
+                            Main.getPermissionConfig().setGroup(group);
+
+                            Main.getMessenger().respond(event, "已移除权限: " + permission.toString());
+                            return;
+                        }
+                        else
+                        {
+                            Main.getMessenger().respond(event, "无法移除, 权限" + permission.toString() + "不存在");
+                            return;
+                        }
+                    }
+                }
+                else if (args.get(0).equals("group"))
+                {
+                    PermissionGroup newGroup = Main.getPermissionConfig().getGroup(args.get(3));
+
+                    if (newGroup == null)
+                    {
+                        Main.getMessenger().respond(event, "无法编辑, 权限组" + args.get(3) + "不存在");
+                        return;
+                    }
+
+                    if (args.get(1).equals("add"))
+                    {
+                        if (!group.getContainings().contains(newGroup))
+                        {
+                            group.getContainings().add(newGroup);
+
+                            Main.getPermissionConfig().setGroup(group);
+
+                            Main.getMessenger().respond(event, "已添加权限组继承: " + newGroup.getGroupName());
+                            return;
+                        }
+                        else
+                        {
+                            Main.getMessenger().respond(event, "无法添加继承, 权限组" + newGroup.getGroupName() + "已存在");
+                            return;
+                        }
+                    }
+                    else if (args.get(1).equals("remove"))
+                    {
+                        if (group.getContainings().contains(newGroup))
+                        {
+                            group.getContainings().remove(newGroup);
+
+                            Main.getPermissionConfig().setGroup(group);
+
+                            Main.getMessenger().respond(event, "已移除权限组继承: " + newGroup.getGroupName());
+                            return;
+                        }
+                        else
+                        {
+                            Main.getMessenger().respond(event, "无法移除继承, 权限组" + newGroup.getGroupName() + "已存在");
+                            return;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Main.getMessenger().respond(event, "无法编辑, 权限组" + args.get(2) + "不存在");
+            }
         }
         Main.getMessenger().respond(event, "指令参数错误");
     }
