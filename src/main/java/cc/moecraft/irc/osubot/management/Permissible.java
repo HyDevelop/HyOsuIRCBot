@@ -25,6 +25,8 @@ public abstract class Permissible
     {
         if (isAdmin()) return true;
 
+        if (groups.size() == 0) groups.add(Main.getPermissionConfig().getDefaultGroup());
+
         for (Permission eachPermission : getAllPermissions())
             if (eachPermission.hasPermission(permission)) return true;
         return false;
@@ -49,7 +51,6 @@ public abstract class Permissible
 
     public ArrayList<PermissionGroup> getGroups()
     {
-        if (groups.size() == 0) groups.add(Main.getPermissionConfig().getDefaultGroup());
         return groups;
     }
 
