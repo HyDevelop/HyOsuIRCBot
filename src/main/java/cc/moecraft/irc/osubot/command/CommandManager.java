@@ -1,6 +1,7 @@
 package cc.moecraft.irc.osubot.command;
 
 import cc.moecraft.irc.osubot.Main;
+import cc.moecraft.irc.osubot.management.OsuUser;
 import com.sun.org.apache.xerces.internal.impl.dv.dtd.NOTATIONDatatypeValidator;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
@@ -88,7 +89,15 @@ public class CommandManager
         // ["hi", "there"]
         args.remove(0);
 
-        registeredCommands.get(command).run(event, user, channel, command, args);  // TODO: 判断用户有没有权限 ( 需要: 获取用户 )
+        Command commandToRun = registeredCommands.get(command);
+
+        if (new OsuUser(user.getNick()).hasPermission(commandToRun.permissionRequired()))
+        {
+            Main.getMessenger().respond(event, "NO PERMISSION: 您没有权限使用" + getPrefix() + command);
+            return RunResult.NO_PERMISSION;
+        }
+
+        registeredCommands.get(command).run(event, user, channel, command, args);
 
         return RunResult.SUCCESS;
     }
