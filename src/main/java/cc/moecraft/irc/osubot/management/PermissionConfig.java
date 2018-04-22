@@ -40,6 +40,20 @@ public class PermissionConfig extends Config
     }
 
     /**
+     * 向配置写入一个权限组
+     * @param group 权限组
+     */
+    public void removeGroup(PermissionGroup group)
+    {
+        String currentPrefix = GROUPS_PREFIX + group.getGroupName() + ".";
+
+        set(currentPrefix + "ContainingGroups", null);
+        set(currentPrefix + "Permissions", null);
+
+        save();
+    }
+
+    /**
      * 从配置获取一个权限组
      * @param name 权限组名
      * @return 权限组
@@ -49,6 +63,8 @@ public class PermissionConfig extends Config
         if (loadedGroups.containsKey(name)) return loadedGroups.get(name);
 
         String currentPrefix = GROUPS_PREFIX + name + ".";
+
+        if (!contains(currentPrefix + "Permissions") && !contains(currentPrefix + "ContainingGroups")) return null;
 
         PermissionGroup result = new PermissionGroup(name);
 
