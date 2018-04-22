@@ -23,7 +23,6 @@ public class CommandListener extends ListenerAdapter
     {
         Main.getLogger().log(" ### OsuBot已连接 ###");
         Main.getLogger().debug("Connected");
-
     }
 
     /**

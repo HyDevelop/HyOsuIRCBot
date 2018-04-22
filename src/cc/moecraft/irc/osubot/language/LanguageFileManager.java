@@ -110,8 +110,9 @@ public class LanguageFileManager
                         "  [>= !cmd     List all available commands",
                         "  [>= !ping    Pong!",
                 });
-                addDefault("Commands.Errors.COMMAND_NOT_FOUND", "未知指令");
-                addDefault("Commands.CommandList.COMMANDS_TEXT", "所有指令: %s");
+                addDefault("Commands.Errors.NOT_A_COMMAND", "Not a command. (Type %shelp to show the help menu)");
+                addDefault("Commands.Errors.UNKNOWN_COMMAND", "Unknown command.  (Type %shelp to show the help menu)");
+                addDefault("Commands.CommandList.COMMANDS_TEXT", "Command List: %s");
             }
             else if (lang.equals(OfficiallySupportedLanguages.zh.name()))
             {
@@ -122,6 +123,9 @@ public class LanguageFileManager
                         "  [>= !cmd     显示所有可用指令",
                         "  [>= !ping    啪!",
                 });
+                addDefault("Commands.Errors.NOT_A_COMMAND", "NOT A COMMAND: 不是指令 ( 输入%shelp显示帮助 )");
+                addDefault("Commands.Errors.UNKNOWN_COMMAND", "UNKNOWN COMMAND: 未知指令 ( 输入%shelp显示帮助 )");
+                addDefault("Commands.CommandList.COMMANDS_TEXT", "所有指令: %s");
             }
             else
             {
