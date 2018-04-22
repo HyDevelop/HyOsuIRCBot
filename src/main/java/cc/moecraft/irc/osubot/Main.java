@@ -6,6 +6,7 @@ import cc.moecraft.irc.osubot.command.commands.CommandHelp;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandNullpo;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandPing;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandTime;
+import cc.moecraft.irc.osubot.command.commands.management.CommandGroups;
 import cc.moecraft.irc.osubot.command.commands.management.CommandReload;
 import cc.moecraft.irc.osubot.command.commands.management.CommandRestart;
 import cc.moecraft.irc.osubot.language.Messenger;
@@ -115,6 +116,7 @@ public class Main {
         commandManager = new CommandManager();
         logger = new DebugLogger("HyOsuIRCBot", debug);
         messenger = new Messenger();
+        permissionConfig = new PermissionConfig();
 
         // 注册指令 //TODO: 优化
         commandManager.registerCommand(new CommandHelp());
@@ -124,13 +126,10 @@ public class Main {
         commandManager.registerCommand(new CommandNullpo());
         commandManager.registerCommand(new CommandReload());
         commandManager.registerCommand(new CommandRestart());
+        commandManager.registerCommand(new CommandGroups());
 
         // 连接服务器
         osuBot.startBot();
-
-        // 想创建机器人的频道但是发现osu的irc服务器禁用了创建...
-        // 这里用于在本地服务器测试
-        // osuBot.joinChannel("#bots");
     }
 
     public static BotConfig getConfig() {
