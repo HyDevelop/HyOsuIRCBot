@@ -1,6 +1,8 @@
 package cc.moecraft.irc.osubot;
 
 import cc.moecraft.yaml.Config;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,11 +15,13 @@ import java.util.Arrays;
  */
 public class BotConfig extends Config
 {
+    private Logger logger = LoggerFactory.getLogger(BotConfig.class);
+
     public BotConfig()
     {
         super(Main.VERSION, Main.PATH, "Config", "yml", false, true, true);
 
-        System.out.println("配置文件路径: " + getConfigFile().getAbsolutePath());
+        logger.info("配置文件路径: " + getConfigFile().getAbsolutePath());
     }
 
     /**

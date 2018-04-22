@@ -3,11 +3,11 @@ package cc.moecraft.irc.osubot.command.commands;
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.model.Osu;
-import cc.moecraft.irc.osubot.service.OsuService;
-import io.jboot.core.rpc.annotation.JbootrpcService;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,8 +21,10 @@ import java.util.List;
  */
 public class CommandHelp extends Command
 {
-    @JbootrpcService
-    private OsuService osuService;
+
+    private Logger logger = LoggerFactory.getLogger(CommandHelp.class);
+
+    private Osu osuDao = new Osu();
 
     public CommandHelp()
     {
@@ -32,8 +34,8 @@ public class CommandHelp extends Command
     @Override
     public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        //List<Osu> all = osuService.getAll();
-        //System.out.println(all.toString());
+        List<Osu> all = osuDao.findAll();
+        logger.info(all.toString());
         Main.getMessenger().respond(event, "还没有帮助!");
     }
 }

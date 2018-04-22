@@ -7,6 +7,7 @@ import cc.moecraft.irc.osubot.command.commands.fun.CommandNullpo;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandPing;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandTime;
 import cc.moecraft.irc.osubot.language.Messenger;
+import io.jboot.Jboot;
 import org.pircbotx.PircBotX;
 import org.pircbotx.exception.IrcException;
 
@@ -87,6 +88,8 @@ public class Main {
     private static boolean debug = true;
 
     public static void main(String[] args) throws IOException, IrcException {
+        Jboot.run(args);
+
         config = new BotConfig();
 
         BotProperties properties = new BotProperties()

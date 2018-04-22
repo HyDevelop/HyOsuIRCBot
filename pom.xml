@@ -95,6 +95,7 @@
           <include>**/*.properties</include>
           <include>**/*.yml</include>
           <include>**/*.xml</include>
+          <include>**/*.txt</include>
         </includes>
       </resource>
     </resources>
@@ -119,14 +120,12 @@
       <properties>
         <jboot.server.port>8082</jboot.server.port>
         <jboot.mode>dev</jboot.mode>
-        <jboot.rpc.hystrixEnable>false</jboot.rpc.hystrixEnable>
         <jboot.datasource.url>jdbc:mysql://xxx:3306/testSql?useUnicode=true&amp;characterEncoding=utf-8</jboot.datasource.url>
         <jboot.datasource.user>root</jboot.datasource.user>
-        <jboot.datasource.password>password</jboot.datasource.password>
+        <jboot.datasource.password>xxx</jboot.datasource.password>
         <jboot.datasource.maximumPoolSize>10</jboot.datasource.maximumPoolSize>
         <jboot.redis.host>xxx</jboot.redis.host>
         <jboot.redis.password>xxx</jboot.redis.password>
-        <jboot.rpc.host>xxx:2181</jboot.rpc.host>
         <jboot.log>true</jboot.log>
       </properties>
     </profile>
@@ -137,14 +136,12 @@
       <properties>
         <jboot.server.port>8082</jboot.server.port>
         <jboot.mode>product</jboot.mode>
-        <jboot.rpc.hystrixEnable>false</jboot.rpc.hystrixEnable>
         <jboot.datasource.url>jdbc:mysql://正式环境IP:3306/数据库名?useUnicode=true&amp;characterEncoding=utf-8</jboot.datasource.url>
         <jboot.datasource.user>root</jboot.datasource.user>
         <jboot.datasource.password>数据库密码</jboot.datasource.password>
         <jboot.datasource.maximumPoolSize>10</jboot.datasource.maximumPoolSize>
         <jboot.redis.host>Redis的IP</jboot.redis.host>
         <jboot.redis.password>Redis密码</jboot.redis.password>
-        <jboot.rpc.host>正式环境IP:2181</jboot.rpc.host>
         <jboot.log>false</jboot.log>
       </properties>
     </profile>
