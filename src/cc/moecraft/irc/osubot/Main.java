@@ -1,6 +1,7 @@
 package cc.moecraft.irc.osubot;
 
 import cc.moecraft.irc.osubot.command.CommandManager;
+import cc.moecraft.irc.osubot.command.commands.CommandCommands;
 import cc.moecraft.irc.osubot.command.commands.CommandHelp;
 import cc.moecraft.irc.osubot.command.commands.CommandPing;
 import cc.moecraft.irc.osubot.language.Messenger;
@@ -31,7 +32,7 @@ import java.util.ArrayList;
         ▷ [-] 帮助指令
             ▷ [X] 帮助指令
             ▷ [ ] 帮助内容 ( 需要语言文件 )
-        ▷ [ ] 列出所有指令的指令
+        ▶ [X] 列出所有指令的指令
     ▷ [ ] 用户系统
         ▷ [ ] 权限组
         ▷ [ ] 检测新用户
@@ -97,6 +98,7 @@ public class Main
         // 注册指令 //TODO: 优化
         commandManager.registerCommand(new CommandHelp());
         commandManager.registerCommand(new CommandPing());
+        commandManager.registerCommand(new CommandCommands());
 
         // 连接服务器
         osuBot.startBot();
