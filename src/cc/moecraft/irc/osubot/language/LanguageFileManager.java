@@ -103,11 +103,25 @@ public class LanguageFileManager
 
             if (lang.equals(OfficiallySupportedLanguages.en.name()))
             {
-
+                addDefault("Commands.Help.HELP_TEXT", new String[]{
+                        "<---------= HELP MENU =--------->",
+                        "<---= Commands:",
+                        "  [>= !help    Display this menu",
+                        "  [>= !cmd     List all available commands",
+                        "  [>= !ping    Pong!",
+                });
+                addDefault("Commands.Errors.COMMAND_NOT_FOUND", "未知指令");
+                addDefault("Commands.CommandList.COMMANDS_TEXT", "所有指令: %s");
             }
             else if (lang.equals(OfficiallySupportedLanguages.zh.name()))
             {
-
+                addDefault("Commands.Help.HELP_TEXT", new String[]{
+                        "<---------= 帮助菜单 =--------->",
+                        "<---= 指令:",
+                        "  [>= !help    打开这个菜单",
+                        "  [>= !cmd     显示所有可用指令",
+                        "  [>= !ping    啪!",
+                });
             }
             else
             {

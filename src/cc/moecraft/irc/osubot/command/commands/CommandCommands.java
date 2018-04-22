@@ -26,6 +26,6 @@ public class CommandCommands extends Command
     @Override
     public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        Main.getMessenger().respond(event, "可用指令: " + Main.getCommandManager().getCommandNameList().toString());
+        Main.getMessenger().respond(event, "所有指令: " + Main.getCommandManager().getCommandNameList().toString());
     }
 }
