@@ -53,10 +53,12 @@ public class CommandGroups extends Command
                     Main.getPermissionConfig().setGroup(group);
 
                     Main.getMessenger().respond(event, "权限组" + args.get(1) + "已成功创建");
+                    return;
                 }
                 else
                 {
                     Main.getMessenger().respond(event, "无法创建, 权限组" + args.get(1) + "已存在");
+                    return;
                 }
             }
             else if (args.get(0).equals("remove"))
@@ -68,10 +70,12 @@ public class CommandGroups extends Command
                     Main.getPermissionConfig().removeGroup(group);
 
                     Main.getMessenger().respond(event, "权限组" + args.get(1) + "已成功删除");
+                    return;
                 }
                 else
                 {
                     Main.getMessenger().respond(event, "无法移除, 权限组" + args.get(1) + "不存在");
+                    return;
                 }
             }
         }
@@ -169,6 +173,7 @@ public class CommandGroups extends Command
             else
             {
                 Main.getMessenger().respond(event, "无法编辑, 权限组" + args.get(2) + "不存在");
+                return;
             }
         }
         Main.getMessenger().respond(event, "指令参数错误");
