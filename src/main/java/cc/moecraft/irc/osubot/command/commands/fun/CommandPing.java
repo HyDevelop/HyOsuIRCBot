@@ -1,4 +1,4 @@
-package cc.moecraft.irc.osubot.command.commands;
+package cc.moecraft.irc.osubot.command.commands.fun;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;

@@ -3,7 +3,9 @@ package cc.moecraft.irc.osubot;
 import cc.moecraft.irc.osubot.command.CommandManager;
 import cc.moecraft.irc.osubot.command.commands.CommandCommands;
 import cc.moecraft.irc.osubot.command.commands.CommandHelp;
-import cc.moecraft.irc.osubot.command.commands.CommandPing;
+import cc.moecraft.irc.osubot.command.commands.fun.CommandNullpo;
+import cc.moecraft.irc.osubot.command.commands.fun.CommandPing;
+import cc.moecraft.irc.osubot.command.commands.fun.CommandTime;
 import cc.moecraft.irc.osubot.language.Messenger;
 import org.pircbotx.PircBotX;
 import org.pircbotx.exception.IrcException;
@@ -103,6 +105,8 @@ public class Main {
         commandManager.registerCommand(new CommandHelp());
         commandManager.registerCommand(new CommandPing());
         commandManager.registerCommand(new CommandCommands());
+        commandManager.registerCommand(new CommandTime());
+        commandManager.registerCommand(new CommandNullpo());
 
         // 连接服务器
         osuBot.startBot();

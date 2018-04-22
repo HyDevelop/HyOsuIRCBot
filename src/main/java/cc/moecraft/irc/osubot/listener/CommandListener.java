@@ -1,14 +1,12 @@
 package cc.moecraft.irc.osubot.listener;
 
+import cc.moecraft.irc.osubot.DebugLogger;
 import cc.moecraft.irc.osubot.Main;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.Listener;
 import org.pircbotx.hooks.ListenerAdapter;
-import org.pircbotx.hooks.events.ConnectEvent;
-import org.pircbotx.hooks.events.DisconnectEvent;
-import org.pircbotx.hooks.events.MessageEvent;
-import org.pircbotx.hooks.events.PrivateMessageEvent;
+import org.pircbotx.hooks.events.*;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/21 创建!
@@ -21,8 +19,14 @@ public class CommandListener extends ListenerAdapter
     @Override
     public void onConnect(ConnectEvent event) throws Exception
     {
-        Main.getLogger().log(" ### OsuBot已连接 ###");
+        Main.getLogger().debug(" ### OsuBot已连接 ###");
         Main.getLogger().debug("Connected");
+    }
+
+    @Override
+    public void onJoin(JoinEvent event) throws Exception
+    {
+        Main.getLogger().debug(DebugLogger.WHITE + "<===--- 已加入频道:" + event.getChannel().getName() + " ---===>");
     }
 
     /**
