@@ -3,6 +3,7 @@ package cc.moecraft.irc.osubot;
 import cc.moecraft.irc.osubot.command.CommandManager;
 import cc.moecraft.irc.osubot.command.commands.CommandCommands;
 import cc.moecraft.irc.osubot.command.commands.CommandHelp;
+import cc.moecraft.irc.osubot.command.commands.fun.CommandEcho;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandNullpo;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandPing;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandTime;
@@ -127,6 +128,7 @@ public class Main {
         commandManager.registerCommand(new CommandReload());
         commandManager.registerCommand(new CommandRestart());
         commandManager.registerCommand(new CommandGroups());
+        commandManager.registerCommand(new CommandEcho());
 
         // 连接服务器
         osuBot.startBot();
