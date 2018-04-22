@@ -58,6 +58,12 @@ public abstract class Command
      */
     public abstract void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args); //TODO 添加用户系统并把这个User类的用户改成CommandSender类的用户
 
+    /**
+     * 获取需要的权限
+     * @return 需要的权限
+     */
+    public abstract String permissionRequired();
+
     public String getName()
     {
         return name;

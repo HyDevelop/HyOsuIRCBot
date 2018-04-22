@@ -31,4 +31,10 @@ public class CommandReload extends Command
 
         Main.getMessenger().respond(event, "重载完成! 耗时: " + (System.currentTimeMillis() - start) + "ms");
     }
+
+    @Override
+    public String permissionRequired()
+    {
+        return "irc.admin.managing.reload";
+    }
 }

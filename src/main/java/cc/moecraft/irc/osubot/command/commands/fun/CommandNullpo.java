@@ -26,4 +26,10 @@ public class CommandNullpo extends Command
     {
         event.respond("Gah!");
     }
+
+    @Override
+    public String permissionRequired()
+    {
+        return "irc.user.regular.command.nullpo";
+    }
 }

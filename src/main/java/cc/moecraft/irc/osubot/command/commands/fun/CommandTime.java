@@ -27,4 +27,10 @@ public class CommandTime extends Command
     {
         Main.getMessenger().respond(event, "当前时间: " + Main.getLogger().getCurrentTime());
     }
+
+    @Override
+    public String permissionRequired()
+    {
+        return "irc.user.regular.command.time";
+    }
 }

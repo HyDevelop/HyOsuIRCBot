@@ -28,4 +28,10 @@ public class CommandCommands extends Command
     {
         Main.getMessenger().respond(event, "所有指令: " + Main.getCommandManager().getCommandNameList().toString());
     }
+
+    @Override
+    public String permissionRequired()
+    {
+        return "irc.user.regular.command.commands";
+    }
 }

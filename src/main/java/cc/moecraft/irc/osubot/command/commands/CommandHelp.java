@@ -38,4 +38,10 @@ public class CommandHelp extends Command
         logger.info(all.toString());
         Main.getMessenger().respond(event, "还没有帮助!");
     }
+
+    @Override
+    public String permissionRequired()
+    {
+        return "irc.user.regular.command.help";
+    }
 }

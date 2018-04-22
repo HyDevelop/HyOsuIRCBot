@@ -26,4 +26,10 @@ public class CommandPing extends Command
     {
         Main.getMessenger().respond(event, "Pong!");
     }
+
+    @Override
+    public String permissionRequired()
+    {
+        return "irc.user.regular.command.ping";
+    }
 }

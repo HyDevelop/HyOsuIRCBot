@@ -51,6 +51,12 @@ public class CommandRestart extends Command
         }
     }
 
+    @Override
+    public String permissionRequired()
+    {
+        return "irc.admin.managing.restart";
+    }
+
     /**
      * Sun property pointing the main class and its arguments.
      * Might not be defined on non Hotspot VM implementations.
