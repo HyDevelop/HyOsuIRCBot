@@ -21,7 +21,6 @@ import java.util.List;
  */
 public class CommandHelp extends Command
 {
-
     @JbootrpcService
     private OsuService osuService;
 

@@ -42,7 +42,7 @@ public class Messenger
      * @param placeholder 语言节点
      * @param args 参数
      */
-    public void respondWithParam(GenericMessageEvent event, String lang, String placeholder, Object[] args)
+    public void respondWithFormat(GenericMessageEvent event, String lang, String placeholder, Object ... args)
     {
         event.respond(String.format(languageFileManager.get(lang, placeholder), args));
     }
