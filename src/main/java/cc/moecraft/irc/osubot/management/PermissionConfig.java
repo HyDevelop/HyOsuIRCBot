@@ -5,6 +5,8 @@ import cc.moecraft.yaml.Config;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/22 创建!
@@ -14,6 +16,8 @@ import java.util.ArrayList;
  */
 public class PermissionConfig extends Config
 {
+    public Map<String, PermissionGroup> loadedGroups;
+
     public static final String GROUPS_PREFIX = "Groups.";
     public static final String USERS_PREFIX = "Users.";
 
@@ -43,6 +47,8 @@ public class PermissionConfig extends Config
      */
     public PermissionGroup getGroup(String name)
     {
+        if (loadedGroups.containsKey(name)) return loadedGroups.get(name);
+
         String currentPrefix = GROUPS_PREFIX + name + ".";
 
         PermissionGroup result = new PermissionGroup(name);
@@ -101,10 +107,15 @@ public class PermissionConfig extends Config
         save();
     }
 
+    /**
+     * 预加载, 可以重载
+     */
     @Override
     public void readConfig()
     {
-        //TODO: 添加预加载和重载
+        loadedGroups = new HashMap<>();
+
+        getKeys(GROUPS_PREFIX.replace(".", "")).forEach(key -> loadedGroups.put(key, getGroup(key)));
     }
 
     @Override
