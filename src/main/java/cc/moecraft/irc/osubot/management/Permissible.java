@@ -25,7 +25,8 @@ public abstract class Permissible
     {
         if (isAdmin()) return true;
 
-        if (groups.size() == 0) groups.add(Main.getPermissionConfig().getDefaultGroup());
+        // Main.getLogger().debug("Main.getDefault: " + PermissionConfig.permissionListToNameList(Main.getPermissionConfig().getDefaultGroup().getAllPermissions()));
+        if (Main.getPermissionConfig().getDefaultGroup().hasPermission(permission)) return true;
 
         for (Permission eachPermission : getAllPermissions())
             if (eachPermission.hasPermission(permission)) return true;

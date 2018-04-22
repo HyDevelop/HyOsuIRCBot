@@ -91,9 +91,9 @@ public class CommandManager
 
         Command commandToRun = registeredCommands.get(command);
 
-        if (new OsuUser(user.getNick()).hasPermission(commandToRun.permissionRequired()))
+        if (!new OsuUser(user.getNick()).hasPermission(commandToRun.permissionRequired()))
         {
-            Main.getMessenger().respond(event, "NO PERMISSION: 您没有权限使用" + getPrefix() + command);
+            Main.getMessenger().respond(event, "NO PERM: 无法执行" + getPrefix() + command + ", 缺少权限:" + commandToRun.permissionRequired());
             return RunResult.NO_PERMISSION;
         }
 
