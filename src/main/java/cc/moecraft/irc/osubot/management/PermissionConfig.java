@@ -3,7 +3,6 @@ package cc.moecraft.irc.osubot.management;
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.yaml.Config;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -128,7 +127,7 @@ public class PermissionConfig extends Config
      * 保存用户权限组
      * @param user 用户
      */
-    public void setUserPermissionGroups(User user) // TODO: 换成用Osu的UserID
+    public void setUserPermissionGroups(OsuUser user) // TODO: 换成用Osu的UserID
     {
         String currentPrefix = USERS_PREFIX + user.getUsername();
 
