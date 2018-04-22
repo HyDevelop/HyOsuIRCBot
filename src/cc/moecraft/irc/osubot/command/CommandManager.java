@@ -116,4 +116,36 @@ public class CommandManager
     {
         return Main.getConfig().getString("BotProperties.CommandPrefix");
     }
+
+    /**
+     * 获取指令列表
+     * @return 指令列表
+     */
+    public ArrayList<Command> getCommandList()
+    {
+        ArrayList<Command> result = new ArrayList<>();
+
+        registeredCommands.forEach((k, v) ->
+        {
+            if (!result.contains(v)) result.add(v);
+        });
+
+        return result;
+    }
+
+    /**
+     * 获取指令名列表
+     * @return 指令名列表
+     */
+    public ArrayList<String> getCommandNameList()
+    {
+        ArrayList<String> result = new ArrayList<>();
+
+        registeredCommands.forEach((k, v) ->
+        {
+            if (!result.contains(v.getName())) result.add(v.getName());
+        });
+
+        return result;
+    }
 }
