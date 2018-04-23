@@ -84,6 +84,7 @@ public class Main {
         commandManager.registerCommand(new CommandEcho());
         commandManager.registerCommand(new CommandUserPermission());
         commandManager.registerCommand(new CommandSetAdmin());
+        commandManager.registerCommand(new CommandRemoveAdmin());
 
         // 连接服务器
         osuBot.startBot();
