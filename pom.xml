@@ -114,12 +114,12 @@
       <properties>
         <jboot.server.port>8082</jboot.server.port>
         <jboot.mode>dev</jboot.mode>
-        <jboot.datasource.url>jdbc:mysql://xxx:3306/testSql?useUnicode=true&amp;characterEncoding=utf-8</jboot.datasource.url>
+        <jboot.datasource.url>jdbc:mysql://119.29.222.57:3306/testSql?useUnicode=true&amp;characterEncoding=utf-8</jboot.datasource.url>
         <jboot.datasource.user>root</jboot.datasource.user>
-        <jboot.datasource.password>xxx</jboot.datasource.password>
+        <jboot.datasource.password>dw123456</jboot.datasource.password>
         <jboot.datasource.maximumPoolSize>10</jboot.datasource.maximumPoolSize>
-        <jboot.redis.host>xxx</jboot.redis.host>
-        <jboot.redis.password>xxx</jboot.redis.password>
+        <jboot.redis.host>119.29.222.57</jboot.redis.host>
+        <jboot.redis.password>dw1234</jboot.redis.password>
         <jboot.log>true</jboot.log>
       </properties>
     </profile>
