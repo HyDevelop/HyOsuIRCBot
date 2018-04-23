@@ -40,8 +40,8 @@ public class DownloadUtils
         try
         {
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setConnectTimeout(Main.getConfig().getInt("BotProperties.Downloading.Timeout"));
-            httpURLConnection.setReadTimeout(Main.getConfig().getInt("BotProperties.Downloading.Timeout"));
+            httpURLConnection.setConnectTimeout(Main.getConfig().getInt("BotProperties.Download.Timeout"));
+            httpURLConnection.setReadTimeout(Main.getConfig().getInt("BotProperties.Download.Timeout"));
             httpURLConnection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
 
             InputStream inputStream = httpURLConnection.getInputStream();

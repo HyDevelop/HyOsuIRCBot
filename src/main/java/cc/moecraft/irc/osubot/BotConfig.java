@@ -106,6 +106,10 @@ public class BotConfig extends Config
 
         addDefault("BotProperties.CommandPrefix", "!");
         addDefault("BotProperties.AutoJoinChannels", new String[]{"#general", "#chinese"});
+
+        addDefault("BotProperties.Download.Timeout", 3000);
+        addDefault("BotProperties.Download.Osu.APIKey", "ChangeThisToOsuAPIKey"); // https://github.com/ppy/osu-api/wiki
+
         save();
     }
 }
