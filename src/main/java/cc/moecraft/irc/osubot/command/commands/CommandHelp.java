@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.command.commands;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.factory.DAOFactory;
 import cc.moecraft.irc.osubot.model.Osu;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
@@ -10,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,7 +24,6 @@ public class CommandHelp extends Command
 
     private Logger logger = LoggerFactory.getLogger(CommandHelp.class);
 
-    private Osu osuDao = new Osu();
 
     public CommandHelp()
     {
@@ -34,9 +33,10 @@ public class CommandHelp extends Command
     @Override
     public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        List<Osu> all = osuDao.findAll();
-        logger.info(all.toString());
-        Main.getMessenger().respond(event, "还没有帮助!");
+        //这里我只是测试可不可以链接数据库，到时候可以删掉
+        List<Osu> all = DAOFactory.getOsuService().getAll();
+        logger.info("第一个玩家是："+all.get(0).getUsername());
+        Main.getMessenger().respond(event, "第一个玩家是："+all.get(0).getUsername());
     }
 
     @Override
