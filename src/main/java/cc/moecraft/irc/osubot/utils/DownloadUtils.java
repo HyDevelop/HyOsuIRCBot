@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -18,12 +19,23 @@ import java.util.UUID;
 public class DownloadUtils
 {
     /**
-     * 下载文件
+     * 下载HTTP数据为字符串
+     *
+     * @param url 下载地址
+     * @return 下载到的字符串
+     */
+    public static String downloadAsString(URL url)
+    {
+        return Arrays.toString(download(url));
+    }
+
+    /**
+     * 下载HTTP数据
      *
      * @param url 下载地址
      * @return 下载到的内容
      */
-    public static byte[] downloadFile(URL url)
+    public static byte[] download(URL url)
     {
         try
         {
