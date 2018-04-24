@@ -1,9 +1,11 @@
 package cc.moecraft.irc.osubot.utils;
 
 import cc.moecraft.irc.osubot.Main;
+import com.alibaba.fastjson.JSONObject;
 
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -18,6 +20,25 @@ import java.util.UUID;
  */
 public class DownloadUtils
 {
+    /**
+     * 从URL获取JSON对象
+     *
+     * @param url URL
+     * @return JSON对象
+     */
+    public JSONObject getJSONObjectFromURL(String url)
+    {
+        try
+        {
+            return JsonUtils.getJsonObjectByJsonString(DownloadUtils.downloadAsString(new URL(url)));
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     /**
      * 下载HTTP数据为字符串
      *
