@@ -10,6 +10,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -26,11 +27,11 @@ public class DownloadUtils
      * @param url URL
      * @return JSON对象
      */
-    public JSONObject getJSONObjectFromURL(String url)
+    public static JSONObject getJSONObjectFromURL(String url, int timeout)
     {
         try
         {
-            return JsonUtils.getJsonObjectByJsonString(DownloadUtils.downloadAsString(new URL(url)));
+            return JsonUtils.getJsonObjectByJsonString(DownloadUtils.downloadAsString(new URL(url), timeout));
         }
         catch (MalformedURLException e)
         {
@@ -39,15 +40,35 @@ public class DownloadUtils
         }
     }
 
+    public static JSONObject getJSONObjectFromURL(String url)
+    {
+        return getJSONObjectFromURL(url, getDefaultTimeout());
+    }
+
     /**
      * 下载HTTP数据为字符串
      *
      * @param url 下载地址
      * @return 下载到的字符串
      */
+    public static String downloadAsString(URL url, int timeout)
+    {
+        return new String(Objects.requireNonNull(download(url, timeout)));
+    }
+
     public static String downloadAsString(URL url)
     {
-        return Arrays.toString(download(url));
+        return downloadAsString(url, getDefaultTimeout());
+    }
+
+    public static byte[] download(URL url)
+    {
+        return download(url, getDefaultTimeout());
+    }
+
+    private static int getDefaultTimeout()
+    {
+        return Main.getConfig().getInt("BotProperties.Download.Timeout");
     }
 
     /**
@@ -56,13 +77,13 @@ public class DownloadUtils
      * @param url 下载地址
      * @return 下载到的内容
      */
-    public static byte[] download(URL url)
+    public static byte[] download(URL url, int timeout)
     {
         try
         {
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setConnectTimeout(Main.getConfig().getInt("BotProperties.Download.Timeout"));
-            httpURLConnection.setReadTimeout(Main.getConfig().getInt("BotProperties.Download.Timeout"));
+            httpURLConnection.setConnectTimeout(timeout);
+            httpURLConnection.setReadTimeout(timeout);
             httpURLConnection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
 
             InputStream inputStream = httpURLConnection.getInputStream();
