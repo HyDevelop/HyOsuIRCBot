@@ -3,7 +3,12 @@ A Java IRC Bot for Osu!
 
 ### Credit:
 - PircBotX for IRC Bot Library
-- Uso Bot for Beatmap Suggestion Algorism
+    - Github: https://github.com/pircbotx/pircbotx
+- Uso Bot for Beatmap Suggestion Algorithm 
+    - Github: https://github.com/Renondedju/Uso_Bot_V2.0
+- Osu!Track for Player Data Tracking & Analysis 
+    - Website: https://ameobea.me/osutrack/
+    - Github: https://github.com/Ameobea/osutrack_irc_v2
 
 
 
