@@ -2,10 +2,12 @@ package cc.moecraft.irc.osubot.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
+import static org.codehaus.groovy.runtime.DefaultGroovyMethods.toList;
 
 public class JsonUtils {
 
