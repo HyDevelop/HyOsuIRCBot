@@ -9,6 +9,21 @@ package cc.moecraft.irc.osubot.utils;
 public class StringUtils
 {
     /**
+     * 添加HTTP请求参数
+     * @param builder 字符串构造器
+     * @param key 键
+     * @param value 值
+     */
+    public static StringBuilder addParameter(StringBuilder builder, String key, String value)
+    {
+        if (!builder.toString().endsWith("&") || !builder.toString().endsWith("?"))
+        {
+            builder.append("&");
+        }
+        return builder.append(key).append("=").append(value);
+    }
+
+    /**
      * 判断当前版本和最新版本的关系
      *
      * 如果当前版本小于最新版本, 返回1,
