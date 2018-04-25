@@ -11,6 +11,7 @@ import cc.moecraft.irc.osubot.command.commands.management.*;
 import cc.moecraft.irc.osubot.language.Messenger;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
 import io.jboot.Jboot;
+import lombok.Getter;
 import org.pircbotx.PircBotX;
 import org.pircbotx.exception.IrcException;
 
@@ -31,26 +32,26 @@ public class Main {
     // 配置/语言文件路径
     public static final String PATH = "src" + File.separator + "main" + File.separator + "resources"; //TODO: 这里分两个版本, 测试放现在这个路径, 发布的话放"./conf/"路径
 
-    // 配置文件 ( 用来存用于IRC登陆的账号密码 )
-    private static BotConfig config;
+    @Getter
+    private static BotConfig config; // 配置文件 ( 用来存用于IRC登陆的账号密码 )
 
-    // 机器人对象
-    private static PircBotX osuBot;
+    @Getter
+    private static PircBotX osuBot; // 机器人对象
 
-    // 指令管理器
-    private static CommandManager commandManager;
+    @Getter
+    private static CommandManager commandManager; // 指令管理器
 
-    // Logger
-    private static DebugLogger logger;
+    @Getter
+    private static DebugLogger logger; // Logger
 
-    // 消息发送器
-    private static Messenger messenger;
+    @Getter
+    private static Messenger messenger; // 消息发送器
 
-    // 权限配置文件
-    private static PermissionConfig permissionConfig;
+    @Getter
+    private static PermissionConfig permissionConfig; // 权限配置文件
 
-    // 是否开启测试
-    private static boolean debug = true;
+    @Getter
+    private static boolean debug = true; // 是否开启测试
 
     public static void main(String[] args) throws IOException, IrcException {
         Jboot.run(args);
@@ -88,30 +89,5 @@ public class Main {
 
         // 连接服务器
         osuBot.startBot();
-    }
-
-    public static BotConfig getConfig() {
-        return config;
-    }
-
-    public static PircBotX getOsuBot() {
-        return osuBot;
-    }
-
-    public static CommandManager getCommandManager() {
-        return commandManager;
-    }
-
-    public static DebugLogger getLogger() {
-        return logger;
-    }
-
-    public static Messenger getMessenger() {
-        return messenger;
-    }
-
-    public static PermissionConfig getPermissionConfig()
-    {
-        return permissionConfig;
     }
 }
