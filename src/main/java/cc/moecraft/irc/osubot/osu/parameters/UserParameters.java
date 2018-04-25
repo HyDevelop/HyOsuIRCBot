@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.osu.parameters;
 
 import cc.moecraft.irc.osubot.osu.data.DataBase;
 import cc.moecraft.irc.osubot.osu.data.UserData;
+import cc.moecraft.irc.osubot.osu.parameters.tags.HttpParameter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,13 +14,21 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class UserParameters extends ParameterBase
+public class UserParameters extends ParametersBase
 {
     // 必要的参数
+    @HttpParameter(required = true)
     private String userIdOrName;
 
     // 不必要的参数
+    @HttpParameter(required = false)
     private int mode;
+
+    @HttpParameter(required = false)
+    private String type;
+
+    @HttpParameter(required = false)
+    private int event_days;
 
     public UserParameters(String userIdOrName)
     {
@@ -27,13 +36,13 @@ public class UserParameters extends ParameterBase
     }
 
     @Override
-    public String getSubURL()
+    public String subURL()
     {
         return "user";
     }
 
     @Override
-    public DataBase getDataStorage()
+    public DataBase dataStorageObject()
     {
         return new UserData();
     }
