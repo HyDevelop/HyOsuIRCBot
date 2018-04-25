@@ -18,7 +18,7 @@ public class UserParameters extends ParametersBase
 {
     // 必要的参数
     @HttpParameter(required = true)
-    private String userIdOrName;
+    private String u;
 
     // 不必要的参数
     @HttpParameter(required = false)
@@ -32,7 +32,7 @@ public class UserParameters extends ParametersBase
 
     public UserParameters(String userIdOrName)
     {
-        setUserIdOrName(userIdOrName);
+        setU(userIdOrName);
     }
 
     @Override
