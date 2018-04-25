@@ -26,7 +26,13 @@ public class OsuAPIUtils
     {
         this.apiKey = apiKey;
     }
-    
+
+    /**
+     * 用HTTP参数直接获取数据类对象
+     * @param parameter HTTP参数
+     * @return 数据类对象
+     * @throws IllegalAccessException 反射失败
+     */
     public DataBase get(ParametersBase parameter) throws IllegalAccessException
     {
         JSONObject jsonObject = getJSONObjectFromParameter(parameter);
@@ -59,7 +65,7 @@ public class OsuAPIUtils
      * @return JSON对象
      * @throws IllegalAccessException 反射失败
      */
-    public JSONObject getJSONObjectFromParameter(ParametersBase parameter) throws IllegalAccessException
+    private JSONObject getJSONObjectFromParameter(ParametersBase parameter) throws IllegalAccessException
     {
         // 获取URL
         StringBuilder urlBuilder = new StringBuilder();
