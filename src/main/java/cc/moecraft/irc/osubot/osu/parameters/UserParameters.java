@@ -3,8 +3,7 @@ package cc.moecraft.irc.osubot.osu.parameters;
 import cc.moecraft.irc.osubot.osu.data.DataBase;
 import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.parameters.tags.HttpParameter;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/24 创建!
@@ -13,7 +12,7 @@ import lombok.EqualsAndHashCode;
  * Meow!
  */
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Builder @Data @AllArgsConstructor @NoArgsConstructor
 public class UserParameters extends ParametersBase
 {
     // 必要的参数
