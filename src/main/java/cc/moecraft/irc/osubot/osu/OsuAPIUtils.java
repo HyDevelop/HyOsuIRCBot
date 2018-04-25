@@ -20,7 +20,14 @@ public class OsuAPIUtils
 {
     public static final String BASE_URL = "http://osu.ppy.sh/api/get_";
 
-    public static DataBase get(ParametersBase parameter) throws IllegalAccessException
+    private String apiKey;
+
+    public OsuAPIUtils(String apiKey)
+    {
+        this.apiKey = apiKey;
+    }
+    
+    public DataBase get(ParametersBase parameter) throws IllegalAccessException
     {
         JSONObject jsonObject = getJSONObjectFromParameter(parameter);
 
@@ -52,12 +59,17 @@ public class OsuAPIUtils
      * @return JSON对象
      * @throws IllegalAccessException 反射失败
      */
-    public static JSONObject getJSONObjectFromParameter(ParametersBase parameter) throws IllegalAccessException
+    public JSONObject getJSONObjectFromParameter(ParametersBase parameter) throws IllegalAccessException
     {
         // 获取URL
         StringBuilder urlBuilder = new StringBuilder();
 
-        urlBuilder.append(parameter.subURL().contains("%COMPLETE_URL%") ? parameter.subURL().replace("%COMPLETE_URL%", "") + "?" : BASE_URL + parameter.subURL() + "?");
+        boolean completeURL = parameter.subURL().contains("%COMPLETE_URL%");
+
+        urlBuilder.append(completeURL ? parameter.subURL().replace("%COMPLETE_URL%", "") + "?" : BASE_URL + parameter.subURL() + "?");
+
+        // 添加 APIKey
+        if (!completeURL) StringUtils.addParameter(urlBuilder, "k", apiKey);
 
         for (Field field : parameter.getClass().getDeclaredFields())
         {
