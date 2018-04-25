@@ -28,8 +28,21 @@ public class OsuDataTest
 
         String apiKey = reader.readLine();
 
+        logger.log("当前测试OsuTrack的API");
+        logger.log("输入用户名: ");
+
+        String username = reader.readLine();
+
+        logger.log("输入模式: ");
+
+        int mode = reader.read();
+
+        logger.log("当前信息: ");
+        logger.log("- 用户名 = " + username);
+        logger.log("- 模式   = " + mode);
+
         OsuAPIUtils utils = new OsuAPIUtils(apiKey);
 
-        utils.get(new OsuTrackParameters("Hykilpikonna", 0));
+        utils.get(new OsuTrackParameters(username, mode));
     }
 }
