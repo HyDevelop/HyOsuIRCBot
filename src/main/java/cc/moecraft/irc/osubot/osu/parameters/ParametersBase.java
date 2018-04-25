@@ -10,9 +10,9 @@ import lombok.Data;
  * QQ: admin@moecraft.cc -OR- 871674895
  */
 @Data
-public abstract class ParameterBase
+public abstract class ParametersBase
 {
-    public abstract String getSubURL();
+    public abstract String subURL();
 
-    public abstract DataBase getDataStorage();
+    public abstract DataBase dataStorageObject();
 }
