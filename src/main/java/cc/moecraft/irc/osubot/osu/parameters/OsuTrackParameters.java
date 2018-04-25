@@ -3,6 +3,7 @@ package cc.moecraft.irc.osubot.osu.parameters;
 import cc.moecraft.irc.osubot.osu.data.DataBase;
 import cc.moecraft.irc.osubot.osu.data.OsuTrackData;
 import cc.moecraft.irc.osubot.osu.parameters.tags.HttpParameter;
+import lombok.*;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/24 创建!
@@ -10,6 +11,8 @@ import cc.moecraft.irc.osubot.osu.parameters.tags.HttpParameter;
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
  */
+@EqualsAndHashCode(callSuper = true)
+@Builder @Data @AllArgsConstructor @NoArgsConstructor
 public class OsuTrackParameters extends ParametersBase
 {
     @HttpParameter(required = true)
