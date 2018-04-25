@@ -4,7 +4,6 @@ import cc.moecraft.irc.osubot.osu.data.DataBase;
 import cc.moecraft.irc.osubot.osu.parameters.ParametersBase;
 import cc.moecraft.irc.osubot.osu.parameters.tags.HttpParameter;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
-import cc.moecraft.irc.osubot.utils.JsonUtils;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
 import cc.moecraft.irc.osubot.utils.StringUtils;
 import com.alibaba.fastjson.JSONObject;
@@ -20,6 +19,31 @@ import java.lang.reflect.Field;
 public class OsuAPIUtils
 {
     public static final String BASE_URL = "http://osu.ppy.sh/api/get_";
+
+    public static DataBase get(ParametersBase parameter) throws IllegalAccessException
+    {
+        JSONObject jsonObject = getJSONObjectFromParameter(parameter);
+
+        DataBase dataBase = parameter.dataStorageObject();
+
+        // 反射赋值
+        for (Field field : dataBase.getClass().getDeclaredFields())
+        {
+            assert jsonObject != null;
+            if (jsonObject.containsKey(field.getName()))
+            {
+                // 赋值 ( 类型转换可能出错
+                field.set(dataBase, jsonObject.get(field.getName()));
+            }
+            else
+            {
+                // 数据类声明的变量名和JSON类不匹配的可能性
+                // TODO: 注入变量名...? ( 不知道能不能实现
+            }
+        }
+
+        return dataBase;
+    }
 
     /**
      * 用HTTP参数获取JSONObject
