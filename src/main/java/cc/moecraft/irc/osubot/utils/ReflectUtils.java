@@ -1,5 +1,7 @@
 package cc.moecraft.irc.osubot.utils;
 
+import com.google.gson.JsonPrimitive;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -21,6 +23,31 @@ public class ReflectUtils
     {
         field.setAccessible(true);
         return field.get(object);
+    }
+
+    /**
+     * 获取JsonPrimitive的"getAs***()"方法
+     * @param field Field
+     * @param object 变量
+     * @param jsonPrimitive Json原始对象
+     * @return 获取到的方法
+     */
+    public static Method getJsonPrimitiveGetAsMethod(Field field, Object object, JsonPrimitive jsonPrimitive)
+    {
+        for (Method method : object.getClass().getMethods())
+        {
+            if (method.getName().startsWith("getAs"))
+            {
+                String methodName = method.getName();
+
+                methodName = methodName.replaceFirst("getAs", "");
+
+                System.out.println("field.getType().getSimpleName() = " + field.getType().getSimpleName());
+
+                if (methodName.equalsIgnoreCase(field.getType().getSimpleName())) return method;
+            }
+        }
+        return null;
     }
 
     /**
