@@ -43,7 +43,7 @@ public class OsuAPIUtils
     {
         JsonArray array = getJsonElementFromParameter(UserParameters.builder().u(username).build()).getAsJsonArray();
 
-        return array.size() == 0;
+        return !(array.size() == 0);
     }
 
     /**
