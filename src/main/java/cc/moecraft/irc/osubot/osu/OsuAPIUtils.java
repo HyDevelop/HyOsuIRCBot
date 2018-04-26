@@ -7,6 +7,7 @@ import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
 import cc.moecraft.irc.osubot.utils.StringUtils;
 import com.alibaba.fastjson.JSONObject;
+import lombok.AllArgsConstructor;
 
 import java.lang.reflect.Field;
 
@@ -16,16 +17,14 @@ import java.lang.reflect.Field;
  * Github: https://github.com/hykilpikonna
  * Meow!
  */
+@AllArgsConstructor
 public class OsuAPIUtils
 {
     public static final String BASE_URL = "http://osu.ppy.sh/api/get_";
 
     private String apiKey;
 
-    public OsuAPIUtils(String apiKey)
-    {
-        this.apiKey = apiKey;
-    }
+    private DownloadUtils downloader;
 
     /**
      * 用HTTP参数直接获取数据类对象
@@ -83,7 +82,7 @@ public class OsuAPIUtils
             {
                 boolean required = field.getAnnotation(HttpParameter.class).required();
 
-                String value = ReflectUtils.getValue(field, urlBuilder).toString();
+                String value = ReflectUtils.getValue(field, parameter).toString();
 
                 if (value != null)
                 {
@@ -100,6 +99,6 @@ public class OsuAPIUtils
 
         System.out.println("获取到的URL请求: " + urlBuilder.toString());
 
-        return DownloadUtils.getJSONObjectFromURL(urlBuilder.toString());
+        return downloader.getJSONObjectFromURL(urlBuilder.toString());
     }
 }
