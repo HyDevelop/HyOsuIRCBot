@@ -6,6 +6,7 @@ import cc.moecraft.irc.osubot.osu.data.DataBase;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.irc.osubot.utils.InputUtils;
+import cc.moecraft.irc.osubot.utils.PropertiesUtil;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
 
 import java.io.BufferedReader;
@@ -23,16 +24,17 @@ public class OsuDataTest
 {
     private static DebugLogger logger = new DebugLogger("OsuDataTest", true);
 
+    private static String defaultKey = PropertiesUtil.readKey("osu_key");
+
     public static void main(String[] args) throws Exception
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
-        logger.log("输入APIKey: ");
+        logger.log("输入APIKey (不输入既用默认): ");
 
         String apiKey = reader.readLine();
 
-        OsuAPIUtils utils = new OsuAPIUtils(apiKey, new DownloadUtils(5000));
-
+        OsuAPIUtils utils = new OsuAPIUtils(apiKey == null || apiKey.isEmpty() ? defaultKey : apiKey, new DownloadUtils(5000));
 
         UserParameters parameters = new UserParameters();
         /*
