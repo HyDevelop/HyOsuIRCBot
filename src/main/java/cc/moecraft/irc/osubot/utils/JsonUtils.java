@@ -59,14 +59,14 @@ public class JsonUtils {
     /**
      * 把JSONObject转换为JsonArray的一项
      *
-     * @param jsonObject Json对象
+     * @param jsonElement Json对象
      * @return JsonArray
      */
-    public static JsonArray toJsonArray(JsonObject jsonObject)
+    public static JsonArray toJsonArray(JsonElement jsonElement)
     {
         JsonArray result = new JsonArray();
 
-        result.add(jsonObject);
+        result.add(jsonElement);
 
         return result;
     }
