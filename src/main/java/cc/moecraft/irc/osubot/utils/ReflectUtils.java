@@ -1,7 +1,6 @@
 package cc.moecraft.irc.osubot.utils;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -25,20 +24,21 @@ public class ReflectUtils
     }
 
     /**
-     * 获取一个对象类里面定义的Get方法
+     * 获取一个对象类里面定义的Get或者Set方法
      * @param field 变量名
      * @param object 对象
-     * @return Get方法
+     * @param getOrSet 如果是"get"获取的就是Getter, 如果是"set"获取的就是Setter
+     * @return Get方法或者Set方法
      */
-    public static Method getGetter(Field field, Object object)
+    public static Method getGetterOrSetter(Field field, Object object, String getOrSet)
     {
         for (Method method : object.getClass().getMethods())
         {
-            if (method.getName().startsWith("get"))
+            if (method.getName().startsWith(getOrSet))
             {
                 String methodName = method.getName().toLowerCase();
 
-                methodName = methodName.replaceFirst("get", "");
+                methodName = methodName.replaceFirst(getOrSet, "");
 
                 if (methodName.equals(field.getName().toLowerCase())) return method;
             }
