@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.osu;
 
 import cc.moecraft.irc.osubot.osu.data.DataBase;
 import cc.moecraft.irc.osubot.osu.parameters.ParametersBase;
+import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
 import cc.moecraft.irc.osubot.osu.parameters.tags.HttpParameter;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.irc.osubot.utils.JsonUtils;
@@ -32,6 +33,18 @@ public class OsuAPIUtils
     private String apiKey;
 
     private DownloadUtils downloader;
+
+    /**
+     * 判断一个用户名在Osu官方数据库里是否存在
+     * @param username 用户名
+     * @return 是否存在
+     */
+    public boolean isUserExisting(String username) throws IllegalAccessException
+    {
+        JsonArray array = getJsonElementFromParameter(UserParameters.builder().u(username).build()).getAsJsonArray();
+
+        return array.size() == 0;
+    }
 
     /**
      * 用HTTP参数直接获取数据类对象
