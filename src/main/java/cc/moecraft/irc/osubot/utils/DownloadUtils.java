@@ -1,7 +1,6 @@
 package cc.moecraft.irc.osubot.utils;
 
-import cc.moecraft.irc.osubot.Main;
-import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonElement;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,9 +25,9 @@ public class DownloadUtils
     @Getter @Setter
     private int timeout;
 
-    public JSONObject getJSONObjectFromURL(String url)
+    public JsonElement getJsonElementFromURL(String url)
     {
-        return getJSONObjectFromURL(url, timeout);
+        return getJsonElementFromURL(url, timeout);
     }
 
     public String downloadAsString(URL url)
@@ -47,11 +46,11 @@ public class DownloadUtils
      * @param url URL
      * @return JSON对象
      */
-    public static JSONObject getJSONObjectFromURL(String url, int timeout)
+    public static JsonElement getJsonElementFromURL(String url, int timeout)
     {
         try
         {
-            return JsonUtils.getJsonObjectByJsonString(downloadAsString(new URL(url), timeout));
+            return JsonUtils.parseJsonElement(downloadAsString(new URL(url), timeout));
         }
         catch (MalformedURLException e)
         {
