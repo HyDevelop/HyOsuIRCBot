@@ -131,4 +131,41 @@ public class ReflectUtils
 
         return targetClass.isPrimitive() || listThatIsConsideredPrimitive.contains(targetClass);
     }
+
+    /**
+     * 反射替换变量
+     *
+     * 例子:
+     *   输入:
+     *   - object: [username = "Hykilpikonna", user_id = "666666", pp_raw = "99999999"] ( 别想了梦里什么都有
+     *   - format = "[%username%(%user_id%)]: %pp_raw%"
+     *   输出:
+     *   "[Hykilpikonna(666666)]: 99999999"
+     *
+     *   练手 +1
+     *
+     * @param object 对象
+     * @param format 格式
+     * @return 替换后的字符串
+     */
+    public static String replaceReflectVariables(Object object, String format)
+    {
+        for (Field field : object.getClass().getDeclaredFields())
+        {
+            String variableName = String.format("%%%s%%", field.getName());
+
+            field.setAccessible(true);
+
+            try
+            {
+                format = format.replace(variableName, field.get(object).toString());
+            }
+            catch (IllegalAccessException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        return format;
+    }
 }
