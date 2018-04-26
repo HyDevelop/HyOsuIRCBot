@@ -3,8 +3,6 @@ package com.dullwolf;
 import cc.moecraft.irc.osubot.DebugLogger;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.data.DataBase;
-import cc.moecraft.irc.osubot.osu.parameters.OsuTrackParameters;
-import cc.moecraft.irc.osubot.osu.parameters.ParametersBase;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.irc.osubot.utils.InputUtils;
