@@ -4,12 +4,16 @@ import cc.moecraft.irc.osubot.osu.data.DataBase;
 import cc.moecraft.irc.osubot.osu.parameters.ParametersBase;
 import cc.moecraft.irc.osubot.osu.parameters.tags.HttpParameter;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
+import cc.moecraft.irc.osubot.utils.JsonUtils;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
 import cc.moecraft.irc.osubot.utils.StringUtils;
-import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import lombok.AllArgsConstructor;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/23 创建!
@@ -30,31 +34,67 @@ public class OsuAPIUtils
      * 用HTTP参数直接获取数据类对象
      * @param parameter HTTP参数
      * @return 数据类对象
-     * @throws IllegalAccessException 反射失败
+     * @throws IllegalAccessException 没有权限访问反射到的变量
+     * @throws InstantiationException 反射创建实例失败
      */
-    public DataBase get(ParametersBase parameter) throws IllegalAccessException
+    public ArrayList<DataBase> get(ParametersBase parameter) throws IllegalAccessException, InstantiationException
     {
-        JSONObject jsonObject = getJSONObjectFromParameter(parameter);
+        JsonElement jsonElement = getJsonElementFromParameter(parameter);
+        assert jsonElement != null;
 
-        DataBase dataBase = parameter.dataStorageObject();
+        JsonArray jsonArray;
 
-        // 反射赋值
-        for (Field field : dataBase.getClass().getDeclaredFields())
+        // 在Osu官方API获取的话可能获取到Array
+        if (jsonElement.isJsonArray()) jsonArray = jsonElement.getAsJsonArray();
+        else if (jsonElement.isJsonObject()) jsonArray = JsonUtils.toJsonArray(jsonElement);
+        else
         {
-            assert jsonObject != null;
-            if (jsonObject.containsKey(field.getName()))
-            {
-                // 赋值 ( 类型转换可能出错
-                field.set(dataBase, jsonObject.get(field.getName()));
-            }
-            else
-            {
-                // 数据类声明的变量名和JSON类不匹配的可能性
-                // TODO: 注入变量名...? ( 不知道能不能实现
-            }
+            // 既不是JsonArray也不是JsonObject的情况
+            return null;
         }
 
-        return dataBase;
+        ArrayList<DataBase> data = new ArrayList<>();
+
+        // 赋值
+        assignHelper(parameter, data, jsonArray);
+
+        return data;
+    }
+
+    /**
+     * 赋值助手 ( 考虑到可能需要递归就分开写了 )
+     *
+     * @param parameter HTTP参数
+     * @param dataBaseList 数据类存储对象列表
+     * @param jsonArray Json对象列表
+     * @throws IllegalAccessException 没有权限访问反射到的变量
+     * @throws InstantiationException 反射创建实例失败
+     */
+    private void assignHelper(ParametersBase parameter, ArrayList<DataBase> dataBaseList, JsonArray jsonArray) throws IllegalAccessException, InstantiationException
+    {
+        for (int i = 0; i < jsonArray.size(); i++)
+        {
+            JsonObject element = jsonArray.get(i).getAsJsonObject(); // TODO: 如果两个Array套在一起就会出错
+
+            // 反射添加新的实例
+            dataBaseList.add((DataBase) parameter.dataStorageClass().newInstance());
+            DataBase data = dataBaseList.get(i);
+
+            // 反射赋值
+            for (Field field : data.getClass().getDeclaredFields())
+            {
+                if (element.keySet().contains(field.getName()))
+                {
+                    // 赋值 ( 类型转换可能出错
+                    field.set(data, element.get(field.getName()));
+                }
+                else
+                {
+                    // 数据类声明的变量名和JSON类不匹配的可能性
+                    // 注入变量名...? ( 不知道能不能实现
+                }
+            }
+        }
     }
 
     /**
@@ -64,7 +104,7 @@ public class OsuAPIUtils
      * @return JSON对象
      * @throws IllegalAccessException 反射失败
      */
-    private JSONObject getJSONObjectFromParameter(ParametersBase parameter) throws IllegalAccessException
+    public JsonElement getJsonElementFromParameter(ParametersBase parameter) throws IllegalAccessException
     {
         // 获取URL
         StringBuilder urlBuilder = new StringBuilder();
@@ -91,7 +131,7 @@ public class OsuAPIUtils
                 }
                 else if (required)
                 {
-                    // TODO: 必要参数值是null的情况
+                    // 必要参数值是null的情况
                     return null;
                 }
             }
@@ -99,6 +139,6 @@ public class OsuAPIUtils
 
         System.out.println("获取到的URL请求: " + urlBuilder.toString());
 
-        return downloader.getJSONObjectFromURL(urlBuilder.toString());
+        return downloader.getJsonElementFromURL(urlBuilder.toString());
     }
 }
