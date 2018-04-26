@@ -10,6 +10,8 @@ import cc.moecraft.irc.osubot.command.commands.fun.CommandTime;
 import cc.moecraft.irc.osubot.command.commands.management.*;
 import cc.moecraft.irc.osubot.language.Messenger;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
+import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
+import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import io.jboot.Jboot;
 import lombok.Getter;
 import org.pircbotx.PircBotX;
@@ -51,6 +53,12 @@ public class Main {
     private static PermissionConfig permissionConfig; // 权限配置文件
 
     @Getter
+    private static DownloadUtils downloader; // 权限配置文件
+
+    @Getter
+    private static OsuAPIUtils osuAPIUtils;
+
+    @Getter
     private static boolean debug = true; // 是否开启测试
 
     public static void main(String[] args) throws IOException, IrcException {
@@ -72,6 +80,8 @@ public class Main {
         logger = new DebugLogger("HyOsuIRCBot", debug);
         messenger = new Messenger();
         permissionConfig = new PermissionConfig();
+        downloader = new DownloadUtils(config.getInt("BotProperties.Download.Timeout"));
+        osuAPIUtils = new OsuAPIUtils(config.getString("BotProperties.Download.Osu.APIKey"), downloader);
 
         // 注册指令 //TODO: 优化
         commandManager.registerCommand(new CommandHelp());
