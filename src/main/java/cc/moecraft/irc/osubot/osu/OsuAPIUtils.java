@@ -10,10 +10,13 @@ import cc.moecraft.irc.osubot.utils.StringUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import lombok.AllArgsConstructor;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/23 创建!
@@ -36,8 +39,9 @@ public class OsuAPIUtils
      * @return 数据类对象
      * @throws IllegalAccessException 没有权限访问反射到的变量
      * @throws InstantiationException 反射创建实例失败
+     * @throws InvocationTargetException 反射方法激活失败
      */
-    public ArrayList<DataBase> get(ParametersBase parameter) throws IllegalAccessException, InstantiationException
+    public ArrayList<DataBase> get(ParametersBase parameter) throws IllegalAccessException, InstantiationException, InvocationTargetException
     {
         JsonElement jsonElement = getJsonElementFromParameter(parameter);
         assert jsonElement != null;
@@ -69,8 +73,9 @@ public class OsuAPIUtils
      * @param jsonArray Json对象列表
      * @throws IllegalAccessException 没有权限访问反射到的变量
      * @throws InstantiationException 反射创建实例失败
+     * @throws InvocationTargetException 反射方法激活失败
      */
-    private void assignHelper(ParametersBase parameter, ArrayList<DataBase> dataBaseList, JsonArray jsonArray) throws IllegalAccessException, InstantiationException
+    private void assignHelper(ParametersBase parameter, ArrayList<DataBase> dataBaseList, JsonArray jsonArray) throws IllegalAccessException, InstantiationException, InvocationTargetException
     {
         for (int i = 0; i < jsonArray.size(); i++)
         {
@@ -91,7 +96,9 @@ public class OsuAPIUtils
                     // 如果是基础类, 反射获取getAs方法转换
                     if (ReflectUtils.isPrimitive(field.getType()))
                     {
-                        field.set(data, ReflectUtils.getJsonPrimitiveGetAsMethod(field, element.get(field.getName()).getAsJsonPrimitive()));
+                        JsonPrimitive primitive = element.get(field.getName()).getAsJsonPrimitive();
+
+                        field.set(data, Objects.requireNonNull(ReflectUtils.getJsonPrimitiveGetAsMethod(field, primitive)).invoke(primitive));
                     }
                     else
                     {
