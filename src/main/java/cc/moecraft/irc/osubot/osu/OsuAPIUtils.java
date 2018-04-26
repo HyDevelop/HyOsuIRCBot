@@ -82,12 +82,12 @@ public class OsuAPIUtils
             {
                 boolean required = field.getAnnotation(HttpParameter.class).required();
 
-                String value = ReflectUtils.getValue(field, parameter).toString();
+                Object value = ReflectUtils.getValue(field, parameter);
 
                 if (value != null)
                 {
                     // 添加参数
-                    StringUtils.addParameter(urlBuilder, field.getName(), value);
+                    StringUtils.addParameter(urlBuilder, field.getName(), value.toString());
                 }
                 else if (required)
                 {
