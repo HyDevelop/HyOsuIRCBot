@@ -19,7 +19,7 @@ public class JsonUtils {
      * @param <T> 泛型
      * @return
      */
-    public static <T> T getObjectByJson(String json, Class<T> clazz){
+    public static <T> T getObjectByJson(String json, Class<T> clazz) {
         return JSON.parseObject(json, clazz);
     }
 
@@ -29,7 +29,7 @@ public class JsonUtils {
      * @return 转换后的JSONObject
      */
     public static JSONObject getJsonObjectByJsonString(String json) {
-        return getObjectByJson(json, JSONObject.class);
+        return JSON.parseObject(json);
     }
 
     /**
