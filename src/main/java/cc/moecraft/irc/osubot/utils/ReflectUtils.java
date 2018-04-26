@@ -4,6 +4,7 @@ import com.google.gson.JsonPrimitive;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/24 创建!
@@ -109,5 +110,26 @@ public class ReflectUtils
         }
 
         System.out.println("输出完成!");
+    }
+
+    /**
+     * 查看一个类是不是Gson的JsonPrimitive里面可以存的类的变量
+     * @param targetClass 目标类
+     * @return 是不是Primitive类
+     */
+    public static boolean isPrimitive(Class targetClass)
+    {
+        ArrayList<Class> listThatIsConsideredPrimitive = new ArrayList<>();
+        listThatIsConsideredPrimitive.add(Boolean.class);
+        listThatIsConsideredPrimitive.add(Character.class);
+        listThatIsConsideredPrimitive.add(Byte.class);
+        listThatIsConsideredPrimitive.add(Short.class);
+        listThatIsConsideredPrimitive.add(Integer.class);
+        listThatIsConsideredPrimitive.add(Long.class);
+        listThatIsConsideredPrimitive.add(Float.class);
+        listThatIsConsideredPrimitive.add(Double.class);
+        listThatIsConsideredPrimitive.add(Void.class);
+
+        return listThatIsConsideredPrimitive.contains(targetClass);
     }
 }
