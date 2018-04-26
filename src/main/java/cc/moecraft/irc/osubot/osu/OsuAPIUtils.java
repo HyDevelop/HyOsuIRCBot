@@ -91,11 +91,12 @@ public class OsuAPIUtils
                     // 如果是基础类, 反射获取getAs方法转换
                     if (ReflectUtils.isPrimitive(field.getType()))
                     {
-                        field.set(data, ReflectUtils.getJsonPrimitiveGetAsMethod(field, data, element.get(field.getName()).getAsJsonPrimitive()));
+                        field.set(data, ReflectUtils.getJsonPrimitiveGetAsMethod(field, element.get(field.getName()).getAsJsonPrimitive()));
                     }
                     else
                     {
                         // TODO: 不是基础类的话怎么办呢...?
+                        System.out.println("不支持类型: " + field.getType().getSimpleName());
                     }
                 }
                 else
