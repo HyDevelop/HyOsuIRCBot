@@ -1,8 +1,6 @@
 package cc.moecraft.irc.osubot.utils;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 
 /**
  * 此类由 Hykilpikonna 在 2018/58/26 创建!
@@ -56,6 +54,21 @@ public class JsonUtils {
     public static JsonElement toJsonElement(Object obj)
     {
         return parseJsonElement(toJsonString(obj));
+    }
+
+    /**
+     * 把JSONObject转换为JsonArray的一项
+     *
+     * @param jsonObject Json对象
+     * @return JsonArray
+     */
+    public static JsonArray toJsonArray(JsonObject jsonObject)
+    {
+        JsonArray result = new JsonArray();
+
+        result.add(jsonObject);
+
+        return result;
     }
     /*
     /**
