@@ -25,6 +25,36 @@ public class ReflectUtils
     }
 
     /**
+     * 获取一个对象类里面定义的Get方法
+     * @param field 变量名
+     * @param object 对象
+     * @return Get方法
+     */
+    public static Method getGetter(Field field, Object object)
+    {
+        for (Method method : object.getClass().getMethods())
+        {
+            System.out.println("Method: " + method);
+            if (method.getName().startsWith("get"))
+            {
+                String methodName = method.getName();
+
+                methodName = methodName.replaceFirst("get", "");
+
+                if (methodName.equals(field.getName()))
+                {
+                    System.out.println("最终获取到的Method: " + methodName);
+                    System.out.println("-------------------------------------------");
+                    return method;
+                }
+            }
+        }
+        System.out.println("没有获取到Method");
+        System.out.println("-------------------------------------------");
+        return null;
+    }
+
+    /**
      * 输出对象所有值
      * @param object 对象
      */
