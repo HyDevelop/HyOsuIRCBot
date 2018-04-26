@@ -1,8 +1,10 @@
 package com.dullwolf;
 
 import cc.moecraft.irc.osubot.DebugLogger;
+import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.data.DataBase;
+import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.parameters.OsuTrackParameters;
 import cc.moecraft.irc.osubot.osu.parameters.ParametersBase;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
@@ -23,13 +25,13 @@ import static java.lang.System.in;
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
  */
-public class GSONTest
+public class UserExistingTest
 {
-    private static DebugLogger logger = new DebugLogger("GSONTest", true);
+    private static DebugLogger logger = new DebugLogger("UserExistingTest", true);
 
     private static String defaultKey = PropertiesUtil.readKey("osu_key");
 
-    public static void main(String[] args) throws IllegalAccessException, IOException, InvocationTargetException
+    public static void main(String[] args) throws IllegalAccessException, IOException, InvocationTargetException, InstantiationException
     {
         logger.log("当前测试OsuTrack的API");
 
@@ -41,25 +43,17 @@ public class GSONTest
 
         OsuAPIUtils utils = new OsuAPIUtils(apiKey.equalsIgnoreCase("def") ? defaultKey : apiKey, new DownloadUtils(5000));
 
-        ParametersBase parameters = new OsuTrackParameters();
+        logger.log("输入用户名: ");
 
-        parameters = InputUtils.inputAllParams(parameters);
+        String username = reader.readLine();
 
-        logger.debug("当前信息: ");
-        ReflectUtils.printAllValue(parameters);
+        logger.log("用户存在: " + utils.isUserExisting(username));
 
-        JsonElement jsonElement = utils.getJsonElementFromParameter(parameters);
-
-        logger.log(" is Array: " + jsonElement.isJsonArray());
-        logger.log(" is Object: " + jsonElement.isJsonObject());
-
-        // 失败: logger.log(" Object 强制获取 Array: " + jsonElement.getAsJsonArray().toString());
-
-        logger.log(" Object 转换 Array: " + JsonUtils.toJsonArray(jsonElement.getAsJsonObject()).toString());
+        UserData userData = (UserData) utils.get(UserParameters.builder().u(username).build()).get(0);
 
         // 输出所有值
         logger.debug("");
         logger.debug("获取到的信息: ");
-        //ReflectUtils.printAllValue(dataBase);
+        ReflectUtils.printAllValue(userData);
     }
 }
