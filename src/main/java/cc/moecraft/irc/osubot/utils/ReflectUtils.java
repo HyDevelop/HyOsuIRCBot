@@ -24,6 +24,28 @@ public class ReflectUtils
     }
 
     /**
+     * 获取Getter
+     * @param field 变量名
+     * @param object 对象
+     * @return Getter方法
+     */
+    public static Method getGetter(Field field, Object object)
+    {
+        return getGetterOrSetter(field, object, "get");
+    }
+
+    /**
+     * 获取Setter
+     * @param field 变量名
+     * @param object 对象
+     * @return Setter方法
+     */
+    public static Method getSetter(Field field, Object object)
+    {
+        return getGetterOrSetter(field, object, "set");
+    }
+
+    /**
      * 获取一个对象类里面定义的Get或者Set方法
      * @param field 变量名
      * @param object 对象
