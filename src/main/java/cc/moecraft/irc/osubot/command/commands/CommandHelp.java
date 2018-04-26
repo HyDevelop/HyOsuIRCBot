@@ -33,10 +33,7 @@ public class CommandHelp extends Command
     @Override
     public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        //这里我只是测试可不可以链接数据库，到时候可以删掉
-        List<Osu> all = DAOFactory.getOsuService().getAll();
-        logger.info("第一个玩家是："+all.get(0).getUsername());
-        Main.getMessenger().respond(event, "第一个玩家是："+all.get(0).getUsername());
+        Main.getMessenger().respond(event, "还没有帮助!");
     }
 
     @Override
