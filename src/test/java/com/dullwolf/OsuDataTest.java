@@ -40,7 +40,7 @@ public class OsuDataTest
 
         OsuAPIUtils utils = new OsuAPIUtils(apiKey.equalsIgnoreCase("def") ? defaultKey : apiKey, new DownloadUtils(5000));
 
-        logger.log("输入要测试获取的东西 ( Osu玩家 = 1, OsuTrack玩家 = 2 ): ");
+        logger.log("输入要测试获取的东西 ( Osu玩家 = 1, OsuTrack玩家 = 2): ");
 
         String thingToTest = reader.readLine();
 
