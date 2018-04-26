@@ -3,11 +3,14 @@ package com.dullwolf;
 import cc.moecraft.irc.osubot.DebugLogger;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.data.DataBase;
+import cc.moecraft.irc.osubot.osu.parameters.OsuTrackParameters;
+import cc.moecraft.irc.osubot.osu.parameters.ParametersBase;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.irc.osubot.utils.InputUtils;
 import cc.moecraft.irc.osubot.utils.PropertiesUtil;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
+import com.mysql.fabric.xmlrpc.base.Param;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -37,9 +40,25 @@ public class OsuDataTest
 
         OsuAPIUtils utils = new OsuAPIUtils(apiKey.equalsIgnoreCase("def") ? defaultKey : apiKey, new DownloadUtils(5000));
 
-        UserParameters parameters = new UserParameters();
+        logger.log("输入要测试获取的东西 ( Osu玩家 = 1, OsuTrack玩家 = 2 ): ");
 
-        parameters = (UserParameters) InputUtils.inputAllParams(parameters);
+        String thingToTest = reader.readLine();
+
+        ParametersBase parameters;
+
+        switch (thingToTest)
+        {
+            case "1":
+                parameters = new UserParameters();
+                break;
+            case "2":
+                parameters = new OsuTrackParameters();
+                break;
+            default:
+                return;
+        }
+
+        parameters = InputUtils.inputAllParams(parameters);
 
         logger.debug("当前信息: ");
         ReflectUtils.printAllValue(parameters);
