@@ -2,16 +2,17 @@ package cc.moecraft.irc.osubot.utils;
 
 import cc.moecraft.irc.osubot.Main;
 import com.alibaba.fastjson.JSONObject;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.util.Arrays;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/23 创建!
@@ -19,8 +20,27 @@ import java.util.UUID;
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
  */
+@AllArgsConstructor
 public class DownloadUtils
 {
+    @Getter @Setter
+    private int timeout;
+
+    public JSONObject getJSONObjectFromURL(String url)
+    {
+        return getJSONObjectFromURL(url, timeout);
+    }
+
+    public String downloadAsString(URL url)
+    {
+        return downloadAsString(url, timeout);
+    }
+
+    public byte[] download(URL url)
+    {
+        return download(url, timeout);
+    }
+
     /**
      * 从URL获取JSON对象
      *
@@ -31,18 +51,13 @@ public class DownloadUtils
     {
         try
         {
-            return JsonUtils.getJsonObjectByJsonString(DownloadUtils.downloadAsString(new URL(url), timeout));
+            return JsonUtils.getJsonObjectByJsonString(downloadAsString(new URL(url), timeout));
         }
         catch (MalformedURLException e)
         {
             e.printStackTrace();
             return null;
         }
-    }
-
-    public static JSONObject getJSONObjectFromURL(String url)
-    {
-        return getJSONObjectFromURL(url, getDefaultTimeout());
     }
 
     /**
@@ -54,21 +69,6 @@ public class DownloadUtils
     public static String downloadAsString(URL url, int timeout)
     {
         return new String(Objects.requireNonNull(download(url, timeout)));
-    }
-
-    public static String downloadAsString(URL url)
-    {
-        return downloadAsString(url, getDefaultTimeout());
-    }
-
-    public static byte[] download(URL url)
-    {
-        return download(url, getDefaultTimeout());
-    }
-
-    private static int getDefaultTimeout()
-    {
-        return Main.getConfig().getInt("BotProperties.Download.Timeout");
     }
 
     /**
