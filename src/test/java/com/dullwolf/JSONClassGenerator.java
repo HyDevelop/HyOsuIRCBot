@@ -1,7 +1,7 @@
 package com.dullwolf;
 
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
-import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonElement;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/24 创建!
@@ -28,10 +28,10 @@ public class JSONClassGenerator
                 "public class UserData extends DataBase\n" +
                 "{");
 
-        JSONObject object = DownloadUtils.getJSONObjectFromURL("https://ameobea.me/osutrack/api/get_changes.php?user=hykilpikonna&mode=0", 5000);
+        JsonElement element = DownloadUtils.getJsonElementFromURL("https://ameobea.me/osutrack/api/get_changes.php?user=hykilpikonna&mode=0", 5000);
 
-        assert object != null;
-        object.keySet().forEach(key -> builder.append(String.format("\n    private %s %s;", getFriendlyName(object.get(key).getClass().getName()), key)));
+        assert element != null;
+        element.getAsJsonObject().keySet().forEach(key -> builder.append(String.format("\n    private %s %s;", getFriendlyName(element.getAsJsonObject().get(key).getClass().getName()), key)));
 
         builder.append("\n" +
                 "}");
