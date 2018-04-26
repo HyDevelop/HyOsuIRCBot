@@ -6,10 +6,7 @@ import cc.moecraft.irc.osubot.osu.data.DataBase;
 import cc.moecraft.irc.osubot.osu.parameters.OsuTrackParameters;
 import cc.moecraft.irc.osubot.osu.parameters.ParametersBase;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
-import cc.moecraft.irc.osubot.utils.DownloadUtils;
-import cc.moecraft.irc.osubot.utils.InputUtils;
-import cc.moecraft.irc.osubot.utils.PropertiesUtil;
-import cc.moecraft.irc.osubot.utils.ReflectUtils;
+import cc.moecraft.irc.osubot.utils.*;
 import com.google.gson.JsonElement;
 import com.jfinal.core.paragetter.Para;
 
@@ -56,7 +53,9 @@ public class GSONTest
         logger.log(" is Array: " + jsonElement.isJsonArray());
         logger.log(" is Object: " + jsonElement.isJsonObject());
 
-        logger.log(" Object 强制获取 Array: " + jsonElement.getAsJsonArray().toString());
+        // 失败: logger.log(" Object 强制获取 Array: " + jsonElement.getAsJsonArray().toString());
+
+        logger.log(" Object 转换 Array: " + JsonUtils.toJsonArray(jsonElement.getAsJsonObject()).toString());
 
         // 输出所有值
         logger.debug("");
