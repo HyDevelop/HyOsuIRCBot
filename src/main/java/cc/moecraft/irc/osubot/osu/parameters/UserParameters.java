@@ -45,4 +45,10 @@ public class UserParameters extends ParametersBase
     {
         return new UserData();
     }
+
+    @Override
+    public ReturnDataType returnDataType()
+    {
+        return ReturnDataType.SINGLETON_LIST;
+    }
 }

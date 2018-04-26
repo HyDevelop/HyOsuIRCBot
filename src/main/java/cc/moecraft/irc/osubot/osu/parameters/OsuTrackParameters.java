@@ -32,4 +32,10 @@ public class OsuTrackParameters extends ParametersBase
     {
         return new OsuTrackData();
     }
+
+    @Override
+    public ReturnDataType returnDataType()
+    {
+        return ReturnDataType.OBJECT;
+    }
 }
