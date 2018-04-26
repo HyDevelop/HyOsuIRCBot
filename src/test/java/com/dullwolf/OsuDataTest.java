@@ -2,10 +2,12 @@ package com.dullwolf;
 
 import cc.moecraft.irc.osubot.DebugLogger;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
+import cc.moecraft.irc.osubot.osu.data.DataBase;
 import cc.moecraft.irc.osubot.osu.parameters.OsuTrackParameters;
+import cc.moecraft.irc.osubot.utils.DownloadUtils;
+import cc.moecraft.irc.osubot.utils.ReflectUtils;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 import static java.lang.System.in;
@@ -41,8 +43,11 @@ public class OsuDataTest
         logger.log("- 用户名 = " + username);
         logger.log("- 模式   = " + mode);
 
-        OsuAPIUtils utils = new OsuAPIUtils(apiKey);
+        OsuAPIUtils utils = new OsuAPIUtils(apiKey, new DownloadUtils(5000));
 
-        utils.get(new OsuTrackParameters(username, mode));
+        DataBase dataBase = utils.get(new OsuTrackParameters(username, mode));
+
+        // 输出所有值
+        ReflectUtils.printAllValue(dataBase);
     }
 }
