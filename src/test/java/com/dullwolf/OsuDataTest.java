@@ -45,7 +45,7 @@ public class OsuDataTest
 
         OsuAPIUtils utils = new OsuAPIUtils(apiKey, new DownloadUtils(5000));
 
-        DataBase dataBase = utils.get(new OsuTrackParameters(username, mode));
+        DataBase dataBase = utils.get(new OsuTrackParameters(username, String.valueOf(mode)));
 
         // 输出所有值
         ReflectUtils.printAllValue(dataBase);
