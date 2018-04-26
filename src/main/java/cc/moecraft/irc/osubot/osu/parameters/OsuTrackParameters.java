@@ -28,9 +28,9 @@ public class OsuTrackParameters extends ParametersBase
     }
 
     @Override
-    public DataBase dataStorageObject()
+    public Class dataStorageClass()
     {
-        return new OsuTrackData();
+        return OsuTrackData.class;
     }
 
     @Override

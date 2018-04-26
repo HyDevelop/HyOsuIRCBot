@@ -14,7 +14,7 @@ public abstract class ParametersBase
 {
     public abstract String subURL();
 
-    public abstract DataBase dataStorageObject();
+    public abstract Class dataStorageClass();
 
     public abstract ReturnDataType returnDataType();
 
