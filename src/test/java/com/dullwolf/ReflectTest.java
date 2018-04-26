@@ -44,10 +44,14 @@ public class ReflectTest
         logger.debug("用来测试获取Getter的Field: " + field);
 
         Method getter = ReflectUtils.getGetter(field, userData);
+        Method setter = ReflectUtils.getSetter(field, userData);
 
         assert getter != null;
         logger.debug("获取到的Getter: " + getter.getName());
+        logger.debug("获取到的Setter: " + getter.getName());
 
+        setter.invoke(userData, 100);
+        logger.debug("运行Setter设置的数据: " + 100);
         logger.debug("运行Getter获取到的数据: " + getter.invoke(userData));
     }
 }
