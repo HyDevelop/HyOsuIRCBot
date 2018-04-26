@@ -37,7 +37,7 @@ public class OsuDataTest
 
         logger.log("输入模式: ");
 
-        int mode = reader.read();
+        int mode = Integer.parseInt(reader.readLine());
 
         logger.log("当前信息: ");
         logger.log("- 用户名 = " + username);
