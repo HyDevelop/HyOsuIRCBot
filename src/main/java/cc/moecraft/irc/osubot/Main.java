@@ -53,10 +53,10 @@ public class Main {
     private static PermissionConfig permissionConfig; // 权限配置文件
 
     @Getter
-    private static DownloadUtils downloader; // 权限配置文件
+    private static DownloadUtils downloader; // 下载器
 
     @Getter
-    private static OsuAPIUtils osuAPIUtils;
+    private static OsuAPIUtils osuAPIUtils; // Osu官方API数据获取器
 
     @Getter
     private static boolean debug = true; // 是否开启测试
