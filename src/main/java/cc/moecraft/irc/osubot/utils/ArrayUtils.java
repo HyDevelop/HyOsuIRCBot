@@ -32,6 +32,6 @@ public class ArrayUtils
             result.append(args.get(i)).append(" ");
         }
 
-        return result.append(args.get(args.size())).toString();
+        return result.append(args.get(args.size() - 1)).toString();
     }
 }
