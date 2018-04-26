@@ -34,23 +34,15 @@ public class ReflectUtils
     {
         for (Method method : object.getClass().getMethods())
         {
-            System.out.println("Method: " + method);
             if (method.getName().startsWith("get"))
             {
-                String methodName = method.getName();
+                String methodName = method.getName().toLowerCase();
 
                 methodName = methodName.replaceFirst("get", "");
 
-                if (methodName.equals(field.getName()))
-                {
-                    System.out.println("最终获取到的Method: " + methodName);
-                    System.out.println("-------------------------------------------");
-                    return method;
-                }
+                if (methodName.equals(field.getName().toLowerCase())) return method;
             }
         }
-        System.out.println("没有获取到Method");
-        System.out.println("-------------------------------------------");
         return null;
     }
 
