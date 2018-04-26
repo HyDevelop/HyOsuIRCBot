@@ -41,9 +41,9 @@ public class UserParameters extends ParametersBase
     }
 
     @Override
-    public DataBase dataStorageObject()
+    public Class dataStorageClass()
     {
-        return new UserData();
+        return UserData.class;
     }
 
     @Override
