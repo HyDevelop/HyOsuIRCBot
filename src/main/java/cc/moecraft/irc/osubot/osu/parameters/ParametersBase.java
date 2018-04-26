@@ -15,4 +15,14 @@ public abstract class ParametersBase
     public abstract String subURL();
 
     public abstract DataBase dataStorageObject();
+
+    public abstract ReturnDataType returnDataType();
+
+    /**
+     * 获取的目标类型
+     */
+    public enum ReturnDataType
+    {
+        OBJECT, LIST, SINGLETON_LIST
+    }
 }
