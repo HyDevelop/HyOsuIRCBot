@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot;
 
+import cc.moecraft.irc.osubot.utils.PropertiesUtil;
 import cc.moecraft.yaml.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,10 @@ import java.util.Arrays;
 public class BotConfig extends Config
 {
     private Logger logger = LoggerFactory.getLogger(BotConfig.class);
+
+    private static final String ircName= PropertiesUtil.readKey("irc_name");
+    private static final String ircPassword=PropertiesUtil.readKey("irc_password");
+    private static final String osuKey=PropertiesUtil.readKey("osu_key");
 
     public BotConfig()
     {
@@ -97,18 +102,19 @@ public class BotConfig extends Config
     @Override
     public void writeDefaultConfig()
     {
+
         addDefault("ServerProperties.Address", "irc.ppy.sh");
         addDefault("ServerProperties.Port", 6667);
 
-        setUsername("ChangeThisToTheUsername");
-        setPassword("ChangeThisToThePassword");
+        setUsername(ircName);
+        setPassword(ircPassword);
         setAdminUsernames(new ArrayList<>(Arrays.asList("Hykilpikonna", "dullwolf")));
 
         addDefault("BotProperties.CommandPrefix", "!");
         addDefault("BotProperties.AutoJoinChannels", new String[]{"#general", "#chinese"});
 
         addDefault("BotProperties.Download.Timeout", 3000);
-        addDefault("BotProperties.Download.Osu.APIKey", "ChangeThisToOsuAPIKey"); // https://github.com/ppy/osu-api/wiki
+        addDefault("BotProperties.Download.Osu.APIKey", osuKey); // https://github.com/ppy/osu-api/wiki
 
         save();
     }
