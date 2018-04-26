@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot.osu.data;
 
+import com.google.gson.JsonArray;
 import lombok.*;
 
 /**
@@ -11,23 +12,23 @@ import lombok.*;
 @Data @Builder @NoArgsConstructor @AllArgsConstructor
 public class OsuTrackData extends DataBase
 {
-    public long pp_rank;
-    public long level;
-    public long count_rank_ss;
-    public long accuracy;
-    public long ranked_score;
-    public long mode;
-    public long count100;
-    public long count_rank_s;
-    public long playcount;
-    public long count300;
-    public com.alibaba.fastjson.JSONArray newhs;
-    public boolean levelup;
-    public boolean exists;
-    public long total_score;
-    public long pp_raw;
-    public long count50;
-    public long count_rank_a;
-    public boolean first;
-    public String username;
+    private long pp_rank;
+    private long level;
+    private long count_rank_ss;
+    private long accuracy;
+    private long ranked_score;
+    private long mode;
+    private long count100;
+    private long count_rank_s;
+    private long playcount;
+    private long count300;
+    private JsonArray newhs;
+    private boolean levelup;
+    private boolean exists;
+    private long total_score;
+    private long pp_raw;
+    private long count50;
+    private long count_rank_a;
+    private boolean first;
+    private String username;
 }
