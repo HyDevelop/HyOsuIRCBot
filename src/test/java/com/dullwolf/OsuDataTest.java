@@ -4,7 +4,10 @@ import cc.moecraft.irc.osubot.DebugLogger;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.data.DataBase;
 import cc.moecraft.irc.osubot.osu.parameters.OsuTrackParameters;
+import cc.moecraft.irc.osubot.osu.parameters.ParametersBase;
+import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
+import cc.moecraft.irc.osubot.utils.InputUtils;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
 
 import java.io.BufferedReader;
@@ -30,6 +33,11 @@ public class OsuDataTest
 
         String apiKey = reader.readLine();
 
+        OsuAPIUtils utils = new OsuAPIUtils(apiKey, new DownloadUtils(5000));
+
+
+        UserParameters parameters = new UserParameters();
+        /*
         logger.log("当前测试OsuTrack的API");
         logger.log("输入用户名: ");
 
@@ -43,11 +51,19 @@ public class OsuDataTest
         logger.log("- 用户名 = " + username);
         logger.log("- 模式   = " + mode);
 
-        OsuAPIUtils utils = new OsuAPIUtils(apiKey, new DownloadUtils(5000));
-
         DataBase dataBase = utils.get(new OsuTrackParameters(username, mode));
+        */
+
+        parameters = (UserParameters) InputUtils.inputAllParams(parameters);
+
+        logger.debug("当前信息: ");
+        ReflectUtils.printAllValue(parameters);
+
+        DataBase dataBase = utils.get(parameters);
 
         // 输出所有值
+        logger.debug("");
+        logger.debug("获取到的信息: ");
         ReflectUtils.printAllValue(dataBase);
     }
 }
