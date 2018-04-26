@@ -11,6 +11,7 @@ import cc.moecraft.irc.osubot.utils.ReflectUtils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import static java.lang.System.in;
 
@@ -30,36 +31,20 @@ public class OsuDataTest
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
-        logger.log("输入APIKey (不输入既用默认): ");
+        logger.log("输入APIKey (输入def既用默认): ");
 
         String apiKey = reader.readLine();
 
-        OsuAPIUtils utils = new OsuAPIUtils(apiKey == null || apiKey.isEmpty() ? defaultKey : apiKey, new DownloadUtils(5000));
+        OsuAPIUtils utils = new OsuAPIUtils(apiKey.equalsIgnoreCase("def") ? defaultKey : apiKey, new DownloadUtils(5000));
 
         UserParameters parameters = new UserParameters();
-        /*
-        logger.log("当前测试OsuTrack的API");
-        logger.log("输入用户名: ");
-
-        String username = reader.readLine();
-
-        logger.log("输入模式: ");
-
-        int mode = Integer.parseInt(reader.readLine());
-
-        logger.log("当前信息: ");
-        logger.log("- 用户名 = " + username);
-        logger.log("- 模式   = " + mode);
-
-        DataBase dataBase = utils.get(new OsuTrackParameters(username, mode));
-        */
 
         parameters = (UserParameters) InputUtils.inputAllParams(parameters);
 
         logger.debug("当前信息: ");
         ReflectUtils.printAllValue(parameters);
 
-        DataBase dataBase = utils.get(parameters);
+        DataBase dataBase = utils.get(parameters).get(0);
 
         // 输出所有值
         logger.debug("");
