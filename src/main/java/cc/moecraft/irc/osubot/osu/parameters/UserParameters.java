@@ -21,13 +21,13 @@ public class UserParameters extends ParametersBase
 
     // 不必要的参数
     @HttpParameter(required = false)
-    private int mode;
+    private String mode;
 
     @HttpParameter(required = false)
     private String type;
 
     @HttpParameter(required = false)
-    private int event_days;
+    private String event_days;
 
     public UserParameters(String userIdOrName)
     {

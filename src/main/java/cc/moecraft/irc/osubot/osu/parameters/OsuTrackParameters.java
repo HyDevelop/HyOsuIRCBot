@@ -19,7 +19,7 @@ public class OsuTrackParameters extends ParametersBase
     private String user;
 
     @HttpParameter(required = true)
-    private int mode;
+    private String mode;
 
     @Override
     public String subURL()
