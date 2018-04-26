@@ -29,13 +29,14 @@ public class ReflectUtils
     /**
      * 获取JsonPrimitive的"getAs***()"方法
      * @param field Field
-     * @param object 变量
      * @param jsonPrimitive Json原始对象
      * @return 获取到的方法
      */
-    public static Method getJsonPrimitiveGetAsMethod(Field field, Object object, JsonPrimitive jsonPrimitive)
+    public static Method getJsonPrimitiveGetAsMethod(Field field, JsonPrimitive jsonPrimitive)
     {
-        for (Method method : object.getClass().getMethods())
+        String fieldSimpleName = field.getType().getSimpleName();
+
+        for (Method method : jsonPrimitive.getClass().getMethods())
         {
             if (method.getName().startsWith("getAs"))
             {
@@ -43,9 +44,7 @@ public class ReflectUtils
 
                 methodName = methodName.replaceFirst("getAs", "");
 
-                System.out.println("field.getType().getSimpleName() = " + field.getType().getSimpleName());
-
-                if (methodName.equalsIgnoreCase(field.getType().getSimpleName())) return method;
+                if (methodName.equalsIgnoreCase(fieldSimpleName)) return method;
             }
         }
         return null;
@@ -121,6 +120,7 @@ public class ReflectUtils
     {
         ArrayList<Class> listThatIsConsideredPrimitive = new ArrayList<>();
         listThatIsConsideredPrimitive.add(Boolean.class);
+        listThatIsConsideredPrimitive.add(String.class);
         listThatIsConsideredPrimitive.add(Character.class);
         listThatIsConsideredPrimitive.add(Byte.class);
         listThatIsConsideredPrimitive.add(Short.class);
@@ -128,8 +128,7 @@ public class ReflectUtils
         listThatIsConsideredPrimitive.add(Long.class);
         listThatIsConsideredPrimitive.add(Float.class);
         listThatIsConsideredPrimitive.add(Double.class);
-        listThatIsConsideredPrimitive.add(Void.class);
 
-        return listThatIsConsideredPrimitive.contains(targetClass);
+        return targetClass.isPrimitive() || listThatIsConsideredPrimitive.contains(targetClass);
     }
 }
