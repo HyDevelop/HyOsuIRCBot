@@ -66,7 +66,7 @@ public class CommandManager
     {
         if (!isCommand(fullCommand))
         {
-            if (channel == null) // 如果是私聊, 回复提示
+            if (channel == null && !user.getNick().equalsIgnoreCase(Main.getConfig().getUsername())) // 如果是私聊并且不是自己, 回复提示
             {
                 Main.getMessenger().respond(event, "NOT A COMMAND: 不是指令 ( 输入" + getPrefix() + "help显示帮助 )");
             }
