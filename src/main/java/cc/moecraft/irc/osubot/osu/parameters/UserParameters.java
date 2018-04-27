@@ -21,7 +21,7 @@ public class UserParameters extends ParametersBase
 
     // 不必要的参数
     @HttpParameter(required = false)
-    private String mode;
+    private String m;
 
     @HttpParameter(required = false)
     private String type;
