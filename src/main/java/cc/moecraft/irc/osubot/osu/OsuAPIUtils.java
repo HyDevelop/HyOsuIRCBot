@@ -17,6 +17,8 @@ import lombok.AllArgsConstructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -171,5 +173,33 @@ public class OsuAPIUtils
         System.out.println("获取到的URL请求: " + urlBuilder.toString());
 
         return downloader.getJsonElementFromURL(urlBuilder.toString());
+    }
+
+    /**
+     * 获取用户输入的模式的数字形式
+     * 如果没找到返回-1
+     *
+     * @param mode 模式名
+     * @return 模式
+     */
+    public static int getModeWithName(String mode)
+    {
+        mode = mode.toLowerCase();
+
+        Map<String, Integer> modeMap = new HashMap<>();
+
+        modeMap.put("std", 0);
+        modeMap.put("standard", 0);
+        modeMap.put("s", 0);
+        modeMap.put("taiko", 1);
+        modeMap.put("t", 1);
+        modeMap.put("ctb", 2);
+        modeMap.put("catch", 2);
+        modeMap.put("catchthebrat", 2);
+        modeMap.put("c", 2);
+        modeMap.put("mania", 3);
+        modeMap.put("m", 3);
+
+        return modeMap.getOrDefault(mode, -1);
     }
 }
