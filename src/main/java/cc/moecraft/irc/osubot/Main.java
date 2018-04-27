@@ -8,6 +8,7 @@ import cc.moecraft.irc.osubot.command.commands.fun.CommandNullpo;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandPing;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandTime;
 import cc.moecraft.irc.osubot.command.commands.management.*;
+import cc.moecraft.irc.osubot.command.commands.osu.CommandStats;
 import cc.moecraft.irc.osubot.language.Messenger;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
@@ -96,6 +97,7 @@ public class Main {
         commandManager.registerCommand(new CommandUserPermission());
         commandManager.registerCommand(new CommandSetAdmin());
         commandManager.registerCommand(new CommandRemoveAdmin());
+        commandManager.registerCommand(new CommandStats());
 
         // 连接服务器
         osuBot.startBot();
