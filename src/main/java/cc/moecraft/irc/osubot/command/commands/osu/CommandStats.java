@@ -3,16 +3,21 @@ package cc.moecraft.irc.osubot.command.commands.osu;
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.language.Messenger;
+import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
 import cc.moecraft.irc.osubot.utils.ArrayUtils;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/23 创建!
@@ -31,6 +36,8 @@ public class CommandStats extends Command
      * 查询玩家信息
      *  !s              查询自己的信息
      *  !s [用户名]     查询其他玩家信息
+     *  !s [t/m/c]      查询自己的某个模式的信息
+     *  !s [t/m/c] [名] 查询其他玩家某个模式的信息
      *
      * @param event 事件
      * @param sender 发送者的irc用户 ( 在osu的irc服务器的话用户名就是osu的用户名 )
@@ -41,20 +48,17 @@ public class CommandStats extends Command
     @Override
     public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        String username;
-
-        if (args.size() == 0) username = sender.getNick();
-        else username = ArrayUtils.getTheRestArgsAsString(args, 0);
+        UsernameAndMode usernameAndMode = getUsernameAndModeWithArgs(sender, args);
 
         try
         {
-            if (!Main.getOsuAPIUtils().isUserExisting(username))
+            if (!Main.getOsuAPIUtils().isUserExisting(usernameAndMode.getUsername()))
             {
-                Main.getMessenger().respond(event, "未知用户: " + username);
+                Main.getMessenger().respond(event, "未知用户: " + usernameAndMode.getUsername());
                 return;
             }
 
-            UserData userData = (UserData) Main.getOsuAPIUtils().get(UserParameters.builder().u(username).build()).get(0);
+            UserData userData = (UserData) Main.getOsuAPIUtils().get(UserParameters.builder().u(usernameAndMode.getUsername()).build()).get(0);
 
             Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(userData, "[%username%(%user_id%)]: %pp_raw%pp | lv.%level% | %accuracy%acc. | %count_rank_ssh%ssh | %count_rank_ss%ss |  %count_rank_sh%sh |  %count_rank_s%s |  %count_rank_a%a "));
         }
@@ -70,5 +74,41 @@ public class CommandStats extends Command
     public String permissionRequired()
     {
         return "irc.user.regular.osu.stats";
+    }
+
+    /**
+     * 获取玩家和模式
+     * @param sender 发送者
+     * @param args 指令
+     * @return 玩家和模式
+     */
+    public UsernameAndMode getUsernameAndModeWithArgs(User sender, ArrayList<String> args)
+    {
+        String username;
+        int mode = 0;
+
+        if (args.size() == 0) username = sender.getNick();
+        else
+        {
+            int modeTemp = OsuAPIUtils.getModeWithName(args.get(0));
+
+            if (modeTemp == -1) username = ArrayUtils.getTheRestArgsAsString(args, 0);
+            else
+            {
+                mode = modeTemp;
+                if (args.size() == 1) username = sender.getNick();
+                else username = ArrayUtils.getTheRestArgsAsString(args, 1);
+            }
+        }
+
+        return new UsernameAndMode(mode, username);
+    }
+
+    @Data
+    @AllArgsConstructor
+    public class UsernameAndMode
+    {
+        private int mode;
+        private String username;
     }
 }
