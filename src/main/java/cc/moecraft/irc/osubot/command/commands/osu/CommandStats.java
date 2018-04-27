@@ -58,7 +58,7 @@ public class CommandStats extends Command
                 return;
             }
 
-            UserData userData = (UserData) Main.getOsuAPIUtils().get(UserParameters.builder().u(usernameAndMode.getUsername()).build()).get(0);
+            UserData userData = (UserData) Main.getOsuAPIUtils().get(UserParameters.builder().m(("" + usernameAndMode.mode)).u(usernameAndMode.getUsername()).build()).get(0);
 
             Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(userData, "[%username%(%user_id%)]: %pp_raw%pp | lv.%level% | %accuracy%acc. | %count_rank_ssh%ssh | %count_rank_ss%ss |  %count_rank_sh%sh |  %count_rank_s%s |  %count_rank_a%a "));
         }
