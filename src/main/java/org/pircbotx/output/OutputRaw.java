@@ -76,12 +76,7 @@ public class OutputRaw {
 				writeNowCondition.await(lastSentLine + delayNanos - curNanos, TimeUnit.NANOSECONDS);
 				curNanos = System.nanoTime();
 			}
-			if (Main.isDebug()) log.info(OUTPUT_MARKER, line);
-			else
-			{
-				ArrayList<String> strings = new ArrayList<>(Arrays.asList(line.split(" ")));
-				Main.getLogger().log(String.format("[O] Reply %s %s", strings.get(1), ArrayUtils.getTheRestArgsAsString(strings, 2)));
-			}
+			logLine(line);
 			Utils.sendRawLineToServer(bot, line);
 			lastSentLine = System.nanoTime();
 		} catch (IOException e) {
@@ -117,12 +112,7 @@ public class OutputRaw {
 		checkArgument(bot.isConnected(), "Not connected to server");
 		writeLock.lock();
 		try {
-			if (Main.isDebug()) log.info(OUTPUT_MARKER, line);
-			else
-			{
-				ArrayList<String> strings = new ArrayList<>(Arrays.asList(line.split(" ")));
-				Main.getLogger().log(String.format("[O] Reply %s %s", strings.get(1), ArrayUtils.getTheRestArgsAsString(strings, 2)));
-			}
+			logLine(line);
 			Utils.sendRawLineToServer(bot, line);
 			lastSentLine = System.nanoTime();
 			if (resetDelay)
@@ -134,6 +124,21 @@ public class OutputRaw {
 			throw new RuntimeException("Could not send line to server. " + exceptionDebug(), e);
 		} finally {
 			writeLock.unlock();
+		}
+	}
+
+	/**
+	 * MODIFIED
+	 * @param line
+	 */
+	private void logLine(String line)
+	{
+		if (Main.isDebug()) log.info(OUTPUT_MARKER, line);
+		else
+		{
+			ArrayList<String> strings = new ArrayList<>(Arrays.asList(line.split(" ")));
+			if (strings.get(0).equalsIgnoreCase("PRIVMSG"))
+				Main.getLogger().log(String.format("[O] Reply %s %s", strings.get(1), ArrayUtils.getTheRestArgsAsString(strings, 2)));
 		}
 	}
 
