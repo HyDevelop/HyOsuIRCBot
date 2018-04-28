@@ -50,6 +50,25 @@ public class OsuUser extends Permissible
         }
     }
 
+    /**
+     * 获取玩家数据
+     *
+     * @param mode 模式
+     * @return 玩家数据
+     */
+    public UserData getData(int mode)
+    {
+        try
+        {
+            return (UserData) Main.getOsuAPIUtils().get(UserParameters.builder().u(username).type("string").m("" + mode).build()).get(0);
+        }
+        catch (IllegalAccessException | InstantiationException | InvocationTargetException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @Override
     public boolean isAdmin()
     {
