@@ -3,6 +3,7 @@ package cc.moecraft.irc.osubot.command.commands.osu;
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
+import cc.moecraft.irc.osubot.osu.OsuUser;
 import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
 import cc.moecraft.irc.osubot.utils.ArrayUtils;
@@ -55,7 +56,7 @@ public class CommandStats extends Command
                 return;
             }
 
-            UserData userData = (UserData) Main.getOsuAPIUtils().get(UserParameters.builder().m(("" + usernameAndMode.mode)).u(usernameAndMode.getUsername()).build()).get(0);
+            UserData userData = new OsuUser(usernameAndMode.getUsername()).getData(usernameAndMode.mode);
 
             // 四舍五入
             ReflectUtils.roundAllNumbers(userData, 1);
