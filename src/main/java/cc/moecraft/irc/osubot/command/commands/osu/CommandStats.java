@@ -60,7 +60,10 @@ public class CommandStats extends Command
 
             UserData userData = (UserData) Main.getOsuAPIUtils().get(UserParameters.builder().m(("" + usernameAndMode.mode)).u(usernameAndMode.getUsername()).build()).get(0);
 
-            Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(userData, "[%username%(%user_id%)]: %pp_raw%pp | lv.%level% | %accuracy%acc. | %count_rank_ssh%ssh | %count_rank_ss%ss |  %count_rank_sh%sh |  %count_rank_s%s |  %count_rank_a%a "));
+            // 四舍五入
+            ReflectUtils.roundAllNumbers(userData, 1);
+
+            Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(userData, "[%username% (%user_id%)]: %pp_raw%pp | lv.%level% | %accuracy%acc. | %count_rank_ss%ss | %count_rank_s%s |  %count_rank_a%a "));
         }
         catch (IllegalAccessException | InstantiationException | InvocationTargetException e)
         {
