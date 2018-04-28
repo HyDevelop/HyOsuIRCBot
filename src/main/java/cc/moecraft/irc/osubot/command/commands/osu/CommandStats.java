@@ -64,7 +64,7 @@ public class CommandStats extends Command
             userData.setCount_rank_s(userData.getCount_rank_s() + userData.getCount_rank_sh());
             userData.setCount_rank_ss(userData.getCount_rank_ss() + userData.getCount_rank_ssh());
 
-            Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(userData, "[%username% (%user_id%)]: %pp_raw%pp | lv.%level% | %accuracy%acc. | %count_rank_ss%ss | %count_rank_s%s |  %count_rank_a%a "));
+            Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(userData, "[%username% (%user_id%)]: %pp_raw%pp | lv.%level% | %accuracy%% acc. | %count_rank_ss%ss | %count_rank_s%s |  %count_rank_a%a "));
         }
         catch (IllegalAccessException | InstantiationException | InvocationTargetException e)
         {
