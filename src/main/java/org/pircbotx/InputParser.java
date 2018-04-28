@@ -293,7 +293,7 @@ public class InputParser implements Closeable {
 		String line = CharMatcher.WHITESPACE.trimFrom(rawLine);
 
 		// MODIFIED: To avoid quit message
-		if (!line.contains("QUIT") && !line.contains("JOIN") && !line.contains("PING")) log.info(INPUT_MARKER, line);
+		if (!line.contains("QUIT") && !line.contains("JOIN") && !line.contains("PING") && !line.contains("PONG")) log.info(INPUT_MARKER, line);
 
 		// Parse out v3Tags before
 		ImmutableMap.Builder<String, String> tags = ImmutableMap.builder();
@@ -537,9 +537,9 @@ public class InputParser implements Closeable {
 			if (source.getNick().equalsIgnoreCase(bot.getNick())) {
 				//Its us, get channel info
 				channel = bot.getUserChannelDao().createChannel(target);
-				if (configuration.isOnJoinWhoEnabled())
-					bot.sendRaw().rawLine("WHO " + target);
-				bot.sendRaw().rawLine("MODE " + target);
+				//if (configuration.isOnJoinWhoEnabled())
+				//	bot.sendRaw().rawLine("WHO " + target);
+				//bot.sendRaw().rawLine("MODE " + target);
 			}
 			/*
 			//Create user if it doesn't exist already
