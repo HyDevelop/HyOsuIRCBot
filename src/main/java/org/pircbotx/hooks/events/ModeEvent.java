@@ -18,17 +18,18 @@
 package org.pircbotx.hooks.events;
 
 import com.google.common.collect.ImmutableList;
-import javax.annotation.Nullable;
-import org.pircbotx.Channel;
-import org.pircbotx.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
-import org.pircbotx.hooks.Event;
+import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.UserHostmask;
+import org.pircbotx.hooks.Event;
 import org.pircbotx.hooks.types.GenericChannelUserEvent;
+
+import javax.annotation.Nullable;
 
 /**
  * Used when the mode of a channel is set.

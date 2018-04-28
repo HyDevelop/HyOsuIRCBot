@@ -18,13 +18,10 @@
 package org.pircbotx.snapshot;
 
 import com.google.common.collect.ImmutableMap;
+import org.pircbotx.*;
+
 import java.util.EnumMap;
 import java.util.Locale;
-import org.pircbotx.PircBotX;
-import org.pircbotx.UserChannelDao;
-import org.pircbotx.UserChannelMap;
-import org.pircbotx.UserHostmask;
-import org.pircbotx.UserLevel;
 
 /**
  *

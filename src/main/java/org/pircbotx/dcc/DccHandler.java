@@ -17,40 +17,28 @@
  */
 package org.pircbotx.dcc;
 
+import com.google.common.collect.ImmutableList;
+import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.pircbotx.*;
+import org.pircbotx.exception.DccException;
+import org.pircbotx.hooks.events.IncomingChatRequestEvent;
+import org.pircbotx.hooks.events.IncomingFileTransferEvent;
+
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.pircbotx.Configuration;
-import org.pircbotx.PircBotX;
-import org.pircbotx.User;
-import org.pircbotx.Utils;
-import org.pircbotx.exception.DccException;
-import org.pircbotx.hooks.events.IncomingChatRequestEvent;
-import org.pircbotx.hooks.events.IncomingFileTransferEvent;
-import static com.google.common.base.Preconditions.*;
-import com.google.common.collect.ImmutableList;
-import java.net.Inet4Address;
-import java.net.Inet6Address;
-import lombok.NonNull;
-import org.pircbotx.UserHostmask;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Handler of all DCC requests

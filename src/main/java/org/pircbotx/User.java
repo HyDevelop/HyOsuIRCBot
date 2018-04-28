@@ -17,15 +17,16 @@
  */
 package org.pircbotx;
 
-import org.pircbotx.snapshot.UserSnapshot;
 import com.google.common.collect.ImmutableSortedSet;
-import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
+import org.pircbotx.snapshot.UserSnapshot;
+
+import java.util.UUID;
 
 /**
  * Represents a User on the server.

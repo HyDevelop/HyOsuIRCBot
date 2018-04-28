@@ -17,12 +17,23 @@
  */
 package org.pircbotx;
 
-import static com.google.common.base.Preconditions.*;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSortedMap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import com.google.common.collect.*;
+import lombok.Data;
+import lombok.NonNull;
+import lombok.ToString;
+import lombok.experimental.Accessors;
+import org.apache.commons.lang3.StringUtils;
+import org.pircbotx.cap.CapHandler;
+import org.pircbotx.cap.EnableCapHandler;
+import org.pircbotx.dcc.*;
+import org.pircbotx.exception.IrcException;
+import org.pircbotx.hooks.CoreHooks;
+import org.pircbotx.hooks.Listener;
+import org.pircbotx.hooks.managers.ListenerManager;
+import org.pircbotx.hooks.managers.ThreadedListenerManager;
+import org.pircbotx.output.*;
+
+import javax.net.SocketFactory;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -31,30 +42,9 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import javax.net.SocketFactory;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-import org.apache.commons.lang3.StringUtils;
-import org.pircbotx.cap.CapHandler;
-import org.pircbotx.cap.EnableCapHandler;
-import org.pircbotx.dcc.DccHandler;
-import org.pircbotx.dcc.ReceiveChat;
-import org.pircbotx.dcc.ReceiveFileTransfer;
-import org.pircbotx.dcc.SendChat;
-import org.pircbotx.dcc.SendFileTransfer;
-import org.pircbotx.exception.IrcException;
-import org.pircbotx.hooks.CoreHooks;
-import org.pircbotx.hooks.Listener;
-import org.pircbotx.hooks.managers.ListenerManager;
-import org.pircbotx.hooks.managers.ThreadedListenerManager;
-import org.pircbotx.output.OutputCAP;
-import org.pircbotx.output.OutputChannel;
-import org.pircbotx.output.OutputDCC;
-import org.pircbotx.output.OutputIRC;
-import org.pircbotx.output.OutputRaw;
-import org.pircbotx.output.OutputUser;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Immutable configuration for PircBotX created from

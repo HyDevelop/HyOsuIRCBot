@@ -17,17 +17,18 @@
  */
 package org.pircbotx.hooks.events;
 
-import javax.annotation.Nullable;
-import org.pircbotx.Channel;
-import org.pircbotx.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
-import org.pircbotx.hooks.Event;
+import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.UserHostmask;
+import org.pircbotx.hooks.Event;
 import org.pircbotx.hooks.types.GenericChannelModeRecipientEvent;
+
+import javax.annotation.Nullable;
 
 /**
  * Called when a user (possibly us) gets owner status granted in a channel. Note

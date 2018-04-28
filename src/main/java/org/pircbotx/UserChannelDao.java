@@ -17,17 +17,9 @@
  */
 package org.pircbotx;
 
-import static com.google.common.base.Preconditions.*;
 import com.google.common.collect.ImmutableBiMap;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Maps;
-import java.io.Closeable;
-import java.util.EnumMap;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 import lombok.AccessLevel;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +31,11 @@ import org.pircbotx.snapshot.ChannelSnapshot;
 import org.pircbotx.snapshot.UserChannelDaoSnapshot;
 import org.pircbotx.snapshot.UserChannelMapSnapshot;
 import org.pircbotx.snapshot.UserSnapshot;
+
+import java.io.Closeable;
+import java.util.*;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * Model that creates and tracks Users and Channel and maintains relationships.

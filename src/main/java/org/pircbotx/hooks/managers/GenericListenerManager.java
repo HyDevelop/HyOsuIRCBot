@@ -18,15 +18,15 @@
 package org.pircbotx.hooks.managers;
 
 import com.google.common.collect.ImmutableSet;
+import lombok.extern.slf4j.Slf4j;
+import org.pircbotx.PircBotX;
+import org.pircbotx.hooks.Event;
+import org.pircbotx.hooks.Listener;
+import org.pircbotx.hooks.WaitForQueue;
+
 import java.util.ConcurrentModificationException;
 import java.util.HashSet;
 import java.util.Set;
-import lombok.extern.slf4j.Slf4j;
-import org.pircbotx.hooks.Event;
-import org.pircbotx.hooks.Listener;
-import org.pircbotx.PircBotX;
-import org.pircbotx.Utils;
-import org.pircbotx.hooks.WaitForQueue;
 
 /**
  * Generic ListenerManager based off of a normal event system. This is backed by

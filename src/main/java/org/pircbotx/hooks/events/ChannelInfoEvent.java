@@ -18,12 +18,11 @@
 package org.pircbotx.hooks.events;
 
 import com.google.common.collect.ImmutableList;
-import javax.annotation.Nullable;
-import org.pircbotx.PircBotX;
-import org.pircbotx.ChannelListEntry;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
+import org.pircbotx.ChannelListEntry;
+import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.Event;
 import org.pircbotx.output.OutputIRC;
 

@@ -17,12 +17,11 @@
  */
 package org.pircbotx.hooks.events;
 
-import javax.annotation.Nullable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.pircbotx.hooks.Event;
 import org.pircbotx.PircBotX;
+import org.pircbotx.hooks.Event;
 import org.pircbotx.hooks.types.GenericSnapshotEvent;
 import org.pircbotx.snapshot.UserChannelDaoSnapshot;
 

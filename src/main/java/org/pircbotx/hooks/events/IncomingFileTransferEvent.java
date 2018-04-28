@@ -17,22 +17,23 @@
  */
 package org.pircbotx.hooks.events;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.InetAddress;
-import javax.annotation.Nullable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
-import org.pircbotx.hooks.Event;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.UserHostmask;
 import org.pircbotx.dcc.FileTransfer;
 import org.pircbotx.dcc.ReceiveFileTransfer;
+import org.pircbotx.hooks.Event;
 import org.pircbotx.hooks.Listener;
 import org.pircbotx.hooks.types.GenericDCCEvent;
+
+import javax.annotation.Nullable;
+import java.io.File;
+import java.io.IOException;
+import java.net.InetAddress;
 
 /**
  * This event is dispatched whenever a DCC SEND request is sent to the PircBotX.

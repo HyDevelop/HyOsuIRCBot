@@ -3,13 +3,16 @@ package cc.moecraft.yaml.configuration.file;
 import cc.moecraft.yaml.configuration.Configuration;
 import cc.moecraft.yaml.configuration.ConfigurationSection;
 import cc.moecraft.yaml.configuration.InvalidConfigurationException;
+import cc.moecraft.yaml.configuration.utils.Validate;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.error.YAMLException;
 import org.yaml.snakeyaml.representer.Representer;
-import cc.moecraft.yaml.configuration.utils.Validate;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
 import java.util.Map;
 
 public class YamlConfiguration extends FileConfiguration {

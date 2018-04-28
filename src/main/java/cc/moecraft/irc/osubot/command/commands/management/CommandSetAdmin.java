@@ -6,7 +6,6 @@ import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**

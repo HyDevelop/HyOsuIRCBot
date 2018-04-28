@@ -1,6 +1,9 @@
 package cc.moecraft.irc.osubot.utils;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 /**
  * 此类由 Hykilpikonna 在 2018/58/26 创建!

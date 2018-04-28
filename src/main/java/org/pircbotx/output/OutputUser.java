@@ -17,8 +17,6 @@
  */
 package org.pircbotx.output;
 
-import java.io.File;
-import java.io.IOException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.pircbotx.Channel;
@@ -27,6 +25,9 @@ import org.pircbotx.UserHostmask;
 import org.pircbotx.dcc.SendChat;
 import org.pircbotx.dcc.SendFileTransfer;
 import org.pircbotx.exception.DccException;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Send lines to a serverUser.

@@ -17,16 +17,17 @@
  */
 package org.pircbotx.hooks;
 
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
+import org.pircbotx.PircBotX;
+import org.pircbotx.hooks.types.GenericEvent;
+
 import java.io.Closeable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
-import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
-import org.pircbotx.PircBotX;
-import org.pircbotx.hooks.types.GenericEvent;
 
 /**
  * Stores all events in a queue for processing. This is useful for sequential

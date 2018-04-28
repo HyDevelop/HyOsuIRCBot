@@ -2,7 +2,6 @@ package cc.moecraft.irc.osubot.command.commands.management;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
-import cc.moecraft.irc.osubot.language.Messenger;
 import cc.moecraft.irc.osubot.management.Permission;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
 import cc.moecraft.irc.osubot.management.PermissionGroup;

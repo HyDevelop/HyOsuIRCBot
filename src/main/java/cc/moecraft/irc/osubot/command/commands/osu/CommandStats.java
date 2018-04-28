@@ -2,7 +2,6 @@ package cc.moecraft.irc.osubot.command.commands.osu;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
-import cc.moecraft.irc.osubot.language.Messenger;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
@@ -16,8 +15,6 @@ import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/23 创建!

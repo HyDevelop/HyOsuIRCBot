@@ -17,13 +17,14 @@
  */
 package org.pircbotx.dcc;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.Socket;
 import lombok.Getter;
 import lombok.NonNull;
 import org.pircbotx.Configuration;
 import org.pircbotx.User;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.Socket;
 
 /**
  * A general active DCC file transfer

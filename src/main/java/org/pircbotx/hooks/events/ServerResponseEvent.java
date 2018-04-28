@@ -18,13 +18,12 @@
 package org.pircbotx.hooks.events;
 
 import com.google.common.collect.ImmutableList;
-import javax.annotation.Nullable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
-import org.pircbotx.hooks.Event;
 import org.pircbotx.PircBotX;
 import org.pircbotx.ReplyConstants;
+import org.pircbotx.hooks.Event;
 
 /**
  * This is called when we receive a numeric response from the IRC server.

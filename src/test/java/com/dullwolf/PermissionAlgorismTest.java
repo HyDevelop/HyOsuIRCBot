@@ -1,7 +1,6 @@
 package com.dullwolf;
 
 import cc.moecraft.irc.osubot.DebugLogger;
-import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.management.Permission;
 
 /**

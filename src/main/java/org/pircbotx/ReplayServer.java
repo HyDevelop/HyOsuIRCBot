@@ -19,14 +19,6 @@ package org.pircbotx;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
 import lombok.Cleanup;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +32,10 @@ import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.managers.GenericListenerManager;
 import org.pircbotx.hooks.managers.ListenerManager;
 import org.pircbotx.hooks.types.GenericMessageEvent;
+
+import java.io.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Helpful server for replaying a raw log to the bot.

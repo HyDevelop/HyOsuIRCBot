@@ -1,7 +1,7 @@
 package cc.moecraft.irc.osubot.language;
 
-import cc.moecraft.yaml.Config;
 import cc.moecraft.irc.osubot.Main;
+import cc.moecraft.yaml.Config;
 
 import java.io.File;
 import java.util.HashMap;

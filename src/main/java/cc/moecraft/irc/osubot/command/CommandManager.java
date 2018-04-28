@@ -2,10 +2,8 @@ package cc.moecraft.irc.osubot.command;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.management.OsuUser;
-import com.sun.org.apache.xerces.internal.impl.dv.dtd.NOTATIONDatatypeValidator;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
-import org.pircbotx.hooks.events.MessageEvent;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.util.ArrayList;

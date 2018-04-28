@@ -18,16 +18,17 @@
 package org.pircbotx;
 
 import com.google.common.base.CharMatcher;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nullable;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.Event;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 import org.slf4j.MDC;
 import org.slf4j.helpers.MessageFormatter;
+
+import javax.annotation.Nullable;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Useful utilities for internal PircBotX use. Users should not use this class

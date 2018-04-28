@@ -3,8 +3,6 @@ package cc.moecraft.irc.osubot.management;
 import cc.moecraft.irc.osubot.Main;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/22 创建!

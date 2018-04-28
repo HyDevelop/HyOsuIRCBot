@@ -3,7 +3,9 @@ package cc.moecraft.irc.osubot.management;
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.yaml.Config;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/22 创建!

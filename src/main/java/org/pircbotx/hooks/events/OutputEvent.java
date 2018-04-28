@@ -17,11 +17,12 @@
  */
 package org.pircbotx.hooks.events;
 
-import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.Event;
+
+import java.util.List;
 
 /**
  * A command sent to the IRC server from PircBotX
