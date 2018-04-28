@@ -247,9 +247,13 @@ public class ReflectUtils
         {
             field.setAccessible(true);
 
-            if (isDecimal(field.getType()))
+            if (isFloat(field.getType()))
             {
                 field.set(object, Math.round((float) field.get(object) * (float) (Math.pow(10d, decimals))) / (float) (Math.pow(10d, decimals)));
+            }
+            if (isDouble(field.getType()))
+            {
+                field.set(object, Math.round((double) field.get(object) * Math.pow(10d, decimals)) / Math.pow(10d, decimals));
             }
         }
     }
