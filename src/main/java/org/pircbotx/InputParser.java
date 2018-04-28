@@ -533,7 +533,7 @@ public class InputParser implements Closeable {
 			bot.getUserChannelDao().addUserToPrivate(sourceUser);
 			configuration.getListenerManager().onEvent(new PrivateMessageEvent(bot, source, sourceUser, message));
 		} else if (command.equals("JOIN")) {
-			// Someone is joining a channel.
+			/* Someone is joining a channel.
 			if (source.getNick().equalsIgnoreCase(bot.getNick())) {
 				//Its us, get channel info
 				channel = bot.getUserChannelDao().createChannel(target);
@@ -545,7 +545,7 @@ public class InputParser implements Closeable {
 			sourceUser = createUserIfNull(sourceUser, source);
 
 			bot.getUserChannelDao().addUserToChannel(sourceUser, channel);
-			configuration.getListenerManager().onEvent(new JoinEvent(bot, channel, source, sourceUser));
+			configuration.getListenerManager().onEvent(new JoinEvent(bot, channel, source, sourceUser));*/
 		} else if (command.equals("PART")) {
 			// Someone is parting from a channel.
 			UserChannelDaoSnapshot daoSnapshot;
