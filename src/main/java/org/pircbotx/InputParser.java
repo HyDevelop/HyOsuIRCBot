@@ -17,6 +17,7 @@
  */
 package org.pircbotx;
 
+import cc.moecraft.irc.osubot.Main;
 import com.google.common.base.CharMatcher;
 import com.google.common.collect.*;
 import lombok.Getter;
@@ -238,7 +239,7 @@ public class InputParser implements Closeable {
 		String line = CharMatcher.WHITESPACE.trimFrom(rawLine);
 
 		// MODIFIED: To avoid quit message
-		if (!line.contains("QUIT") && !line.contains("JOIN") && !line.contains("PING") && !line.contains("PONG")) log.info(INPUT_MARKER, line);
+		if (!line.contains("QUIT") && !line.contains("JOIN") && !line.contains("PING") && !line.contains("PONG") && Main.isDebug()) log.info(INPUT_MARKER, line);
 
 		// Parse out v3Tags before
 		ImmutableMap.Builder<String, String> tags = ImmutableMap.builder();

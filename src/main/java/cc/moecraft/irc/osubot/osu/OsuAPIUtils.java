@@ -170,8 +170,6 @@ public class OsuAPIUtils
             }
         }
 
-        System.out.println("获取到的URL请求: " + urlBuilder.toString());
-
         return downloader.getJsonElementFromURL(urlBuilder.toString());
     }
 

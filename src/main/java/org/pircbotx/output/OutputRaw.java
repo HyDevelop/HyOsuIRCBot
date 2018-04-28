@@ -17,6 +17,7 @@
  */
 package org.pircbotx.output;
 
+import cc.moecraft.irc.osubot.Main;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -72,7 +73,7 @@ public class OutputRaw {
 				writeNowCondition.await(lastSentLine + delayNanos - curNanos, TimeUnit.NANOSECONDS);
 				curNanos = System.nanoTime();
 			}
-			log.info(OUTPUT_MARKER, line);
+			if (Main.isDebug()) log.info(OUTPUT_MARKER, line);
 			Utils.sendRawLineToServer(bot, line);
 			lastSentLine = System.nanoTime();
 		} catch (IOException e) {
@@ -108,7 +109,7 @@ public class OutputRaw {
 		checkArgument(bot.isConnected(), "Not connected to server");
 		writeLock.lock();
 		try {
-			log.info(OUTPUT_MARKER, line);
+			if (Main.isDebug()) log.info(OUTPUT_MARKER, line);
 			Utils.sendRawLineToServer(bot, line);
 			lastSentLine = System.nanoTime();
 			if (resetDelay)

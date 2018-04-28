@@ -10,11 +10,14 @@ import cc.moecraft.irc.osubot.command.commands.fun.CommandTime;
 import cc.moecraft.irc.osubot.command.commands.management.*;
 import cc.moecraft.irc.osubot.command.commands.osu.CommandStats;
 import cc.moecraft.irc.osubot.language.Messenger;
+import cc.moecraft.irc.osubot.listener.CommandListener;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
+import cc.moecraft.yaml.Config;
 import io.jboot.Jboot;
 import lombok.Getter;
+import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.exception.IrcException;
 
@@ -30,7 +33,7 @@ import java.util.ArrayList;
  */
 public class Main {
     // 版本 ( 不懂怎样配置Github版本...
-    public static final String VERSION = "0.0.3";
+    public static final String VERSION = "0.0.4";
 
     // 配置/语言文件路径
     public static final String PATH = "src" + File.separator + "main" + File.separator + "resources"; //TODO: 这里分两个版本, 测试放现在这个路径, 发布的话放"./conf/"路径
@@ -60,25 +63,26 @@ public class Main {
     private static OsuAPIUtils osuAPIUtils; // Osu官方API数据获取器
 
     @Getter
-    private static boolean debug = true; // 是否开启测试
+    private static boolean debug; // 是否开启测试
 
     public static void main(String[] args) throws IOException, IrcException {
         Jboot.run(args);
 
         config = new BotConfig();
+        debug = config.getBoolean("BotProperties.DebugLogging");
 
-        BotProperties properties = new BotProperties()
-                .setUsername(config.getUsername())
-                .setIrcServerAddress(config.getString("ServerProperties.Address"))
-                .setIrcServerPort(config.getInt("ServerProperties.Port"))
-                .setIrcServerPassword(config.getPassword())
-                .setBotAdminUsername(config.getAdminUsernames())
-                .setAutoJoinChannels((ArrayList<String>) config.getStringList("BotProperties.AutoJoinChannels"));
+        Configuration botConfig = new Configuration.Builder()
+                .setName(config.getUsername())
+                .addServer(config.getString("ServerProperties.Address"), config.getInt("ServerProperties.Port"))
+                .setServerPassword(config.getPassword())
+                .addAutoJoinChannels(config.getStringList("BotProperties.AutoJoinChannels"))
+                .addListener(new CommandListener())
+                .buildConfiguration();
 
         // 创建对象
-        osuBot = new PircBotX(properties.toPircConfiguration());
+        osuBot = new PircBotX(botConfig);
         commandManager = new CommandManager();
-        logger = new DebugLogger("HyOsuIRCBot", debug);
+        logger = new DebugLogger("HyOsuIRCBot", true);
         messenger = new Messenger();
         permissionConfig = new PermissionConfig();
         downloader = new DownloadUtils(config.getInt("BotProperties.Download.Timeout"));
