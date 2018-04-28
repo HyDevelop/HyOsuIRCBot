@@ -29,9 +29,6 @@ import org.pircbotx.cap.CapHandler;
 import org.pircbotx.cap.TLSCapHandler;
 import org.pircbotx.exception.IrcException;
 import org.pircbotx.hooks.events.*;
-import org.pircbotx.snapshot.ChannelSnapshot;
-import org.pircbotx.snapshot.UserChannelDaoSnapshot;
-import org.pircbotx.snapshot.UserSnapshot;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 

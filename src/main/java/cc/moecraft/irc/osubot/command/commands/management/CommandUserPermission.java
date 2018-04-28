@@ -2,9 +2,9 @@ package cc.moecraft.irc.osubot.command.commands.management;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
-import cc.moecraft.irc.osubot.osu.OsuUser;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
 import cc.moecraft.irc.osubot.management.PermissionGroup;
+import cc.moecraft.irc.osubot.osu.OsuUser;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
