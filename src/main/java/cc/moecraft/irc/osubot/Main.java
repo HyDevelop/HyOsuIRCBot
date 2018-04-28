@@ -65,6 +65,9 @@ public class Main {
     @Getter
     private static boolean debug; // 是否开启测试
 
+    @Getter
+    private static int downloadMaxTries = 3; // 下载失败重试次数
+
     public static void main(String[] args) throws IOException, IrcException {
         Jboot.run(args);
 
