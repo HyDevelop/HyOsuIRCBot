@@ -177,6 +177,28 @@ public class ReflectUtils
     }
 
     /**
+     * 判断一个类是不是Double
+     *
+     * @param targetClass 目标类
+     * @return 是不是Double
+     */
+    public static boolean isDouble(Class targetClass)
+    {
+        return targetClass == Double.class || targetClass == double.class;
+    }
+
+    /**
+     * 判断一个类是不是Float
+     *
+     * @param targetClass 目标类
+     * @return 是不是Float
+     */
+    public static boolean isFloat(Class targetClass)
+    {
+        return targetClass == Float.class || targetClass == float.class;
+    }
+
+    /**
      * 反射替换变量
      *
      * 例子:
@@ -225,7 +247,7 @@ public class ReflectUtils
         {
             field.setAccessible(true);
 
-            if (isDecimal(field.getClass()))
+            if (isDecimal(field.getType()))
             {
                 field.set(object, Math.round((float) field.get(object) * (float) (Math.pow(10d, decimals))) / (float) (Math.pow(10d, decimals)));
             }
