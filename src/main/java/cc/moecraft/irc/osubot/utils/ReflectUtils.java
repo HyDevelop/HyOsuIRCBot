@@ -11,6 +11,8 @@ import java.util.ArrayList;
  * Created by Hykilpikonna on 2018/04/24!
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
+ *
+ * @author Hykilpikonna
  */
 public class ReflectUtils
 {
@@ -130,6 +132,31 @@ public class ReflectUtils
         listThatIsConsideredPrimitive.add(Double.class);
 
         return targetClass.isPrimitive() || listThatIsConsideredPrimitive.contains(targetClass);
+    }
+
+    /**
+     * 判断一个类是不是数字类
+     *
+     * @param targetClass 目标类
+     * @return 是不是数字类
+     */
+    public static boolean isNumeric(Class targetClass)
+    {
+        ArrayList<Class> listThatIsConsideredNumeric = new ArrayList<>();
+        listThatIsConsideredNumeric.add(Byte.class);
+        listThatIsConsideredNumeric.add(Short.class);
+        listThatIsConsideredNumeric.add(Integer.class);
+        listThatIsConsideredNumeric.add(Long.class);
+        listThatIsConsideredNumeric.add(Float.class);
+        listThatIsConsideredNumeric.add(Double.class);
+        listThatIsConsideredNumeric.add(byte.class);
+        listThatIsConsideredNumeric.add(short.class);
+        listThatIsConsideredNumeric.add(int.class);
+        listThatIsConsideredNumeric.add(long.class);
+        listThatIsConsideredNumeric.add(float.class);
+        listThatIsConsideredNumeric.add(double.class);
+
+        return listThatIsConsideredNumeric.contains(targetClass);
     }
 
     /**
