@@ -14,7 +14,6 @@ import cc.moecraft.irc.osubot.listener.CommandListener;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
-import cc.moecraft.yaml.Config;
 import io.jboot.Jboot;
 import lombok.Getter;
 import org.pircbotx.Configuration;
@@ -23,7 +22,6 @@ import org.pircbotx.exception.IrcException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/20 创建!

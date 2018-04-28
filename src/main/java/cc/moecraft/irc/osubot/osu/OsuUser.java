@@ -2,11 +2,8 @@ package cc.moecraft.irc.osubot.osu;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.management.Permissible;
-import cc.moecraft.irc.osubot.osu.data.DataBase;
 import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
-import cc.moecraft.irc.osubot.utils.DownloadUtils;
-import cc.moecraft.irc.osubot.utils.PropertiesUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;

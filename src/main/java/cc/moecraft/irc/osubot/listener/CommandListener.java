@@ -1,6 +1,5 @@
 package cc.moecraft.irc.osubot.listener;
 
-import cc.moecraft.irc.osubot.DebugLogger;
 import cc.moecraft.irc.osubot.Main;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
