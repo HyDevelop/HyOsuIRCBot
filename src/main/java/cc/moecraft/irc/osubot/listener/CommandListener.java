@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot.listener;
 
+import cc.moecraft.irc.osubot.DebugLogger;
 import cc.moecraft.irc.osubot.Main;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
@@ -19,8 +20,7 @@ public class CommandListener extends ListenerAdapter
     @Override
     public void onConnect(ConnectEvent event) throws Exception
     {
-        Main.getLogger().debug(" ### OsuBot已连接 ###");
-        Main.getLogger().debug("Connected");
+        Main.getLogger().log(" ### OsuBot已连接 ###");
     }
 
     /**
@@ -34,16 +34,23 @@ public class CommandListener extends ListenerAdapter
         User sender = event.getUser();
         String message = event.getMessage();
 
-        Main.getLogger().debug("收到频道消息: ");
-        Main.getLogger().debug("- 频道: ");
-        Main.getLogger().debug("  - 名字:   " + channel.getName());
-        Main.getLogger().debug("  - ID:     " + channel.getChannelId());
-        Main.getLogger().debug("- 用户: ");
-        Main.getLogger().debug("  - 昵称:   " + (sender != null ? sender.getNick() : "没有昵称"));
-        Main.getLogger().debug("  - 登录名: " + (sender != null ? sender.getLogin() : "没有Login"));
-        Main.getLogger().debug("  - UUID:   " + (sender != null ? sender.getUserId() : "没有ID"));
-        Main.getLogger().debug("- 消息: " + message);
-
+        if (Main.isDebug())
+        {
+            Main.getLogger().debug("收到频道消息: ");
+            Main.getLogger().debug("- 频道: ");
+            Main.getLogger().debug("  - 名字:   " + channel.getName());
+            Main.getLogger().debug("  - ID:     " + channel.getChannelId());
+            Main.getLogger().debug("- 用户: ");
+            Main.getLogger().debug("  - 昵称:   " + (sender != null ? sender.getNick() : "没有昵称"));
+            Main.getLogger().debug("  - 登录名: " + (sender != null ? sender.getLogin() : "没有Login"));
+            Main.getLogger().debug("  - UUID:   " + (sender != null ? sender.getUserId() : "没有ID"));
+            Main.getLogger().debug("- 消息: " + message);
+        }
+        else
+        {
+            Main.getLogger().log(String.format("[I] [%s] %s: %s", channel.getName(), sender.getNick(), message));
+        }
+        
         Main.getCommandManager().runCommand(event, message, sender, channel);
     }
 
@@ -53,13 +60,20 @@ public class CommandListener extends ListenerAdapter
         User sender = event.getUser();
         String message = event.getMessage();
 
-        Main.getLogger().debug("收到私聊消息: ");
-        Main.getLogger().debug("- 用户: ");
-        Main.getLogger().debug("  - 昵称:   " + (sender != null ? sender.getNick() : "没有昵称"));
-        Main.getLogger().debug("  - 登录名: " + (sender != null ? sender.getLogin() : "没有Login"));
-        Main.getLogger().debug("  - UUID:   " + (sender != null ? sender.getUserId() : "没有ID"));
-        Main.getLogger().debug("- 消息: " + message);
-
+        if (Main.isDebug())
+        {
+            Main.getLogger().debug("收到私聊消息: ");
+            Main.getLogger().debug("- 用户: ");
+            Main.getLogger().debug("  - 昵称:   " + (sender != null ? sender.getNick() : "没有昵称"));
+            Main.getLogger().debug("  - 登录名: " + (sender != null ? sender.getLogin() : "没有Login"));
+            Main.getLogger().debug("  - UUID:   " + (sender != null ? sender.getUserId() : "没有ID"));
+            Main.getLogger().debug("- 消息: " + message);
+        }
+        else
+        {
+            Main.getLogger().log(String.format("[P] %s: %s", sender.getNick(), message));
+        }
+        
         Main.getCommandManager().runCommand(event, message, sender, null);
     }
 }

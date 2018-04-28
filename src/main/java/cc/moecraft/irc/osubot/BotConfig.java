@@ -117,6 +117,7 @@ public class BotConfig extends Config
         addDefault("BotProperties.Download.Osu.APIKey", osuKey); // https://github.com/ppy/osu-api/wiki
 
         addDefault("BotProperties.DisableChannelReply", false);
+        addDefault("BotProperties.DebugLogging", true);
 
         addDefault("BotProperties.AntiSpam.NotACommandExcludedUsernames", new String[]{"dullwolf", "hykilpikonna", "banchobot"});
 
