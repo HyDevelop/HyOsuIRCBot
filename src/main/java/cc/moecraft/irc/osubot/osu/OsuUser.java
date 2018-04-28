@@ -7,6 +7,8 @@ import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.irc.osubot.utils.PropertiesUtil;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 
 import java.lang.reflect.InvocationTargetException;
@@ -41,7 +43,7 @@ public class OsuUser extends Permissible
     {
         try
         {
-            return (UserData) Main.getOsuAPIUtils().get(UserParameters.builder().u(username).type("string").build()).get(0);
+            return getData(new UsernameAndMode(0, username));
         }
         catch (IllegalAccessException | InstantiationException | InvocationTargetException e)
         {
@@ -53,20 +55,12 @@ public class OsuUser extends Permissible
     /**
      * 获取玩家数据
      *
-     * @param mode 模式
+     * @param usernameAndMode 用户名和模式
      * @return 玩家数据
      */
-    public UserData getData(int mode)
+    public static UserData getData(UsernameAndMode usernameAndMode) throws IllegalAccessException, InvocationTargetException, InstantiationException
     {
-        try
-        {
-            return (UserData) Main.getOsuAPIUtils().get(UserParameters.builder().u(username).type("string").m("" + mode).build()).get(0);
-        }
-        catch (IllegalAccessException | InstantiationException | InvocationTargetException e)
-        {
-            e.printStackTrace();
-            return null;
-        }
+        return (UserData) Main.getOsuAPIUtils().get(UserParameters.builder().u(usernameAndMode.getUsername()).type("string").m("" + usernameAndMode.getMode()).build()).get(0);
     }
 
     @Override
@@ -82,6 +76,14 @@ public class OsuUser extends Permissible
         else Main.getConfig().getAdminUsernames().remove(getUsername());
 
         Main.getConfig().save();
+    }
+
+    @Data
+    @AllArgsConstructor
+    public static class UsernameAndMode
+    {
+        private int mode;
+        private String username;
     }
 
     /* TODO: 实现这个
