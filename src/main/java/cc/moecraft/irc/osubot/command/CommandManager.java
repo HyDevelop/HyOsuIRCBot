@@ -1,7 +1,7 @@
 package cc.moecraft.irc.osubot.command;
 
 import cc.moecraft.irc.osubot.Main;
-import cc.moecraft.irc.osubot.management.OsuUser;
+import cc.moecraft.irc.osubot.osu.OsuUser;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;

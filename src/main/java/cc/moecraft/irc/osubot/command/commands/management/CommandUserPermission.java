@@ -2,7 +2,7 @@ package cc.moecraft.irc.osubot.command.commands.management;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
-import cc.moecraft.irc.osubot.management.OsuUser;
+import cc.moecraft.irc.osubot.osu.OsuUser;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
 import cc.moecraft.irc.osubot.management.PermissionGroup;
 import org.pircbotx.Channel;
