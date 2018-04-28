@@ -46,7 +46,7 @@ public class CommandStats extends Command
     @Override
     public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        UsernameAndMode usernameAndMode = getUsernameAndModeWithArgs(sender, args);
+        OsuUser.UsernameAndMode usernameAndMode = getUsernameAndModeWithArgs(sender, args);
 
         try
         {
@@ -56,7 +56,7 @@ public class CommandStats extends Command
                 return;
             }
 
-            UserData userData = new OsuUser(usernameAndMode.getUsername()).getData(usernameAndMode.mode);
+            UserData userData = OsuUser.getData(usernameAndMode);
 
             // 四舍五入
             ReflectUtils.roundAllNumbers(userData, 1);
@@ -87,7 +87,7 @@ public class CommandStats extends Command
      * @param args 指令
      * @return 玩家和模式
      */
-    public UsernameAndMode getUsernameAndModeWithArgs(User sender, ArrayList<String> args)
+    public OsuUser.UsernameAndMode getUsernameAndModeWithArgs(User sender, ArrayList<String> args)
     {
         String username;
         int mode = 0;
@@ -106,14 +106,6 @@ public class CommandStats extends Command
             }
         }
 
-        return new UsernameAndMode(mode, username);
-    }
-
-    @Data
-    @AllArgsConstructor
-    public class UsernameAndMode
-    {
-        private int mode;
-        private String username;
+        return new OsuUser.UsernameAndMode(mode, username);
     }
 }
