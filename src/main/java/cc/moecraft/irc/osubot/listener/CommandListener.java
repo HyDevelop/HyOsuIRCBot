@@ -23,12 +23,6 @@ public class CommandListener extends ListenerAdapter
         Main.getLogger().debug("Connected");
     }
 
-    @Override
-    public void onJoin(JoinEvent event) throws Exception
-    {
-        Main.getLogger().debug(DebugLogger.WHITE + "<===--- 已加入频道:" + event.getChannel().getName() + " ---===>");
-    }
-
     /**
      * 接收消息
      * @param event 事件
