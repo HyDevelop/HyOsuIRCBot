@@ -1,6 +1,7 @@
 package cc.moecraft.irc.osubot.utils;
 
 import com.google.gson.JsonElement;
+import io.jboot.Jboot;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -67,7 +68,8 @@ public class DownloadUtils
      */
     public static String downloadAsString(URL url, int timeout)
     {
-        return new String(Objects.requireNonNull(download(url, timeout)));
+        return Jboot.httpPost(url.toString());
+        //return new String(Objects.requireNonNull(download(url, timeout)));
     }
 
     /**
