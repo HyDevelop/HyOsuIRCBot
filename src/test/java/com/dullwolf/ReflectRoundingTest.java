@@ -3,14 +3,11 @@ package com.dullwolf;
 import cc.moecraft.irc.osubot.DebugLogger;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.data.DataBase;
-import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.irc.osubot.utils.PropertiesUtil;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 
 /**
