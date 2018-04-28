@@ -212,4 +212,23 @@ public class ReflectUtils
 
         return format;
     }
+
+    /**
+     * 反射四舍五入所有数值
+     *
+     * @param object 对象
+     * @param decimals 小数点后几位 ( 0: 1 | 1: 0.1 | 4: 0.0001 )
+     */
+    public void roundAllNumbers(Object object, int decimals) throws IllegalAccessException
+    {
+        for (Field field : object.getClass().getDeclaredFields())
+        {
+            field.setAccessible(true);
+
+            if (isDecimal(field.getClass()))
+            {
+                field.set(object, Math.round((float) field.get(object) * (float) (Math.pow(10d, decimals))) / (float) (Math.pow(10d, decimals)));
+            }
+        }
+    }
 }
