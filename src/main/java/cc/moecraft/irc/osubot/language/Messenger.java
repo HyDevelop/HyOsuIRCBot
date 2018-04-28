@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot.language;
 
+import cc.moecraft.irc.osubot.Main;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 /**
@@ -19,7 +20,14 @@ public class Messenger
 
     public void respond(GenericMessageEvent event, String text)
     {
-        event.respond(text);
+        if (Main.getConfig().getBoolean("BotProperties.DisableChannelReply"))
+        {
+            event.respondPrivateMessage(text);
+        }
+        else
+        {
+            event.respond(text);
+        }
     }
 
     /**
@@ -32,7 +40,7 @@ public class Messenger
     {
         if (lang == null || lang.equals("")) lang = LanguageFileManager.DEFAULT_LANG;
 
-        event.respond(languageFileManager.get(lang, placeholder));
+        respond(event, languageFileManager.get(lang, placeholder));
     }
 
     /**
@@ -44,7 +52,7 @@ public class Messenger
      */
     public void respondWithFormat(GenericMessageEvent event, String lang, String placeholder, Object ... args)
     {
-        event.respond(String.format(languageFileManager.get(lang, placeholder), args));
+        respond(event, String.format(languageFileManager.get(lang, placeholder), args));
     }
 
     public LanguageFileManager getLanguageFileManager()
