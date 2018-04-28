@@ -118,7 +118,7 @@ public class BotConfig extends Config
 
         addDefault("BotProperties.DisableChannelReply", false);
 
-        addDefault("BotProperties.AntiSpam.NotACommandExcludedUsernames", new String[]{"dullwolf", "Hykilpikonna", "BanchoBot"});
+        addDefault("BotProperties.AntiSpam.NotACommandExcludedUsernames", new String[]{"dullwolf", "hykilpikonna", "banchobot"});
 
         save();
     }
