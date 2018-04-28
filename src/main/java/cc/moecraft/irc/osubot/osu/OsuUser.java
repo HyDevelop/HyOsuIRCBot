@@ -2,7 +2,9 @@ package cc.moecraft.irc.osubot.osu;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.management.Permissible;
+import cc.moecraft.irc.osubot.osu.data.OsuTrackData;
 import cc.moecraft.irc.osubot.osu.data.UserData;
+import cc.moecraft.irc.osubot.osu.parameters.OsuTrackParameters;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -60,6 +62,17 @@ public class OsuUser extends Permissible
         return (UserData) Main.getOsuAPIUtils().get(UserParameters.builder().u(usernameAndMode.getUsername()).type("string").m("" + usernameAndMode.getMode()).build()).get(0);
     }
 
+    /**
+     * 获取OsuTrack玩家数据
+     *
+     * @param usernameAndMode 用户名和模式
+     * @return 玩家数据
+     */
+    public static OsuTrackData getOsuTrackData(UsernameAndMode usernameAndMode) throws IllegalAccessException, InvocationTargetException, InstantiationException
+    {
+        return (OsuTrackData) Main.getOsuAPIUtils().get(OsuTrackParameters.builder().user(usernameAndMode.getUsername()).mode("" + usernameAndMode.getMode()).build()).get(0);
+    }
+
     @Override
     public boolean isAdmin()
     {
@@ -83,14 +96,16 @@ public class OsuUser extends Permissible
         private String username;
     }
 
-    /* TODO: 实现这个
-     * 存放数据的位置
+    /**
+     * 存放数据的位置 ( 
      * OSU:        Osu服务器上最新的数据
-     * DATABASE:   数据库里的数据, 不是最新
+     * TODO: DATABASE:   数据库里的数据, 不是最新
      * AMEO_TRACK: Ameo写的Osu!Track数据统计的数据
-     *
+     */
     public enum StorageLocation
     {
-        OSU, DATABASE, AMEO_TRACK
-    }*/
+        OSU,
+        // DATABASE,
+        AMEO_TRACK
+    }
 }
