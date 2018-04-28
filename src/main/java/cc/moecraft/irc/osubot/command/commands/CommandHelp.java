@@ -33,7 +33,7 @@ public class CommandHelp extends Command
     @Override
     public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        Main.getMessenger().respond(event, "还没有帮助!");
+        Main.getMessenger().respond(event, "指令列表: http://help.bot.hydev.org");
     }
 
     @Override
