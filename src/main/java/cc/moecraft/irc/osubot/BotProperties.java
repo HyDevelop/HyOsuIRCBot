@@ -4,7 +4,6 @@ import cc.moecraft.irc.osubot.listener.CommandListener;
 import org.pircbotx.Configuration;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/20 创建!

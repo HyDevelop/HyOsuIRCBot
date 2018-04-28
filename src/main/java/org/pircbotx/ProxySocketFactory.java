@@ -17,13 +17,9 @@
  */
 package org.pircbotx;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.Socket;
-import java.net.UnknownHostException;
 import javax.net.SocketFactory;
+import java.io.IOException;
+import java.net.*;
 
 /**
  * A basic SocketFactory for creating sockets that connect through the specified

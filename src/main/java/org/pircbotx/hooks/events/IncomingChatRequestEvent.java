@@ -17,20 +17,21 @@
  */
 package org.pircbotx.hooks.events;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import javax.annotation.Nullable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
-import org.pircbotx.hooks.Event;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.UserHostmask;
 import org.pircbotx.dcc.ReceiveChat;
+import org.pircbotx.hooks.Event;
 import org.pircbotx.hooks.Listener;
 import org.pircbotx.hooks.types.GenericDCCEvent;
+
+import javax.annotation.Nullable;
+import java.io.IOException;
+import java.net.InetAddress;
 
 /**
  * This event will be dispatched whenever a DCC Chat request is received. This

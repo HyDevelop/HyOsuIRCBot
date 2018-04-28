@@ -1,6 +1,5 @@
 package cc.moecraft.irc.osubot.osu.parameters;
 
-import cc.moecraft.irc.osubot.osu.data.DataBase;
 import lombok.Data;
 
 /**

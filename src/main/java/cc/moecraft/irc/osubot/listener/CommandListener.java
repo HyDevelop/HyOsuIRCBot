@@ -1,12 +1,12 @@
 package cc.moecraft.irc.osubot.listener;
 
-import cc.moecraft.irc.osubot.DebugLogger;
 import cc.moecraft.irc.osubot.Main;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
-import org.pircbotx.hooks.Listener;
 import org.pircbotx.hooks.ListenerAdapter;
-import org.pircbotx.hooks.events.*;
+import org.pircbotx.hooks.events.ConnectEvent;
+import org.pircbotx.hooks.events.MessageEvent;
+import org.pircbotx.hooks.events.PrivateMessageEvent;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/21 创建!

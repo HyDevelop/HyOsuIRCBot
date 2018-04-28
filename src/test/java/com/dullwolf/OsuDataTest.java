@@ -10,11 +10,9 @@ import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.irc.osubot.utils.InputUtils;
 import cc.moecraft.irc.osubot.utils.PropertiesUtil;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
-import com.mysql.fabric.xmlrpc.base.Param;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 import static java.lang.System.in;
 

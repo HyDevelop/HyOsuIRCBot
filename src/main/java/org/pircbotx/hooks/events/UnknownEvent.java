@@ -17,14 +17,11 @@
  */
 package org.pircbotx.hooks.events;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NonNull;
-import org.pircbotx.hooks.Event;
 import org.pircbotx.PircBotX;
+import org.pircbotx.hooks.Event;
 
 /**
  * This event is dispatched whenever we receive a line from the server that

@@ -17,8 +17,8 @@
  */
 package org.pircbotx.hooks.types;
 
-import org.pircbotx.UserHostmask;
 import org.pircbotx.User;
+import org.pircbotx.UserHostmask;
 
 /**
  *

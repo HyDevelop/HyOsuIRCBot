@@ -19,13 +19,14 @@ package org.pircbotx.hooks.managers;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
+import org.pircbotx.hooks.Event;
+import org.pircbotx.hooks.Listener;
+
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.apache.commons.lang3.concurrent.BasicThreadFactory;
-import org.pircbotx.hooks.Event;
-import org.pircbotx.hooks.Listener;
 
 /**
  * ThreadListenerManager with additional dedicated background threads. Normal

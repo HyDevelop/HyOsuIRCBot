@@ -18,11 +18,10 @@
 package org.pircbotx.hooks.events;
 
 import com.google.common.collect.ImmutableList;
-import javax.annotation.Nullable;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.Builder;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.Event;
 

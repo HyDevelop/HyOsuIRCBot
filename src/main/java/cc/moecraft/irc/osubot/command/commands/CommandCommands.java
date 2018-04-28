@@ -2,13 +2,11 @@ package cc.moecraft.irc.osubot.command.commands;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
-import cc.moecraft.irc.osubot.language.Messenger;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/21 创建!

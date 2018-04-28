@@ -17,8 +17,8 @@
  */
 package org.pircbotx;
 
-import lombok.Data;
 import com.google.common.collect.PeekingIterator;
+import lombok.Data;
 
 /**
  *

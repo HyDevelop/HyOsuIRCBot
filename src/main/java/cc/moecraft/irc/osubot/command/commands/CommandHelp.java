@@ -2,8 +2,6 @@ package cc.moecraft.irc.osubot.command.commands;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
-import cc.moecraft.irc.osubot.factory.DAOFactory;
-import cc.moecraft.irc.osubot.model.Osu;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
@@ -11,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/21 创建!

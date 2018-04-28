@@ -18,11 +18,12 @@
 package org.pircbotx.hooks;
 
 import com.google.common.collect.ComparisonChain;
-import java.util.concurrent.atomic.AtomicLong;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.types.GenericEvent;
+
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * An event representing what was received from the IRC server.
