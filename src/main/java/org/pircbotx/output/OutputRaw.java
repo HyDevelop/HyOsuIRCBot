@@ -18,6 +18,7 @@
 package org.pircbotx.output;
 
 import cc.moecraft.irc.osubot.Main;
+import cc.moecraft.irc.osubot.utils.ArrayUtils;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,8 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -74,6 +77,11 @@ public class OutputRaw {
 				curNanos = System.nanoTime();
 			}
 			if (Main.isDebug()) log.info(OUTPUT_MARKER, line);
+			else
+			{
+				ArrayList<String> strings = new ArrayList<>(Arrays.asList(line.split(" ")));
+				Main.getLogger().log(String.format("[O] Reply %s %s", strings.get(1), ArrayUtils.getTheRestArgsAsString(strings, 2)));
+			}
 			Utils.sendRawLineToServer(bot, line);
 			lastSentLine = System.nanoTime();
 		} catch (IOException e) {
@@ -110,6 +118,11 @@ public class OutputRaw {
 		writeLock.lock();
 		try {
 			if (Main.isDebug()) log.info(OUTPUT_MARKER, line);
+			else
+			{
+				ArrayList<String> strings = new ArrayList<>(Arrays.asList(line.split(" ")));
+				Main.getLogger().log(String.format("[O] Reply %s %s", strings.get(1), ArrayUtils.getTheRestArgsAsString(strings, 2)));
+			}
 			Utils.sendRawLineToServer(bot, line);
 			lastSentLine = System.nanoTime();
 			if (resetDelay)
