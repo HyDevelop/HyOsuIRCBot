@@ -6,7 +6,10 @@ import cc.moecraft.irc.osubot.osu.data.OsuTrackData;
 import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.parameters.OsuTrackParameters;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
-import lombok.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import java.lang.reflect.InvocationTargetException;
 
