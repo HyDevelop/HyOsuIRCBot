@@ -236,6 +236,57 @@ public class ReflectUtils
     }
 
     /**
+     * 反射替换变量, 带+号和-号
+     *
+     * 例子:
+     *   输入:
+     *   - object: [username = "Hykilpikonna", user_id = "666666", pp_raw = "99999999"] ( 别想了梦里什么都有
+     *   - format = "[%username%(%user_id%)]: %pp_raw%"
+     *   输出:
+     *   "[Hykilpikonna(+666666)]: +99999999"
+     *
+     *   练手 +1
+     *
+     * @param object 对象
+     * @param format 格式
+     * @return 替换后的字符串
+     */
+    public static String replaceReflectVariablesWithPositiveAndNegativeSigns(Object object, String format)
+    {
+        for (Field field : object.getClass().getDeclaredFields())
+        {
+            String variableName = String.format("%%%s%%", field.getName());
+
+            field.setAccessible(true);
+
+            try
+            {
+                String value = field.get(object).toString();
+
+                try
+                {
+                    double numericValue = Double.parseDouble(value);
+
+                    if (numericValue >= 0D) value = "+" + value;
+                    else value = "-" + value;
+                }
+                catch (Exception ignored)
+                {
+                    // 不是数字
+                }
+
+                format = format.replace(variableName, value);
+            }
+            catch (IllegalAccessException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        return format;
+    }
+
+    /**
      * 反射四舍五入所有数值
      *
      * @param object 对象
