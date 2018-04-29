@@ -47,23 +47,36 @@ public class ArrayUtils
      */
     public static OsuUser.UsernameAndMode getUsernameAndModeWithArgs(User sender, ArrayList<String> args)
     {
-        String username;
-        int mode = 0;
+        OsuUser.UsernameAndMode result = new OsuUser.UsernameAndMode(0, "");
 
-        if (args.size() == 0) username = sender.getNick();
+        if (args.size() == 0)
+        {
+            result.setUsername(sender.getNick());
+            result.setSelf(true);
+        }
         else
         {
             int modeTemp = OsuAPIUtils.getModeWithName(args.get(0));
 
-            if (modeTemp == -1) username = ArrayUtils.getTheRestArgsAsString(args, 0);
+            if (modeTemp == -1)
+            {
+                result.setUsername(ArrayUtils.getTheRestArgsAsString(args, 0));
+            }
             else
             {
-                mode = modeTemp;
-                if (args.size() == 1) username = sender.getNick();
-                else username = ArrayUtils.getTheRestArgsAsString(args, 1);
+                result.setMode(modeTemp);
+                if (args.size() == 1)
+                {
+                    result.setUsername(sender.getNick());
+                    result.setSelf(true);
+                }
+                else
+                {
+                    result.setUsername(ArrayUtils.getTheRestArgsAsString(args, 1));
+                }
             }
         }
 
-        return new OsuUser.UsernameAndMode(mode, username);
+        return result;
     }
 }

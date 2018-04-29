@@ -6,9 +6,7 @@ import cc.moecraft.irc.osubot.osu.data.OsuTrackData;
 import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.parameters.OsuTrackParameters;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -111,11 +109,14 @@ public class OsuUser extends Permissible
     }
 
     @Data
-    @AllArgsConstructor
+    @RequiredArgsConstructor
     public static class UsernameAndMode
     {
+        @NonNull
         private int mode;
+        @NonNull
         private String username;
+        private boolean self = false;
     }
 
     /**

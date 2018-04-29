@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.command.commands.osu;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.OsuUser;
 import cc.moecraft.irc.osubot.osu.data.OsuTrackData;
 import cc.moecraft.irc.osubot.osu.data.UserData;
@@ -59,7 +60,18 @@ public class CommandUpdate extends Command
             // 四舍五入
             ReflectUtils.roundAllNumbers(osuTrackData, 1);
 
-            Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(osuTrackData, "[%mode% - %username%]: %pp_raw%pp | lv.%level% | %accuracy%% acc. | %count_rank_ss%ss | %count_rank_s%s |  %count_rank_a%a "));
+            // 新玩家 TODO： 检测数据库， 而不是OsuTrack服务器的数据库来判断是不是新玩家
+            if (osuTrackData.isFirst() && usernameAndMode.isSelf())
+            {
+                Main.getMessenger().respond(event, "欢迎新大佬使用HyIRC机器人! 这个指令是Ameo的[https://ameobea.me/osutrack/ Osu!Track]统计功能!");
+                Main.getMessenger().respond(event, "这个指令的数值代表着从上次输入指令到这次输入指令之间的进步!");
+                return;
+            }
+
+            // 获取Mode名字
+            String modeName = OsuAPIUtils.getModeNameWithMode(usernameAndMode.getMode());
+
+            Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariablesWithPositiveAndNegativeSigns(osuTrackData, "[%m% - %username%]: %pp_raw% pp | %level% lvl | %pp_rank% rank | %accuracy%% acc. | %playcount% 次游戏 ").replace("%m%", modeName));
         }
         catch (IllegalAccessException | InstantiationException | InvocationTargetException e)
         {
