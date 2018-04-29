@@ -50,7 +50,7 @@ public class CommandListener extends ListenerAdapter
             Main.getLogger().log(String.format("[I] [%s] %s: %s", channel.getName(), sender.getNick(), message));
         }
         
-        Main.getCommandManager().runCommand(event, message, sender, channel);
+        Main.getCommandManager().runCommand(event, message, sender, channel, true);
     }
 
     @Override
@@ -73,6 +73,6 @@ public class CommandListener extends ListenerAdapter
             Main.getLogger().log(String.format("[P] %s: %s", sender.getNick(), message));
         }
         
-        Main.getCommandManager().runCommand(event, message, sender, null);
+        Main.getCommandManager().runCommand(event, message, sender, null, false);
     }
 }
