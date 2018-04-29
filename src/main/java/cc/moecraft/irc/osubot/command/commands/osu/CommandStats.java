@@ -67,7 +67,7 @@ public class CommandStats extends Command
             // 获取Mode名字
             String modeName = OsuAPIUtils.getModeNameWithMode(usernameAndMode.getMode());
 
-            Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(userData, "[%mode% - %username% (%user_id%)]: %pp_raw%pp | lv.%level% | %accuracy%% acc. | %count_rank_ss%ss | %count_rank_s%s |  %count_rank_a%a ").replace("%mode%", modeName));
+            Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(userData, "[%mode% - %username% (%user_id%)]: %pp_raw%pp | lv.%level% | #%pp_rank% | %accuracy%% acc. | %count_rank_ss%ss | %count_rank_s%s |  %count_rank_a%a ").replace("%mode%", modeName));
         }
         catch (IllegalAccessException | InstantiationException | InvocationTargetException e)
         {
