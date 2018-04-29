@@ -110,7 +110,8 @@ public class BotConfig extends Config
         setPassword(ircPassword);
         setAdminUsernames(new ArrayList<>(Arrays.asList("Hykilpikonna", "dullwolf")));
 
-        addDefault("BotProperties.CommandPrefix", "!");
+        addDefault("BotProperties.CommandPrefix", ";");
+        addDefault("BotProperties.EnabledCommandPrefixes", new String[]{"!", "-", ".", "?", "*"});
         addDefault("BotProperties.AutoJoinChannels", new String[]{"#general", "#chinese"});
 
         addDefault("BotProperties.Download.Timeout", 3000);
