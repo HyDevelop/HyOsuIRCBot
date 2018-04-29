@@ -17,7 +17,7 @@ public class UserData extends DataBase
     private long count300;
     private long count100;
     private long count50;
-    private long play_count;
+    private long playcount;
     private long ranked_score;
     private long total_score;
     private long pp_rank;
