@@ -62,7 +62,9 @@ public class CommandManager
      */
     public RunResult runCommand(GenericMessageEvent event, String fullCommand, User user, Channel channel)
     {
-        if (!isCommand(fullCommand))
+        String prefix = isCommand(fullCommand);
+
+        if (prefix == null)
         {
             if (channel == null && !user.getNick().equalsIgnoreCase(Main.getConfig().getUsername()) && !Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick().toLowerCase())) // 如果是私聊并且不是自己, 回复提示
             {
@@ -76,11 +78,11 @@ public class CommandManager
         ArrayList<String> args = new ArrayList<>(Arrays.asList(fullCommand.split(" ")));
 
         // "echo"
-        String command = args.get(0).replace(getPrefix(), "").toLowerCase();
+        String command = args.get(0).replace(prefix, "").toLowerCase();
 
         if (!registeredCommands.containsKey(command))
         {
-            Main.getMessenger().respond(event, "UNKNOWN COMMAND: 未知指令 ( 输入" + getPrefix() + "help显示帮助 )");
+            Main.getMessenger().respond(event, "UNKNOWN COMMAND: 未知指令 ( 输入" + prefix + "help显示帮助 )");
             return RunResult.COMMAND_NOT_FOUND;
         }
 
@@ -91,7 +93,7 @@ public class CommandManager
 
         if (!new OsuUser(user.getNick()).hasPermission(commandToRun.permissionRequired()))
         {
-            Main.getMessenger().respond(event, "NO PERM: 无法执行" + getPrefix() + command + ", 因为缺少权限");
+            Main.getMessenger().respond(event, "NO PERM: 无法执行" + prefix + command + ", 因为缺少权限");
             return RunResult.NO_PERMISSION;
         }
 
@@ -110,16 +112,18 @@ public class CommandManager
     /**
      * 判断一条消息是不是指令
      * @param text 消息
-     * @return 是不是指令
+     * @return 是指令的话返回指令前缀, 不是的话返回null
      */
-    public boolean isCommand(String text)
+    public String isCommand(String text)
     {
+        if (text.startsWith(getPrefix())) return getPrefix();
+
         for (String prefix : Main.getConfig().getStringList("BotProperties.EnabledCommandPrefixes"))
         {
-            if (text.startsWith(prefix)) return true;
+            if (text.startsWith(prefix)) return prefix;
         }
 
-        return text.startsWith(Main.getConfig().getString("BotProperties.CommandPrefix"));
+        return null;
     }
 
     /**
