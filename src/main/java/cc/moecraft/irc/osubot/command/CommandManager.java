@@ -4,8 +4,6 @@ import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.osu.OsuUser;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
-import org.pircbotx.hooks.events.MessageEvent;
-import org.pircbotx.hooks.types.GenericChannelUserEvent;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.util.ArrayList;
