@@ -38,7 +38,7 @@ public enum Mods
     Key3          (134217728),
     Key2          (268435456);
 
-    int value;
+    public int value;
 
     Mods(int value)
     {

@@ -1,12 +1,12 @@
 package cc.moecraft.irc.osubot.factory;
 
 
-import cc.moecraft.irc.osubot.service.OsuService;
-import cc.moecraft.irc.osubot.service.impl.OsuServiceImpl;
+import cc.moecraft.irc.osubot.service.OsuStdService;
+import cc.moecraft.irc.osubot.service.impl.OsuStdServiceImpl;
 
 public class DAOFactory {
 
-    public static OsuService getOsuService(){
-        return new OsuServiceImpl();
+    public static OsuStdService getOsuStdService(){
+        return new OsuStdServiceImpl();
     }
 }
