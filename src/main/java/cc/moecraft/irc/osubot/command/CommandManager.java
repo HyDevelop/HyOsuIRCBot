@@ -114,6 +114,11 @@ public class CommandManager
      */
     public boolean isCommand(String text)
     {
+        for (String prefix : Main.getConfig().getStringList("BotProperties.EnabledCommandPrefixes"))
+        {
+            if (text.startsWith(prefix)) return true;
+        }
+
         return text.startsWith(Main.getConfig().getString("BotProperties.CommandPrefix"));
     }
 
