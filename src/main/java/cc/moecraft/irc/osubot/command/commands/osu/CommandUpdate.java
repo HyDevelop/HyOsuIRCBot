@@ -5,7 +5,6 @@ import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.OsuUser;
 import cc.moecraft.irc.osubot.osu.data.OsuTrackData;
-import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
