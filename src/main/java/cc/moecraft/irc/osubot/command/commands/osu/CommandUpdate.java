@@ -71,7 +71,7 @@ public class CommandUpdate extends Command
             // 获取Mode名字
             String modeName = OsuAPIUtils.getModeNameWithMode(usernameAndMode.getMode());
 
-            Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariablesWithPositiveAndNegativeSigns(osuTrackData, "[%m% - %username%]: %pp_raw% pp | %level% lvl | %pp_rank% rank | %accuracy%% acc. | %playcount% 次游戏 ").replace("%m%", modeName));
+            Main.getMessenger().respond(event, getPrefix(osuTrackData) + ReflectUtils.replaceReflectVariablesWithPositiveAndNegativeSigns(osuTrackData, "[%m% - %username%]: %pp_raw% pp | %level% lvl | %pp_rank% rank | %accuracy%% acc. | %playcount% 次游戏 ").replace("%m%", modeName));
         }
         catch (IllegalAccessException | InstantiationException | InvocationTargetException e)
         {
@@ -87,9 +87,33 @@ public class CommandUpdate extends Command
         return "irc.user.regular.osu.update";
     }
 
-    /* TODO: 实现这个
+    /**
+     * 获取适应玩家环境的前缀消息
+     *
+     * 例子：
+     *  +0  +0  ： “多玩玩再来看吧!”
+     *  +20 +400： “进步了.. 加油!”
+     *  +99 +999： “w.. 大..大佬!”
+     *  TODO: 随机消息列表
+     *
+     * @param osuTrackData 数据
+     * @return 前缀消息
+     */
     public String getPrefix(OsuTrackData osuTrackData)
     {
+        if (osuTrackData.getPp_rank() <= 0 && osuTrackData.getPp_raw() <= 0)
+        {
+            return "多玩玩再来看吧! ";
+        }
+        else if (osuTrackData.getPp_rank() <= 400 && osuTrackData.getPp_raw() <= 20)
+        {
+            return "进步了.. 加油! ";
+        }
+        else if (osuTrackData.getPp_rank() > 400 && osuTrackData.getPp_raw() > 20)
+        {
+            return "w.. 大..大佬! ";
+        }
 
-    }*/
+        return "啊哈哈.... ";
+    }
 }
