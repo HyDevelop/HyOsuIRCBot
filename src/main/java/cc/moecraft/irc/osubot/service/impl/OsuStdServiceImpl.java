@@ -1,18 +1,23 @@
 package cc.moecraft.irc.osubot.service.impl;
 
+import cc.moecraft.irc.osubot.common.Constant;
 import cc.moecraft.irc.osubot.model.OsuStd;
 import cc.moecraft.irc.osubot.osu.Api;
 import cc.moecraft.irc.osubot.service.OsuStdService;
 import cc.moecraft.irc.osubot.utils.JsonUtils;
 import cc.moecraft.irc.osubot.utils.PropertiesUtil;
+import com.google.gson.JsonElement;
 import com.jfinal.kit.StrKit;
 import io.jboot.Jboot;
+import io.jboot.component.redis.JbootRedis;
 import io.jboot.utils.ArrayUtils;
 
 import java.util.List;
 import java.util.Map;
 
 public class OsuStdServiceImpl implements OsuStdService {
+
+    private JbootRedis redis = Jboot.me().getRedis();
 
     private OsuStd osuStdDao = new OsuStd();
 
@@ -31,31 +36,34 @@ public class OsuStdServiceImpl implements OsuStdService {
     public void saveById(long nextId) {
         final String key = PropertiesUtil.readKey("osu_key");
         final String url = Api.User.apiUrl;
-        //定时任务是一分钟，而子线程开启等待时间设置3秒，因此是循环20次
-        for (int i = 0; i < 20; i++) {
-            //3秒异步执行 30 个..
-            Thread mThreadClient = new Thread(() -> {
-                for (int j = 0; j < 30; j++) {
-                    if(!getExistById(nextId + j)){
-                        String json = Jboot.httpPost(url + "?k=" + key + "&u=" + (nextId + j));
-                        if(!StrKit.isBlank(json)){
-                            List<Map> list = JsonUtils.getArrayByJson(json, Map.class);
-                            if(ArrayUtils.isNotEmpty(list)){
-                                String jsonString = JsonUtils.toJsonString(list.get(0));
-                                OsuStd osuStd = JsonUtils.jsonToModel(jsonString, OsuStd.class);
-                                osuStd.save();
+        //定时任务是一分钟，而子线程开启等待时间设置60秒
+        Thread mThreadClient = new Thread(() -> {
+            for (int j = 0; j < 100; j++) {
+                String json = Jboot.httpPost(url + "?k=" + key + "&type=id&u=" + (nextId + j));
+                if(!StrKit.isBlank(json)){
+                    JsonElement jsonElement = JsonUtils.parseJsonElement(json);
+                    if(jsonElement.isJsonArray()){
+                        List<Map> list = JsonUtils.getArrayByJson(json, Map.class);
+                        if(ArrayUtils.isNotEmpty(list)){
+                            String userId = list.get(0).get("user_id").toString();
+                            if(String.valueOf(nextId + j).equalsIgnoreCase(userId)){
+                                redis.set(Constant.USER_MAX_ID,String.valueOf(nextId + j));
+                                if(ArrayUtils.isNotEmpty(list) && !getExistById(nextId + j)){
+                                    String jsonString = JsonUtils.toJsonString(list.get(0));
+                                    OsuStd osuStd = JsonUtils.jsonToModel(jsonString, OsuStd.class);
+                                    osuStd.save();
+                                }
                             }
                         }
                     }
                 }
-            });
-            mThreadClient.start();
-            //等待子线程执行完毕
-            try {
-                mThreadClient.join(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
+        });
+        mThreadClient.start();
+        //等待子线程执行完毕
+        try {
+            mThreadClient.join(60000);
+        } catch (InterruptedException ignored) {
         }
     }
 
