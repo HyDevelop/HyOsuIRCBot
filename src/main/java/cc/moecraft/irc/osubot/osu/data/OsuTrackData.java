@@ -1,6 +1,5 @@
 package cc.moecraft.irc.osubot.osu.data;
 
-import com.google.gson.JsonArray;
 import lombok.*;
 
 /**
