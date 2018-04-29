@@ -1,9 +1,15 @@
 package cc.moecraft.irc.osubot.utils;
 
+import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.activerecord.Model;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 此类由 Hykilpikonna 在 2018/58/26 创建!
@@ -73,46 +79,35 @@ public class JsonUtils {
 
         return result;
     }
-    /*
-    /**
-     * 解析json字符串 转换指定的列表对象
-     * @param json json字符串
-     * @param targetClass 列表对象
-     * @param <T> 泛型
-     * @return
-     *//*
-    public static <T> List<T> getArrayByJson(String json, Class<T> targetClass)
-    {
-        return .parseArray(json, targetClass);
-    }
 
     /**
-     * json字符串中下划线转为驼峰
-     * @param json json字符串
-     * @return 驼峰对象
-     *//*
-    public static Object convert(String json) {
-        Object obj = JSON.parse(json);
-        convert(obj);
-        return obj;
-    }
-
-    private static void convert(Object json) {
-        if (json instanceof JSONArray) {
-            JSONArray arr = (JSONArray) json;
-            for (Object obj : arr) {
-                convert(obj);
-            }
-        } else if (json instanceof JSONObject) {
-            JSONObject jo = (JSONObject) json;
-            Set<String> keys = jo.keySet();
-            String[] array = keys.toArray(new String[keys.size()]);
-            for (String key : array) {
-                Object value = jo.get(key);
-                jo.remove(key);
-                jo.put(StrKit.toCamelCase(key), value);
-                convert(value);
+     * 把JSON字符串转换为Model对象（只针对数据库Model所用，其他情况别乱用）
+     *
+     */
+    public static <T extends Model> T jsonToModel(String json, Class<T> t) {
+        T model = null;
+        if(!StrKit.isBlank(json)){
+            try {
+                Map map = getObjectByJson(json, Map.class);
+                model = t.newInstance();
+                model.put(map);
+                model.put("_auto_copy_model_",true);
+                //model.put(ModelCopier.MODEL_FROM_COPIER, true);
+            } catch (Exception ignored) {
+                //可忽略
             }
         }
-    }*/
+        return model;
+    }
+
+    /**
+     * 解析json字符串 转换指定的列表对象 (有时候我还是想要List<Map>集合，这个保留)
+     * @param json json字符串
+     * @param clazz 列表对象
+     * @param <T> 泛型
+     * @return
+     */
+    public static <T> List<T> getArrayByJson(String json, Class<T> clazz){
+        return JSON.parseArray(json, clazz);
+    }
 }
