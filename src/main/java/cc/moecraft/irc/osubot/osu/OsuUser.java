@@ -74,6 +74,17 @@ public class OsuUser extends Permissible
     }
 
     /**
+     * 封装: 获取OsuTrack链接
+     *
+     * @param usernameAndMode 用户名和模式
+     * @return 链接
+     */
+    public static String getOsuTrackLink(UsernameAndMode usernameAndMode)
+    {
+        return getOsuTrackLink(usernameAndMode.getUsername());
+    }
+
+    /**
      * 获取OsuTrack连接
      *
      * @param username 用户名
