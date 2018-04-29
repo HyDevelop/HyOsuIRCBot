@@ -22,7 +22,7 @@ public class OsuTrackData extends DataBase
     private long count_rank_s;
     private long playcount;
     private long count300;
-    private JsonArray newhs;
+    // private JsonArray newhs;
     private boolean levelup;
     private boolean exists;
     private long total_score;
