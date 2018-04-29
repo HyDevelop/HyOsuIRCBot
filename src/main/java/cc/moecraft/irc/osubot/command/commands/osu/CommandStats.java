@@ -30,7 +30,7 @@ public class CommandStats extends Command
     /**
      * 查询玩家信息
      *  !s              查询自己的信息
-     *  !s [用户名]     查询其他玩家信息
+     *  !s [用户名]      查询其他玩家信息
      *  !s [t/m/c]      查询自己的某个模式的信息
      *  !s [t/m/c] [名] 查询其他玩家某个模式的信息
      *

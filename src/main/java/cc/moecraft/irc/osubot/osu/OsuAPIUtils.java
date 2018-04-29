@@ -200,4 +200,23 @@ public class OsuAPIUtils
 
         return modeMap.getOrDefault(mode, -1);
     }
+
+    /**
+     * 获取模式的名字
+     * 如果没找到返回null
+     *
+     * @param mode 模式
+     * @return 模式名
+     */
+    public static String getModeNameWithMode(int mode)
+    {
+        Map<Integer, String> modeMap = new HashMap<>();
+
+        modeMap.put(0, "STD");
+        modeMap.put(1, "Taiko");
+        modeMap.put(2, "CTB");
+        modeMap.put(3, "Mania");
+
+        return modeMap.getOrDefault(mode, null);
+    }
 }
