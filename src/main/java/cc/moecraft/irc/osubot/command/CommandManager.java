@@ -4,6 +4,8 @@ import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.osu.OsuUser;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
+import org.pircbotx.hooks.events.MessageEvent;
+import org.pircbotx.hooks.types.GenericChannelUserEvent;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.util.ArrayList;
@@ -58,15 +60,16 @@ public class CommandManager
      * @param fullCommand 完整指令
      * @param user 用户名
      * @param channel 频道
+     * @param isChannel 是不是从频道发出的
      * @return 执行结果
      */
-    public RunResult runCommand(GenericMessageEvent event, String fullCommand, User user, Channel channel)
+    public RunResult runCommand(GenericMessageEvent event, String fullCommand, User user, Channel channel, boolean isChannel)
     {
-        String prefix = isCommand(fullCommand);
+        String prefix = isCommand(fullCommand, isChannel);
 
         if (prefix == null)
         {
-            if (channel == null && !user.getNick().equalsIgnoreCase(Main.getConfig().getUsername()) && !Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick().toLowerCase())) // 如果是私聊并且不是自己, 回复提示
+            if (!isChannel && !user.getNick().equalsIgnoreCase(Main.getConfig().getUsername()) && !Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick().toLowerCase())) // 如果是私聊并且不是自己, 回复提示
             {
                 Main.getMessenger().respond(event, "NOT A COMMAND: 不是指令 ( 输入" + getPrefix() + "help显示帮助 )");
             }
@@ -112,11 +115,14 @@ public class CommandManager
     /**
      * 判断一条消息是不是指令
      * @param text 消息
+     * @param channel 频道
      * @return 是指令的话返回指令前缀, 不是的话返回null
      */
-    public String isCommand(String text)
+    public String isCommand(String text, boolean channel)
     {
         if (text.startsWith(getPrefix())) return getPrefix();
+
+        if (channel) return null;
 
         for (String prefix : Main.getConfig().getStringList("BotProperties.EnabledCommandPrefixes"))
         {
