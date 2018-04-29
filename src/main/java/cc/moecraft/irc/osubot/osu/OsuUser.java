@@ -73,6 +73,17 @@ public class OsuUser extends Permissible
         return (OsuTrackData) Main.getOsuAPIUtils().get(OsuTrackParameters.builder().user(usernameAndMode.getUsername()).mode("" + usernameAndMode.getMode()).build()).get(0);
     }
 
+    /**
+     * 获取OsuTrack连接
+     *
+     * @param username 用户名
+     * @return 链接
+     */
+    public static String getOsuTrackLink(String username)
+    {
+        return String.format("https://ameobea.me/osutrack/user/%s/", username);
+    }
+
     @Override
     public boolean isAdmin()
     {
