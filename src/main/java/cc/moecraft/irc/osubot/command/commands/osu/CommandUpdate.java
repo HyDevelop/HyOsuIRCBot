@@ -71,7 +71,7 @@ public class CommandUpdate extends Command
             // 获取Mode名字
             String modeName = OsuAPIUtils.getModeNameWithMode(usernameAndMode.getMode());
 
-            Main.getMessenger().respond(event, getPrefix(osuTrackData) + ReflectUtils.replaceReflectVariablesWithPositiveAndNegativeSigns(osuTrackData, "[%m% - %username%]: %pp_raw% pp | %level% lvl | %pp_rank% rank | %accuracy%% acc. | %playcount% 次游戏 ").replace("%m%", modeName));
+            Main.getMessenger().respond(event, getPrefix(osuTrackData) + ReflectUtils.replaceReflectVariablesWithPositiveAndNegativeSigns(osuTrackData, "[%m% - [%link% %username%]]: %pp_raw% pp | %level% lvl | %pp_rank% rank | %accuracy%% acc. | %playcount% 次游戏 ").replace("%m%", modeName).replace("%link%", OsuUser.getOsuTrackLink(usernameAndMode)));
         }
         catch (IllegalAccessException | InstantiationException | InvocationTargetException e)
         {
