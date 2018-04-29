@@ -236,7 +236,7 @@ public class ReflectUtils
     }
 
     /**
-     * 反射替换变量, 带+号和-号
+     * 反射替换变量, 带+号
      *
      * 例子:
      *   输入:
@@ -268,7 +268,6 @@ public class ReflectUtils
                     double numericValue = Double.parseDouble(value);
 
                     if (numericValue >= 0D) value = "+" + value;
-                    else value = "-" + value;
                 }
                 catch (Exception ignored)
                 {
