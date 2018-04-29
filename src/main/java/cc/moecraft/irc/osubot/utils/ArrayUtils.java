@@ -1,5 +1,9 @@
 package cc.moecraft.irc.osubot.utils;
 
+import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
+import cc.moecraft.irc.osubot.osu.OsuUser;
+import org.pircbotx.User;
+
 import java.util.ArrayList;
 
 /**
@@ -33,5 +37,33 @@ public class ArrayUtils
         }
 
         return result.append(args.get(args.size() - 1)).toString();
+    }
+
+    /**
+     * 获取玩家和模式
+     * @param sender 发送者
+     * @param args 指令
+     * @return 玩家和模式
+     */
+    public static OsuUser.UsernameAndMode getUsernameAndModeWithArgs(User sender, ArrayList<String> args)
+    {
+        String username;
+        int mode = 0;
+
+        if (args.size() == 0) username = sender.getNick();
+        else
+        {
+            int modeTemp = OsuAPIUtils.getModeWithName(args.get(0));
+
+            if (modeTemp == -1) username = ArrayUtils.getTheRestArgsAsString(args, 0);
+            else
+            {
+                mode = modeTemp;
+                if (args.size() == 1) username = sender.getNick();
+                else username = ArrayUtils.getTheRestArgsAsString(args, 1);
+            }
+        }
+
+        return new OsuUser.UsernameAndMode(mode, username);
     }
 }
