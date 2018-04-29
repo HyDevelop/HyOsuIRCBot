@@ -102,7 +102,6 @@ public class BotConfig extends Config
     @Override
     public void writeDefaultConfig()
     {
-
         addDefault("ServerProperties.Address", "irc.ppy.sh");
         addDefault("ServerProperties.Port", 6667);
 
