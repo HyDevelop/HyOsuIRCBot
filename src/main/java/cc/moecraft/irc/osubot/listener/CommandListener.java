@@ -41,6 +41,7 @@ public class CommandListener extends ListenerAdapter
             Main.getLogger().debug("  - ID:     " + channel.getChannelId());
             Main.getLogger().debug("- 用户: ");
             Main.getLogger().debug("  - 昵称:   " + (sender != null ? sender.getNick() : "没有昵称"));
+            Main.getLogger().debug("  - 真名:   " + (sender != null ? sender.getRealName() : "没有真名"));
             Main.getLogger().debug("  - 登录名: " + (sender != null ? sender.getLogin() : "没有Login"));
             Main.getLogger().debug("  - UUID:   " + (sender != null ? sender.getUserId() : "没有ID"));
             Main.getLogger().debug("- 消息: " + message);
@@ -64,6 +65,7 @@ public class CommandListener extends ListenerAdapter
             Main.getLogger().debug("收到私聊消息: ");
             Main.getLogger().debug("- 用户: ");
             Main.getLogger().debug("  - 昵称:   " + (sender != null ? sender.getNick() : "没有昵称"));
+            Main.getLogger().debug("  - 真名:   " + (sender != null ? sender.getRealName() : "没有真名"));
             Main.getLogger().debug("  - 登录名: " + (sender != null ? sender.getLogin() : "没有Login"));
             Main.getLogger().debug("  - UUID:   " + (sender != null ? sender.getUserId() : "没有ID"));
             Main.getLogger().debug("- 消息: " + message);

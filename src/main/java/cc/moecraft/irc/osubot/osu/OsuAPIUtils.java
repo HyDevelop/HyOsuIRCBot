@@ -101,31 +101,46 @@ public class OsuAPIUtils
             DataBase data = dataBaseList.get(i);
 
             // 反射赋值
-            for (Field field : data.getClass().getDeclaredFields())
+            assignHelper2(data, element);
+        }
+    }
+
+    /**
+     * 赋值递归助手 ( 考虑到可能需要递归就分开写了 )
+     *
+     * @param object 赋值对象
+     * @param element JSON对象
+     * @throws IllegalAccessException 没有权限访问反射到的变量
+     * @throws InstantiationException 反射创建实例失败
+     * @throws InvocationTargetException 反射方法激活失败
+     */
+    public void assignHelper2(Object object, JsonObject element) throws InvocationTargetException, IllegalAccessException
+    {
+        for (Field field : object.getClass().getDeclaredFields())
+        {
+            if (element.keySet().contains(field.getName()))
             {
-                if (element.keySet().contains(field.getName()))
+                // 赋值 ( 类型转换可能出错
+                field.setAccessible(true);
+
+                // 如果是基础类, 反射获取getAs方法转换
+                if (ReflectUtils.isPrimitive(field.getType()))
                 {
-                    // 赋值 ( 类型转换可能出错
-                    field.setAccessible(true);
+                    JsonPrimitive primitive = element.get(field.getName()).getAsJsonPrimitive();
 
-                    // 如果是基础类, 反射获取getAs方法转换
-                    if (ReflectUtils.isPrimitive(field.getType()))
-                    {
-                        JsonPrimitive primitive = element.get(field.getName()).getAsJsonPrimitive();
-
-                        field.set(data, Objects.requireNonNull(ReflectUtils.getJsonPrimitiveGetAsMethod(field, primitive)).invoke(primitive));
-                    }
-                    else
-                    {
-                        // TODO: 不是基础类的话怎么办呢...?
-                        System.out.println("不支持类型: " + field.getType().getSimpleName());
-                    }
+                    field.set(object, Objects.requireNonNull(ReflectUtils.getJsonPrimitiveGetAsMethod(field, primitive)).invoke(primitive));
                 }
                 else
                 {
-                    // 数据类声明的变量名和JSON类不匹配的可能性
-                    // 注入变量名...? ( 不知道能不能实现
+                    // 不是基础类, 递归
+                    System.out.println("递归: " + field.getType().getSimpleName());
+                    assignHelper2(field.get(object), (JsonObject) element.get(field.getName()));
                 }
+            }
+            else
+            {
+                // 数据类声明的变量名和JSON类不匹配的可能性
+                // 注入变量名...? ( 不知道能不能实现
             }
         }
     }
