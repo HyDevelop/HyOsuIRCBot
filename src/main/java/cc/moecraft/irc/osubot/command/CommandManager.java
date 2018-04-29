@@ -120,9 +120,9 @@ public class CommandManager
      */
     public String isCommand(String text, boolean channel)
     {
-        if (text.startsWith(getPrefix())) return getPrefix();
-
         if (channel) return null;
+        
+        if (text.startsWith(getPrefix())) return getPrefix();
 
         for (String prefix : Main.getConfig().getStringList("BotProperties.EnabledCommandPrefixes"))
         {
