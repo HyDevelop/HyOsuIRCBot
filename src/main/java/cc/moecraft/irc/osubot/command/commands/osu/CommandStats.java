@@ -14,6 +14,8 @@ import org.pircbotx.hooks.types.GenericMessageEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
+import static cc.moecraft.irc.osubot.utils.ArrayUtils.getUsernameAndModeWithArgs;
+
 /**
  * 此类由 Hykilpikonna 在 2018/04/23 创建!
  * Created by Hykilpikonna on 2018/04/23!
@@ -62,7 +64,10 @@ public class CommandStats extends Command
             userData.setCount_rank_s(userData.getCount_rank_s() + userData.getCount_rank_sh());
             userData.setCount_rank_ss(userData.getCount_rank_ss() + userData.getCount_rank_ssh());
 
-            Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(userData, "[%username% (%user_id%)]: %pp_raw%pp | lv.%level% | %accuracy%% acc. | %count_rank_ss%ss | %count_rank_s%s |  %count_rank_a%a "));
+            // 获取Mode名字
+            String modeName = OsuAPIUtils.getModeNameWithMode(usernameAndMode.getMode());
+
+            Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(userData, "[%mode% - %username% (%user_id%)]: %pp_raw%pp | lv.%level% | %accuracy%% acc. | %count_rank_ss%ss | %count_rank_s%s |  %count_rank_a%a ").replace("%mode%", modeName));
         }
         catch (IllegalAccessException | InstantiationException | InvocationTargetException e)
         {
@@ -76,33 +81,5 @@ public class CommandStats extends Command
     public String permissionRequired()
     {
         return "irc.user.regular.osu.stats";
-    }
-
-    /**
-     * 获取玩家和模式
-     * @param sender 发送者
-     * @param args 指令
-     * @return 玩家和模式
-     */
-    public OsuUser.UsernameAndMode getUsernameAndModeWithArgs(User sender, ArrayList<String> args)
-    {
-        String username;
-        int mode = 0;
-
-        if (args.size() == 0) username = sender.getNick();
-        else
-        {
-            int modeTemp = OsuAPIUtils.getModeWithName(args.get(0));
-
-            if (modeTemp == -1) username = ArrayUtils.getTheRestArgsAsString(args, 0);
-            else
-            {
-                mode = modeTemp;
-                if (args.size() == 1) username = sender.getNick();
-                else username = ArrayUtils.getTheRestArgsAsString(args, 1);
-            }
-        }
-
-        return new OsuUser.UsernameAndMode(mode, username);
     }
 }
