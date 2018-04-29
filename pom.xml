@@ -197,13 +197,16 @@
       <properties>
         <jboot.server.port>23019</jboot.server.port>
         <jboot.mode>dev</jboot.mode>
-        <jboot.datasource.url>jdbc:mysql://119.29.222.57:3306/testSql?useUnicode=true&amp;characterEncoding=utf-8</jboot.datasource.url>
+        <jboot.datasource.url>jdbc:mysql://119.29.222.57:3306/osuIrcBot?useUnicode=true&amp;characterEncoding=utf-8</jboot.datasource.url>
         <jboot.datasource.user>root</jboot.datasource.user>
         <jboot.datasource.password>dw123456</jboot.datasource.password>
         <jboot.datasource.maximumPoolSize>10</jboot.datasource.maximumPoolSize>
         <jboot.redis.host>119.29.222.57</jboot.redis.host>
         <jboot.redis.password>dw1234</jboot.redis.password>
         <jboot.log>true</jboot.log>
+        <osu.key>cda7da667c3c0d6b36e1ef1e7c1941e28e984310</osu.key>
+        <osu.irc.username>dullwolf</osu.irc.username>
+        <osu.irc.password>2eee23a5</osu.irc.password>
       </properties>
     </profile>
 
@@ -220,6 +223,9 @@
         <jboot.redis.host>Redis的IP</jboot.redis.host>
         <jboot.redis.password>Redis密码</jboot.redis.password>
         <jboot.log>false</jboot.log>
+        <osu.key>OSU的key</osu.key>
+        <osu.irc.username>irc服务器账号</osu.irc.username>
+        <osu.irc.password>irc服务器密码</osu.irc.password>
       </properties>
     </profile>
 
