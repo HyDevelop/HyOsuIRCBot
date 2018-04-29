@@ -196,7 +196,7 @@
       </activation>
       <properties>
         <jboot.server.port>23019</jboot.server.port>
-        <jboot.mode>dev</jboot.mode>
+        <jboot.mode>product</jboot.mode>
         <jboot.datasource.url>jdbc:mysql://119.29.222.57:3306/osuIrcBot?useUnicode=true&amp;characterEncoding=utf-8</jboot.datasource.url>
         <jboot.datasource.user>root</jboot.datasource.user>
         <jboot.datasource.password>dw123456</jboot.datasource.password>
