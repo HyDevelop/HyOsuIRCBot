@@ -70,12 +70,12 @@ public abstract class BaseOsuStd<M extends BaseOsuStd<M>> extends JbootModel<M> 
 		return getInt("count50");
 	}
 
-	public void setPlayCount(java.lang.Integer playCount) {
-		set("play_count", playCount);
+	public void setPlaycount(java.lang.Integer playcount) {
+		set("playcount", playcount);
 	}
 	
-	public java.lang.Integer getPlayCount() {
-		return getInt("play_count");
+	public java.lang.Integer getPlaycount() {
+		return getInt("playcount");
 	}
 
 	public void setRankedScore(java.lang.Long rankedScore) {
