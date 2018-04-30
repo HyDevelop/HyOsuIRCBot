@@ -14,6 +14,8 @@ import io.jboot.utils.ArrayUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 public class OsuStdServiceImpl implements OsuStdService {
 
@@ -33,30 +35,48 @@ public class OsuStdServiceImpl implements OsuStdService {
     }
 
     @Override
-    public void saveById(long nextId) {
+    public void asyncSaveById() {
         final String key = PropertiesUtil.readKey("osu_key");
         final String url = Api.User.apiUrl;
         //定时任务是一分钟，而子线程开启等待时间设置60秒
         Thread mThreadClient = new Thread(() -> {
-            for (int j = 0; j < 100; j++) {
-                String json = Jboot.httpPost(url + "?k=" + key + "&type=id&u=" + (nextId + j));
-                if(!StrKit.isBlank(json)){
-                    JsonElement jsonElement = JsonUtils.parseJsonElement(json);
-                    if(jsonElement.isJsonArray()){
-                        List<Map> list = JsonUtils.getArrayByJson(json, Map.class);
-                        if(ArrayUtils.isNotEmpty(list)){
-                            String userId = list.get(0).get("user_id").toString();
-                            if(String.valueOf(nextId + j).equalsIgnoreCase(userId)){
-                                redis.set(Constant.USER_MAX_ID,String.valueOf(nextId + j));
-                                if(ArrayUtils.isNotEmpty(list) && !getExistById(nextId + j)){
-                                    String jsonString = JsonUtils.toJsonString(list.get(0));
-                                    OsuStd osuStd = JsonUtils.jsonToModel(jsonString, OsuStd.class);
-                                    osuStd.save();
+            for (int j = 0; j < 300; j++) {
+                long maxId;
+                if(null != redis.get(Constant.USER_MAX_ID)){
+                    maxId = Long.parseLong(redis.get(Constant.USER_MAX_ID).toString());
+                }else{
+                    maxId = getMaxId();
+                }
+                long nextId = maxId + 1;
+                Callable<Long> callable = () -> {
+                    String json = Jboot.httpPost(url + "?k=" + key + "&type=id&u=" + nextId);
+                    if(!StrKit.isBlank(json)){
+                        JsonElement jsonElement = JsonUtils.parseJsonElement(json);
+                        if(jsonElement.isJsonArray()){
+                            List<Map> list = JsonUtils.getArrayByJson(json, Map.class);
+                            if(ArrayUtils.isNotEmpty(list)){
+                                String userId = list.get(0).get("user_id").toString();
+                                if(String.valueOf(nextId).equals(userId) && ArrayUtils.isNotEmpty(list)){
+                                    if(!getExistById(nextId)){
+                                        String jsonString = JsonUtils.toJsonString(list.get(0));
+                                        OsuStd osuStd = JsonUtils.jsonToModel(jsonString, OsuStd.class);
+                                        osuStd.save();
+                                    }
                                 }
                             }
                         }
                     }
+                    return nextId;
+                };
+                FutureTask<Long> future = new FutureTask<>(callable);
+                new Thread(future).start();
+                try {
+                    //然后放进缓存
+                    redis.set(Constant.USER_MAX_ID,String.valueOf(future.get()));
+                } catch (Exception ignored) {
+
                 }
+
             }
         });
         mThreadClient.start();

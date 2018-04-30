@@ -31,7 +31,7 @@ public class OsuJob implements ITask {
             if(totalUser < nextId){
                 stop();
             }else{
-                DAOFactory.getOsuStdService().saveById(nextId);
+                DAOFactory.getOsuStdService().asyncSaveById();
             }
         } catch (Exception ignored) {
             //这里抓到所有异常都忽略，免得频繁报错，导致日志刷屏
