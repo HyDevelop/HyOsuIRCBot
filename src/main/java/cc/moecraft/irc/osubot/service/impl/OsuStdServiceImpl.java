@@ -52,4 +52,10 @@ public class OsuStdServiceImpl implements OsuStdService {
         executor.shutdown();
 
     }
+
+    @Override
+    public long getRandomId() {
+        String sql = "select user_id from osu_std order by rand() limit " + totalCount();
+        return osuStdDao.findFirst(sql).getUserId();
+    }
 }
