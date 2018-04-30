@@ -17,11 +17,6 @@ public interface OsuStdService {
     long getMaxId();
 
     /**
-     * 根据userId异步保存用户玩家信息
-     */
-    void asyncSaveById();
-
-    /**
      * 根据ID查找用户是否存在数据库
      */
     boolean getExistById(long userId);

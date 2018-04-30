@@ -12,6 +12,7 @@ public class OsuJob implements ITask {
 
     @Override
     public void run() {
+        stop();
 //        try {
 //            long maxId;
 //            if(null != redis.get(Constant.USER_MAX_ID)){
@@ -32,6 +33,6 @@ public class OsuJob implements ITask {
 
     @Override
     public void stop() {
-        logger.info("任务结束了");
+        //logger.info("任务结束了");
     }
 }
