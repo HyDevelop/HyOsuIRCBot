@@ -1,23 +1,15 @@
 package cc.moecraft.irc.osubot.service.impl;
 
-import cc.moecraft.irc.osubot.common.Constant;
 import cc.moecraft.irc.osubot.model.OsuStd;
-import cc.moecraft.irc.osubot.osu.Api;
 import cc.moecraft.irc.osubot.service.OsuStdService;
-import cc.moecraft.irc.osubot.utils.JsonUtils;
-import cc.moecraft.irc.osubot.utils.PropertiesUtil;
-import com.google.gson.JsonElement;
-import com.jfinal.kit.StrKit;
-import io.jboot.Jboot;
-import io.jboot.component.redis.JbootRedis;
-import io.jboot.utils.ArrayUtils;
+import cc.moecraft.irc.osubot.task.MyTask;
 
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class OsuStdServiceImpl implements OsuStdService {
-
-    private JbootRedis redis = Jboot.me().getRedis();
 
     private OsuStd osuStdDao = new OsuStd();
 
@@ -33,43 +25,37 @@ public class OsuStdServiceImpl implements OsuStdService {
     }
 
     @Override
-    public void saveById(long nextId) {
-        final String key = PropertiesUtil.readKey("osu_key");
-        final String url = Api.User.apiUrl;
-        //定时任务是一分钟，而子线程开启等待时间设置60秒
-        Thread mThreadClient = new Thread(() -> {
-            for (int j = 0; j < 100; j++) {
-                String json = Jboot.httpPost(url + "?k=" + key + "&type=id&u=" + (nextId + j));
-                if(!StrKit.isBlank(json)){
-                    JsonElement jsonElement = JsonUtils.parseJsonElement(json);
-                    if(jsonElement.isJsonArray()){
-                        List<Map> list = JsonUtils.getArrayByJson(json, Map.class);
-                        if(ArrayUtils.isNotEmpty(list)){
-                            String userId = list.get(0).get("user_id").toString();
-                            if(String.valueOf(nextId + j).equalsIgnoreCase(userId)){
-                                redis.set(Constant.USER_MAX_ID,String.valueOf(nextId + j));
-                                if(ArrayUtils.isNotEmpty(list) && !getExistById(nextId + j)){
-                                    String jsonString = JsonUtils.toJsonString(list.get(0));
-                                    OsuStd osuStd = JsonUtils.jsonToModel(jsonString, OsuStd.class);
-                                    osuStd.save();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        });
-        mThreadClient.start();
-        //等待子线程执行完毕
-        try {
-            mThreadClient.join(60000);
-        } catch (InterruptedException ignored) {
-        }
+    public long totalCount() {
+        String sql = "select count(*) as total from osu_std ";
+        return osuStdDao.findFirst(sql).getLong("total");
     }
 
     @Override
     public boolean getExistById(long userId) {
-        String sql = "select count(*) as total from osu_std where user_id = "+ userId;
+        String sql = "select count(*) as total from osu_std where user_id = " + userId;
         return osuStdDao.findFirst(sql).getLong("total") > 0;
+    }
+
+    @Override
+    public void asyncSave(long size,long nextId) {
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(
+                50,  //核心池的大小（即线程池中的线程数目大于这个参数时，提交的任务会被放进任务缓存队列）
+                100, //线程池最大能容忍的线程数
+                200, //线程存活时间
+                TimeUnit.MILLISECONDS, //参数keepAliveTime的时间单位
+                new ArrayBlockingQueue<>(50) //任务缓存队列，用来存放等待执行的任务
+        );
+        for (long i = 0; i < size; i++) {
+            MyTask myTask = new MyTask(i + nextId);
+            executor.execute(myTask);
+        }
+        executor.shutdown();
+
+    }
+
+    @Override
+    public long getRandomId() {
+        String sql = "select user_id from osu_std order by rand() limit " + totalCount();
+        return osuStdDao.findFirst(sql).getUserId();
     }
 }
