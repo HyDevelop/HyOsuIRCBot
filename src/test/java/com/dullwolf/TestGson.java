@@ -2,11 +2,15 @@ package com.dullwolf;
 
 
 import cc.moecraft.irc.osubot.model.OsuStd;
+import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.utils.JsonUtils;
+import cc.moecraft.irc.osubot.utils.ReflectUtils;
+import com.google.gson.Gson;
+import org.pircbotx.User;
 
 public class TestGson {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalAccessException {
         String json = "{\n" +
                 "        \"user_id\": \"2660718\",\n" +
                 "        \"username\": \"dullwolf\",\n" +
@@ -38,9 +42,21 @@ public class TestGson {
                 "        ]\n" +
                 "    }";
 
-        OsuStd osuStd = JsonUtils.getObjectByJson(json, OsuStd.class);
-        System.out.println(osuStd.toJson());
+        try
+        {
+            OsuStd osuStd = new Gson().fromJson(json, OsuStd.class);
 
+            System.out.println("OsuStd类里面一共定义了 " + osuStd.getClass().getDeclaredFields().length + " 个变量");
+            System.out.println("OsuStd类里面一共有 " + osuStd.getClass().getFields().length + " 个变量");
+
+            ReflectUtils.printAllValue(osuStd);
+
+            UserData userData = new Gson().fromJson(json, UserData.class);
+            ReflectUtils.printAllValue(userData);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
-
 }
