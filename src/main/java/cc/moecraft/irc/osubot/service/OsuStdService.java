@@ -17,12 +17,23 @@ public interface OsuStdService {
     long getMaxId();
 
     /**
-     * 根据userId保存用户玩家信息
+     * 库表所有用户
      */
-    void saveById(long nextId);
+    long totalCount();
 
     /**
      * 根据ID查找用户是否存在数据库
      */
     boolean getExistById(long userId);
+
+    /**
+     * 根据userId异步保存用户玩家信息
+     */
+    void asyncSave(long size,long nextId);
+
+    /**
+     * 随机获取一个ID
+     */
+    long getRandomId();
+
 }
