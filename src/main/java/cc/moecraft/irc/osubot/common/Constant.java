@@ -14,9 +14,5 @@ public class Constant {
      */
     public static final String QUEUE_LOGS = "queueLog";
 
-    /**
-     * OSU用户最大maxId标记
-     */
-    public static final String USER_MAX_ID = "userMaxId";
 
 }

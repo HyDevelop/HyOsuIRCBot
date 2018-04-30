@@ -2,14 +2,14 @@ package cc.moecraft.irc.osubot.service.impl;
 
 import cc.moecraft.irc.osubot.model.OsuStd;
 import cc.moecraft.irc.osubot.service.OsuStdService;
-import io.jboot.Jboot;
-import io.jboot.component.redis.JbootRedis;
+import cc.moecraft.irc.osubot.task.MyTask;
 
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class OsuStdServiceImpl implements OsuStdService {
-
-    private JbootRedis redis = Jboot.me().getRedis();
 
     private OsuStd osuStdDao = new OsuStd();
 
@@ -25,8 +25,31 @@ public class OsuStdServiceImpl implements OsuStdService {
     }
 
     @Override
+    public long totalCount() {
+        String sql = "select count(*) as total from osu_std ";
+        return osuStdDao.findFirst(sql).getLong("total");
+    }
+
+    @Override
     public boolean getExistById(long userId) {
-        String sql = "select count(*) as total from osu_std where user_id = "+ userId;
+        String sql = "select count(*) as total from osu_std where user_id = " + userId;
         return osuStdDao.findFirst(sql).getLong("total") > 0;
+    }
+
+    @Override
+    public void asyncSave(long size,long nextId) {
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(
+                50,  //核心池的大小（即线程池中的线程数目大于这个参数时，提交的任务会被放进任务缓存队列）
+                100, //线程池最大能容忍的线程数
+                200, //线程存活时间
+                TimeUnit.MILLISECONDS, //参数keepAliveTime的时间单位
+                new ArrayBlockingQueue<>(50) //任务缓存队列，用来存放等待执行的任务
+        );
+        for (long i = 0; i < size; i++) {
+            MyTask myTask = new MyTask(i + nextId);
+            executor.execute(myTask);
+        }
+        executor.shutdown();
+
     }
 }
