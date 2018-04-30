@@ -31,4 +31,9 @@ public interface OsuStdService {
      */
     void asyncSave(long size,long nextId);
 
+    /**
+     * 随机获取一个ID
+     */
+    long getRandomId();
+
 }
