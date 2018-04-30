@@ -1,6 +1,8 @@
 package com.dullwolf;
 
 
+import cc.moecraft.irc.osubot.task.MyTask;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -10,7 +12,12 @@ public class TestMain {
 
     public static void main(String[] args) throws Exception {
         new TestMain().exec();
-        System.out.println("执行完毕");
+        System.out.println("执行完毕，顺便开始测试最大循环所需时间...");
+        long start = System.currentTimeMillis();
+        for (long i = 0; i < 11998017; i++) {
+            System.out.println(i+1);
+        }
+        System.out.println("完毕，耗时：" + (System.currentTimeMillis() - start));
     }
 
     private void exec() throws Exception {
