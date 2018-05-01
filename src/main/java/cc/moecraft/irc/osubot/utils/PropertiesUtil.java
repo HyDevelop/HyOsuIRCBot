@@ -52,4 +52,39 @@ public final class PropertiesUtil {
     }
 
 
+    /**
+     * 设置一个属性，如果key已经存在，那么将其对应value值覆盖。
+     *
+     */
+    public static void setProperty(String key, String value) {
+        InputStream is = null;
+        OutputStream os = null;
+        Properties p = new Properties();
+        try {
+            URL resource = Thread.currentThread().getContextClassLoader().getResource(DEFULT_CONFIG_FILE);
+            assert resource != null;
+            String filePath = resource.getPath();
+            is = new FileInputStream(filePath);
+            p.load(is);
+            os = new FileOutputStream(PropertiesUtil.class.getClassLoader().getResource(DEFULT_CONFIG_FILE).getFile());
+            p.setProperty(key, value);
+            p.store(os, key);
+            os.flush();
+            os.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != is)
+                    is.close();
+                if (null != os)
+                    os.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
 }

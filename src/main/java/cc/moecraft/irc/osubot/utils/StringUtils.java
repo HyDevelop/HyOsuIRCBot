@@ -79,4 +79,11 @@ public class StringUtils
         }
         return output.toString();
     }
+
+    /**
+     * 过滤html标签
+     */
+    public static String guoHtml(String s) {
+        return s.replaceAll("<[.[^<]]*>", "").trim();
+    }
 }
