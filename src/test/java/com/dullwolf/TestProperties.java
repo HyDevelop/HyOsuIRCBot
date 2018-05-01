@@ -9,6 +9,7 @@ public class TestProperties {
 
     public static void main(String[] args) {
         System.out.println(osuKey);
+        PropertiesUtil.setProperty("osu_key", "test");
     }
 
 }
