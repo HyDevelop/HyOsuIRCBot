@@ -4,8 +4,12 @@ A Java IRC Bot for Osu!
 ### Credit:
 - PircBotX for IRC Bot Library
     - Github: https://github.com/pircbotx/pircbotx
+    
+    
 - Uso Bot for Beatmap Suggestion Algorithm 
     - Github: https://github.com/Renondedju/Uso_Bot_V2.0
+    
+    
 - Osu!Track for Player Data Tracking & Analysis 
     - Website: https://ameobea.me/osutrack/
     - Github: https://github.com/Ameobea/osutrack_irc_v2
@@ -25,28 +29,16 @@ A Java IRC Bot for Osu!
     [#]: 取消
 
     TODO: 添加功能:
-    ▷ [#] 注册个机器人账号 ( 被ppy拒绝 )
     ▶ [-] 指令系统
-        ▷ [X] 框架
-            ▷ [X] 基础框架
-            ▷ [X] 检测权限 ( 需要权限组 )
         ▷ [-] 帮助指令
             ▷ [X] 帮助指令
             ▶ [ ] 帮助内容 ( 需要语言文件 )
-        ▷ [X] 列出所有指令的指令
-        ▷ [X] 查询玩家信息的指令
         ▶ [ ] 自动提示指令用法
         ▶ [ ] !Channel 指令, 让机器人加入/退出频道
     ▶ [-] 用户系统
         ▶ [?] 数据库
             ▷ [ ] 用户语言
             ▷ [ ] 用户默认模式
-        ▶ [D] 权限组
-            ▷ [X] 框架
-            ▷ [X] 应用 ( 需要获取用户 )
-            ▶ [ ] 存储移至数据库
-        ▷ [X] 获取用户
-        ▷ [#] 管理服务器 ( 同时连两个服务器, 一个是Osu, 另一个是私服用来管理 ) #无法实现
         ▷ [ ] 检测新用户
             ▷ [ ] 新用户提示设置语言
     ▶ [-] 语言文件
@@ -57,8 +49,3 @@ A Java IRC Bot for Osu!
         ▷ [-] 用来回复消息的类
             ▷ [ ] 放在用户下直接用语言文件码回复消息
     ▷ [ ] 报错收集系统 ( 不知道可不可能实现
-    ▷ [X] 简化Logging
-        ▷ [X] 添加回复行
-
-    TODO: 修复Bug:
-    ▷ [X] 登陆/退出消息刷屏
