@@ -67,10 +67,10 @@ public class CommandManager
 
         if (prefix == null)
         {
-            if (!isChannel && !user.getNick().equalsIgnoreCase(Main.getConfig().getUsername()) && !Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick().toLowerCase())) // 如果是私聊并且不是自己, 回复提示
-            {
-                Main.getMessenger().respond(event, "NOT A COMMAND: 不是指令 ( 输入%prefix%help显示帮助 )");
-            }
+            if (!isChannel && !user.getNick().equalsIgnoreCase(Main.getConfig().getUsername()) &&
+                    !Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick().toLowerCase())) // 如果是私聊并且不是自己, 回复提示
+                if (Main.isEnableListening())
+                    Main.getMessenger().respond(event, "NOT A COMMAND: 不是指令 ( 输入%prefix%help显示帮助 )");
 
             return RunResult.NOT_A_COMMAND;
         }
@@ -80,6 +80,8 @@ public class CommandManager
 
         // "echo"
         String command = args.get(0).replace(prefix, "").toLowerCase();
+
+        if (!Main.isEnableListening() && !command.equalsIgnoreCase("enable")) return RunResult.LISTENING_DISABLED;
 
         if (!registeredCommands.containsKey(command))
         {
@@ -105,7 +107,7 @@ public class CommandManager
 
     public enum RunResult
     {
-        NOT_A_COMMAND, COMMAND_NOT_FOUND,
+        NOT_A_COMMAND, COMMAND_NOT_FOUND, LISTENING_DISABLED,
         NO_PERMISSION,
         SUCCESS
     }

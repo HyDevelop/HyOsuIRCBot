@@ -29,8 +29,6 @@ public class CommandListener extends ListenerAdapter
     @Override
     public void onMessage(MessageEvent event)
     {
-        if (!Main.isEnableListening()) return;
-
         Channel channel = event.getChannel();
         User sender = event.getUser();
         String message = event.getMessage();
@@ -59,8 +57,6 @@ public class CommandListener extends ListenerAdapter
     @Override
     public void onPrivateMessage(PrivateMessageEvent event)
     {
-        if (!Main.isEnableListening()) return;
-
         User sender = event.getUser();
         String message = event.getMessage();
 
