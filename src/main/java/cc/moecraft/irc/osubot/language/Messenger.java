@@ -1,6 +1,7 @@
 package cc.moecraft.irc.osubot.language;
 
 import cc.moecraft.irc.osubot.Main;
+import cc.moecraft.irc.osubot.command.CommandManager;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 /**
@@ -20,6 +21,8 @@ public class Messenger
 
     public void respond(GenericMessageEvent event, String text)
     {
+        text = replaceVariables(text);
+
         if (Main.getConfig().getBoolean("BotProperties.DisableChannelReply"))
         {
             event.respondPrivateMessage(text);
@@ -63,5 +66,16 @@ public class Messenger
     public void setLanguageFileManager(LanguageFileManager languageFileManager)
     {
         this.languageFileManager = languageFileManager;
+    }
+
+    /**
+     * 替换所有变量
+     * @param original 源字符串
+     * @return 替换后的字符串
+     */
+    public String replaceVariables(String original)
+    {
+        return original
+                .replace("%prefix%", CommandManager.getPrefix());
     }
 }
