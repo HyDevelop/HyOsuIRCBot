@@ -95,11 +95,6 @@ public class BotConfig extends Config
     }
 
     @Override
-    public void writeConfig() {
-
-    }
-
-    @Override
     public void writeDefaultConfig()
     {
         addDefault("ServerProperties.Address", "irc.ppy.sh");

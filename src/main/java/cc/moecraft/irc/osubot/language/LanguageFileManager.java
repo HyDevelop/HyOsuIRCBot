@@ -90,11 +90,6 @@ public class LanguageFileManager
         }
 
         @Override
-        public void writeConfig() {
-
-        }
-
-        @Override
         public void writeDefaultConfig()
         {
             if (lang == null) return;

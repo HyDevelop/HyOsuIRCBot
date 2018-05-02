@@ -80,41 +80,6 @@ public abstract class Config extends YamlConfiguration
     }
 
     /**
-     * 新建一个Config
-     *
-     * @param dir 路径
-     * @param fileName 文件名
-     * @param fileExtension 文件后缀
-     */
-    public Config(String latestVersion, String dir, String fileName, String fileExtension)
-    {
-        this(latestVersion, dir, fileName, fileExtension, false, false, true);
-    }
-
-    /**
-     * 新建一个Config
-     *
-     * @param dir 路径
-     * @param fileName 文件名
-     * @param fileExtension 文件后缀
-     */
-    public Config(String latestVersion, String dir, String fileName, String fileExtension, boolean autoOverwriteVersionInfo)
-    {
-        this(latestVersion, dir, fileName, fileExtension, true, true, autoOverwriteVersionInfo);
-    }
-
-    /**
-     * 新建一个Config
-     *
-     * @param dir 路径
-     * @param fileName 文件名
-     */
-    public Config(String latestVersion, String dir, String fileName)
-    {
-        this(latestVersion, dir, fileName, "yml", true, true, true);
-    }
-
-    /**
      * 检测配置是否是最新
      *
      * 如果未生成, 执行writeDefaultConfig()方法
@@ -124,14 +89,9 @@ public abstract class Config extends YamlConfiguration
     public void checkConfig()
     {
         boolean save = false;
-        if (isDefaultConfig())
+        if (!isLatest() || isDefaultConfig())
         {
             writeDefaultConfig();
-            save = true;
-        }
-        if (!isLatest())
-        {
-            writeConfig();
             save = true;
         }
         if (autoOverwriteVersionInfo)
@@ -151,11 +111,6 @@ public abstract class Config extends YamlConfiguration
      * 在检测配置后 读取配置
      */
     public abstract void readConfig();
-
-    /**
-     * 在检测到配置生成过但不是最新时 写配置
-     */
-    public abstract void writeConfig();
 
     /**
      * 在检测到配置未生成时 写默认配置
