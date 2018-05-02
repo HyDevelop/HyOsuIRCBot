@@ -27,7 +27,7 @@ public class CommandListener extends ListenerAdapter
      * @param event 事件
      */
     @Override
-    public void onMessage(MessageEvent event) throws Exception
+    public void onMessage(MessageEvent event)
     {
         Channel channel = event.getChannel();
         User sender = event.getUser();
@@ -55,7 +55,7 @@ public class CommandListener extends ListenerAdapter
     }
 
     @Override
-    public void onPrivateMessage(PrivateMessageEvent event) throws Exception
+    public void onPrivateMessage(PrivateMessageEvent event)
     {
         User sender = event.getUser();
         String message = event.getMessage();

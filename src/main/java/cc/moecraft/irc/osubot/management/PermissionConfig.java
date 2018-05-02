@@ -153,12 +153,6 @@ public class PermissionConfig extends Config
     }
 
     @Override
-    public void writeConfig()
-    {
-
-    }
-
-    @Override
     public void writeDefaultConfig()
     {
         // 默认用户权限分3组:

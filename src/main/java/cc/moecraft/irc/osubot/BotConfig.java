@@ -95,11 +95,6 @@ public class BotConfig extends Config
     }
 
     @Override
-    public void writeConfig() {
-
-    }
-
-    @Override
     public void writeDefaultConfig()
     {
         addDefault("ServerProperties.Address", "irc.ppy.sh");
@@ -109,8 +104,8 @@ public class BotConfig extends Config
         setPassword(ircPassword);
         setAdminUsernames(new ArrayList<>(Arrays.asList("Hykilpikonna", "dullwolf")));
 
-        addDefault("BotProperties.CommandPrefix", ";");
-        addDefault("BotProperties.EnabledCommandPrefixes", new String[]{"!", "-", ".", "?", "*"});
+        addDefault("BotProperties.CommandPrefix", "!");
+        addDefault("BotProperties.EnabledCommandPrefixes", new String[]{";", "-", ".", "?", "*"});
         addDefault("BotProperties.AutoJoinChannels", new String[]{"#general", "#chinese"});
 
         addDefault("BotProperties.Download.Timeout", 3000);
