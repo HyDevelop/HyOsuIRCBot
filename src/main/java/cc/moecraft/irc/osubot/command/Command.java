@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot.command;
 
+import lombok.Getter;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
@@ -15,6 +16,9 @@ import java.util.Arrays;
  */
 public abstract class Command
 {
+    @Getter
+    private static final ArrayList<Command> COMMANDS = new ArrayList<>();
+
     private String name;                // 指令名
     private ArrayList<String> alias;    // 其他指向这个指令的指令名
 
@@ -27,6 +31,8 @@ public abstract class Command
     {
         this.name = name;
         this.alias = alias;
+
+        COMMANDS.add(this);
     }
 
     /**
