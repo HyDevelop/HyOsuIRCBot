@@ -31,6 +31,14 @@
     </dependency>
     <!--验证器-->
 
+    <!--反射工具库-->
+    <dependency>
+      <groupId>org.reflections</groupId>
+      <artifactId>reflections</artifactId>
+      <version>0.9.11</version>
+    </dependency>
+    <!--反射工具库-->
+
     <dependency>
       <groupId>org.yaml</groupId>
       <artifactId>snakeyaml</artifactId>
