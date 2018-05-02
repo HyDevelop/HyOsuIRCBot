@@ -8,6 +8,7 @@ import cc.moecraft.irc.osubot.command.commands.fun.CommandNullpo;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandPing;
 import cc.moecraft.irc.osubot.command.commands.fun.CommandTime;
 import cc.moecraft.irc.osubot.command.commands.management.*;
+import cc.moecraft.irc.osubot.command.commands.management.power.CommandRestart;
 import cc.moecraft.irc.osubot.command.commands.osu.CommandStats;
 import cc.moecraft.irc.osubot.command.commands.osu.CommandUpdate;
 import cc.moecraft.irc.osubot.language.Messenger;
