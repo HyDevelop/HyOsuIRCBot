@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot;
 
+import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.command.CommandManager;
 import cc.moecraft.irc.osubot.command.commands.CommandCommands;
 import cc.moecraft.irc.osubot.command.commands.CommandHelp;
@@ -21,9 +22,11 @@ import lombok.Getter;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.exception.IrcException;
+import org.reflections.Reflections;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/20 创建!
@@ -32,8 +35,7 @@ import java.io.IOException;
  * QQ: admin@moecraft.cc -OR- 871674895
  */
 public class Main {
-    // 版本 ( 不懂怎样配置Github版本...
-    public static final String VERSION = "0.0.5";
+    public static final String VERSION = "0.0.5"; // 版本 ( 不懂怎样配置Github版本...
 
     // 配置/语言文件路径
     public static final String PATH = "src" + File.separator + "main" + File.separator + "resources"; //TODO: 这里分两个版本, 测试放现在这个路径, 发布的话放"./conf/"路径
@@ -66,9 +68,13 @@ public class Main {
     private static boolean debug; // 是否开启测试
 
     @Getter
+    private static boolean enableListening = true; // 是否监听消息
+
+    @Getter
     private static int downloadMaxTries = 3; // 下载失败重试次数
 
-    public static void main(String[] args) throws IOException, IrcException {
+    public static void main(String[] args) throws IOException, IrcException, InstantiationException, IllegalAccessException
+    {
         Jboot.run(args);
 
         config = new BotConfig();
@@ -91,23 +97,26 @@ public class Main {
         downloader = new DownloadUtils(config.getInt("BotProperties.Download.Timeout"));
         osuAPIUtils = new OsuAPIUtils(config.getString("BotProperties.Download.Osu.APIKey"), downloader);
 
-        // 注册指令 //TODO: 优化
-        commandManager.registerCommand(new CommandHelp());
-        commandManager.registerCommand(new CommandPing());
-        commandManager.registerCommand(new CommandCommands());
-        commandManager.registerCommand(new CommandTime());
-        commandManager.registerCommand(new CommandNullpo());
-        commandManager.registerCommand(new CommandReload());
-        commandManager.registerCommand(new CommandRestart());
-        commandManager.registerCommand(new CommandGroups());
-        commandManager.registerCommand(new CommandEcho());
-        commandManager.registerCommand(new CommandUserPermission());
-        commandManager.registerCommand(new CommandSetAdmin());
-        commandManager.registerCommand(new CommandRemoveAdmin());
-        commandManager.registerCommand(new CommandStats());
-        commandManager.registerCommand(new CommandUpdate());
+        // 注册指令  优化: 2018-05-02
+        registerAllCommands();
 
         // 连接服务器
         osuBot.startBot();
+    }
+
+    /**
+     * 自动循环commands下的所有包找指令类
+     * 然后反射实例注册
+     */
+    public static void registerAllCommands() throws IllegalAccessException, InstantiationException
+    {
+        Reflections reflections = new Reflections("cc.moecraft.irc.osubot.command.commands");
+
+        // 获取包下的所有继承Command的类
+        Set<Class<? extends Command>> commands = reflections.getSubTypesOf(Command.class);
+
+        // 循环注册
+        for (Class<? extends Command> command : commands)
+            commandManager.registerCommand(command.newInstance());
     }
 }
