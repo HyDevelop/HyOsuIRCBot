@@ -19,6 +19,7 @@ import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import io.jboot.Jboot;
 import lombok.Getter;
+import lombok.Setter;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.exception.IrcException;
@@ -67,7 +68,7 @@ public class Main {
     @Getter
     private static boolean debug; // 是否开启测试
 
-    @Getter
+    @Getter @Setter
     private static boolean enableListening = true; // 是否监听消息
 
     @Getter
