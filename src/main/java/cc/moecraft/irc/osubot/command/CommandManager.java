@@ -69,7 +69,7 @@ public class CommandManager
         {
             if (!isChannel && !user.getNick().equalsIgnoreCase(Main.getConfig().getUsername()) && !Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick().toLowerCase())) // 如果是私聊并且不是自己, 回复提示
             {
-                Main.getMessenger().respond(event, "NOT A COMMAND: 不是指令 ( 输入" + getPrefix() + "help显示帮助 )");
+                Main.getMessenger().respond(event, "NOT A COMMAND: 不是指令 ( 输入%prefix%help显示帮助 )");
             }
 
             return RunResult.NOT_A_COMMAND;
@@ -83,7 +83,7 @@ public class CommandManager
 
         if (!registeredCommands.containsKey(command))
         {
-            Main.getMessenger().respond(event, "UNKNOWN COMMAND: 未知指令 ( 输入" + prefix + "help显示帮助 )");
+            Main.getMessenger().respond(event, "UNKNOWN COMMAND: 未知指令 ( 输入%prefix%help显示帮助 )");
             return RunResult.COMMAND_NOT_FOUND;
         }
 
@@ -94,7 +94,7 @@ public class CommandManager
 
         if (!new OsuUser(user.getNick()).hasPermission(commandToRun.permissionRequired()))
         {
-            Main.getMessenger().respond(event, "NO PERM: 无法执行" + prefix + command + ", 因为缺少权限");
+            Main.getMessenger().respond(event, "NO PERM: 无法执行%prefix%" + command + ", 因为缺少权限");
             return RunResult.NO_PERMISSION;
         }
 
@@ -134,7 +134,7 @@ public class CommandManager
      * 获取指令前缀
      * @return 指令前缀
      */
-    public String getPrefix()
+    public static String getPrefix()
     {
         return Main.getConfig().getString("BotProperties.CommandPrefix");
     }
