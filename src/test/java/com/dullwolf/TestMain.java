@@ -1,8 +1,6 @@
 package com.dullwolf;
 
 
-import cc.moecraft.irc.osubot.task.MyTask;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
