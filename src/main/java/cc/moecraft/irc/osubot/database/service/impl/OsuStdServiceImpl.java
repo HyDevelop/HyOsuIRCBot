@@ -1,8 +1,8 @@
-package cc.moecraft.irc.osubot.service.impl;
+package cc.moecraft.irc.osubot.database.service.impl;
 
 import cc.moecraft.irc.osubot.dbc.MyTask;
-import cc.moecraft.irc.osubot.model.OsuStd;
-import cc.moecraft.irc.osubot.service.OsuStdService;
+import cc.moecraft.irc.osubot.database.model.OsuStd;
+import cc.moecraft.irc.osubot.database.service.OsuStdService;
 
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;

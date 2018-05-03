@@ -1,6 +1,6 @@
-package cc.moecraft.irc.osubot.model;
+package cc.moecraft.irc.osubot.database.model;
 
-import cc.moecraft.irc.osubot.model.base.BaseOsuStd;
+import cc.moecraft.irc.osubot.database.model.base.BaseOsuStd;
 import io.jboot.db.annotation.Table;
 
 /**
