@@ -2,7 +2,7 @@ package cc.moecraft.irc.osubot.service.impl;
 
 import cc.moecraft.irc.osubot.model.OsuStd;
 import cc.moecraft.irc.osubot.service.OsuStdService;
-import cc.moecraft.irc.osubot.task.MyTask;
+import cc.moecraft.irc.osubot.dbc.MyTask;
 
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;

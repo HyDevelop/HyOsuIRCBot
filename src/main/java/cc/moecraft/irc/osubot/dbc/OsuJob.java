@@ -1,11 +1,8 @@
-package cc.moecraft.irc.osubot.job;
+package cc.moecraft.irc.osubot.dbc;
 
-import cc.moecraft.irc.osubot.common.Constant;
 import cc.moecraft.irc.osubot.factory.DAOFactory;
 import cc.moecraft.irc.osubot.utils.PropertiesUtil;
 import com.jfinal.plugin.cron4j.ITask;
-import io.jboot.Jboot;
-import io.jboot.component.redis.JbootRedis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
