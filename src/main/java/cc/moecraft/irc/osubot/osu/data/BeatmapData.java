@@ -20,109 +20,109 @@ public class BeatmapData extends DataBase
 {
     @SerializedName("beatmapset_id")
     @Expose
-    public String beatmapsetId;
+    private String beatmapsetId;
 
     @SerializedName("beatmap_id")
     @Expose
-    public String beatmapId;
+    private String beatmapId;
 
     @SerializedName("approved")
     @Expose
-    public String approved;
+    private String approved;
 
     @SerializedName("total_length")
     @Expose
-    public String totalLength;
+    private String totalLength;
 
     @SerializedName("hit_length")
     @Expose
-    public String hitLength;
+    private String hitLength;
 
     @SerializedName("version")
     @Expose
-    public String version;
+    private String version;
 
     @SerializedName("file_md5")
     @Expose
-    public String fileMd5;
+    private String fileMd5;
 
     @SerializedName("diff_size")
     @Expose
-    public String diffSize;
+    private String diffSize;
 
     @SerializedName("diff_overall")
     @Expose
-    public String diffOverall;
+    private String diffOverall;
 
     @SerializedName("diff_approach")
     @Expose
-    public String diffApproach;
+    private String diffApproach;
 
     @SerializedName("diff_drain")
     @Expose
-    public String diffDrain;
+    private String diffDrain;
 
     @SerializedName("mode")
     @Expose
-    public String mode;
+    private String mode;
 
     @SerializedName("approved_date")
     @Expose
-    public String approvedDate;
+    private String approvedDate;
 
     @SerializedName("last_update")
     @Expose
-    public String lastUpdate;
+    private String lastUpdate;
 
     @SerializedName("artist")
     @Expose
-    public String artist;
+    private String artist;
 
     @SerializedName("title")
     @Expose
-    public String title;
+    private String title;
 
     @SerializedName("creator")
     @Expose
-    public String creator;
+    private String creator;
 
     @SerializedName("bpm")
     @Expose
-    public String bpm;
+    private String bpm;
 
     @SerializedName("source")
     @Expose
-    public String source;
+    private String source;
 
     @SerializedName("tags")
     @Expose
-    public String tags;
+    private String tags;
 
     @SerializedName("genre_id")
     @Expose
-    public String genreId;
+    private String genreId;
 
     @SerializedName("language_id")
     @Expose
-    public String languageId;
+    private String languageId;
 
     @SerializedName("favourite_count")
     @Expose
-    public String favouriteCount;
+    private String favouriteCount;
 
     @SerializedName("playcount")
     @Expose
-    public String playcount;
+    private String playcount;
 
     @SerializedName("passcount")
     @Expose
-    public String passCount;
+    private String passCount;
 
     @SerializedName("max_combo")
     @Expose
-    public String maxCombo;
+    private String maxCombo;
 
     @SerializedName("difficultyrating")
     @Expose
-    public String difficultyRating;
+    private String difficultyRating;
 }
