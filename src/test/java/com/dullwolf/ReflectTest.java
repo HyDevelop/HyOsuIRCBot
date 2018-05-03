@@ -21,7 +21,7 @@ public class ReflectTest
 
     public static void main(String[] args) throws IllegalAccessException, InvocationTargetException
     {
-        UserData userData = new UserData(1,"test",1,1,1,1,1,1,1,1.5d,1.7d,1.8d,1,1,1,1,1,"cn",1);
+        UserData userData = new UserData(1,"test",1,1,1,1,1,1,1,1.5d,1.7d,1.8d,1,1,1,1,1,"cn",1, null);
 
         Field[] fields = UserData.class.getDeclaredFields();
 
