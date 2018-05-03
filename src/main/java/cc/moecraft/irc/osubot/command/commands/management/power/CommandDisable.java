@@ -5,7 +5,6 @@ import cc.moecraft.irc.osubot.command.Command;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
-import redis.clients.jedis.Commands;
 
 import java.util.ArrayList;
 

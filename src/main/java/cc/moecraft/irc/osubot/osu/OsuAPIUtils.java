@@ -10,17 +10,17 @@ import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.irc.osubot.utils.JsonUtils;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
 import cc.moecraft.irc.osubot.utils.StringUtils;
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import lombok.AllArgsConstructor;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/23 创建!
