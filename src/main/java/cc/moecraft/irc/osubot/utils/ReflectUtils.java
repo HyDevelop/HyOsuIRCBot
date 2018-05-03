@@ -1,6 +1,8 @@
 package cc.moecraft.irc.osubot.utils;
 
+import cc.moecraft.irc.osubot.osu.parameters.tags.HttpParameter;
 import com.google.gson.JsonPrimitive;
+import com.google.gson.annotations.SerializedName;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -212,50 +214,24 @@ public class ReflectUtils
      *
      * @param object 对象
      * @param format 格式
+     * @param positiveSigns 要不要显示+号
      * @return 替换后的字符串
      */
-    public static String replaceReflectVariables(Object object, String format)
+    public static String replaceReflectVariables(Object object, String format, boolean positiveSigns, boolean useGsonNames)
     {
         for (Field field : object.getClass().getDeclaredFields())
         {
-            String variableName = String.format("%%%s%%", field.getName());
+            String fieldName;
 
-            field.setAccessible(true);
-
-            try
+            if (useGsonNames)
             {
-                format = format.replace(variableName, field.get(object).toString());
+                if (field.isAnnotationPresent(SerializedName.class))
+                    fieldName = field.getAnnotation(SerializedName.class).value();
+                else continue;
             }
-            catch (IllegalAccessException e)
-            {
-                e.printStackTrace();
-            }
-        }
+            else fieldName = field.getName();
 
-        return format;
-    }
-
-    /**
-     * 反射替换变量, 带+号
-     *
-     * 例子:
-     *   输入:
-     *   - object: [username = "Hykilpikonna", user_id = "666666", pp_raw = "99999999"] ( 别想了梦里什么都有
-     *   - format = "[%username%(%user_id%)]: %pp_raw%"
-     *   输出:
-     *   "[Hykilpikonna(+666666)]: +99999999"
-     *
-     *   练手 +1
-     *
-     * @param object 对象
-     * @param format 格式
-     * @return 替换后的字符串
-     */
-    public static String replaceReflectVariablesWithPositiveAndNegativeSigns(Object object, String format)
-    {
-        for (Field field : object.getClass().getDeclaredFields())
-        {
-            String variableName = String.format("%%%s%%", field.getName());
+            String variableName = String.format("%%%s%%", fieldName);
 
             field.setAccessible(true);
 
@@ -263,15 +239,12 @@ public class ReflectUtils
             {
                 String value = field.get(object).toString();
 
-                try
+                if (positiveSigns)
                 {
-                    double numericValue = Double.parseDouble(value);
-
-                    if (numericValue >= 0D) value = "+" + value;
-                }
-                catch (Exception ignored)
-                {
-                    // 不是数字
+                    try {
+                        double numericValue = Double.parseDouble(value);
+                        if (numericValue >= 0D) value = "+" + value;
+                    } catch (Exception ignored) { } // 不是数字
                 }
 
                 format = format.replace(variableName, value);
