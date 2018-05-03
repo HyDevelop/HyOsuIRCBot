@@ -1,6 +1,8 @@
 package cc.moecraft.irc.osubot.osu;
 
 import cc.moecraft.irc.osubot.osu.data.DataBase;
+import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
+import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.osu.parameters.ParametersBase;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
 import cc.moecraft.irc.osubot.osu.parameters.tags.HttpParameter;
@@ -14,6 +16,7 @@ import lombok.AllArgsConstructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,9 +44,13 @@ public class OsuAPIUtils
      */
     public boolean isUserExisting(String username) throws IllegalAccessException
     {
-        JsonArray array = getJsonElementFromParameter(UserParameters.builder().u(username).build()).getAsJsonArray();
-
-        return !(array.size() == 0);
+        try {
+            JsonArray array = getJsonElementFromParameter(UserParameters.builder().u(username).build()).getAsJsonArray();
+            return !(array.size() == 0);
+        } catch (MalformedURLException | RequiredParamIsNullException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
@@ -52,21 +59,18 @@ public class OsuAPIUtils
      * @return 数据类对象
      * @throws IllegalAccessException 没有权限访问反射到的变量
      */
-    public ArrayList<DataBase> get(ParametersBase parameter) throws IllegalAccessException
+    public ArrayList<DataBase> get(ParametersBase parameter) throws IllegalAccessException, JsonEmptyException, MalformedURLException, RequiredParamIsNullException
     {
         JsonElement jsonElement = getJsonElementFromParameter(parameter);
-        assert jsonElement != null;
+
+        if (jsonElement.isJsonNull()) throw new JsonEmptyException();
 
         JsonArray jsonArray;
 
         // 在Osu官方API获取的话可能获取到Array
         if (jsonElement.isJsonArray()) jsonArray = jsonElement.getAsJsonArray();
         else if (jsonElement.isJsonObject()) jsonArray = JsonUtils.toJsonArray(jsonElement);
-        else
-        {
-            // 既不是JsonArray也不是JsonObject的情况
-            return null;
-        }
+        else throw new JsonEmptyException(); // 既不是JsonArray也不是JsonObject的情况
 
         ArrayList<DataBase> data = new ArrayList<>();
 
@@ -80,74 +84,13 @@ public class OsuAPIUtils
     }
 
     /**
-     * 赋值助手 ( 考虑到可能需要递归就分开写了 )
-     *
-     * @param parameter HTTP参数
-     * @param dataBaseList 数据类存储对象列表
-     * @param jsonArray Json对象列表
-     * @throws IllegalAccessException 没有权限访问反射到的变量
-     * @throws InstantiationException 反射创建实例失败
-     * @throws InvocationTargetException 反射方法激活失败
-     */
-    @Deprecated
-    private void assignHelper(ParametersBase parameter, ArrayList<DataBase> dataBaseList, JsonArray jsonArray) throws IllegalAccessException, InstantiationException, InvocationTargetException
-    {
-        for (int i = 0; i < jsonArray.size(); i++)
-        {
-            JsonObject element = jsonArray.get(i).getAsJsonObject(); // TODO: 如果两个Array套在一起就会出错
-
-            // 反射添加新的实例
-            dataBaseList.add((DataBase) parameter.dataStorageClass().newInstance());
-            DataBase data = dataBaseList.get(i);
-
-            // 反射赋值
-            assignHelper2(data, element);
-        }
-    }
-
-    /**
-     * 赋值递归助手 ( 考虑到可能需要递归就分开写了 )
-     *
-     * @param object 赋值对象
-     * @param element JSON对象
-     * @throws IllegalAccessException 没有权限访问反射到的变量
-     * @throws InvocationTargetException 反射方法激活失败
-     */
-    @Deprecated
-    public void assignHelper2(Object object, JsonObject element) throws InvocationTargetException, IllegalAccessException
-    {
-        for (Field field : object.getClass().getDeclaredFields())
-        {
-            if (element.keySet().contains(field.getName()))
-            {
-                // 赋值 ( 类型转换可能出错
-                field.setAccessible(true);
-
-                // 如果是基础类, 反射获取getAs方法转换
-                if (ReflectUtils.isPrimitive(field.getType()))
-                {
-                    JsonPrimitive primitive = element.get(field.getName()).getAsJsonPrimitive();
-
-                    field.set(object, Objects.requireNonNull(ReflectUtils.getJsonPrimitiveGetAsMethod(field, primitive)).invoke(primitive));
-                }
-                else
-                {
-                    // 不是基础类, 递归
-                    System.out.println("递归: " + field.getType().getSimpleName());
-                    assignHelper2(field.get(object), (JsonObject) element.get(field.getName()));
-                }
-            }
-        }
-    }
-
-    /**
      * 用HTTP参数获取JSONObject
      *
      * @param parameter HTTP参数
      * @return JSON对象
      * @throws IllegalAccessException 反射失败
      */
-    public JsonElement getJsonElementFromParameter(ParametersBase parameter) throws IllegalAccessException
+    public JsonElement getJsonElementFromParameter(ParametersBase parameter) throws IllegalAccessException, MalformedURLException, RequiredParamIsNullException
     {
         // 获取URL
         StringBuilder urlBuilder = new StringBuilder();
@@ -175,7 +118,7 @@ public class OsuAPIUtils
                 else if (required)
                 {
                     // 必要参数值是null的情况
-                    return null;
+                    throw new RequiredParamIsNullException();
                 }
             }
         }
