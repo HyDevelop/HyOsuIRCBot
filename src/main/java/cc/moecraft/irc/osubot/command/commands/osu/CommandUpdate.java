@@ -60,7 +60,7 @@ public class CommandUpdate extends Command
             ReflectUtils.roundAllNumbers(osuTrackData, 1);
 
             // 新玩家 TODO： 检测数据库， 而不是OsuTrack服务器的数据库来判断是不是新玩家
-            if (osuTrackData.isFirst() && usernameAndMode.isSelf())
+            if (osuTrackData.getFirst() && usernameAndMode.isSelf())
             {
                 Main.getMessenger().respond(event, "欢迎新大佬使用HyIRC机器人! 这个指令是Ameo的[https://ameobea.me/osutrack/ Osu!Track]统计功能!");
                 Main.getMessenger().respond(event, "这个指令的数值代表着从上次输入指令到这次输入指令之间的进步!");
@@ -70,7 +70,10 @@ public class CommandUpdate extends Command
             // 获取Mode名字
             String modeName = OsuAPIUtils.getModeNameWithMode(usernameAndMode.getMode());
 
-            Main.getMessenger().respond(event, getPrefix(osuTrackData) + ReflectUtils.replaceReflectVariablesWithPositiveAndNegativeSigns(osuTrackData, "[%m% - [%link% %username%]]: %pp_raw% pp | %level% lvl | %pp_rank% rank | %accuracy%% acc. | %playcount% 次游戏 ").replace("%m%", modeName).replace("%link%", OsuUser.getOsuTrackLink(usernameAndMode)));
+            Main.getMessenger().respond(event, getPrefix(osuTrackData) + ReflectUtils.replaceReflectVariables(osuTrackData,
+                    "[%m% - [%link% %username%]]: %pp_raw% pp | %level% lvl | %pp_rank% rank | %accuracy%% acc. | %playcount% 次游戏 ",
+                    true, true
+            ).replace("%m%", modeName).replace("%link%", OsuUser.getOsuTrackLink(usernameAndMode)));
         }
         catch (IllegalAccessException | InstantiationException | InvocationTargetException e)
         {
@@ -100,15 +103,15 @@ public class CommandUpdate extends Command
      */
     public String getPrefix(OsuTrackData osuTrackData)
     {
-        if (osuTrackData.getPp_rank() <= 0 && osuTrackData.getPp_raw() <= 0)
+        if (osuTrackData.getPpRank() <= 0 && osuTrackData.getPpRaw() <= 0)
         {
             return "多玩玩再来看吧! ";
         }
-        else if (osuTrackData.getPp_rank() <= 400 && osuTrackData.getPp_raw() <= 20)
+        else if (osuTrackData.getPpRank() <= 400 && osuTrackData.getPpRaw() <= 20)
         {
             return "进步了.. 加油! ";
         }
-        else if (osuTrackData.getPp_rank() > 400 && osuTrackData.getPp_raw() > 20)
+        else if (osuTrackData.getPpRank() > 400 && osuTrackData.getPpRaw() > 20)
         {
             return "w.. 大..大佬! ";
         }

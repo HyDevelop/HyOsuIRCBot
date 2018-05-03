@@ -8,14 +8,12 @@ import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.irc.osubot.utils.JsonUtils;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
 import cc.moecraft.irc.osubot.utils.StringUtils;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
+import com.google.gson.*;
 import lombok.AllArgsConstructor;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,10 +51,8 @@ public class OsuAPIUtils
      * @param parameter HTTP参数
      * @return 数据类对象
      * @throws IllegalAccessException 没有权限访问反射到的变量
-     * @throws InstantiationException 反射创建实例失败
-     * @throws InvocationTargetException 反射方法激活失败
      */
-    public ArrayList<DataBase> get(ParametersBase parameter) throws IllegalAccessException, InstantiationException, InvocationTargetException
+    public ArrayList<DataBase> get(ParametersBase parameter) throws IllegalAccessException
     {
         JsonElement jsonElement = getJsonElementFromParameter(parameter);
         assert jsonElement != null;
@@ -75,7 +71,10 @@ public class OsuAPIUtils
         ArrayList<DataBase> data = new ArrayList<>();
 
         // 赋值
-        assignHelper(parameter, data, jsonArray);
+        for (JsonElement element : jsonArray)
+        {
+            data.add(new Gson().fromJson(element, (Type) parameter.dataStorageClass()));
+        }
 
         return data;
     }
@@ -90,6 +89,7 @@ public class OsuAPIUtils
      * @throws InstantiationException 反射创建实例失败
      * @throws InvocationTargetException 反射方法激活失败
      */
+    @Deprecated
     private void assignHelper(ParametersBase parameter, ArrayList<DataBase> dataBaseList, JsonArray jsonArray) throws IllegalAccessException, InstantiationException, InvocationTargetException
     {
         for (int i = 0; i < jsonArray.size(); i++)
@@ -111,9 +111,9 @@ public class OsuAPIUtils
      * @param object 赋值对象
      * @param element JSON对象
      * @throws IllegalAccessException 没有权限访问反射到的变量
-     * @throws InstantiationException 反射创建实例失败
      * @throws InvocationTargetException 反射方法激活失败
      */
+    @Deprecated
     public void assignHelper2(Object object, JsonObject element) throws InvocationTargetException, IllegalAccessException
     {
         for (Field field : object.getClass().getDeclaredFields())
@@ -136,11 +136,6 @@ public class OsuAPIUtils
                     System.out.println("递归: " + field.getType().getSimpleName());
                     assignHelper2(field.get(object), (JsonObject) element.get(field.getName()));
                 }
-            }
-            else
-            {
-                // 数据类声明的变量名和JSON类不匹配的可能性
-                // 注入变量名...? ( 不知道能不能实现
             }
         }
     }

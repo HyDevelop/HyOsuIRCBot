@@ -28,6 +28,8 @@ public class ReflectRoundingTest
 
         ReflectUtils.roundAllNumbers(userData, 1);
 
-        logger.log(ReflectUtils.replaceReflectVariables(userData, "[%username% (%user_id%)]: %pp_raw%pp | lv.%level% | %accuracy%acc. | %count_rank_ssh%ssh | %count_rank_ss%ss |  %count_rank_sh%sh |  %count_rank_s%s |  %count_rank_a%a "));
+        logger.log(ReflectUtils.replaceReflectVariables(userData,
+                "[%username% (%user_id%)]: %pp_raw%pp | lv.%level% | %accuracy%acc. | %count_rank_ssh%ssh | %count_rank_ss%ss |  %count_rank_sh%sh |  %count_rank_s%s |  %count_rank_a%a ",
+                false, true));
     }
 }

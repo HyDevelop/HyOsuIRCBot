@@ -60,13 +60,16 @@ public class CommandStats extends Command
             ReflectUtils.roundAllNumbers(userData, 1);
 
             // SS和SSH加起来, S和SH加起来
-            userData.setCount_rank_s(userData.getCount_rank_s() + userData.getCount_rank_sh());
-            userData.setCount_rank_ss(userData.getCount_rank_ss() + userData.getCount_rank_ssh());
+            userData.setCountRankS(userData.getCountRankS() + userData.getCountRankSh());
+            userData.setCountRankSs(userData.getCountRankSs() + userData.getCountRankSsh());
 
             // 获取Mode名字
             String modeName = OsuAPIUtils.getModeNameWithMode(usernameAndMode.getMode());
 
-            Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(userData, "[%mode% - %username% (%user_id%)]: %pp_raw%pp | lv.%level% | #%pp_rank% | %accuracy%% acc. | %count_rank_ss%ss | %count_rank_s%s |  %count_rank_a%a ").replace("%mode%", modeName));
+            Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(userData,
+                    "[%mode% - %username% (%user_id%)]: %pp_raw%pp | lv.%level% | #%pp_rank% | %accuracy%% acc. | %count_rank_ss%ss | %count_rank_s%s |  %count_rank_a%a ",
+                    false, true
+            ).replace("%mode%", modeName));
         }
         catch (IllegalAccessException | InstantiationException | InvocationTargetException e)
         {
