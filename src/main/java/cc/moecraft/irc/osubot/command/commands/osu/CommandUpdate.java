@@ -5,12 +5,15 @@ import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.OsuUser;
 import cc.moecraft.irc.osubot.osu.data.OsuTrackData;
+import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
+import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import static cc.moecraft.irc.osubot.utils.ArrayUtils.getUsernameAndModeWithArgs;
@@ -74,11 +77,12 @@ public class CommandUpdate extends Command
                     "[%m% - [%link% %username%]]: %pp_raw% pp | %level% lvl | %pp_rank% rank | %accuracy%% acc. | %playcount% 次游戏 ",
                     true, true
             ).replace("%m%", modeName).replace("%link%", OsuUser.getOsuTrackLink(usernameAndMode)));
-        }
-        catch (IllegalAccessException | InstantiationException | InvocationTargetException e)
-        {
+        } catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e) {
             Main.getMessenger().respond(event, "未知后台错误, 请联系me@hydev.org");
-            // TODO: 报错收集系统 ( 不知道可不可能实现
+            e.printStackTrace();
+        } catch (JsonEmptyException e) {
+            Main.getMessenger().respond(event, "未找到用户: " + usernameAndMode.getUsername() + ", 如果确定该用户存在, 请联系me@hydev.org");
+            // TODO: 报错收集系统
             e.printStackTrace();
         }
     }
