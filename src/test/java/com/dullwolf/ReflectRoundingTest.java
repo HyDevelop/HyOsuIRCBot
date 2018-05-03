@@ -10,7 +10,6 @@ import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.irc.osubot.utils.PropertiesUtil;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 
 /**

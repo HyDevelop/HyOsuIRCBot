@@ -1,4 +1,4 @@
-package cc.moecraft.irc.osubot.task;
+package cc.moecraft.irc.osubot.dbc;
 
 import cc.moecraft.irc.osubot.factory.DAOFactory;
 import cc.moecraft.irc.osubot.model.OsuStd;

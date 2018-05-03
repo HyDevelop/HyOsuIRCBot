@@ -2,16 +2,6 @@ package cc.moecraft.irc.osubot;
 
 import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.command.CommandManager;
-import cc.moecraft.irc.osubot.command.commands.CommandCommands;
-import cc.moecraft.irc.osubot.command.commands.CommandHelp;
-import cc.moecraft.irc.osubot.command.commands.fun.CommandEcho;
-import cc.moecraft.irc.osubot.command.commands.fun.CommandNullpo;
-import cc.moecraft.irc.osubot.command.commands.fun.CommandPing;
-import cc.moecraft.irc.osubot.command.commands.fun.CommandTime;
-import cc.moecraft.irc.osubot.command.commands.management.*;
-import cc.moecraft.irc.osubot.command.commands.management.power.CommandRestart;
-import cc.moecraft.irc.osubot.command.commands.osu.CommandStats;
-import cc.moecraft.irc.osubot.command.commands.osu.CommandUpdate;
 import cc.moecraft.irc.osubot.language.Messenger;
 import cc.moecraft.irc.osubot.listener.CommandListener;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
