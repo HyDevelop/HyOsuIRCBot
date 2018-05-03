@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.net.MalformedURLException;
 
 /**
@@ -106,12 +107,14 @@ public class OsuUser extends Permissible
     }
 
     @Data
-    @RequiredArgsConstructor
     public static class UsernameAndMode
     {
-        @NonNull
+        public UsernameAndMode(int mode, String username)
+        {
+            this.mode = mode; this.username = username;
+        }
+
         private int mode;
-        @NonNull
         private String username;
         private boolean self = false;
     }

@@ -1,4 +1,4 @@
-package cc.moecraft.irc.osubot.model.base;
+package cc.moecraft.irc.osubot.database.model.base;
 
 import com.jfinal.plugin.activerecord.IBean;
 import io.jboot.db.model.JbootModel;
