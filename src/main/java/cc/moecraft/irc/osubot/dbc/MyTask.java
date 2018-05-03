@@ -1,7 +1,7 @@
 package cc.moecraft.irc.osubot.dbc;
 
-import cc.moecraft.irc.osubot.factory.DAOFactory;
-import cc.moecraft.irc.osubot.model.OsuStd;
+import cc.moecraft.irc.osubot.database.factory.DAOFactory;
+import cc.moecraft.irc.osubot.database.model.OsuStd;
 import cc.moecraft.irc.osubot.osu.Api;
 import cc.moecraft.irc.osubot.utils.JsonUtils;
 import cc.moecraft.irc.osubot.utils.PropertiesUtil;

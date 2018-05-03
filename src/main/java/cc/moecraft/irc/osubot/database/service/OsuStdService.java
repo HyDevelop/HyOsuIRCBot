@@ -1,6 +1,6 @@
-package cc.moecraft.irc.osubot.service;
+package cc.moecraft.irc.osubot.database.service;
 
-import cc.moecraft.irc.osubot.model.OsuStd;
+import cc.moecraft.irc.osubot.database.model.OsuStd;
 
 import java.util.List;
 

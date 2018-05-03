@@ -1,6 +1,6 @@
 package cc.moecraft.irc.osubot.dbc;
 
-import cc.moecraft.irc.osubot.factory.DAOFactory;
+import cc.moecraft.irc.osubot.database.factory.DAOFactory;
 import cc.moecraft.irc.osubot.utils.PropertiesUtil;
 import com.jfinal.plugin.cron4j.ITask;
 import org.slf4j.Logger;

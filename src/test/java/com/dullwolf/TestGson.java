@@ -1,7 +1,7 @@
 package com.dullwolf;
 
 
-import cc.moecraft.irc.osubot.model.OsuStd;
+import cc.moecraft.irc.osubot.database.model.OsuStd;
 import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
 import com.google.gson.Gson;
