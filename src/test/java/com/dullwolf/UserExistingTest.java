@@ -3,6 +3,8 @@ package com.dullwolf;
 import cc.moecraft.irc.osubot.DebugLogger;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.data.UserData;
+import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
+import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.irc.osubot.utils.PropertiesUtil;
@@ -45,7 +47,12 @@ public class UserExistingTest
 
         logger.log("用户存在: " + utils.isUserExisting(username));
 
-        UserData userData = (UserData) utils.get(UserParameters.builder().u(username).build()).get(0);
+        UserData userData = null;
+        try {
+            userData = (UserData) utils.get(UserParameters.builder().u(username).build()).get(0);
+        } catch (JsonEmptyException | RequiredParamIsNullException e) {
+            e.printStackTrace();
+        }
 
         // 输出所有值
         logger.debug("");

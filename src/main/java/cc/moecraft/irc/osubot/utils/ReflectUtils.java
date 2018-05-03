@@ -1,12 +1,18 @@
 package cc.moecraft.irc.osubot.utils;
 
+import cc.moecraft.irc.osubot.osu.data.DataBase;
+import cc.moecraft.irc.osubot.osu.parameters.ParametersBase;
 import cc.moecraft.irc.osubot.osu.parameters.tags.HttpParameter;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.annotations.SerializedName;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/24 创建!
@@ -277,6 +283,67 @@ public class ReflectUtils
             if (isDouble(field.getType()))
             {
                 field.set(object, Math.round((double) field.get(object) * Math.pow(10d, decimals)) / Math.pow(10d, decimals));
+            }
+        }
+    }
+
+    /**
+     * 赋值助手 ( 考虑到可能需要递归就分开写了 )
+     *
+     * @param parameter HTTP参数
+     * @param dataBaseList 数据类存储对象列表
+     * @param jsonArray Json对象列表
+     * @throws IllegalAccessException 没有权限访问反射到的变量
+     * @throws InstantiationException 反射创建实例失败
+     * @throws InvocationTargetException 反射方法激活失败
+     */
+    @Deprecated
+    public static void assignHelper(ParametersBase parameter, ArrayList<DataBase> dataBaseList, JsonArray jsonArray) throws IllegalAccessException, InstantiationException, InvocationTargetException
+    {
+        for (int i = 0; i < jsonArray.size(); i++)
+        {
+            JsonObject element = jsonArray.get(i).getAsJsonObject(); // TODO: 如果两个Array套在一起就会出错
+
+            // 反射添加新的实例
+            dataBaseList.add((DataBase) parameter.dataStorageClass().newInstance());
+            DataBase data = dataBaseList.get(i);
+
+            // 反射赋值
+            assignHelper2(data, element);
+        }
+    }
+
+    /**
+     * 赋值递归助手 ( 考虑到可能需要递归就分开写了 )
+     *
+     * @param object 赋值对象
+     * @param element JSON对象
+     * @throws IllegalAccessException 没有权限访问反射到的变量
+     * @throws InvocationTargetException 反射方法激活失败
+     */
+    @Deprecated
+    public static void assignHelper2(Object object, JsonObject element) throws InvocationTargetException, IllegalAccessException
+    {
+        for (Field field : object.getClass().getDeclaredFields())
+        {
+            if (element.keySet().contains(field.getName()))
+            {
+                // 赋值 ( 类型转换可能出错
+                field.setAccessible(true);
+
+                // 如果是基础类, 反射获取getAs方法转换
+                if (ReflectUtils.isPrimitive(field.getType()))
+                {
+                    JsonPrimitive primitive = element.get(field.getName()).getAsJsonPrimitive();
+
+                    field.set(object, Objects.requireNonNull(ReflectUtils.getJsonPrimitiveGetAsMethod(field, primitive)).invoke(primitive));
+                }
+                else
+                {
+                    // 不是基础类, 递归
+                    System.out.println("递归: " + field.getType().getSimpleName());
+                    assignHelper2(field.get(object), (JsonObject) element.get(field.getName()));
+                }
             }
         }
     }

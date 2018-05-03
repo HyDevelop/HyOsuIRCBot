@@ -25,19 +25,9 @@ public class DownloadUtils
     @Getter @Setter
     private int timeout;
 
-    public JsonElement getJsonElementFromURL(String url)
+    public JsonElement getJsonElementFromURL(String url) throws MalformedURLException
     {
         return getJsonElementFromURL(url, timeout);
-    }
-
-    public String downloadAsString(URL url)
-    {
-        return downloadAsString(url, timeout);
-    }
-
-    public byte[] download(URL url)
-    {
-        return download(url, timeout);
     }
 
     /**
@@ -45,18 +35,16 @@ public class DownloadUtils
      *
      * @param url URL
      * @return JSON对象
+     * @exception MalformedURLException URL解析失败
      */
-    public static JsonElement getJsonElementFromURL(String url, int timeout)
+    public static JsonElement getJsonElementFromURL(String url, int timeout) throws MalformedURLException
     {
-        try
-        {
-            return JsonUtils.parseJsonElement(downloadAsString(new URL(url), timeout));
-        }
-        catch (MalformedURLException e)
-        {
-            e.printStackTrace();
-            return null;
-        }
+        return JsonUtils.parseJsonElement(downloadAsString(new URL(url), timeout));
+    }
+
+    public String downloadAsString(URL url)
+    {
+        return downloadAsString(url, timeout);
     }
 
     /**
@@ -68,7 +56,12 @@ public class DownloadUtils
     public static String downloadAsString(URL url, int timeout)
     {
         return Jboot.httpPost(url.toString());
-        //return new String(Objects.requireNonNull(download(url, timeout)));
+    }
+
+    @Deprecated
+    public byte[] download(URL url)
+    {
+        return download(url, timeout);
     }
 
     /**
@@ -77,10 +70,10 @@ public class DownloadUtils
      * @param url 下载地址
      * @return 下载到的内容
      */
+    @Deprecated
     public static byte[] download(URL url, int timeout)
     {
-        try
-        {
+        try {
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setConnectTimeout(timeout);
             httpURLConnection.setReadTimeout(timeout);
@@ -92,9 +85,7 @@ public class DownloadUtils
             inputStream.close();
 
             return data;
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
@@ -109,16 +100,14 @@ public class DownloadUtils
      * @return 读取为字节数组
      * @throws IOException 抛出异常
      */
+    @Deprecated
     public static byte[] readInputStream(InputStream inputStream) throws IOException
     {
         byte[] buffer = new byte[1024];
         int len;
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        while ((len = inputStream.read(buffer)) != -1)
-        {
-            outputStream.write(buffer, 0, len);
-        }
+        while ((len = inputStream.read(buffer)) != -1) outputStream.write(buffer, 0, len);
         outputStream.close();
 
         return outputStream.toByteArray();

@@ -4,6 +4,8 @@ import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.management.Permissible;
 import cc.moecraft.irc.osubot.osu.data.OsuTrackData;
 import cc.moecraft.irc.osubot.osu.data.UserData;
+import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
+import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.osu.parameters.OsuTrackParameters;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
 import lombok.Data;
@@ -12,6 +14,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/22 创建!
@@ -39,17 +42,9 @@ public class OsuUser extends Permissible
      *
      * @return 玩家数据
      */
-    public UserData getData()
+    public UserData getData() throws JsonEmptyException, RequiredParamIsNullException, MalformedURLException, IllegalAccessException
     {
-        try
-        {
-            return getData(new UsernameAndMode(0, username));
-        }
-        catch (IllegalAccessException | InstantiationException | InvocationTargetException e)
-        {
-            e.printStackTrace();
-            return null;
-        }
+        return getData(new UsernameAndMode(0, username));
     }
 
     /**
@@ -58,7 +53,7 @@ public class OsuUser extends Permissible
      * @param usernameAndMode 用户名和模式
      * @return 玩家数据
      */
-    public static UserData getData(UsernameAndMode usernameAndMode) throws IllegalAccessException, InvocationTargetException, InstantiationException
+    public static UserData getData(UsernameAndMode usernameAndMode) throws IllegalAccessException, RequiredParamIsNullException, MalformedURLException, JsonEmptyException
     {
         return (UserData) Main.getOsuAPIUtils().get(UserParameters.builder().u(usernameAndMode.getUsername()).type("string").m("" + usernameAndMode.getMode()).build()).get(0);
     }
@@ -69,7 +64,7 @@ public class OsuUser extends Permissible
      * @param usernameAndMode 用户名和模式
      * @return 玩家数据
      */
-    public static OsuTrackData getOsuTrackData(UsernameAndMode usernameAndMode) throws IllegalAccessException, InvocationTargetException, InstantiationException
+    public static OsuTrackData getOsuTrackData(UsernameAndMode usernameAndMode) throws IllegalAccessException, RequiredParamIsNullException, MalformedURLException, JsonEmptyException
     {
         return (OsuTrackData) Main.getOsuAPIUtils().get(OsuTrackParameters.builder().user(usernameAndMode.getUsername()).mode("" + usernameAndMode.getMode()).build()).get(0);
     }
@@ -120,18 +115,5 @@ public class OsuUser extends Permissible
         @NonNull
         private String username;
         private boolean self = false;
-    }
-
-    /**
-     * 存放数据的位置 ( 
-     * OSU:        Osu服务器上最新的数据
-     * TODO: DATABASE:   数据库里的数据, 不是最新
-     * AMEO_TRACK: Ameo写的Osu!Track数据统计的数据
-     */
-    public enum StorageLocation
-    {
-        OSU,
-        // DATABASE,
-        AMEO_TRACK
     }
 }

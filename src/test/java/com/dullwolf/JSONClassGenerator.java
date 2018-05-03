@@ -3,6 +3,8 @@ package com.dullwolf;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import com.google.gson.JsonElement;
 
+import java.net.MalformedURLException;
+
 /**
  * 此类由 Hykilpikonna 在 2018/04/24 创建!
  * Created by Hykilpikonna on 2018/04/24!
@@ -11,8 +13,7 @@ import com.google.gson.JsonElement;
  */
 public class JSONClassGenerator
 {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws MalformedURLException {
         StringBuilder builder = new StringBuilder();
 
         builder.append("" +
