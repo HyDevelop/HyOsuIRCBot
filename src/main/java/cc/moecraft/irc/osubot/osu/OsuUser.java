@@ -13,7 +13,6 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 
 /**

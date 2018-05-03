@@ -2,7 +2,6 @@ package cc.moecraft.irc.osubot.utils;
 
 import cc.moecraft.irc.osubot.osu.data.DataBase;
 import cc.moecraft.irc.osubot.osu.parameters.ParametersBase;
-import cc.moecraft.irc.osubot.osu.parameters.tags.HttpParameter;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
