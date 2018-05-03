@@ -3,12 +3,15 @@ package com.dullwolf;
 import cc.moecraft.irc.osubot.DebugLogger;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.data.DataBase;
+import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
+import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.irc.osubot.utils.PropertiesUtil;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
 
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/27 创建!
@@ -22,8 +25,7 @@ public class ReflectRoundingTest
 {
     private static DebugLogger logger = new DebugLogger("ReflectRoundingTest", true);
 
-    public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, InstantiationException
-    {
+    public static void main(String[] args) throws IllegalAccessException, RequiredParamIsNullException, MalformedURLException, JsonEmptyException {
         DataBase userData = new OsuAPIUtils(PropertiesUtil.readKey("osu_key"), new DownloadUtils(5000)).get(UserParameters.builder().u("Hykilpikonna").build()).get(0);
 
         ReflectUtils.roundAllNumbers(userData, 1);
