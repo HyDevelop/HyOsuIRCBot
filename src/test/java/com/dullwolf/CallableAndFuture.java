@@ -1,9 +1,6 @@
 package com.dullwolf;
 
 
-import cc.moecraft.irc.osubot.common.Constant;
-import cc.moecraft.irc.osubot.factory.DAOFactory;
-import cc.moecraft.irc.osubot.model.OsuStd;
 import cc.moecraft.irc.osubot.osu.Api;
 import cc.moecraft.irc.osubot.utils.JsonUtils;
 import cc.moecraft.irc.osubot.utils.PropertiesUtil;
