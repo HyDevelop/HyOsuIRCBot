@@ -113,7 +113,7 @@ public class PermissionConfig extends Config
      * @param username 用户
      * @return 权限组
      */
-    public ArrayList<PermissionGroup> getUserPermissionGroups(String username) // TODO: 换成用Osu的UserID
+    public ArrayList<PermissionGroup> getUserPermissionGroups(String username)
     {
         String currentPrefix = USERS_PREFIX + username;
 
@@ -130,7 +130,7 @@ public class PermissionConfig extends Config
      * 保存用户权限组
      * @param user 用户
      */
-    public void setUserPermissionGroups(OsuUser user) // TODO: 换成用Osu的UserID
+    public void setUserPermissionGroups(OsuUser user)
     {
         String currentPrefix = USERS_PREFIX + user.getUsername();
 

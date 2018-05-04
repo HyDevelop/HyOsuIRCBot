@@ -62,7 +62,7 @@ public class StringUtils
     }
 
     /**
-     * 去掉字符串里除了数字/小数点外的字符 // TODO: 需要优化
+     * 去掉字符串里除了数字/小数点外的字符
      *
      * @param string 源
      * @return 处理后

@@ -711,8 +711,7 @@ public class Configuration {
 			getAutoJoinChannels().put(channel, key);
 			return this;
 		}
-		
-		//TODO: Temporary backwards compatibility
+
 		private void checkSetServerBackwardsCompatible() {
 			if(servers.size() >= 2)
 				throw new RuntimeException("Cannot combine deprecated setServer and addServer");
