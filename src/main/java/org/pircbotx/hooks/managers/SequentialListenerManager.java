@@ -234,7 +234,6 @@ public class SequentialListenerManager extends AbstractListenerManager {
 		}
 
 		public void close() throws IOException {
-			//TODO: Blocking close or listener tracking
 			if (executor instanceof ExecutorService)
 				((ExecutorService) executor).shutdown();
 		}
@@ -258,7 +257,6 @@ public class SequentialListenerManager extends AbstractListenerManager {
 
 	@Override
 	public void shutdown(PircBotX bot) {
-		//TODO: Active listener tracking
 		if (executorPool instanceof ExecutorService)
 			((ExecutorService) executorPool).shutdown();
 	}

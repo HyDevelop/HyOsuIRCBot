@@ -69,8 +69,6 @@ public class BotConfig extends Config
     }
 
     /**
-     * TODO: 写用户系统的权限组系统替代这个管理员系统
-     *
      * 获取配置中的管理员用户名列表
      * @return 管理员用户名列表
      */
