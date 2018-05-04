@@ -6,6 +6,7 @@ import cc.moecraft.irc.osubot.language.Messenger;
 import cc.moecraft.irc.osubot.listener.CommandListener;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
+import cc.moecraft.irc.osubot.osu.OsuAPIWrapper;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import io.jboot.Jboot;
 import lombok.Getter;
@@ -56,6 +57,9 @@ public class Main {
     private static OsuAPIUtils osuAPIUtils; // Osu官方API数据获取器
 
     @Getter
+    private static OsuAPIWrapper wrapper; // Osu官方API数据获取器 封装
+
+    @Getter
     private static boolean debug; // 是否开启测试
 
     @Getter @Setter
@@ -87,6 +91,7 @@ public class Main {
         permissionConfig = new PermissionConfig();
         downloader = new DownloadUtils(config.getInt("BotProperties.Download.Timeout"));
         osuAPIUtils = new OsuAPIUtils(config.getString("BotProperties.Download.Osu.APIKey"), downloader);
+        wrapper = new OsuAPIWrapper(osuAPIUtils);
 
         // 注册指令  优化: 2018-05-02
         registerAllCommands();
