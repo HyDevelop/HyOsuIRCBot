@@ -8,6 +8,7 @@ import cc.moecraft.irc.osubot.management.PermissionConfig;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.OsuAPIWrapper;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
+import cc.moecraft.logger.DebugLogger;
 import io.jboot.Jboot;
 import lombok.Getter;
 import lombok.Setter;
