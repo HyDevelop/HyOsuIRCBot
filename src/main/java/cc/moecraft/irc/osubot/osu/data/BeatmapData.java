@@ -20,23 +20,23 @@ public class BeatmapData extends DataBase
 {
     @SerializedName("beatmapset_id")
     @Expose
-    private String beatmapsetId;
+    private int beatmapsetId;
 
     @SerializedName("beatmap_id")
     @Expose
-    private String beatmapId;
+    private int beatmapId;
 
     @SerializedName("approved")
     @Expose
-    private String approved;
+    private int approved;
 
     @SerializedName("total_length")
     @Expose
-    private String totalLength;
+    private int totalLength;
 
     @SerializedName("hit_length")
     @Expose
-    private String hitLength;
+    private int hitLength;
 
     @SerializedName("version")
     @Expose
@@ -48,23 +48,23 @@ public class BeatmapData extends DataBase
 
     @SerializedName("diff_size")
     @Expose
-    private String diffSize;
+    private double diffSize;
 
     @SerializedName("diff_overall")
     @Expose
-    private String diffOverall;
+    private double diffOverall;
 
     @SerializedName("diff_approach")
     @Expose
-    private String diffApproach;
+    private double diffApproach;
 
     @SerializedName("diff_drain")
     @Expose
-    private String diffDrain;
+    private double diffDrain;
 
     @SerializedName("mode")
     @Expose
-    private String mode;
+    private int mode;
 
     @SerializedName("approved_date")
     @Expose
@@ -88,7 +88,7 @@ public class BeatmapData extends DataBase
 
     @SerializedName("bpm")
     @Expose
-    private String bpm;
+    private int bpm;
 
     @SerializedName("source")
     @Expose
@@ -100,29 +100,29 @@ public class BeatmapData extends DataBase
 
     @SerializedName("genre_id")
     @Expose
-    private String genreId;
+    private int genreId;
 
     @SerializedName("language_id")
     @Expose
-    private String languageId;
+    private int languageId;
 
     @SerializedName("favourite_count")
     @Expose
-    private String favouriteCount;
+    private int favouriteCount;
 
     @SerializedName("playcount")
     @Expose
-    private String playcount;
+    private int playcount;
 
     @SerializedName("passcount")
     @Expose
-    private String passCount;
+    private int passCount;
 
     @SerializedName("max_combo")
     @Expose
-    private String maxCombo;
+    private int maxCombo;
 
     @SerializedName("difficultyrating")
     @Expose
-    private String difficultyRating;
+    private double difficultyRating;
 }
