@@ -84,8 +84,9 @@ public class CommandMap extends Command
                 // 获取时间
                 String time = TimeUtils.convertToString("m:ss", data.getHitLength(), TimeUnits.Second);
 
+                // TODO: PP估算
                 Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(data,
-                        "[%cm%: %title% - %artist% (%version%)]: PP计算还没有! | ⧖ %ct% | ★ %difficultyrating% | BPM %bpm% | AR %diff_approach% | CS %diff_size% | OD %diff_overall%",
+                        "[osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: PP计算还没有! | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm% | AR %diff_approach% | CS %diff_size% | OD %diff_overall%",
                         false, true
                 ).replace("%cm%", modeName).replace("%ct%", time));
 
