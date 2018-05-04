@@ -73,10 +73,9 @@ public class LanguageFileManager
 
         LanguageFile(String lang)
         {
-            super(Main.VERSION, Main.PATH, "Language", "yml", false, true, true);
+            super(Main.PATH, "Language", "yml", false, false);
             this.lang = lang;
-            writeDefaultConfig();
-            save();
+            initialize();
         }
 
         public String get(String placeholder)

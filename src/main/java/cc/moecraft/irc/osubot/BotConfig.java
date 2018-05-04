@@ -24,7 +24,7 @@ public class BotConfig extends Config
 
     public BotConfig()
     {
-        super(Main.VERSION, Main.PATH, "Config", "yml", false, true, true);
+        super(Main.PATH, "Config", "yml", false, true);
 
         logger.info("配置文件路径: " + getConfigFile().getAbsolutePath());
     }

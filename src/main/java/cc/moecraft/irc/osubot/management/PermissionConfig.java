@@ -24,7 +24,7 @@ public class PermissionConfig extends Config
 
     public PermissionConfig()
     {
-        super(Main.VERSION, Main.PATH, "Permissions", "yml", false, false, true);
+        super(Main.PATH, "Permissions", "yml", false, true);
     }
 
     /**
