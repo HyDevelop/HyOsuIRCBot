@@ -1,6 +1,6 @@
 package com.dullwolf;
 
-import cc.moecraft.irc.osubot.DebugLogger;
+import cc.moecraft.logger.DebugLogger;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
