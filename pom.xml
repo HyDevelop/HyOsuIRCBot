@@ -59,6 +59,12 @@
       <version>-1eb4f7896a-1</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.github.hykilpikonna</groupId>
+      <artifactId>HyLogger</artifactId>
+      <version>c697af4a68</version>
+    </dependency>
+
     <!--在PircBotX里面的-->
     <dependency>
       <groupId>org.projectlombok</groupId>
