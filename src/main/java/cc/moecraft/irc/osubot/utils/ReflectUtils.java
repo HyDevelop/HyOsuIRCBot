@@ -301,7 +301,7 @@ public class ReflectUtils
     {
         for (int i = 0; i < jsonArray.size(); i++)
         {
-            JsonObject element = jsonArray.get(i).getAsJsonObject(); // TODO: 如果两个Array套在一起就会出错
+            JsonObject element = jsonArray.get(i).getAsJsonObject(); // 如果两个Array套在一起就会出错
 
             // 反射添加新的实例
             dataBaseList.add((DataBase) parameter.dataStorageClass().newInstance());

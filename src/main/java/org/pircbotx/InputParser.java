@@ -344,7 +344,6 @@ public class InputParser implements Closeable {
 		} else if (code.equals("439"))
 			//EXAMPLE: PircBotX: Target change too fast. Please wait 104 seconds
 			// No action required.
-			//TODO: Should we delay joining channels here or something?
 			log.warn("Ignoring too fast error");
 		else if (configuration.isCapEnabled() && code.equals("421") && parsedLine.get(1).equals("CAP"))
 			//EXAMPLE: 421 you CAP :Unknown command
@@ -558,7 +557,6 @@ public class InputParser implements Closeable {
 			String mode = line.substring(line.indexOf(target, 2) + target.length() + 1);
 			if (mode.startsWith(":"))
 				mode = mode.substring(1);
-			//TODO: ummm... what does this do?
 			//Handle situations where source doesn't have a full username (IE server setting user mode on connect)
 			//User sourceModeUser = sourceUser;
 			//if (sourceModeUser == null)
@@ -605,7 +603,6 @@ public class InputParser implements Closeable {
 		if (code == 433) {
 			//EXAMPLE: * AnAlreadyUsedName :Nickname already in use
 			//EXAMPLE: AnAlreadyUsedName :Nickname already in use (spec)
-			//TODO: When output parsing is implemented intercept outgoing NICK?
 			//Nickname in use, rename
 			boolean autoNickChange = configuration.isAutoNickChange();
 			String autoNewNick = null;

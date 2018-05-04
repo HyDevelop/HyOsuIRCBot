@@ -6,6 +6,7 @@ import cc.moecraft.irc.osubot.language.Messenger;
 import cc.moecraft.irc.osubot.listener.CommandListener;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
+import cc.moecraft.irc.osubot.osu.OsuAPIWrapper;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import io.jboot.Jboot;
 import lombok.Getter;
@@ -29,7 +30,7 @@ public class Main {
     public static final String VERSION = "0.0.5"; // 版本 ( 不懂怎样配置Github版本...
 
     // 配置/语言文件路径
-    public static final String PATH = "src" + File.separator + "main" + File.separator + "resources"; //TODO: 这里分两个版本, 测试放现在这个路径, 发布的话放"./conf/"路径
+    public static final String PATH = "src" + File.separator + "main" + File.separator + "resources"; // TODO: 这里分两个版本, 测试放现在这个路径, 发布的话放"./conf/"路径
 
     @Getter
     private static BotConfig config; // 配置文件 ( 用来存用于IRC登陆的账号密码 )
@@ -54,6 +55,9 @@ public class Main {
 
     @Getter
     private static OsuAPIUtils osuAPIUtils; // Osu官方API数据获取器
+
+    @Getter
+    private static OsuAPIWrapper wrapper; // Osu官方API数据获取器 封装
 
     @Getter
     private static boolean debug; // 是否开启测试
@@ -87,6 +91,7 @@ public class Main {
         permissionConfig = new PermissionConfig();
         downloader = new DownloadUtils(config.getInt("BotProperties.Download.Timeout"));
         osuAPIUtils = new OsuAPIUtils(config.getString("BotProperties.Download.Osu.APIKey"), downloader);
+        wrapper = new OsuAPIWrapper(osuAPIUtils);
 
         // 注册指令  优化: 2018-05-02
         registerAllCommands();

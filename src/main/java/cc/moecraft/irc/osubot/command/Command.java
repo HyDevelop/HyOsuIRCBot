@@ -62,7 +62,7 @@ public abstract class Command
      * @param command 指令名 ( 不包含指令参数 )
      * @param args 指令参数 ( 不包含指令名 )
      */
-    public abstract void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args); //TODO 添加用户系统并把这个User类的用户改成CommandSender类的用户
+    public abstract void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args);
 
     /**
      * 获取需要的权限

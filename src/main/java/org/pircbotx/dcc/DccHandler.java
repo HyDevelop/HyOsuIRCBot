@@ -144,7 +144,6 @@ public class DccHandler implements Closeable {
 			//Someone is acknowledging a transfer resume
 			//Example (normal):  DCC ACCEPT <filename> <port> <position>
 			//Example (passive): DCC ACCEPT <filename> 0 <position> <token>
-			//TODO how well does this handle non passive?
 			String filename = requestParts.get(2);
 			int port;
 			long position = Long.parseLong(requestParts.get(4));
