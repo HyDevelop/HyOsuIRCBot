@@ -48,19 +48,19 @@ public class BeatmapData extends DataBase
 
     @SerializedName("diff_size")
     @Expose
-    private int diffSize;
+    private double diffSize;
 
     @SerializedName("diff_overall")
     @Expose
-    private int diffOverall;
+    private double diffOverall;
 
     @SerializedName("diff_approach")
     @Expose
-    private int diffApproach;
+    private double diffApproach;
 
     @SerializedName("diff_drain")
     @Expose
-    private int diffDrain;
+    private double diffDrain;
 
     @SerializedName("mode")
     @Expose
