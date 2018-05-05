@@ -25,7 +25,9 @@ public class CommandRoll extends Command
     }
 
     /**
-     * 随机数
+     * 用法:
+     *  生成随机数:
+     *
      *  !roll                           随机数, 最小值为0, 最大值为100
      *  !roll [最大]                    随机数, 最小值为0
      *  !roll [最小] [最大]             随机数

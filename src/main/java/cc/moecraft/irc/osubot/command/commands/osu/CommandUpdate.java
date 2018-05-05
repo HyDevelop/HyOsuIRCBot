@@ -31,9 +31,9 @@ public class CommandUpdate extends Command
     }
 
     /**
-     * 更新玩家信息
-     *
      * 用法:
+     *  更新玩家信息:
+     *
      *  !u              更新自己的信息
      *  !u [用户名]     更新其他玩家信息
      *  !u [t/m/c]      更新自己的某个模式的信息

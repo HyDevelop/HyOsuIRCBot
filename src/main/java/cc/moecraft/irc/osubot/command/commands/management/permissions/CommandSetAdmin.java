@@ -22,8 +22,8 @@ public class CommandSetAdmin extends Command
     }
 
     /**
-     * 指令帮助:
-     *  - !op [用户名]         将一个用户设为管理员
+     * 用法:
+     *  !op [用户名]         将一个用户设为管理员
      *
      * @param event 事件
      * @param sender 发送者的irc用户 ( 在osu的irc服务器的话用户名就是osu的用户名 )
