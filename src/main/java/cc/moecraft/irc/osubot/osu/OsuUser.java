@@ -59,6 +59,17 @@ public class OsuUser extends Permissible
     }
 
     /**
+     * 获取玩家数据
+     *
+     * @param id 用户id
+     * @return 玩家数据
+     */
+    public static UserData getData(int id, int mode) throws IllegalAccessException, RequiredParamIsNullException, MalformedURLException, JsonEmptyException
+    {
+        return (UserData) Main.getOsuAPIUtils().get(UserParameters.builder().u(String.valueOf(id)).type("id").m(String.valueOf(mode)).build()).get(0);
+    }
+
+    /**
      * 获取OsuTrack玩家数据
      *
      * @param usernameAndMode 用户名和模式
