@@ -87,7 +87,7 @@ public class OsuAPIWrapper
                 .m(String.valueOf(info.getMode()))
                 .build());
 
-        if (recents.size() < info.getIndex()) throw new RecentScoreNotEnough(recents.size(), info.getIndex());
+        if (recents.size() < info.getIndex()) throw new RecentScoreNotEnough(recents.size(), info.getIndex(), info.getMode());
 
         return recents.get(info.getIndex() - 1);
     }
@@ -124,7 +124,7 @@ public class OsuAPIWrapper
                 .m(String.valueOf(info.getMode()))
                 .build());
 
-        if (data.size() < info.getIndex()) throw new RecentScoreNotEnough(data.size(), info.getIndex());
+        if (data.size() < info.getIndex()) throw new RecentScoreNotEnough(data.size(), info.getIndex(), info.getMode());
 
         return data.get(info.getIndex() - 1);
     }
