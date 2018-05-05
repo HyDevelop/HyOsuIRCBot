@@ -23,14 +23,12 @@ public class Messenger
     {
         text = replaceVariables(text);
 
-        if (Main.getConfig().getBoolean("BotProperties.DisableChannelReply"))
-        {
+        /*if (Main.getConfig().getBoolean("BotProperties.DisableChannelReply"))
             event.respondPrivateMessage(text);
-        }
         else
-        {
-            event.respond(text);
-        }
+            event.respond(text);*/
+
+        event.respond(text);
     }
 
     /**
