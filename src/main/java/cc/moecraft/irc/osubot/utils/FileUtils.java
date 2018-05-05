@@ -41,4 +41,17 @@ public class FileUtils
     {
         return getAllFiles(new ArrayList<>(), path);
     }
+
+    /**
+     * 获取文件后缀
+     *
+     * @param file 文件
+     * @return 文件后缀
+     */
+    public static String getFileExtension(File file)
+    {
+        String fileName = file.getName();
+        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) return fileName.substring(fileName.lastIndexOf(".")+1);
+        else return "";
+    }
 }
