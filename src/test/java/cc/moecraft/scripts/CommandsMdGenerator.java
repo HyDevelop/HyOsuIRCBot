@@ -80,11 +80,11 @@ public class CommandsMdGenerator
 
         appendData(result, userOsu);
 
-        result.append("\n#### 彩蛋指令:\n-\n");
+        result.append("\n#### 彩蛋指令:\n\n-\n");
 
         appendData(result, userFun);
 
-        result.append("\n#### 管理指令:\n-\n");
+        result.append("\n#### 管理指令:\n\n-\n");
 
         appendData(result, admins);
 
