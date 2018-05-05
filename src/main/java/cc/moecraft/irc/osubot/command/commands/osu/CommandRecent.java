@@ -9,6 +9,7 @@ import cc.moecraft.irc.osubot.osu.data.BeatmapData;
 import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.data.UserRecentData;
 import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
+import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnough;
 import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.osu.parameters.BeatmapParameters;
 import cc.moecraft.irc.osubot.osu.parameters.UserRecentParameters;
@@ -60,6 +61,12 @@ public class CommandRecent extends Command
     {
         UsernameAndIndexAndMode info = getIndexAndModeWithArgs(sender, args);
 
+        if (info.getIndex() > 50)
+        {
+            Main.getMessenger().respond(event, "请输入50以下的数字");
+            return;
+        }
+
         try {
             UserRecentData data = Main.getWrapper().getRecent(info);
 
@@ -94,6 +101,8 @@ public class CommandRecent extends Command
             Main.getMessenger().respond(event, "未找到用户: " + info.getUsername() + ", 如果确定该用户存在, 请联系me@hydev.org");
             // TODO: 报错收集系统
             e.printStackTrace();
+        } catch (RecentScoreNotEnough recentScoreNotEnough) {
+            Main.getMessenger().respond(event, String.format("现在你的近期成绩只有%s个... 无法获取第%s个, 多玩玩再来看看吧!", recentScoreNotEnough.getLimit(), recentScoreNotEnough.getRequested()));
         }
     }
 
@@ -111,7 +120,7 @@ public class CommandRecent extends Command
      */
     private static UsernameAndIndexAndMode getIndexAndModeWithArgs(User sender, ArrayList<String> args)
     {
-        UsernameAndIndexAndMode result = new UsernameAndIndexAndMode(0, 0, "");
+        UsernameAndIndexAndMode result = new UsernameAndIndexAndMode(1, 0, "");
         result.setUsername(sender.getNick());
         result.setSelf(true);
 
