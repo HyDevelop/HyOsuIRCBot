@@ -102,7 +102,7 @@ public class CommandRecent extends Command
             // TODO: 报错收集系统
             e.printStackTrace();
         } catch (RecentScoreNotEnough recentScoreNotEnough) {
-            Main.getMessenger().respond(event, String.format("现在你的近期成绩只有%s个... 无法获取第%s个, 多玩玩再来看看吧!", recentScoreNotEnough.getLimit(), recentScoreNotEnough.getRequested()));
+            Main.getMessenger().respond(event, String.format("现在你%s模式的近期成绩只有%s个... 无法获取第%s个, 多玩玩再来看看吧!", OsuAPIUtils.getModeNameWithMode(recentScoreNotEnough.getMode()), recentScoreNotEnough.getLimit(), recentScoreNotEnough.getRequested()));
         }
     }
 
