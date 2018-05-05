@@ -76,15 +76,15 @@ public class CommandsMdGenerator
         admins.sort(DataSet::compareTo);
 
         // 生成
-        result.append("\n## 指令帮助:\n\n#### Osu指令:\n\n");
+        result.append("\n## 指令帮助:\n\n#### Osu指令:\n\n-\n");
 
         appendData(result, userOsu);
 
-        result.append("\n#### 彩蛋指令:\n\n");
+        result.append("\n#### 彩蛋指令:\n-\n");
 
         appendData(result, userFun);
 
-        result.append("\n#### 管理指令:\n\n");
+        result.append("\n#### 管理指令:\n-\n");
 
         appendData(result, admins);
 
@@ -119,7 +119,7 @@ public class CommandsMdGenerator
             }
 
             javaDocs.append(oneJavaDoc);
-            if (oneJavaDoc.toString().split("\n").length > 3) javaDocs.append("\n\n");
+            if (oneJavaDoc.toString().split("\n").length > 3) javaDocs.append("\n-\n");
             else if (!switched)
             {
                 builder.append("         其他指令:\n");
