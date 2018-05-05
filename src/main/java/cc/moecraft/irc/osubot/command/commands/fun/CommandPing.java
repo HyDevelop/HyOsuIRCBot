@@ -30,6 +30,6 @@ public class CommandPing extends Command
     @Override
     public String permissionRequired()
     {
-        return "irc.user.regular.command.ping";
+        return "irc.user.regular.fun.ping";
     }
 }

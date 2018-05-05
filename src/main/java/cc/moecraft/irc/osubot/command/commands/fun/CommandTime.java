@@ -30,6 +30,6 @@ public class CommandTime extends Command
     @Override
     public String permissionRequired()
     {
-        return "irc.user.regular.command.time";
+        return "irc.user.regular.fun.time";
     }
 }
