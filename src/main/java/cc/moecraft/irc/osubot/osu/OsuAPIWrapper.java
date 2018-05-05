@@ -56,4 +56,9 @@ public class OsuAPIWrapper
 
         return recents.get(info.getIndex() - 1);
     }
+
+    public double getAcc(UserRecentData recent, BeatmapData beatmap)
+    {
+        return recent.getAcc(beatmap.getMode());
+    }
 }

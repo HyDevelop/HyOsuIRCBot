@@ -75,4 +75,29 @@ public class UserRecentData extends DataBase
     @SerializedName("rank")
     @Expose
     public String rank;
+
+    public double getAcc(int mode)
+    {
+        double acc = 0;
+        switch (mode)
+        {
+            case 0:
+                acc = (count300 * 300.0 + count100 * 100.0 + count50 * 50.0) / ((count300 + count100 + count50 + countMiss) * 300);
+                break;
+            case 1:
+                acc = (count300 + count100 * 0.5) / (count300 + count100 + countMiss);
+                break;
+            case 2:
+                int base = count300 + count100 + count50;
+                acc = (double) base / (base + (countMiss + count100p));
+                break;
+            case 3:
+                acc = (double)(count50 * 50 + count100 * 100 + count100p * 200 + (count300 + count300p) * 300) / ((count300 + count100 + count50 + countMiss + count100p + count300p) * 300);
+                break;
+            default:
+                break;
+        }
+
+        return acc;
+    }
 }
