@@ -1,7 +1,12 @@
 package cc.moecraft.irc.osubot.utils;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -71,5 +76,35 @@ public class FileUtils
         });
 
         return filterResult;
+    }
+
+    /**
+     * 把一个文件的内容读入String
+     *
+     * @param path 路径
+     * @param encoding 编码
+     * @return String
+     */
+    public static String readFileAsString(String path, Charset encoding) throws IOException
+    {
+        byte[] encoded = Files.readAllBytes(Paths.get(path));
+        return new String(encoded, encoding);
+    }
+
+    /**
+     * 把一个文件的内容读入String
+     *
+     * @param file 路径
+     * @return String
+     */
+    public static String readFileAsString(File file) throws IOException
+    {
+        List<String> lines = Files.readAllLines(Paths.get(file.getAbsolutePath()));
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        lines.forEach(line -> stringBuilder.append(line).append("\n"));
+
+        return stringBuilder.toString();
     }
 }
