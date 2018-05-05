@@ -38,8 +38,16 @@ public class CommandPush extends Command implements ChannelCommand
 
     /**
      * 用法:
+     *  给其他人推荐谱面 (私聊输入):
+     *
      *  !push [用户名]         推荐给某个玩家你刚刚玩的图
      *  !push [模式] [用户名]  推荐给某个玩家你刚刚玩某个模式的图
+     *  .
+     *  .
+     *  给其他人推荐谱面 (在频道里输入):
+     *
+     *  !push                  推荐给大家你刚刚玩的图
+     *  !push [模式]           推荐给大家你刚刚玩的其他模式的图
      *
      * @param event 事件
      * @param sender 发送者的irc用户 ( 在osu的irc服务器的话用户名就是osu的用户名 )
@@ -73,17 +81,6 @@ public class CommandPush extends Command implements ChannelCommand
                 "%username%推荐给你了刚刚在玩的谱面: [osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: ⏳ %ct% | ★ %difficultyrating% | BPM %bpm% | AR %diff_approach%");
     }
 
-    /**
-     * 用法:
-     *  !push          推荐给大家你刚刚玩的图
-     *  !push [模式]   推荐给大家你刚刚玩的其他模式的图
-     *
-     * @param event 事件
-     * @param sender 发送者的irc用户 ( 在osu的irc服务器的话用户名就是osu的用户名 )
-     * @param channel 频道
-     * @param command 指令名 ( 不包含指令参数 )
-     * @param args 指令参数 ( 不包含指令名 )
-     */
     @Override
     public void channel(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
