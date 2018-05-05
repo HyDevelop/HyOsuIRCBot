@@ -4,11 +4,13 @@ import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.commands.osu.CommandRecent;
 import cc.moecraft.irc.osubot.osu.data.BeatmapData;
 import cc.moecraft.irc.osubot.osu.data.UserRecentData;
+import cc.moecraft.irc.osubot.osu.data.UserScoreData;
 import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
 import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnough;
 import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.osu.parameters.BeatmapParameters;
 import cc.moecraft.irc.osubot.osu.parameters.UserRecentParameters;
+import cc.moecraft.irc.osubot.osu.parameters.UserScoreParameters;
 import lombok.AllArgsConstructor;
 
 import java.net.MalformedURLException;
@@ -29,6 +31,14 @@ public class OsuAPIWrapper
 {
     OsuAPIUtils downloader;
 
+    // 谱面
+
+    /**
+     * 获取谱面组
+     * 
+     * @param parameters 谱面参数
+     * @return 谱面组
+     */
     public ArrayList<BeatmapData> getBeatmap(BeatmapParameters parameters) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException
     {
         ArrayList<BeatmapData> beatmapDataArrayList = new ArrayList<>();
@@ -36,11 +46,25 @@ public class OsuAPIWrapper
         return beatmapDataArrayList;
     }
 
+    /**
+     * 获取谱面
+     * 
+     * @param recent 谱面参数
+     * @return 谱面
+     */
     public BeatmapData getBeatmap(UserRecentData recent) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException
     {
         return getBeatmap(BeatmapParameters.builder().b(String.valueOf(recent.getBeatmapId())).build()).get(0);
     }
 
+    // recent成绩
+
+    /**
+     * 获取recent成绩组
+     *
+     * @param parameters recent参数
+     * @return 成绩组
+     */
     public ArrayList<UserRecentData> getRecent(UserRecentParameters parameters) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException
     {
         ArrayList<UserRecentData> beatmapDataArrayList = new ArrayList<>();
@@ -48,15 +72,64 @@ public class OsuAPIWrapper
         return beatmapDataArrayList;
     }
 
+    /**
+     * 获取recent成绩
+     *
+     * @param info 用户信息
+     * @return recent成绩
+     */
     public UserRecentData getRecent(CommandRecent.UsernameAndIndexAndMode info) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException, RecentScoreNotEnough
     {
-        ArrayList<UserRecentData> recents = getRecent(UserRecentParameters.builder().u(info.getUsername()).limit(String.valueOf(info.getIndex())).type("string").m(String.valueOf(info.getMode())).build());
+        ArrayList<UserRecentData> recents = getRecent(UserRecentParameters.builder()
+                .u(info.getUsername())
+                .limit(String.valueOf(info.getIndex()))
+                .type("string")
+                .m(String.valueOf(info.getMode()))
+                .build());
 
         if (recents.size() < info.getIndex()) throw new RecentScoreNotEnough(recents.size(), info.getIndex());
 
         return recents.get(info.getIndex() - 1);
     }
+    
+    // score成绩
 
+    /**
+     * 获取Scores成绩组
+     *
+     * @param parameters scores参数
+     * @return scores成绩组
+     */
+    public ArrayList<UserScoreData> getScore(UserScoreParameters parameters) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException
+    {
+        ArrayList<UserScoreData> beatmapDataArrayList = new ArrayList<>();
+        downloader.get(parameters).forEach(data -> beatmapDataArrayList.add((UserScoreData) data));
+        return beatmapDataArrayList;
+    }
+
+    /**
+     * 获取Score成绩
+     *
+     * @param info 用户信息
+     * @param recent recent成绩
+     * @return score成绩
+     */
+    public UserScoreData getScore(CommandRecent.UsernameAndIndexAndMode info, UserRecentData recent) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException, RecentScoreNotEnough
+    {
+        ArrayList<UserScoreData> data = getScore(UserScoreParameters.builder()
+                .b(String.valueOf(recent.getBeatmapId()))
+                .u(info.getUsername())
+                .limit(String.valueOf(info.getIndex()))
+                .type("string")
+                .m(String.valueOf(info.getMode()))
+                .build());
+
+        if (data.size() < info.getIndex()) throw new RecentScoreNotEnough(data.size(), info.getIndex());
+
+        return data.get(info.getIndex() - 1);
+    }
+
+    // 计算
     public double getAcc(UserRecentData recent, BeatmapData beatmap)
     {
         return recent.getAcc(beatmap.getMode());
