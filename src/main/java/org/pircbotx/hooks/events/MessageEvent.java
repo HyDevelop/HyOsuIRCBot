@@ -93,6 +93,10 @@ public class MessageEvent extends Event implements GenericMessageEvent, GenericC
 	 */
 	@Override
 	public void respond(String response) {
+		respondWith(response);
+	}
+
+	public void respondWithUsername(String response) {
 		respondWith(getUser().getNick() + ": " + response);
 	}
 	
