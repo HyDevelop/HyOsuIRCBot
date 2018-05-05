@@ -120,7 +120,7 @@ public class CommandManager
      */
     public String isCommand(String text, boolean channel)
     {
-        if (channel) return null;
+        if (channel && Main.getConfig().getBoolean("BotProperties.DisableChannelReply")) return null;
         
         if (text.startsWith(getPrefix())) return getPrefix();
 
