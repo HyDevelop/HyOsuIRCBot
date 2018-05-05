@@ -2,17 +2,14 @@ package cc.moecraft.scripts;
 
 import cc.moecraft.irc.osubot.utils.FileUtils;
 import cc.moecraft.logger.DebugLogger;
-import jdk.nashorn.internal.runtime.regexp.joni.Regex;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import org.github.pcre.Pcre;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,12 +27,88 @@ public class CommandsMdGenerator
 {
     private static DebugLogger logger = new DebugLogger("CommandsMdGenerator", true);
 
-    // private static Pattern regex = Pattern.compile("/\\*\\*([^*]|\\*(?!/))*?用法.*?\\*/", Pattern.DOTALL);
-    private static Pattern regex2 = Pattern.compile(" {5}\\* 用法:([^*]|\\*(?!/))*?\\* @param");
+    private static Pattern regex = Pattern.compile("/\\*\\*([^*]|\\*(?!/))*?用法.*?\\*/", Pattern.DOTALL);
+    private static Pattern regexFindPermission = Pattern.compile("(?<=public String permissionRequired\\(\\)\\n    \\{\\n        return \\\")(.*)(?=\\\"\\;\n    \\})", Pattern.DOTALL);
+    /*private static Pattern regexFindPermission = Pattern.compile("" +
+            "(?<=@Override\\n" +
+            " {4}public String permissionRequired\\(\\)\\n" +
+            " {4}\\{\\n" +
+            " {8}return \")(.*)(?=\";.*})", Pattern.DOTALL);*/
+    private static Pattern regexFindJavaDocComments = Pattern.compile(" {5}\\* 用法:([^*]|\\*(?!/))*?\\* @param");
+    private static Pattern regexFindExtend = Pattern.compile("public class .* extends Command");
 
     public static void main(String[] args) throws IOException
     {
-        ArrayList<String> javaDocComments = getJavaDocComments(new File("D:\\Temp"));
+        ArrayList<DataSet> javaDocComments = getJavaDocComments(new File("D:\\Temp"));
+        logger.log("Generated: " + generate(javaDocComments));
+    }
+
+    public static String generate(ArrayList<DataSet> javaDocComments)
+    {
+        StringBuilder result = new StringBuilder();
+
+        // 分类
+        ArrayList<DataSet> userOsu = new ArrayList<>();
+        ArrayList<DataSet> userFun = new ArrayList<>();
+        ArrayList<DataSet> admins = new ArrayList<>();
+
+        for (DataSet dataSet : javaDocComments)
+        {
+            if (dataSet.getPermission().contains("irc.user.regular.osu"))
+            {
+                userOsu.add(dataSet);
+            }
+            if (dataSet.getPermission().contains("irc.user.regular.fun"))
+            {
+                userFun.add(dataSet);
+            }
+            if (dataSet.getPermission().contains("irc.admin"))
+            {
+                admins.add(dataSet);
+            }
+        }
+
+        // 生成
+        result.append("\n## 指令帮助:\n\n#### Osu指令:\n\n");
+
+        appendData(result, userOsu);
+
+        result.append("\n\n#### 彩蛋指令:\n\n");
+
+        appendData(result, userFun);
+
+        result.append("\n\n#### 管理指令:\n\n");
+
+        appendData(result, admins);
+
+        return result.toString();
+    }
+
+    public static void appendData(StringBuilder builder, ArrayList<DataSet> dataSets)
+    {
+        for (DataSet dataSet : dataSets)
+        {
+            StringBuilder javaDocs = new StringBuilder();
+
+            for (String javadoc : dataSet.getJavaDocs())
+            {
+                String[] split = javadoc.split("\n");
+
+                for (String line : split)
+                {
+                    logger.debug("处理: " + line);
+                    if (line.contains("用法")) continue;
+                    if (line.contains("@param")) continue;
+                    if (line.equals(split[split.length - 2])) continue;
+
+                    line = line.replaceAll(".*\\*", "       ");
+                    javaDocs.append(line).append("\n");
+                    logger.debug("添加");
+                }
+            }
+
+            builder.append(javaDocs);
+        }
     }
 
     /**
@@ -43,22 +116,42 @@ public class CommandsMdGenerator
      * @param path 路径
      * @return 所有JavaDocs字符串
      */
-    public static ArrayList<String> getJavaDocComments(File path) throws IOException
+    public static ArrayList<DataSet> getJavaDocComments(File path) throws IOException
     {
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<DataSet> result = new ArrayList<>();
         ArrayList<File> allFiles = getAllJavaFiles(FileUtils.getAllFiles(path));
 
         for (File file : allFiles)
         {
+            logger.debug("正在处理文件: " + file.toString());
+
             String content = FileUtils.readFileAsString(file);
 
-            Matcher matcher = regex2.matcher(content);
-            while (matcher.find())
+            if (regexFindExtend.matcher(content).find())
             {
-                result.add(matcher.group());
+                DataSet dataSet = new DataSet(new ArrayList<>(), "");
+
+                String permissionAndTheRest = Pcre.preg_match_all(regexFindPermission, content)[0];
+                dataSet.setPermission(permissionAndTheRest.contains("\";") ? Pcre.preg_match_all("(.*)(?=\\\"\\;\\n    \\})", permissionAndTheRest)[0] : permissionAndTheRest);
+                logger.debug("Perm: " + dataSet.getPermission());
+
+                Matcher matcherJDoc = regexFindJavaDocComments.matcher(content);
+                while (matcherJDoc.find())
+                {
+                    dataSet.getJavaDocs().add(matcherJDoc.group());
+                }
+
+                result.add(dataSet);
             }
         }
 
         return result;
+    }
+
+    @Data @AllArgsConstructor
+    public static class DataSet
+    {
+        ArrayList<String> javaDocs;
+        String permission;
     }
 }
