@@ -29,6 +29,6 @@ public class CommandNullpo extends Command
     @Override
     public String permissionRequired()
     {
-        return "irc.user.regular.command.nullpo";
+        return "irc.user.regular.fun.nullpo";
     }
 }

@@ -33,6 +33,6 @@ public class CommandEcho extends Command
     @Override
     public String permissionRequired()
     {
-        return "irc.user.regular.commands.echo";
+        return "irc.user.regular.fun.echo";
     }
 }

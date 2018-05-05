@@ -22,8 +22,8 @@ public class CommandRemoveAdmin extends Command
     }
 
     /**
-     * 指令帮助:
-     *  - !deop [用户名]       将一个用户取消管理员
+     * 用法:
+     *  !deop [用户名]       将一个用户取消管理员
      *
      * @param event 事件
      * @param sender 发送者的irc用户 ( 在osu的irc服务器的话用户名就是osu的用户名 )

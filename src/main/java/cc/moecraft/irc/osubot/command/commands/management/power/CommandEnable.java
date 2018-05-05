@@ -23,6 +23,16 @@ public class CommandEnable extends Command
         super("enable", "start");
     }
 
+    /**
+     * 用法:
+     *  !enable         启用机器人
+     *
+     * @param event 事件
+     * @param sender 发送者的irc用户 ( 在osu的irc服务器的话用户名就是osu的用户名 )
+     * @param channel 频道
+     * @param command 指令名 ( 不包含指令参数 )
+     * @param args 指令参数 ( 不包含指令名 )
+     */
     @Override
     public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {

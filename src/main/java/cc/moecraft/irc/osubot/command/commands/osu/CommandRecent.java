@@ -45,6 +45,8 @@ public class CommandRecent extends Command
 
     /**
      * 用法:
+     *  查询最近的成绩:
+     *
      *  !r                 查询自己最后一个成绩
      *  !r [定位]          查询自己某个成绩 ( 比如定位是2的话就是两局之前的成绩 )
      *  !r [t/m/c]         查询自己的某个模式最后一个成绩

@@ -36,7 +36,8 @@ public class CommandMap extends Command
     }
 
     /**
-     * 查询铺面
+     * 查询谱面
+     * 用法:
      *  !map [id]        查询谱面信息
      *
      * @param event 事件
