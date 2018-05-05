@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot.utils;
 
+import cc.moecraft.irc.osubot.command.CommandArgs;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.OsuUser;
 import org.pircbotx.User;
