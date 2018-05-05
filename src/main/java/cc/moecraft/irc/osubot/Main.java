@@ -70,9 +70,11 @@ public class Main {
     public static void main(String[] args) throws IOException, IrcException, InstantiationException, IllegalAccessException
     {
         Jboot.run(args);
+        logger = new DebugLogger("HyOsuIRCBot", true);
 
         config = new BotConfig();
         debug = config.getBoolean("BotProperties.DebugLogging");
+        logger.setDebug(debug);
 
         Configuration botConfig = new Configuration.Builder()
                 .setName(config.getUsername())
@@ -85,7 +87,6 @@ public class Main {
         // 创建对象
         osuBot = new PircBotX(botConfig);
         commandManager = new CommandManager();
-        logger = new DebugLogger("HyOsuIRCBot", true);
         messenger = new Messenger();
         permissionConfig = new PermissionConfig();
         downloader = new DownloadUtils(config.getInt("BotProperties.Download.Timeout"));

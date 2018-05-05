@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot.osu;
 
+import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.commands.osu.CommandRecent;
 import cc.moecraft.irc.osubot.osu.data.BeatmapData;
 import cc.moecraft.irc.osubot.osu.data.UserRecentData;
@@ -32,6 +33,11 @@ public class OsuAPIWrapper
         ArrayList<BeatmapData> beatmapDataArrayList = new ArrayList<>();
         downloader.get(parameters).forEach(data -> beatmapDataArrayList.add((BeatmapData) data));
         return beatmapDataArrayList;
+    }
+
+    public BeatmapData getBeatmap(UserRecentData recent) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException
+    {
+        return getBeatmap(BeatmapParameters.builder().b(String.valueOf(recent.getBeatmapId())).build()).get(0);
     }
 
     public ArrayList<UserRecentData> getRecent(UserRecentParameters parameters) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException

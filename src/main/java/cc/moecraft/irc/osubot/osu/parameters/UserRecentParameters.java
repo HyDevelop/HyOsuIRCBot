@@ -36,7 +36,7 @@ public class UserRecentParameters extends ParametersBase
     @Override
     public String subURL()
     {
-        return "get_user_recent";
+        return "user_recent";
     }
 
     @Override
