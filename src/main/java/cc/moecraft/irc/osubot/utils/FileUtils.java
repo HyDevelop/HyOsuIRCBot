@@ -54,4 +54,22 @@ public class FileUtils
         if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) return fileName.substring(fileName.lastIndexOf(".")+1);
         else return "";
     }
+
+    /**
+     * 获取所有Java文件
+     *
+     * @param allFiles 所有文件
+     * @return 所有java文件
+     */
+    public static ArrayList<File> getAllJavaFiles(ArrayList<File> allFiles)
+    {
+        ArrayList<File> filterResult = new ArrayList<>();
+
+        allFiles.forEach(file ->
+        {
+            if (FileUtils.getFileExtension(file).equals("java")) filterResult.add(file);
+        });
+
+        return filterResult;
+    }
 }
