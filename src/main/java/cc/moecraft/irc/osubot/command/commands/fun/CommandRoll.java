@@ -69,6 +69,6 @@ public class CommandRoll extends Command
     @Override
     public String permissionRequired()
     {
-        return "irc.user.regular.command.roll";
+        return "irc.user.regular.fun.roll";
     }
 }
