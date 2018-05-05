@@ -5,6 +5,7 @@ import cc.moecraft.irc.osubot.command.commands.osu.CommandRecent;
 import cc.moecraft.irc.osubot.osu.data.BeatmapData;
 import cc.moecraft.irc.osubot.osu.data.UserRecentData;
 import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
+import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnough;
 import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.osu.parameters.BeatmapParameters;
 import cc.moecraft.irc.osubot.osu.parameters.UserRecentParameters;
@@ -47,8 +48,12 @@ public class OsuAPIWrapper
         return beatmapDataArrayList;
     }
 
-    public UserRecentData getRecent(CommandRecent.UsernameAndIndexAndMode info) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException
+    public UserRecentData getRecent(CommandRecent.UsernameAndIndexAndMode info) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException, RecentScoreNotEnough
     {
-        return getRecent(UserRecentParameters.builder().u(info.getUsername()).type("string").m(String.valueOf(info.getMode())).build()).get(info.getIndex());
+        ArrayList<UserRecentData> recents = getRecent(UserRecentParameters.builder().u(info.getUsername()).limit(String.valueOf(info.getIndex())).type("string").m(String.valueOf(info.getMode())).build());
+
+        if (recents.size() < info.getIndex()) throw new RecentScoreNotEnough(recents.size(), info.getIndex());
+
+        return recents.get(info.getIndex() - 1);
     }
 }
