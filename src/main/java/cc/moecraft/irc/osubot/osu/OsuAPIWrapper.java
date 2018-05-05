@@ -1,9 +1,12 @@
 package cc.moecraft.irc.osubot.osu;
 
+import cc.moecraft.irc.osubot.command.commands.osu.CommandRecent;
 import cc.moecraft.irc.osubot.osu.data.BeatmapData;
+import cc.moecraft.irc.osubot.osu.data.UserRecentData;
 import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
 import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.osu.parameters.BeatmapParameters;
+import cc.moecraft.irc.osubot.osu.parameters.UserRecentParameters;
 import lombok.AllArgsConstructor;
 
 import java.net.MalformedURLException;
@@ -29,5 +32,17 @@ public class OsuAPIWrapper
         ArrayList<BeatmapData> beatmapDataArrayList = new ArrayList<>();
         downloader.get(parameters).forEach(data -> beatmapDataArrayList.add((BeatmapData) data));
         return beatmapDataArrayList;
+    }
+
+    public ArrayList<UserRecentData> getRecent(UserRecentParameters parameters) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException
+    {
+        ArrayList<UserRecentData> beatmapDataArrayList = new ArrayList<>();
+        downloader.get(parameters).forEach(data -> beatmapDataArrayList.add((UserRecentData) data));
+        return beatmapDataArrayList;
+    }
+
+    public UserRecentData getRecent(CommandRecent.UsernameAndIndexAndMode info) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException
+    {
+        return getRecent(UserRecentParameters.builder().u(info.getUsername()).type("string").m(String.valueOf(info.getMode())).build()).get(info.getIndex());
     }
 }
