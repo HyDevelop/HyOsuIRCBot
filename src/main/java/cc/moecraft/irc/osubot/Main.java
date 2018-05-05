@@ -28,8 +28,6 @@ import java.util.Set;
  * QQ: admin@moecraft.cc -OR- 871674895
  */
 public class Main {
-    public static final String VERSION = "0.0.5"; // 版本 ( 不懂怎样配置Github版本...
-
     // 配置/语言文件路径
     public static final String PATH = "src" + File.separator + "main" + File.separator + "resources"; // TODO: 这里分两个版本, 测试放现在这个路径, 发布的话放"./conf/"路径
 
@@ -72,9 +70,11 @@ public class Main {
     public static void main(String[] args) throws IOException, IrcException, InstantiationException, IllegalAccessException
     {
         Jboot.run(args);
+        logger = new DebugLogger("HyOsuIRCBot", true);
 
         config = new BotConfig();
         debug = config.getBoolean("BotProperties.DebugLogging");
+        logger.setDebug(debug);
 
         Configuration botConfig = new Configuration.Builder()
                 .setName(config.getUsername())
@@ -87,7 +87,6 @@ public class Main {
         // 创建对象
         osuBot = new PircBotX(botConfig);
         commandManager = new CommandManager();
-        logger = new DebugLogger("HyOsuIRCBot", true);
         messenger = new Messenger();
         permissionConfig = new PermissionConfig();
         downloader = new DownloadUtils(config.getInt("BotProperties.Download.Timeout"));

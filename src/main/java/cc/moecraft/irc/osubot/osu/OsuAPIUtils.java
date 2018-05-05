@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot.osu;
 
+import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.osu.data.DataBase;
 import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
 import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
@@ -122,6 +123,8 @@ public class OsuAPIUtils
                 }
             }
         }
+
+        Main.getLogger().debug("正在获取... URL: " + urlBuilder.toString());
 
         return downloader.getJsonElementFromURL(urlBuilder.toString());
     }

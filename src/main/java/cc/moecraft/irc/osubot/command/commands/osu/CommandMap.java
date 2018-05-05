@@ -51,12 +51,10 @@ public class CommandMap extends Command
         if (args.size() < 1)
         {
             Main.getMessenger().respond(event,"没有输入地图ID怎样找嘛...!");
-            return;
         }
         else if (args.size() > 1)
         {
             Main.getMessenger().respond(event, "哪里输错了...?");
-            return;
         }
         else
         {
