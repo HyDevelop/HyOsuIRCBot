@@ -1,4 +1,4 @@
-package cc.moecraft.irc.osubot.command.commands.management;
+package cc.moecraft.irc.osubot.command.commands.management.permissions;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
