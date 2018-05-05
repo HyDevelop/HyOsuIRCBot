@@ -27,6 +27,8 @@ public class CommandChannel extends Command
 
     /**
      * 用法:
+     *  管理频道:
+     *
      *  !chan join [频道名]      加入频道
      *  !chan leave [频道名]     离开频道
      *  !chan list               列出已加入的频道

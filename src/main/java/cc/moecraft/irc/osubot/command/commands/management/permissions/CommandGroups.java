@@ -25,14 +25,16 @@ public class CommandGroups extends Command
     }
 
     /**
-     * 指令帮助:
-     *  - !grp info [名字]                   查询权限组 2
-     *  - !grp create [名字]                 创建权限组 2
-     *  - !grp remove [名字]                 移除权限组 2
-     *  - !grp perm add [名字] [权限]        添加权限   4
-     *  - !grp perm remove [名字] [权限]     移除权限   4
-     *  - !grp group add [名字] [权限组]     添加继承   4
-     *  - !grp group remove [名字] [权限组]  移除继承   4
+     * 用法:
+     *  管理权限组:
+     *
+     *  !grp info [名字]                   查询权限组 2
+     *  !grp create [名字]                 创建权限组 2
+     *  !grp remove [名字]                 移除权限组 2
+     *  !grp perm add [名字] [权限]        添加权限   4
+     *  !grp perm remove [名字] [权限]     移除权限   4
+     *  !grp group add [名字] [权限组]     添加继承   4
+     *  !grp group remove [名字] [权限组]  移除继承   4
      *
      * @param event 事件
      * @param sender 发送者的irc用户 ( 在osu的irc服务器的话用户名就是osu的用户名 )

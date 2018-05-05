@@ -21,6 +21,16 @@ public class CommandReload extends Command
         super("reload");
     }
 
+    /**
+     * 用法:
+     *  !reload         重载配置
+     *
+     * @param event 事件
+     * @param sender 发送者的irc用户 ( 在osu的irc服务器的话用户名就是osu的用户名 )
+     * @param channel 频道
+     * @param command 指令名 ( 不包含指令参数 )
+     * @param args 指令参数 ( 不包含指令名 )
+     */
     @Override
     public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {

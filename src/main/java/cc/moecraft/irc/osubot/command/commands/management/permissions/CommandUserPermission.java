@@ -26,10 +26,12 @@ public class CommandUserPermission extends Command
     }
 
     /**
-     * 指令帮助:
-     *  - !usr info [用户名]              查询用户权限信息
-     *  - !usr add [用户名] [权限组]      把用户加入权限组
-     *  - !usr remove [用户名] [权限组]   把用户从权限组中移除
+     * 用法:
+     *  管理用户权限组:
+     *
+     *  !usr info [用户名]              查询用户权限信息
+     *  !usr add [用户名] [权限组]      把用户加入权限组
+     *  !usr remove [用户名] [权限组]   把用户从权限组中移除
      *
      * @param event 事件
      * @param sender 发送者的irc用户 ( 在osu的irc服务器的话用户名就是osu的用户名 )
