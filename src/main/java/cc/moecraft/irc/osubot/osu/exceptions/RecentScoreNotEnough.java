@@ -18,4 +18,5 @@ public class RecentScoreNotEnough extends Exception
 {
     int limit;
     int requested;
+    int mode;
 }
