@@ -1,13 +1,15 @@
 package cc.moecraft.irc.osubot.command;
 
 import cc.moecraft.irc.osubot.Main;
+import cc.moecraft.irc.osubot.command.exceptions.CommandNotFoundException;
+import cc.moecraft.irc.osubot.command.exceptions.NotACommandException;
 import cc.moecraft.irc.osubot.osu.OsuUser;
+import lombok.Getter;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +21,7 @@ import java.util.Map;
  */
 public class CommandManager
 {
+    @Getter
     private Map<String, Command> registeredCommands;    // 已注册的指令, String 是指令名, Command 是指令对象
 
     /**
@@ -63,73 +66,54 @@ public class CommandManager
      */
     public RunResult runCommand(GenericMessageEvent event, String fullCommand, User user, Channel channel, boolean isChannel)
     {
-        String prefix = isCommand(fullCommand, isChannel);
-
-        if (prefix == null)
+        try
         {
-            if (!isChannel && !user.getNick().equalsIgnoreCase(Main.getConfig().getUsername()) &&
-                    !Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick().toLowerCase())) // 如果是私聊并且不是自己, 回复提示
-                if (Main.isEnableListening())
+            CommandArgs commandArgs = CommandArgs.parse(fullCommand);
+
+            if (!Main.isEnableListening() && !commandArgs.getCommandName().equalsIgnoreCase("enable")) return RunResult.LISTENING_DISABLED;
+
+            if (!new OsuUser(user.getNick()).hasPermission(commandArgs.getCommandRunner().permissionRequired()))
+            {
+                Main.getMessenger().respond(event, "NO PERM: 无法执行%prefix%" + commandArgs.getCommandName() + ", 因为缺少权限");
+                return RunResult.NO_PERMISSION;
+            }
+
+            if (isChannel) // 频道
+            {
+                if (commandArgs.getCommandRunner() instanceof ChannelCommand) // implement了频道指令方法的类
+                    ((ChannelCommand) commandArgs.getCommandRunner()).channel(event, user, channel, commandArgs.getCommandName(), commandArgs.getArgs());
+
+                if (Main.getConfig().getBoolean("BotProperties.DisableChannelReply")) // 关闭了频道直接回复
+                    return RunResult.CHANNEL_DISABLED;
+            }
+
+            commandArgs.getCommandRunner().run(event, user, channel, commandArgs.getCommandName(), commandArgs.getArgs());
+
+            return RunResult.SUCCESS;
+        }
+        catch (NotACommandException e)
+        {
+            if (!isChannel &&
+                    !user.getNick().equals(event.getBot().getNick()) &&
+                    !Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick().toLowerCase()) &&
+                    Main.isEnableListening()) // 如果是私聊并且不是自己, 回复提示
                     Main.getMessenger().respond(event, "NOT A COMMAND: 不是指令 ( 输入%prefix%help显示帮助 )");
 
             return RunResult.NOT_A_COMMAND;
         }
-
-        // String "!ecHO hi" -> ArrayList ["!ecHO", "hi", "there"]
-        ArrayList<String> args = new ArrayList<>(Arrays.asList(fullCommand.split(" ")));
-
-        // "echo"
-        String command = args.get(0).replace(prefix, "").toLowerCase();
-
-        if (!Main.isEnableListening() && !command.equalsIgnoreCase("enable")) return RunResult.LISTENING_DISABLED;
-
-        if (!registeredCommands.containsKey(command))
+        catch (CommandNotFoundException e)
         {
             Main.getMessenger().respond(event, "UNKNOWN COMMAND: 未知指令 ( 输入%prefix%help显示帮助 )");
             return RunResult.COMMAND_NOT_FOUND;
         }
-
-        // ["hi", "there"]
-        args.remove(0);
-
-        Command commandToRun = registeredCommands.get(command);
-
-        if (!new OsuUser(user.getNick()).hasPermission(commandToRun.permissionRequired()))
-        {
-            Main.getMessenger().respond(event, "NO PERM: 无法执行%prefix%" + command + ", 因为缺少权限");
-            return RunResult.NO_PERMISSION;
-        }
-
-        registeredCommands.get(command).run(event, user, channel, command, args);
-
-        return RunResult.SUCCESS;
     }
 
     public enum RunResult
     {
-        NOT_A_COMMAND, COMMAND_NOT_FOUND, LISTENING_DISABLED,
+        NOT_A_COMMAND, COMMAND_NOT_FOUND,
+        LISTENING_DISABLED, CHANNEL_DISABLED,
         NO_PERMISSION,
         SUCCESS
-    }
-
-    /**
-     * 判断一条消息是不是指令
-     * @param text 消息
-     * @param channel 频道
-     * @return 是指令的话返回指令前缀, 不是的话返回null
-     */
-    public String isCommand(String text, boolean channel)
-    {
-        if (channel && Main.getConfig().getBoolean("BotProperties.DisableChannelReply")) return null;
-        
-        if (text.startsWith(getPrefix())) return getPrefix();
-
-        for (String prefix : Main.getConfig().getStringList("BotProperties.EnabledCommandPrefixes"))
-        {
-            if (text.startsWith(prefix)) return prefix;
-        }
-
-        return null;
     }
 
     /**

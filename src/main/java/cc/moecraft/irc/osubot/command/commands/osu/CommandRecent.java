@@ -118,7 +118,7 @@ public class CommandRecent extends Command
      * @param args 指令
      * @return 玩家和模式
      */
-    private static UsernameAndIndexAndMode getIndexAndModeWithArgs(User sender, ArrayList<String> args)
+    public static UsernameAndIndexAndMode getIndexAndModeWithArgs(User sender, ArrayList<String> args)
     {
         UsernameAndIndexAndMode result = new UsernameAndIndexAndMode(1, 0, "");
         result.setUsername(sender.getNick());
