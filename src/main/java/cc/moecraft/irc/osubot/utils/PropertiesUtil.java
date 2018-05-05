@@ -54,7 +54,6 @@ public final class PropertiesUtil {
 
     /**
      * 设置一个属性，如果key已经存在，那么将其对应value值覆盖。
-     *
      */
     public static void setProperty(String key, String value) {
         InputStream is = null;
