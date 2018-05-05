@@ -83,8 +83,8 @@ public class CommandRecent extends Command
             data.setCount100(data.getCount100() + data.getCount100p());
             data.setCount300(data.getCount300() + data.getCount300p());
 
-            // TODO: PP显示
-            String format = "[osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: ★ %difficultyrating% | 成绩: %rank% | PP计算还没有! | %score% | %maxcombo%x/%max_combo%x | G: %count300% | K: %count100% | I: %count50% | Miss: %countmiss%";
+            // TODO: PP显示, Mods显示
+            String format = "[osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: ★ %difficultyrating% | 成绩: %rank% | PP计算还没有! | %score% | %maxcombo%x/%max_combo%x | %count300% %count100% %count50% %countmiss%";
 
             Main.getMessenger().respond(event,
                     ReflectUtils.replaceReflectVariables(data,
