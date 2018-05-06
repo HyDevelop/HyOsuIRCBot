@@ -44,7 +44,7 @@ public class ReflectRoundingTest
         OsuAPIWrapper wrapper = new OsuAPIWrapper(osuAPIUtils);
 
 
-        CommandRecent.UsernameAndIndexAndMode info = new CommandRecent.UsernameAndIndexAndMode(1, 0, "Hykilpikonna");
+        CommandRecent.UsernameAndIndexAndMode info = new CommandRecent.UsernameAndIndexAndMode(1, 0, "nekomimi_kyara");
 
         UserRecentData data = wrapper.getRecent(info);
 
@@ -55,7 +55,10 @@ public class ReflectRoundingTest
         try {
             UserScoreData scoreData = wrapper.getScore(info, data);
 
-            ppMsg = String.valueOf(scoreData.getPp()) + "pp";
+            if (scoreData.getPp() == null)
+                ppMsg = "未计分!";
+            else
+                ppMsg = String.valueOf(Math.round(scoreData.getPp() * 100d) / 100d) + "pp";
         } catch (RelatedScoreNotFoundException e) {
             // TODO: @dullwolf PP计算
             ppMsg = "未计分!";
