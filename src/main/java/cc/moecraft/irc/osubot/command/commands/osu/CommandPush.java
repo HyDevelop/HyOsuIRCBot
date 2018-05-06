@@ -9,7 +9,7 @@ import cc.moecraft.irc.osubot.osu.data.BeatmapData;
 import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.data.UserRecentData;
 import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
-import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnough;
+import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnoughException;
 import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.utils.*;
 import org.pircbotx.Channel;
@@ -18,8 +18,6 @@ import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-
-import static cc.moecraft.irc.osubot.command.commands.osu.CommandRecent.getIndexAndModeWithArgs;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/05 创建!
@@ -129,7 +127,7 @@ public class CommandPush extends Command implements ChannelCommand
             Main.getMessenger().respond(event, "未找到用户: " + info.getUsername() + ", 如果确定该用户存在, 请联系admin@moecraft.cc");
             // TODO: 报错收集系统
             e.printStackTrace();
-        } catch (RecentScoreNotEnough recentScoreNotEnough) {
+        } catch (RecentScoreNotEnoughException recentScoreNotEnough) {
             Main.getMessenger().respond(event, String.format("现在你%s模式的近期成绩只有%s个... 无法获取第%s个, 多玩玩再来看看吧!", OsuAPIUtils.getModeNameWithMode(recentScoreNotEnough.getMode()), recentScoreNotEnough.getLimit(), recentScoreNotEnough.getRequested()));
         }
     }

@@ -3,22 +3,15 @@ package cc.moecraft.irc.osubot.command.commands.osu;
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
-import cc.moecraft.irc.osubot.osu.OsuAPIWrapper;
 import cc.moecraft.irc.osubot.osu.OsuUser;
 import cc.moecraft.irc.osubot.osu.data.BeatmapData;
-import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.data.UserRecentData;
 import cc.moecraft.irc.osubot.osu.data.UserScoreData;
 import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
-import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnough;
+import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnoughException;
 import cc.moecraft.irc.osubot.osu.exceptions.RelatedScoreNotFoundException;
 import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
-import cc.moecraft.irc.osubot.osu.parameters.BeatmapParameters;
-import cc.moecraft.irc.osubot.osu.parameters.UserRecentParameters;
-import cc.moecraft.irc.osubot.utils.ArrayUtils;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
-import cc.moecraft.irc.osubot.utils.TimeUnits;
-import cc.moecraft.irc.osubot.utils.TimeUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.pircbotx.Channel;
@@ -28,8 +21,6 @@ import org.pircbotx.hooks.types.GenericMessageEvent;
 import java.net.MalformedURLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
-import static cc.moecraft.irc.osubot.utils.ArrayUtils.getUsernameAndModeWithArgs;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/04 创建!
@@ -113,7 +104,7 @@ public class CommandRecent extends Command
         } catch (JsonEmptyException e) {
             Main.getMessenger().respond(event, "未找到用户: " + info.getUsername() + ", 如果确定该用户存在, 请联系admin@moecraft.cc");
             // TODO: 报错收集系统
-        } catch (RecentScoreNotEnough recentScoreNotEnough) {
+        } catch (RecentScoreNotEnoughException recentScoreNotEnough) {
             Main.getMessenger().respond(event, String.format("现在你%s模式的近期成绩只有%s个... 无法获取第%s个, 多玩玩再来看看吧!", OsuAPIUtils.getModeNameWithMode(recentScoreNotEnough.getMode()), recentScoreNotEnough.getLimit(), recentScoreNotEnough.getRequested()));
         }
     }
