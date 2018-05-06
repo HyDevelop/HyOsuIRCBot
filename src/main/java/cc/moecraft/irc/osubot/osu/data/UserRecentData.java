@@ -2,7 +2,6 @@ package cc.moecraft.irc.osubot.osu.data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import io.shardingjdbc.core.routing.type.all.DatabaseAllRoutingEngine;
 import lombok.*;
 
 
@@ -50,11 +49,11 @@ public class UserRecentData extends DataBase
 
     @SerializedName("countkatu")
     @Expose
-    public int count100p; // 喝
+    public int countKatu; // 喝
 
     @SerializedName("countgeki")
     @Expose
-    public int count300p; // 激
+    public int countGeki; // 激
 
     @SerializedName("perfect")
     @Expose
@@ -89,10 +88,10 @@ public class UserRecentData extends DataBase
                 break;
             case 2:
                 int base = count300 + count100 + count50;
-                acc = (double) base / (base + (countMiss + count100p));
+                acc = (double) base / (base + (countMiss + countKatu));
                 break;
             case 3:
-                acc = (double)(count50 * 50 + count100 * 100 + count100p * 200 + (count300 + count300p) * 300) / ((count300 + count100 + count50 + countMiss + count100p + count300p) * 300);
+                acc = (double)(count50 * 50 + count100 * 100 + countKatu * 200 + (count300 + countGeki) * 300) / ((count300 + count100 + count50 + countMiss + countKatu + countGeki) * 300);
                 break;
             default:
                 break;
