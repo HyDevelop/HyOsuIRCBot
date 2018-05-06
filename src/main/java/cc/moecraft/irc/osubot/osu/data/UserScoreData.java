@@ -4,6 +4,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * 此类由 Hykilpikonna 在 2018/05/05 创建!
  * Created by Hykilpikonna on 2018/05/05!
@@ -16,7 +20,7 @@ import lombok.*;
 @Data @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserScoreData extends DataBase
+public class UserScoreData extends DataBase implements Comparable<UserScoreData>
 {
     @SerializedName("score_id")
     @Expose
@@ -85,4 +89,20 @@ public class UserScoreData extends DataBase
     @SerializedName("replay_available")
     @Expose
     public Long replayAvailable;
+
+    @Override
+    public int compareTo(UserScoreData o)
+    {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            Date thisDate = dateFormat.parse(getDate());
+            Date otherDate = dateFormat.parse(o.getDate());
+
+            return thisDate.compareTo(otherDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }
