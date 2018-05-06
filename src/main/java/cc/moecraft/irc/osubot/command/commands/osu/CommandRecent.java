@@ -8,8 +8,10 @@ import cc.moecraft.irc.osubot.osu.OsuUser;
 import cc.moecraft.irc.osubot.osu.data.BeatmapData;
 import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.data.UserRecentData;
+import cc.moecraft.irc.osubot.osu.data.UserScoreData;
 import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
 import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnough;
+import cc.moecraft.irc.osubot.osu.exceptions.RelatedScoreNotFoundException;
 import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.osu.parameters.BeatmapParameters;
 import cc.moecraft.irc.osubot.osu.parameters.UserRecentParameters;
@@ -75,18 +77,30 @@ public class CommandRecent extends Command
 
             BeatmapData beatmapData = Main.getWrapper().getBeatmap(data);
 
+            String ppMsg;
+
+            try {
+                UserScoreData scoreData = Main.getWrapper().getScore(info, data);
+
+                ppMsg = String.valueOf(Math.round(scoreData.getPp() * 100d) / 100d) + "pp";
+            } catch (RelatedScoreNotFoundException e) {
+                // TODO: @dullwolf PP计算
+                ppMsg = "未计分!";
+            }
+
             // 四舍五入
             ReflectUtils.roundAllNumbers(data, 1);
             ReflectUtils.roundAllNumbers(beatmapData, 1);
 
             // TODO: PP显示, Mods显示
-            String format = "[osu://b/%beatmap_id% [%cm%: %artist% - %title% (%version%)]]: ★ %difficultyrating% | 成绩: %rank% | PP计算还没有! | %ca%% | %cscore% | %maxcombo%x/%max_combo%x 连击";
+            String format = "[osu://b/%beatmap_id% [%cm%: %artist% - %title% (%version%)]]: ★ %difficultyrating% | 成绩: %rank% | %ppmsg% | %ca%% | %cscore% | %maxcombo%x/%max_combo%x 连击";
 
             format = ReflectUtils.replaceReflectVariables(data, format, false, true);
             format = ReflectUtils.replaceReflectVariables(beatmapData, format, false, true);
             format = format.replace("%cm%", OsuAPIUtils.getModeNameWithMode(beatmapData.getMode()));
             format = format.replace("%ca%", String.valueOf(Math.round(data.getAcc(beatmapData.getMode()) * 10000d) / 100d));
             format = format.replace("%cscore%", new DecimalFormat("#,###").format(Math.round(data.getScore())));
+            format = format.replace("%ppmsg%", ppMsg);
 
             Main.getMessenger().respond(event, format);
 
@@ -96,7 +110,6 @@ public class CommandRecent extends Command
         } catch (JsonEmptyException e) {
             Main.getMessenger().respond(event, "未找到用户: " + info.getUsername() + ", 如果确定该用户存在, 请联系admin@moecraft.cc");
             // TODO: 报错收集系统
-            e.printStackTrace();
         } catch (RecentScoreNotEnough recentScoreNotEnough) {
             Main.getMessenger().respond(event, String.format("现在你%s模式的近期成绩只有%s个... 无法获取第%s个, 多玩玩再来看看吧!", OsuAPIUtils.getModeNameWithMode(recentScoreNotEnough.getMode()), recentScoreNotEnough.getLimit(), recentScoreNotEnough.getRequested()));
         }
