@@ -8,8 +8,10 @@ import cc.moecraft.irc.osubot.osu.OsuUser;
 import cc.moecraft.irc.osubot.osu.data.BeatmapData;
 import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.data.UserRecentData;
+import cc.moecraft.irc.osubot.osu.data.UserScoreData;
+import cc.moecraft.irc.osubot.osu.exceptions.BeatmapScoreNotEnoughException;
 import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
-import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnough;
+import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnoughException;
 import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.utils.*;
 import org.pircbotx.Channel;
@@ -18,8 +20,6 @@ import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-
-import static cc.moecraft.irc.osubot.command.commands.osu.CommandRecent.getIndexAndModeWithArgs;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/05 创建!
@@ -78,7 +78,7 @@ public class CommandPush extends Command implements ChannelCommand
         }
 
         process(event, sender, mode, username.replace(" ", "_"),
-                "%username%推荐给你了刚刚在玩的谱面: [osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: ⏳ %ct% | ★ %difficultyrating% | BPM %bpm% | AR %diff_approach%");
+                "%username%推荐给你了刚刚在玩的谱面: [osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: %ppmsg% | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm%");
     }
 
     @Override
@@ -91,7 +91,7 @@ public class CommandPush extends Command implements ChannelCommand
 
         if (mode == -1) return;
         process(event, sender, mode, channel.getName(),
-                "%username%推荐给你们了刚刚在玩的谱面: [osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: ⏳ %ct% | ★ %difficultyrating% | BPM %bpm% | AR %diff_approach%");
+                "%username%推荐给你们了刚刚在玩的谱面: [osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: %ppmsg% | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm%");
     }
 
     public void process(GenericMessageEvent event, User sender, int mode, String placeToSend, String format)
@@ -115,10 +115,23 @@ public class CommandPush extends Command implements ChannelCommand
             // 获取时间
             String time = TimeUtils.convertToString("m:ss", beatmapData.getHitLength(), TimeUnits.Second);
 
+            // 获取PP
+            String ppMsg;
+
+            try {
+                UserScoreData score = Main.getWrapper().getScore(beatmapData);
+
+                ppMsg = Math.round(score.getPp() * 100d) / 100d + " PP";
+            } catch (BeatmapScoreNotEnoughException e) {
+                ppMsg = "无计分!";
+                //TODO: 报错收集表
+            }
+
             format = ReflectUtils.replaceReflectVariables(data, format, false, true);
             format = ReflectUtils.replaceReflectVariables(beatmapData, format, false, true);
             format = ReflectUtils.replaceReflectVariables(userData, format, false, true);
             format = format.replace("%cm%", modeName).replace("%ct%", time);
+            format = format.replace("%ppmsg%", ppMsg);
 
             event.getBot().sendIRC().message(placeToSend, format);
 
@@ -129,7 +142,7 @@ public class CommandPush extends Command implements ChannelCommand
             Main.getMessenger().respond(event, "未找到用户: " + info.getUsername() + ", 如果确定该用户存在, 请联系admin@moecraft.cc");
             // TODO: 报错收集系统
             e.printStackTrace();
-        } catch (RecentScoreNotEnough recentScoreNotEnough) {
+        } catch (RecentScoreNotEnoughException recentScoreNotEnough) {
             Main.getMessenger().respond(event, String.format("现在你%s模式的近期成绩只有%s个... 无法获取第%s个, 多玩玩再来看看吧!", OsuAPIUtils.getModeNameWithMode(recentScoreNotEnough.getMode()), recentScoreNotEnough.getLimit(), recentScoreNotEnough.getRequested()));
         }
     }

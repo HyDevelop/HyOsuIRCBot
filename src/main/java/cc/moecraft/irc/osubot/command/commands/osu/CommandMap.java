@@ -3,9 +3,9 @@ package cc.moecraft.irc.osubot.command.commands.osu;
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
-import cc.moecraft.irc.osubot.osu.OsuUser;
 import cc.moecraft.irc.osubot.osu.data.BeatmapData;
-import cc.moecraft.irc.osubot.osu.data.UserData;
+import cc.moecraft.irc.osubot.osu.data.UserScoreData;
+import cc.moecraft.irc.osubot.osu.exceptions.BeatmapScoreNotEnoughException;
 import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
 import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.osu.parameters.BeatmapParameters;
@@ -17,7 +17,6 @@ import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.net.MalformedURLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
@@ -71,7 +70,6 @@ public class CommandMap extends Command
             {
                 ArrayList<BeatmapData> beatmapData = Main.getWrapper().getBeatmap(BeatmapParameters.builder().b(String.valueOf(beatmapId)).build());
 
-                // TODO: 支持多个谱面
                 BeatmapData data = beatmapData.get(0);
 
                 // 获取Mode名字
@@ -83,11 +81,26 @@ public class CommandMap extends Command
                 // 获取时间
                 String time = TimeUtils.convertToString("m:ss", data.getHitLength(), TimeUnits.Second);
 
-                // TODO: PP估算
-                Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(data,
-                        "[osu://b/%beatmap_id% [%cm%: %artist% - %title% (%version%)]]: PP计算还没有! | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm% | AR %diff_approach% | CS %diff_size% | OD %diff_overall%",
-                        false, true
-                ).replace("%cm%", modeName).replace("%ct%", time));
+                // 获取PP
+                String ppMsg;
+
+                try {
+                    UserScoreData score = Main.getWrapper().getScore(data);
+
+                    ppMsg = Math.round(score.getPp() * 100d) / 100d + " PP";
+                } catch (BeatmapScoreNotEnoughException e) {
+                    ppMsg = "无计分!";
+                    //TODO: 报错收集表
+                }
+
+                String format = "[osu://b/%beatmap_id% [%cm%: %artist% - %title% (%version%)]]: %ppmsg% | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm% | AR %diff_approach% | CS %diff_size% | OD %diff_overall%";
+
+                format = ReflectUtils.replaceReflectVariables(data, format, false, true);
+                format = format.replace("%cm%", modeName);
+                format = format.replace("%ct%", time);
+                format = format.replace("%ppmsg%", ppMsg);
+
+                Main.getMessenger().respond(event, format);
 
             } catch (JsonEmptyException e) {
                 Main.getMessenger().respond(event, "此谱面不存在!");

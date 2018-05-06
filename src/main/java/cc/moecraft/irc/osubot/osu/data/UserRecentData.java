@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot.osu.data;
 
+import cc.moecraft.irc.osubot.osu.OsuAPIWrapper;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
@@ -75,28 +76,8 @@ public class UserRecentData extends DataBase
     @Expose
     public String rank;
 
-    public double getAcc(int mode)
+    public double getAcc(OsuAPIWrapper wrapper, int mode)
     {
-        double acc = 0;
-        switch (mode)
-        {
-            case 0:
-                acc = (count300 * 300.0 + count100 * 100.0 + count50 * 50.0) / ((count300 + count100 + count50 + countMiss) * 300);
-                break;
-            case 1:
-                acc = (count300 + count100 * 0.5) / (count300 + count100 + countMiss);
-                break;
-            case 2:
-                int base = count300 + count100 + count50;
-                acc = (double) base / (base + (countMiss + countKatu));
-                break;
-            case 3:
-                acc = (double)(count50 * 50 + count100 * 100 + countKatu * 200 + (count300 + countgeki) * 300) / ((count300 + count100 + count50 + countMiss + countKatu + countgeki) * 300);
-                break;
-            default:
-                break;
-        }
-
-        return acc;
+        return wrapper.getAcc(mode, count300, count100, count50, countMiss, countKatu, countgeki);
     }
 }

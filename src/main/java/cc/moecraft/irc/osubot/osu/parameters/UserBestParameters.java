@@ -1,12 +1,12 @@
 package cc.moecraft.irc.osubot.osu.parameters;
 
-import cc.moecraft.irc.osubot.osu.data.UserRecentData;
+import cc.moecraft.irc.osubot.osu.data.UserBestData;
 import cc.moecraft.irc.osubot.osu.parameters.tags.HttpParameter;
 import lombok.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/04 创建!
- * Created by Hykilpikonna on 2018/05/04!
+ * 此类由 Hykilpikonna 在 2018/05/06 创建!
+ * Created by Hykilpikonna on 2018/05/06!
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
  *
@@ -16,7 +16,7 @@ import lombok.*;
 @Builder @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRecentParameters extends ParametersBase
+public class UserBestParameters extends ParametersBase
 {
     // 必要的参数
     @HttpParameter(required = true)
@@ -35,13 +35,13 @@ public class UserRecentParameters extends ParametersBase
     @Override
     public String subURL()
     {
-        return "user_recent";
+        return "user_best";
     }
 
     @Override
     public Class dataStorageClass()
     {
-        return UserRecentData.class;
+        return UserBestData.class;
     }
 
     @Override

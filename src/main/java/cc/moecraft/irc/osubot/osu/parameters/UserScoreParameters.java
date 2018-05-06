@@ -1,6 +1,5 @@
 package cc.moecraft.irc.osubot.osu.parameters;
 
-import cc.moecraft.irc.osubot.osu.data.UserRecentData;
 import cc.moecraft.irc.osubot.osu.data.UserScoreData;
 import cc.moecraft.irc.osubot.osu.parameters.tags.HttpParameter;
 import lombok.*;
@@ -19,12 +18,12 @@ public class UserScoreParameters extends ParametersBase
 {
     // 必要的参数
     @HttpParameter(required = true)
-    private String u;
-
-    @HttpParameter(required = true)
     private String b;
 
     // 不必要的参数
+    @HttpParameter(required = false)
+    private String u;
+
     @HttpParameter(required = false)
     private String m;
 
