@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot.osu.data;
 
+import cc.moecraft.irc.osubot.osu.parameters.UserBestParameters;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
@@ -9,8 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/05 创建!
- * Created by Hykilpikonna on 2018/05/05!
+ * 此类由 Hykilpikonna 在 2018/05/06 创建!
+ * Created by Hykilpikonna on 2018/05/06!
  * Github: https://github.com/hykilpikonna
  * Meow!
  *
@@ -20,47 +21,43 @@ import java.util.Date;
 @Data @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserScoreData extends DataBase implements Comparable<UserScoreData>
+public class UserBestData extends DataBase implements Comparable<UserBestData>
 {
-    @SerializedName("score_id")
+    @SerializedName("beatmap_id")
     @Expose
-    public Long scoreId;
+    public Long beatmapId;
 
     @SerializedName("score")
     @Expose
     public Long score;
 
-    @SerializedName("username")
-    @Expose
-    public String username;
-
     @SerializedName("maxcombo")
     @Expose
-    public Long maxcombo;
+    public int maxcombo;
 
     @SerializedName("count50")
     @Expose
-    public Long count50;
+    public int count50;
 
     @SerializedName("count100")
     @Expose
-    public Long count100;
+    public int count100;
 
     @SerializedName("count300")
     @Expose
-    public Long count300;
+    public int count300;
 
     @SerializedName("countmiss")
     @Expose
-    public Long countmiss;
+    public int countmiss;
 
     @SerializedName("countkatu")
     @Expose
-    public Long countkatu;
+    public int countkatu;
 
     @SerializedName("countgeki")
     @Expose
-    public Long countgeki;
+    public int countgeki;
 
     @SerializedName("perfect")
     @Expose
@@ -86,23 +83,24 @@ public class UserScoreData extends DataBase implements Comparable<UserScoreData>
     @Expose
     public Double pp;
 
-    @SerializedName("replay_available")
-    @Expose
-    public Long replayAvailable;
-
     @Override
-    public int compareTo(UserScoreData o)
+    public int compareTo(UserBestData o)
     {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
         try {
-            Date thisDate = dateFormat.parse(getDate());
-            Date otherDate = dateFormat.parse(o.getDate());
+            Date thisDate = getDateObject();
+            Date otherDate = o.getDateObject();
 
             return otherDate.compareTo(thisDate);
         } catch (ParseException e) {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    public Date getDateObject() throws ParseException
+    {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        return dateFormat.parse(getDate());
     }
 }
