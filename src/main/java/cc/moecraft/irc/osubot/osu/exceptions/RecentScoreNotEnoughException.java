@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor @Data
-public class RecentScoreNotEnough extends Exception
+public class RecentScoreNotEnoughException extends Exception
 {
     int limit;
     int requested;

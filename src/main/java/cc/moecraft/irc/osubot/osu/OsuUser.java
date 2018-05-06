@@ -10,10 +10,7 @@ import cc.moecraft.irc.osubot.osu.parameters.OsuTrackParameters;
 import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
 import lombok.Data;
 import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 import java.net.MalformedURLException;
 
 /**
