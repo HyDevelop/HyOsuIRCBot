@@ -101,7 +101,7 @@ public class CommandRecent extends Command
             format = ReflectUtils.replaceReflectVariables(data, format, false, true);
             format = ReflectUtils.replaceReflectVariables(beatmapData, format, false, true);
             format = format.replace("%cm%", OsuAPIUtils.getModeNameWithMode(beatmapData.getMode()));
-            format = format.replace("%ca%", String.valueOf(Math.round(data.getAcc(beatmapData.getMode()) * 10000d) / 100d));
+            format = format.replace("%ca%", String.valueOf(Math.round(data.getAcc(Main.getWrapper(), beatmapData.getMode()) * 10000d) / 100d));
             format = format.replace("%cscore%", new DecimalFormat("#,###").format(Math.round(data.getScore())));
             format = format.replace("%ppmsg%", ppMsg);
 
