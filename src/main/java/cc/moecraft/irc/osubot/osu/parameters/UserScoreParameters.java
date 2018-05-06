@@ -1,6 +1,7 @@
 package cc.moecraft.irc.osubot.osu.parameters;
 
 import cc.moecraft.irc.osubot.osu.data.UserRecentData;
+import cc.moecraft.irc.osubot.osu.data.UserScoreData;
 import cc.moecraft.irc.osubot.osu.parameters.tags.HttpParameter;
 import lombok.*;
 
@@ -45,7 +46,7 @@ public class UserScoreParameters extends ParametersBase
     @Override
     public Class dataStorageClass()
     {
-        return UserRecentData.class;
+        return UserScoreData.class;
     }
 
     @Override

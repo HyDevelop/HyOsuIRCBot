@@ -85,7 +85,7 @@ public class CommandMap extends Command
 
                 // TODO: PP估算
                 Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(data,
-                        "[osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: PP计算还没有! | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm% | AR %diff_approach% | CS %diff_size% | OD %diff_overall%",
+                        "[osu://b/%beatmap_id% [%cm%: %artist% - %title% (%version%)]]: PP计算还没有! | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm% | AR %diff_approach% | CS %diff_size% | OD %diff_overall%",
                         false, true
                 ).replace("%cm%", modeName).replace("%ct%", time));
 

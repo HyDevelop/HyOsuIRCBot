@@ -8,8 +8,10 @@ import cc.moecraft.irc.osubot.osu.OsuUser;
 import cc.moecraft.irc.osubot.osu.data.BeatmapData;
 import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.osu.data.UserRecentData;
+import cc.moecraft.irc.osubot.osu.data.UserScoreData;
 import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
 import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnough;
+import cc.moecraft.irc.osubot.osu.exceptions.RelatedScoreNotFoundException;
 import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.osu.parameters.BeatmapParameters;
 import cc.moecraft.irc.osubot.osu.parameters.UserRecentParameters;
@@ -24,6 +26,7 @@ import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.net.MalformedURLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import static cc.moecraft.irc.osubot.utils.ArrayUtils.getUsernameAndModeWithArgs;
@@ -74,27 +77,35 @@ public class CommandRecent extends Command
 
             BeatmapData beatmapData = Main.getWrapper().getBeatmap(data);
 
-            // 获取Mode名字
-            String modeName = OsuAPIUtils.getModeNameWithMode(beatmapData.getMode());
+            String ppMsg;
+
+            try {
+                UserScoreData scoreData = Main.getWrapper().getScore(info, data);
+
+                if (scoreData.getPp() == null)
+                    ppMsg = "未计分!";
+                else
+                    ppMsg = String.valueOf(Math.round(scoreData.getPp() * 100d) / 100d) + "pp";
+            } catch (RelatedScoreNotFoundException e) {
+                // TODO: @dullwolf PP计算
+                ppMsg = "未计分!";
+            }
 
             // 四舍五入
             ReflectUtils.roundAllNumbers(data, 1);
             ReflectUtils.roundAllNumbers(beatmapData, 1);
 
-            // 300 和 300p 加起来, 100 和 100p 加起来
-            data.setCount100(data.getCount100() + data.getCount100p());
-            data.setCount300(data.getCount300() + data.getCount300p());
-
             // TODO: PP显示, Mods显示
-            String format = "[osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: ★ %difficultyrating% | 成绩: %rank% | PP计算还没有! | %score% | %maxcombo%x/%max_combo%x | %count300% %count100% %count50% %countmiss%";
+            String format = "[osu://b/%beatmap_id% [%cm%: %artist% - %title% (%version%)]]: ★ %difficultyrating% | 成绩: %rank% | %ppmsg% | %ca%% | %cscore% | %maxcombo%x/%max_combo%x 连击";
 
-            Main.getMessenger().respond(event,
-                    ReflectUtils.replaceReflectVariables(data,
-                            ReflectUtils.replaceReflectVariables(beatmapData,
-                                    format,
-                            false, true),
-                    false, true
-            ).replace("%cm%", modeName));
+            format = ReflectUtils.replaceReflectVariables(data, format, false, true);
+            format = ReflectUtils.replaceReflectVariables(beatmapData, format, false, true);
+            format = format.replace("%cm%", OsuAPIUtils.getModeNameWithMode(beatmapData.getMode()));
+            format = format.replace("%ca%", String.valueOf(Math.round(data.getAcc(beatmapData.getMode()) * 10000d) / 100d));
+            format = format.replace("%cscore%", new DecimalFormat("#,###").format(Math.round(data.getScore())));
+            format = format.replace("%ppmsg%", ppMsg);
+
+            Main.getMessenger().respond(event, format);
 
         } catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e) {
             Main.getMessenger().respond(event, "未知后台错误, 请联系admin@moecraft.cc");
@@ -102,7 +113,6 @@ public class CommandRecent extends Command
         } catch (JsonEmptyException e) {
             Main.getMessenger().respond(event, "未找到用户: " + info.getUsername() + ", 如果确定该用户存在, 请联系admin@moecraft.cc");
             // TODO: 报错收集系统
-            e.printStackTrace();
         } catch (RecentScoreNotEnough recentScoreNotEnough) {
             Main.getMessenger().respond(event, String.format("现在你%s模式的近期成绩只有%s个... 无法获取第%s个, 多玩玩再来看看吧!", OsuAPIUtils.getModeNameWithMode(recentScoreNotEnough.getMode()), recentScoreNotEnough.getLimit(), recentScoreNotEnough.getRequested()));
         }
@@ -153,7 +163,7 @@ public class CommandRecent extends Command
     {
         private int index;
 
-        UsernameAndIndexAndMode(int index, int mode, String username)
+        public UsernameAndIndexAndMode(int index, int mode, String username)
         {
             super(mode, username);
             this.index = index;

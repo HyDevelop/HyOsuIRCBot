@@ -40,7 +40,7 @@ public class Main {
     @Getter
     private static CommandManager commandManager; // 指令管理器
 
-    @Getter
+    @Getter @Setter
     private static DebugLogger logger; // Logger
 
     @Getter
