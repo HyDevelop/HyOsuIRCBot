@@ -20,11 +20,11 @@ public class BeatmapData extends DataBase
 {
     @SerializedName("beatmapset_id")
     @Expose
-    private int beatmapsetId;
+    private long beatmapsetId;
 
     @SerializedName("beatmap_id")
     @Expose
-    private int beatmapId;
+    private long beatmapId;
 
     @SerializedName("approved")
     @Expose
@@ -88,7 +88,7 @@ public class BeatmapData extends DataBase
 
     @SerializedName("bpm")
     @Expose
-    private int bpm;
+    private double bpm;
 
     @SerializedName("source")
     @Expose
@@ -112,11 +112,11 @@ public class BeatmapData extends DataBase
 
     @SerializedName("playcount")
     @Expose
-    private int playcount;
+    private long playcount;
 
     @SerializedName("passcount")
     @Expose
-    private int passCount;
+    private long passCount;
 
     @SerializedName("max_combo")
     @Expose

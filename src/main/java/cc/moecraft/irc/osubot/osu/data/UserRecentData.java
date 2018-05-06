@@ -53,7 +53,7 @@ public class UserRecentData extends DataBase
 
     @SerializedName("countgeki")
     @Expose
-    public int countGeki; // 激
+    public int countgeki; // 激
 
     @SerializedName("perfect")
     @Expose
@@ -91,7 +91,7 @@ public class UserRecentData extends DataBase
                 acc = (double) base / (base + (countMiss + countKatu));
                 break;
             case 3:
-                acc = (double)(count50 * 50 + count100 * 100 + countKatu * 200 + (count300 + countGeki) * 300) / ((count300 + count100 + count50 + countMiss + countKatu + countGeki) * 300);
+                acc = (double)(count50 * 50 + count100 * 100 + countKatu * 200 + (count300 + countgeki) * 300) / ((count300 + count100 + count50 + countMiss + countKatu + countgeki) * 300);
                 break;
             default:
                 break;
