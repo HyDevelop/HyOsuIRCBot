@@ -1,6 +1,5 @@
 package cc.moecraft.irc.osubot.language;
 
-import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.CommandManager;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
