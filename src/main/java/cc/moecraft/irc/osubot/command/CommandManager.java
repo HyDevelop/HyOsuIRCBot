@@ -103,7 +103,14 @@ public class CommandManager
         }
         catch (CommandNotFoundException e)
         {
-            Main.getMessenger().respond(event, "UNKNOWN COMMAND: 未知指令 ( 输入%prefix%help显示帮助 )");
+            if (Main.isEnableListening())
+            {
+                if (isChannel)
+                    if (Main.getConfig().getBoolean("BotProperties.DisableChannelReply")) return RunResult.COMMAND_NOT_FOUND;
+
+                Main.getMessenger().respond(event, "UNKNOWN COMMAND: 未知指令 ( 输入%prefix%help显示帮助 )");
+            }
+
             return RunResult.COMMAND_NOT_FOUND;
         }
     }

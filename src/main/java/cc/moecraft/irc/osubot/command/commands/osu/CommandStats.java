@@ -27,7 +27,7 @@ public class CommandStats extends Command
 {
     public CommandStats()
     {
-        super("stats", "s", "info");
+        super("stats", "s");
     }
 
     /**

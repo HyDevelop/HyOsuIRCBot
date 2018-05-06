@@ -1,12 +1,12 @@
 package cc.moecraft.irc.osubot.osu;
 
-import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.commands.osu.CommandRecent;
 import cc.moecraft.irc.osubot.osu.data.BeatmapData;
 import cc.moecraft.irc.osubot.osu.data.UserRecentData;
 import cc.moecraft.irc.osubot.osu.data.UserScoreData;
 import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
 import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnough;
+import cc.moecraft.irc.osubot.osu.exceptions.RelatedScoreNotFoundException;
 import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.osu.parameters.BeatmapParameters;
 import cc.moecraft.irc.osubot.osu.parameters.UserRecentParameters;
@@ -104,6 +104,8 @@ public class OsuAPIWrapper
     {
         ArrayList<UserScoreData> beatmapDataArrayList = new ArrayList<>();
         downloader.get(parameters).forEach(data -> beatmapDataArrayList.add((UserScoreData) data));
+        beatmapDataArrayList.sort(UserScoreData::compareTo);
+
         return beatmapDataArrayList;
     }
 
@@ -114,9 +116,8 @@ public class OsuAPIWrapper
      * @param recent recent成绩
      * @return score成绩
      */
-    public UserScoreData getScore(CommandRecent.UsernameAndIndexAndMode info, UserRecentData recent) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException, RecentScoreNotEnough
-    {
-        ArrayList<UserScoreData> data = getScore(UserScoreParameters.builder()
+    public UserScoreData getScore(CommandRecent.UsernameAndIndexAndMode info, UserRecentData recent) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException, RelatedScoreNotFoundException {
+        ArrayList<UserScoreData> dataSet = getScore(UserScoreParameters.builder()
                 .b(String.valueOf(recent.getBeatmapId()))
                 .u(info.getUsername())
                 .limit(String.valueOf(info.getIndex()))
@@ -124,9 +125,22 @@ public class OsuAPIWrapper
                 .m(String.valueOf(info.getMode()))
                 .build());
 
-        if (data.size() < info.getIndex()) throw new RecentScoreNotEnough(data.size(), info.getIndex(), info.getMode());
+        for (UserScoreData data : dataSet)
+        {
+            if (    data.count50 == recent.count50 &&
+                    data.count100 == recent.count100 &&
+                    data.count300 == recent.count300 &&
+                    data.countgeki == recent.countgeki &&
+                    data.countkatu == recent.countKatu &&
+                    data.countmiss == recent.countMiss &&
+                    data.enabledMods == recent.enabledMods &&
+                    data.maxcombo == recent.maxCombo)
+            {
+                return data;
+            }
+        }
 
-        return data.get(info.getIndex() - 1);
+        throw new RelatedScoreNotFoundException();
     }
 
     // 计算
