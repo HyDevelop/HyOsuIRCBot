@@ -2,10 +2,7 @@ package cc.moecraft.irc.osubot.osu;
 
 import cc.moecraft.irc.osubot.command.commands.osu.CommandRecent;
 import cc.moecraft.irc.osubot.osu.data.*;
-import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
-import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnough;
-import cc.moecraft.irc.osubot.osu.exceptions.RelatedScoreNotFoundException;
-import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
+import cc.moecraft.irc.osubot.osu.exceptions.*;
 import cc.moecraft.irc.osubot.osu.parameters.BeatmapParameters;
 import cc.moecraft.irc.osubot.osu.parameters.UserBestParameters;
 import cc.moecraft.irc.osubot.osu.parameters.UserRecentParameters;
@@ -83,7 +80,7 @@ public class OsuAPIWrapper
      * @param info 用户信息
      * @return recent成绩
      */
-    public UserRecentData getRecent(CommandRecent.UsernameAndIndexAndMode info) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException, RecentScoreNotEnough
+    public UserRecentData getRecent(CommandRecent.UsernameAndIndexAndMode info) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException, RecentScoreNotEnoughException
     {
         ArrayList<UserRecentData> recents = getRecent(UserRecentParameters.builder()
                 .u(info.getUsername())
@@ -92,7 +89,7 @@ public class OsuAPIWrapper
                 .m(String.valueOf(info.getMode()))
                 .build());
 
-        if (recents.size() < info.getIndex()) throw new RecentScoreNotEnough(recents.size(), info.getIndex(), info.getMode());
+        if (recents.size() < info.getIndex()) throw new RecentScoreNotEnoughException(recents.size(), info.getIndex(), info.getMode());
 
         return recents.get(info.getIndex() - 1);
     }
@@ -105,13 +102,28 @@ public class OsuAPIWrapper
      * @param parameters scores参数
      * @return scores成绩组
      */
-    public ArrayList<UserScoreData> getScore(UserScoreParameters parameters) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException
+    public ArrayList<UserScoreData> getScore(UserScoreParameters parameters, boolean sort) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException
     {
-        ArrayList<UserScoreData> beatmapDataArrayList = new ArrayList<>();
-        downloader.get(parameters).forEach(data -> beatmapDataArrayList.add((UserScoreData) data));
-        beatmapDataArrayList.sort(UserScoreData::compareTo);
+        ArrayList<UserScoreData> obtainedData = new ArrayList<>();
+        downloader.get(parameters).forEach(data -> obtainedData.add((UserScoreData) data));
+        if (sort) obtainedData.sort(UserScoreData::compareTo);
 
-        return beatmapDataArrayList;
+        return obtainedData;
+    }
+
+    /**
+     * 获取一个谱面的最佳成绩
+     *
+     * @param data 谱面
+     * @return 最佳成绩
+     */
+    public UserScoreData getScore(BeatmapData data) throws JsonEmptyException, MalformedURLException, RequiredParamIsNullException, IllegalAccessException, BeatmapScoreNotEnoughException
+    {
+        ArrayList<UserScoreData> obtainedData = getScore(UserScoreParameters.builder().b(String.valueOf(data.getBeatmapId())).m(String.valueOf(data.getMode())).mods("0").limit("2").build(), false);
+
+        if (obtainedData.size() < 1) throw new BeatmapScoreNotEnoughException();
+
+        return obtainedData.get(0);
     }
 
     /**
@@ -128,7 +140,7 @@ public class OsuAPIWrapper
                 .limit(String.valueOf(info.getIndex()))
                 .type("string")
                 .m(String.valueOf(info.getMode()))
-                .build());
+                .build(), true);
 
         for (UserScoreData data : dataSet)
         {
