@@ -147,7 +147,7 @@ public class CommandRecent extends Command
     {
         private int index;
 
-        UsernameAndIndexAndMode(int index, int mode, String username)
+        public UsernameAndIndexAndMode(int index, int mode, String username)
         {
             super(mode, username);
             this.index = index;
