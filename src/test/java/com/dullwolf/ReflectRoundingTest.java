@@ -6,15 +6,12 @@ import cc.moecraft.irc.osubot.osu.OsuAPIWrapper;
 import cc.moecraft.irc.osubot.osu.data.BeatmapData;
 import cc.moecraft.irc.osubot.osu.data.UserRecentData;
 import cc.moecraft.irc.osubot.osu.data.UserScoreData;
-import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnough;
+import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnoughException;
 import cc.moecraft.irc.osubot.osu.exceptions.RelatedScoreNotFoundException;
-import cc.moecraft.irc.osubot.osu.parameters.BeatmapParameters;
 import cc.moecraft.logger.DebugLogger;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
-import cc.moecraft.irc.osubot.osu.data.DataBase;
 import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
 import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
-import cc.moecraft.irc.osubot.osu.parameters.UserParameters;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.irc.osubot.utils.PropertiesUtil;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
@@ -34,7 +31,7 @@ public class ReflectRoundingTest
 {
     private static DebugLogger logger = new DebugLogger("ReflectRoundingTest", true);
 
-    public static void main(String[] args) throws IllegalAccessException, RequiredParamIsNullException, MalformedURLException, JsonEmptyException, RecentScoreNotEnough {
+    public static void main(String[] args) throws IllegalAccessException, RequiredParamIsNullException, MalformedURLException, JsonEmptyException, RecentScoreNotEnoughException {
         //DataBase data = new OsuAPIUtils(PropertiesUtil.readKey("osu_key"), new DownloadUtils(5000)).get(UserParameters.builder().u("Hykilpikonna").build()).get(0);
 
         Main.setLogger(logger);
