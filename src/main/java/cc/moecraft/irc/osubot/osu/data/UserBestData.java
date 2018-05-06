@@ -1,6 +1,5 @@
 package cc.moecraft.irc.osubot.osu.data;
 
-import cc.moecraft.irc.osubot.osu.parameters.UserBestParameters;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
