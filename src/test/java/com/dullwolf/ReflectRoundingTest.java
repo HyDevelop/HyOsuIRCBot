@@ -5,7 +5,9 @@ import cc.moecraft.irc.osubot.command.commands.osu.CommandRecent;
 import cc.moecraft.irc.osubot.osu.OsuAPIWrapper;
 import cc.moecraft.irc.osubot.osu.data.BeatmapData;
 import cc.moecraft.irc.osubot.osu.data.UserRecentData;
+import cc.moecraft.irc.osubot.osu.data.UserScoreData;
 import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnough;
+import cc.moecraft.irc.osubot.osu.exceptions.RelatedScoreNotFoundException;
 import cc.moecraft.irc.osubot.osu.parameters.BeatmapParameters;
 import cc.moecraft.logger.DebugLogger;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
@@ -42,19 +44,33 @@ public class ReflectRoundingTest
         OsuAPIWrapper wrapper = new OsuAPIWrapper(osuAPIUtils);
 
 
-        UserRecentData data = wrapper.getRecent(new CommandRecent.UsernameAndIndexAndMode(1, 0, "Hykilpikonna"));
+        CommandRecent.UsernameAndIndexAndMode info = new CommandRecent.UsernameAndIndexAndMode(1, 0, "Hykilpikonna");
+
+        UserRecentData data = wrapper.getRecent(info);
 
         BeatmapData beatmapData = wrapper.getBeatmap(data);
 
+        String ppMsg;
+
+        try {
+            UserScoreData scoreData = wrapper.getScore(info, data);
+
+            ppMsg = String.valueOf(scoreData.getPp()) + "pp";
+        } catch (RelatedScoreNotFoundException e) {
+            // TODO: @dullwolf PP计算
+            ppMsg = "未计分!";
+        }
+
         ReflectUtils.roundAllNumbers(data, 1);
 
-        String format = "[osu://b/%beatmap_id% [%cm%: %artist% - %title% (%version%)]]: ★ %difficultyrating% | 成绩: %rank% | PP计算还没有! | %ca%% | %cscore% | %maxcombo%x/%max_combo%x 连击";
+        String format = "[osu://b/%beatmap_id% [%cm%: %artist% - %title% (%version%)]]: ★ %difficultyrating% | 成绩: %rank% | %ppmsg% | %ca%% | %cscore% | %maxcombo%x/%max_combo%x 连击";
 
         format = ReflectUtils.replaceReflectVariables(data, format, false, true);
         format = ReflectUtils.replaceReflectVariables(beatmapData, format, false, true);
         format = format.replace("%cm%", OsuAPIUtils.getModeNameWithMode(beatmapData.getMode()));
         format = format.replace("%ca%", String.valueOf(Math.round(data.getAcc(beatmapData.getMode()) * 10000d) / 100d));
         format = format.replace("%cscore%", new DecimalFormat("#,###").format(Math.round(data.getScore())));
+        format = format.replace("%ppmsg%", ppMsg);
 
         logger.log(format);
     }
