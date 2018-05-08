@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot;
 
+import cc.moecraft.irc.osubot.achievement.AchievementManager;
 import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.command.CommandManager;
 import cc.moecraft.irc.osubot.language.Messenger;
@@ -39,6 +40,9 @@ public class Main {
 
     @Getter
     private static CommandManager commandManager; // 指令管理器
+
+    @Getter
+    private static AchievementManager achievementManager; // 成就管理器
 
     @Getter @Setter
     private static DebugLogger logger; // Logger
@@ -92,6 +96,7 @@ public class Main {
         downloader = new DownloadUtils(config.getInt("BotProperties.Download.Timeout"));
         osuAPIUtils = new OsuAPIUtils(config.getString("BotProperties.Download.Osu.APIKey"), downloader);
         wrapper = new OsuAPIWrapper(osuAPIUtils);
+        achievementManager = new AchievementManager();
 
         // 注册指令  优化: 2018-05-02
         registerAllCommands();
