@@ -1,4 +1,6 @@
-package cc.moecraft.irc.osubot.osu;
+package cc.moecraft.irc.osubot.achievement;
+
+import cc.moecraft.irc.osubot.osu.Mods;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/08 创建!
@@ -26,13 +28,13 @@ public interface Achievement
      * 推荐的谱面
      * @return 谱面ID (不是组ID)
      */
-    long recommandedMap();
+    long recommendedMap();
 
     /**
      * 推荐的mod名称
      * @return mods //TODO: 这里改成Bitwise
      */
-    String mods();
+    Mods mods();
 
     /**
      * 一次性成功耗时
