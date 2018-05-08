@@ -1,47 +1,123 @@
 package cc.moecraft.irc.osubot.osu;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+
 /**
- * 此类由 Hykilpikonna 在 2018/04/23 创建!
- * Created by Hykilpikonna on 2018/04/23!
+ * 此类由 Hykilpikonna 在 2018/05/08 创建!
+ * Created by Hykilpikonna on 2018/05/08!
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
+ *
+ * @author Hykilpikonna
  */
-public enum Mods
+@AllArgsConstructor
+@NoArgsConstructor
+public class Mods
 {
-    None          (0),
-    NoFail        (1),
-    Easy          (2),
-    NoVideo       (4), // Not used anymore), but can be found on old plays like Mesita on b/78239
-    Hidden        (8),
-    HardRock      (16),
-    SuddenDeath   (32),
-    DoubleTime    (64),
-    Relax         (128),
-    HalfTime      (256),
-    Nightcore     (512), // Only set along with DoubleTime. i.e: NC only gives 576
-    Flashlight    (1024),
-    Autoplay      (2048),
-    SpunOut       (4096),
-    Relax2        (8192),	// Autopilot?
-    Perfect       (16384), // Only set along with SuddenDeath. i.e: PF only gives 16416
-    Key4          (32768),
-    Key5          (65536),
-    Key6          (131072),
-    Key7          (262144),
-    Key8          (524288),
-    FadeIn        (1048576),
-    Random        (2097152),
-    LastMod       (4194304),
-    Key9          (16777216),
-    Key10         (33554432),
-    Key1          (67108864),
-    Key3          (134217728),
-    Key2          (268435456);
+    private long modsInDEC = 0;
 
-    public int value;
-
-    Mods(int value)
+    /**
+     * 判断一个Mod是否存在
+     * @param mod mod
+     * @return 是否存在
+     */
+    public boolean contains(Mod mod)
     {
-        this.value = value;
+        return (modsInDEC & mod.getBitwiseValue()) == mod.getBitwiseValue();
+    }
+
+    /**
+     * 获取所有mod为ArrayList形式
+     * @return 所有mod列表
+     */
+    public ArrayList<Mod> toArray()
+    {
+        ArrayList<Mod> result = new ArrayList<>();
+
+        Mod.getModReferenceMap().forEach((k, v) ->
+        {
+            if (contains(v)) result.add(v);
+        });
+
+        return result;
+    }
+
+    /**
+     * 获取所有mod为十进制数格式
+     * @return 代表所有mod的十进制数
+     */
+    public long toDec()
+    {
+        return modsInDEC;
+    }
+
+    /**
+     * 添加一个Mod
+     * @param mod mod
+     * @return 这个实例
+     */
+    public Mods add(Mod mod)
+    {
+        modsInDEC = modsInDEC | mod.getBitwiseValue();
+        return this;
+    }
+
+    /**
+     * 添加一个Mod的封装, 添加多个mod
+     * @param mods mod
+     * @return 这个实例
+     */
+    public Mods add(Mod ... mods)
+    {
+        for (Mod oneMod : mods) add(oneMod);
+        return this;
+    }
+
+    /**
+     * 移除一个Mod
+     * @param mod mod
+     * @return 这个实例
+     */
+    public Mods remove(Mod mod)
+    {
+        modsInDEC = modsInDEC ^ mod.getBitwiseValue();
+        return this;
+    }
+
+    /**
+     * 移除一个Mod的封装, 移除多个mod
+     * @param mods mod
+     * @return 这个实例
+     */
+    public Mods remove(Mod ... mods)
+    {
+        for (Mod oneMod : mods) remove(oneMod);
+        return this;
+    }
+
+    /**
+     * 获取所有mod合在一起的名字
+     * Ex: "HD DT HR"
+     *
+     * @return 所有mod名字
+     */
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+
+        ArrayList<Mod> modsArrayList = toArray();
+
+        if (modsArrayList.size() == 0) return "";
+        
+        builder.append(modsArrayList.get(0).getShortName());
+        modsArrayList.remove(0);
+
+        modsArrayList.forEach(oneMod -> builder.append(" ").append(oneMod.getShortName()));
+
+        return builder.toString();
     }
 }
