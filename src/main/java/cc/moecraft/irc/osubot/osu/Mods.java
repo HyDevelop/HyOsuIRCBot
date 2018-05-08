@@ -17,7 +17,7 @@ import java.util.ArrayList;
 @NoArgsConstructor
 public class Mods
 {
-    private long modsInDEC;
+    private long modsInDEC = 0;
 
     /**
      * 判断一个Mod是否存在
@@ -96,5 +96,28 @@ public class Mods
     {
         for (Mod oneMod : mods) remove(oneMod);
         return this;
+    }
+
+    /**
+     * 获取所有mod合在一起的名字
+     * Ex: "HD DT HR"
+     *
+     * @return 所有mod名字
+     */
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+
+        ArrayList<Mod> modsArrayList = toArray();
+
+        if (modsArrayList.size() == 0) return "";
+        
+        builder.append(modsArrayList.get(0).getShortName());
+        modsArrayList.remove(0);
+
+        modsArrayList.forEach(oneMod -> builder.append(" ").append(oneMod.getShortName()));
+
+        return builder.toString();
     }
 }

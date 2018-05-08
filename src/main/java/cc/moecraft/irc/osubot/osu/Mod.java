@@ -14,6 +14,9 @@ import java.util.HashMap;
 @Data
 public class Mod
 {
+    @Getter
+    private static HashMap<String, Mod> modReferenceMap = new HashMap<>();
+
     public static final Mod None = new Mod          (""  , 0);
     public static final Mod NoFail = new Mod        ("NF", 1);
     public static final Mod Easy = new Mod          ("EZ", 2);
@@ -44,9 +47,6 @@ public class Mod
     public static final Mod Key3 = new Mod          ("3K", 134217728);
     public static final Mod Key2 = new Mod          ("2K", 268435456);
 
-    @Getter
-    private static HashMap<String, Mod> modReferenceMap = new HashMap<>();
-
     private String shortName;
     private long bitwiseValue;
 
@@ -55,7 +55,6 @@ public class Mod
         this.shortName = shortName;
         this.bitwiseValue = bitwiseValue;
 
-        modReferenceMap = new HashMap<>();
         modReferenceMap.put(shortName, this);
     }
 }
