@@ -17,7 +17,7 @@ public class Mod
     public static final Mod None = new Mod          (""  , 0);
     public static final Mod NoFail = new Mod        ("NF", 1);
     public static final Mod Easy = new Mod          ("EZ", 2);
-    public static final Mod NoVideo = new Mod       (""  , 4); // Not used anymore), but can be found on old plays like Mesita on b/78239
+    public static final Mod NoVideo = new Mod       (""  , 4); // 官方已弃用
     public static final Mod Hidden = new Mod        ("HD", 8);
     public static final Mod HardRock = new Mod      ("HR", 16);
     public static final Mod SuddenDeath = new Mod   ("SD", 32);
@@ -39,7 +39,7 @@ public class Mod
     public static final Mod Random = new Mod        ("", 2097152);
     public static final Mod LastMod = new Mod       ("", 4194304);
     public static final Mod Key9 = new Mod          ("9K", 16777216);
-    public static final Mod Key10 = new Mod         ("XK", 33554432);
+    public static final Mod Key10 = new Mod         ("XK", 33554432); // 官方已弃用
     public static final Mod Key1 = new Mod          ("1K", 67108864);
     public static final Mod Key3 = new Mod          ("3K", 134217728);
     public static final Mod Key2 = new Mod          ("2K", 268435456);
