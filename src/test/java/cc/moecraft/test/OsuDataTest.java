@@ -38,23 +38,24 @@ public class OsuDataTest
         OsuAPIWrapper wrapper = new OsuAPIWrapper(osuAPIUtils);
 
 
-        CommandRecent.UsernameAndIndexAndMode info = new CommandRecent.UsernameAndIndexAndMode(1, 0, "nekomimi_kyara");
+        CommandRecent.UsernameAndIndexAndMode info = new CommandRecent.UsernameAndIndexAndMode(7, 0, "Hykilpikonna");
 
         UserRecentData data = wrapper.getRecent(info);
 
         BeatmapData beatmapData = wrapper.getBeatmap(data);
 
-        String ppMsg;
+        String ppMsg = "未赋值";
 
         try {
             UserScoreData scoreData = wrapper.getScore(info, data);
 
-            if (scoreData.getPp() == null)
-                ppMsg = "未计分!";
-            else
-                ppMsg = String.valueOf(Math.round(scoreData.getPp() * 100d) / 100d) + "pp";
+            ppMsg = String.valueOf(Math.round(scoreData.getPp() * 100d) / 100d) + "pp";
+
+            int i = 1/0;
         } catch (RelatedScoreNotFoundException e) {
-            ppMsg = "未计分!";
+            ppMsg = "未计分2!";
+        } catch (ArithmeticException devideByZeroException) {
+            logger.log("除以0异常");
         }
 
         ReflectUtils.roundAllNumbers(data, 1);

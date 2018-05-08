@@ -141,7 +141,6 @@ public class CommandPush extends Command implements ChannelCommand
         } catch (JsonEmptyException e) {
             Main.getMessenger().respond(event, "未找到用户: " + info.getUsername() + ", 如果确定该用户存在, 请联系me@hydev.org");
             // TODO: 报错收集系统
-            e.printStackTrace();
         } catch (RecentScoreNotEnoughException recentScoreNotEnough) {
             Main.getMessenger().respond(event, String.format("现在你%s模式的近期成绩只有%s个... 无法获取第%s个, 多玩玩再来看看吧!", OsuAPIUtils.getModeNameWithMode(recentScoreNotEnough.getMode()), recentScoreNotEnough.getLimit(), recentScoreNotEnough.getRequested()));
         }
