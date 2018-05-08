@@ -1,7 +1,9 @@
 package cc.moecraft.irc.osubot.osu;
 
 import lombok.Data;
+import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -43,6 +45,7 @@ public class Mod
     public static final Mod Key3 = new Mod          ("3K", 134217728);
     public static final Mod Key2 = new Mod          ("2K", 268435456);
 
+    @Getter
     private static HashMap<String, Mod> modReferenceMap = new HashMap<>();
 
     private String shortName;
