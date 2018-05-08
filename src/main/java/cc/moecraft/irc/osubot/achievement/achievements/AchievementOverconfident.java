@@ -12,7 +12,7 @@ import cc.moecraft.irc.osubot.osu.Mods;
  *
  * @author Hykilpikonna
  */
-public class AchievementOverconfident implements Achievement
+public class AchievementOverconfident extends Achievement
 {
     @Override
     public String officialAchievementName()
