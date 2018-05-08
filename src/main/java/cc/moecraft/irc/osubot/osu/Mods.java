@@ -1,7 +1,6 @@
 package cc.moecraft.irc.osubot.osu;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 
 import java.util.ArrayList;
 
@@ -25,7 +24,7 @@ public class Mods
      */
     public boolean contains(Mod mod)
     {
-        return (modsInDEC & mod.getValue()) == mod.getValue();
+        return (modsInDEC & mod.getBitwiseValue()) == mod.getBitwiseValue();
     }
 
     /**
@@ -51,5 +50,16 @@ public class Mods
     public long toDec()
     {
         return modsInDEC;
+    }
+
+    /**
+     * 添加一个Mod
+     * @param mod mod
+     * @return 这个实例
+     */
+    public Mods add(Mod mod)
+    {
+        modsInDEC = modsInDEC | mod.getBitwiseValue();
+        return this;
     }
 }

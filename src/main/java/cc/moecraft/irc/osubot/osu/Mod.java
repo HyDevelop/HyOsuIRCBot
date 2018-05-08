@@ -3,7 +3,6 @@ package cc.moecraft.irc.osubot.osu;
 import lombok.Data;
 import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -49,12 +48,12 @@ public class Mod
     private static HashMap<String, Mod> modReferenceMap = new HashMap<>();
 
     private String shortName;
-    private int value;
+    private long bitwiseValue;
 
-    public Mod(String shortName, int value)
+    public Mod(String shortName, int bitwiseValue)
     {
         this.shortName = shortName;
-        this.value = value;
+        this.bitwiseValue = bitwiseValue;
 
         modReferenceMap = new HashMap<>();
         modReferenceMap.put(shortName, this);
