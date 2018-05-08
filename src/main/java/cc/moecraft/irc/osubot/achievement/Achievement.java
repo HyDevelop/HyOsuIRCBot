@@ -1,6 +1,7 @@
 package cc.moecraft.irc.osubot.achievement;
 
 import cc.moecraft.irc.osubot.osu.Mods;
+import lombok.NoArgsConstructor;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/08 创建!
@@ -10,41 +11,42 @@ import cc.moecraft.irc.osubot.osu.Mods;
  *
  * @author Hykilpikonna
  */
-public interface Achievement
+@NoArgsConstructor
+public abstract class Achievement
 {
     /**
      * 官方的成就名
      * @return 成就名
      */
-    String officialAchievementName();
+    public abstract String officialAchievementName();
 
     /**
      * 成就攻略
      * @return 攻略
      */
-    String tutorial();
+    public abstract String tutorial();
 
     /**
      * 推荐的谱面
      * @return 谱面ID (不是组ID)
      */
-    long recommendedMap();
+    public abstract long recommendedMap();
 
     /**
      * 推荐的mod名称
-     * @return mods //TODO: 这里改成Bitwise
+     * @return mods
      */
-    Mods mods();
+    public abstract Mods mods();
 
     /**
      * 一次性成功耗时
      * @return 耗时 (分钟)
      */
-    double completionTimeInMinutes();
+    public abstract double completionTimeInMinutes();
 
     /**
      * 平均重试次数
      * @return 重试次数
      */
-    int averageRetryCount();
+    public abstract int averageRetryCount();
 }
