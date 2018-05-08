@@ -62,4 +62,15 @@ public class Mods
         modsInDEC = modsInDEC | mod.getBitwiseValue();
         return this;
     }
+
+    /**
+     * 移除一个Mod
+     * @param mod mod
+     * @return 这个实例
+     */
+    public Mods remove(Mod mod)
+    {
+        modsInDEC = modsInDEC ^ mod.getBitwiseValue();
+        return this;
+    }
 }
