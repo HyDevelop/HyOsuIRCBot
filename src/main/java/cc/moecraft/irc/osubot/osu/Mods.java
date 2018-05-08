@@ -86,4 +86,15 @@ public class Mods
         modsInDEC = modsInDEC ^ mod.getBitwiseValue();
         return this;
     }
+
+    /**
+     * 移除一个Mod的封装, 移除多个mod
+     * @param mods mod
+     * @return 这个实例
+     */
+    public Mods remove(Mod ... mods)
+    {
+        for (Mod oneMod : mods) remove(oneMod);
+        return this;
+    }
 }
