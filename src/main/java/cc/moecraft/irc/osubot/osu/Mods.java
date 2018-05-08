@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class Mods
 {
     private long modsInDEC = 0;
-    
+
     /**
      * 封装构造器, 在构造之后直接添加mods
      * @param mods mods
