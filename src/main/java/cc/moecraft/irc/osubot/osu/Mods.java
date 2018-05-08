@@ -13,11 +13,16 @@ import java.util.ArrayList;
  *
  * @author Hykilpikonna
  */
-@AllArgsConstructor @Data
+@AllArgsConstructor
 public class Mods
 {
     private long modsInDEC;
 
+    /**
+     * 判断一个Mod是否存在
+     * @param mod mod
+     * @return 是否存在
+     */
     public boolean contains(Mod mod)
     {
         return (modsInDEC & mod.getValue()) == mod.getValue();
@@ -37,5 +42,14 @@ public class Mods
         });
 
         return result;
+    }
+
+    /**
+     * 获取所有mod为十进制数格式
+     * @return 代表所有mod的十进制数
+     */
+    public long toDec()
+    {
+        return modsInDEC;
     }
 }
