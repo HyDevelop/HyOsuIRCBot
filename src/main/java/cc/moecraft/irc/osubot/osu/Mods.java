@@ -1,6 +1,7 @@
 package cc.moecraft.irc.osubot.osu;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
  * @author Hykilpikonna
  */
 @AllArgsConstructor
+@NoArgsConstructor
 public class Mods
 {
     private long modsInDEC;
@@ -60,6 +62,17 @@ public class Mods
     public Mods add(Mod mod)
     {
         modsInDEC = modsInDEC | mod.getBitwiseValue();
+        return this;
+    }
+
+    /**
+     * 添加一个Mod的封装, 添加多个mod
+     * @param mods mod
+     * @return 这个实例
+     */
+    public Mods add(Mod ... mods)
+    {
+        for (Mod oneMod : mods) add(oneMod);
         return this;
     }
 
