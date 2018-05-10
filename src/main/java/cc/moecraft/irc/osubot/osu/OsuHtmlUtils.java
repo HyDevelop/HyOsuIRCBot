@@ -106,13 +106,13 @@ public class OsuHtmlUtils
     }
 
     /**
-     * 获取用户成就组
-     * @param user 用户ID或用户名
+     * 获取所有成就组
+     * // @param user 用户ID或用户名
      * @return 成就列表
      */
-    public ArrayList<AchievementData> getAchievements(String user) throws UnexpectedHtmlJsonException, MalformedURLException, JsonEmptyException
+    public ArrayList<AchievementData> getAllAvaliableAchievements() throws UnexpectedHtmlJsonException, MalformedURLException, JsonEmptyException
     {
-        ArrayList<JsonElement> tempElements = getJsonElementFromUser(user, "achievements");
+        ArrayList<JsonElement> tempElements = getJsonElementFromUser("5093373", "achievements");
 
         if (tempElements.size() < 1) throw new JsonEmptyException();
         if (tempElements.size() > 1) throw new UnexpectedHtmlJsonException("获取到的Json不止一个", null, tempElements);
@@ -128,43 +128,8 @@ public class OsuHtmlUtils
 
         ArrayList<AchievementData> result = new ArrayList<>();
 
-        array.forEach(element ->
-        {
-            result.add(new Gson().fromJson(element, AchievementData.class));
-        });
+        array.forEach(element -> result.add(new Gson().fromJson(element, AchievementData.class)));
 
         return result;
-
-
-        /*String html = downloader.downloadAsString(new URL("https://osu.ppy.sh/users/" + user));
-
-        // Pattern pattern = Pattern.compile("(?<=<script id=\"json-achievements\" type=\"application\\/json\">)(.*([\\d\\r\\n]+))(?= {8}<\\/script>)", Pattern.DOTALL);
-        Pattern pattern = Pattern.compile("\\b.*<script id=\"json-achievements\" type=\"application\\/json\">\\s+\\S+.*]", Pattern.DOTALL);
-        Matcher matcher = pattern.matcher(html);
-
-        // if (!matcher.find()) throw new UserNotFoundException();
-
-        while (matcher.find())
-        {
-            System.out.println(matcher.group(1));
-        }
-
-        String group = matcher.group(0);
-        JsonElement jsonElement = JsonUtils.parseJsonElement(group);
-
-        if (jsonElement.isJsonNull()) throw new JsonEmptyException();
-        if (!jsonElement.isJsonArray()) throw new UnexpectedHtmlJsonException("这个获取到的Json不是JsonArray, 也不是空的", html, jsonElement.toString());
-
-        ArrayList<AchievementData> achievements = new ArrayList<>();
-
-        for (JsonElement oneElement : jsonElement.getAsJsonArray())
-        {
-            if (oneElement.isJsonNull()) continue;
-            if (!oneElement.isJsonObject()) throw new UnexpectedHtmlJsonException("这个获取到的Json中的一项不是JsonObject, 也不是空的", html, oneElement.toString());
-
-            achievements.add(new Gson().fromJson(oneElement.getAsJsonObject(), AchievementData.class));
-        }
-
-        return achievements;*/
     }
 }
