@@ -114,8 +114,6 @@ public class OsuHtmlUtils
     {
         ArrayList<JsonElement> tempElements = getJsonElementFromUser(user, "achievements");
 
-        System.out.println("Elements: " + tempElements);
-
         if (tempElements.size() < 1) throw new JsonEmptyException();
         if (tempElements.size() > 1) throw new UnexpectedHtmlJsonException("获取到的Json不止一个", null, tempElements);
 
