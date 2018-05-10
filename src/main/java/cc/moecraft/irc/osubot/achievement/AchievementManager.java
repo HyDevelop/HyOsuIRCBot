@@ -1,9 +1,12 @@
 package cc.moecraft.irc.osubot.achievement;
 
+import cc.moecraft.irc.osubot.osu.data.AchievementData;
+import cc.moecraft.irc.osubot.osu.exceptions.UnexpectedAchievementNotFoundException;
 import lombok.Getter;
 import org.reflections.Reflections;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -41,5 +44,20 @@ public class AchievementManager
 
             achievements.put(achievement.getName(), achievement);
         }
+    }
+
+    /**
+     * 通过从JSON获取到的成就获取成就
+     * @param achievementData 获取到的成就数据
+     * @return 成就
+     */
+    public Achievement getAchievement(AchievementData achievementData) throws UnexpectedAchievementNotFoundException
+    {
+        for (Map.Entry<String, Achievement> achievementEntry : achievements.entrySet())
+        {
+            if (achievementEntry.getValue().getId() == achievementData.getId()) return achievementEntry.getValue();
+        }
+
+        throw new UnexpectedAchievementNotFoundException(achievementData);
     }
 }
