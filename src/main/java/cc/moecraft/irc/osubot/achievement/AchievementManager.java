@@ -1,6 +1,5 @@
 package cc.moecraft.irc.osubot.achievement;
 
-import cc.moecraft.irc.osubot.command.Command;
 import lombok.Getter;
 import org.reflections.Reflections;
 
@@ -40,7 +39,7 @@ public class AchievementManager
         {
             Achievement achievement = oneClass.newInstance();
 
-            achievements.put(achievement.officialAchievementName(), achievement);
+            achievements.put(achievement.getName(), achievement);
         }
     }
 }
