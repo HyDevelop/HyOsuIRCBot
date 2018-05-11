@@ -1,18 +1,13 @@
 package cc.moecraft.irc.osubot.osu;
 
-import cc.moecraft.irc.osubot.achievement.Achievement;
 import cc.moecraft.irc.osubot.osu.data.AchievementData;
 import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
-import cc.moecraft.irc.osubot.osu.exceptions.JsonNotFoundInHtmlException;
 import cc.moecraft.irc.osubot.osu.exceptions.UnexpectedHtmlJsonException;
-import cc.moecraft.irc.osubot.osu.exceptions.UserNotFoundException;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
-import cc.moecraft.irc.osubot.utils.JsonUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.jfinal.json.Json;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -20,10 +15,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/08 创建!
@@ -48,7 +41,8 @@ public class OsuHtmlUtils
      * @param user 用户ID或用户名
      * @return Json对象
      */
-    public ArrayList<JsonElement> getJsonElementFromUser(String user, String ... jsonIds) throws MalformedURLException {
+    public HashMap<String, JsonElement> getJsonElementFromUser(String user, String ... jsonIds) throws MalformedURLException
+    {
         return getJsonElementsFromOsuWebsite(new ArrayList<>(Arrays.asList(jsonIds)), new URL("https://osu.ppy.sh/users/" + user));
     }
 
@@ -59,10 +53,29 @@ public class OsuHtmlUtils
      * @param url URL
      * @return Json对象
      */
-    public ArrayList<JsonElement> getJsonElementsFromOsuWebsite(ArrayList<String> jsonIds, URL url)
+    public HashMap<String, JsonElement> getJsonElementsFromOsuWebsite(ArrayList<String> jsonIds, URL url)
     {
         ArrayList<String> tags = getTagsFromJsonIds(jsonIds);
-        ArrayList<JsonElement> result = new ArrayList<>();
+        HashMap<String, String> tagData = getTagDataFromWebsite(tags, url, 1, "</script>");
+
+        HashMap<String, JsonElement> result = new HashMap<>();
+
+        tagData.forEach((tag, data) -> result.put(getTagsFromJsonIdsReverse(tag), new JsonParser().parse(data)));
+
+        return result;
+    }
+
+    /**
+     * 从一个网站中获取一些Tag
+     * @param tags 这些Tag
+     * @param url 网站URL
+     * @param ignoranceIndex 忽略几行
+     * @param endLineContains 扫描到什么结束
+     * @return 结果 ( Tag 对应 数据 )
+     */
+    public HashMap<String, String> getTagDataFromWebsite(ArrayList<String> tags, URL url, int ignoranceIndex, String endLineContains)
+    {
+        HashMap<String, String> result = new HashMap<>();
 
         String html = downloader.downloadAsString(url);
 
@@ -78,7 +91,21 @@ public class OsuHtmlUtils
             {
                 if (!line.contains(tag)) continue;
 
-                result.add(new JsonParser().parse(scanner.nextLine()));
+                for (int i = 1; i < ignoranceIndex; i++) scanner.nextLine(); // 忽略掉这些行
+
+                StringBuilder builder = new StringBuilder();
+
+                while (scanner.hasNext())
+                {
+                    String nextLine = scanner.nextLine();
+
+                    if (nextLine.contains(endLineContains)) break;
+
+                    if (!builder.toString().equals("")) builder.append("\n");
+                    builder.append(nextLine);
+                }
+
+                result.put(tag, builder.toString());
             }
         }
 
@@ -106,18 +133,42 @@ public class OsuHtmlUtils
     }
 
     /**
+     * 反向处理, 从HTML的Tags获取Id
+     * @param tags Id列表
+     * @return Tag列表
+     */
+    public ArrayList<String> getTagsFromJsonIdsReverse(ArrayList<String> tags)
+    {
+        ArrayList<String> jsonIds = new ArrayList<>();
+
+        tags.forEach(tag -> jsonIds.add(tag.replace(TAGS_PREFIX, "").replace(TAGS_SUFFIX, "")));
+
+        return jsonIds;
+    }
+
+    /**
+     * 反向处理, 从HTML的Tags获取Id
+     * @param tag Id
+     * @return Tag
+     */
+    public String getTagsFromJsonIdsReverse(String tag)
+    {
+        return tag.replace(TAGS_PREFIX, "").replace(TAGS_SUFFIX, "");
+    }
+
+    /**
      * 获取所有成就组
      * // @param user 用户ID或用户名
      * @return 成就列表
      */
-    public ArrayList<AchievementData> getAllAvaliableAchievements() throws UnexpectedHtmlJsonException, MalformedURLException, JsonEmptyException
+    public ArrayList<AchievementData> getAllAvailableAchievements() throws UnexpectedHtmlJsonException, MalformedURLException, JsonEmptyException
     {
-        ArrayList<JsonElement> tempElements = getJsonElementFromUser("5093373", "achievements");
+        HashMap<String, JsonElement> tempElements = getJsonElementFromUser("5093373", "achievements");
 
         if (tempElements.size() < 1) throw new JsonEmptyException();
         if (tempElements.size() > 1) throw new UnexpectedHtmlJsonException("获取到的Json不止一个", null, tempElements);
 
-        JsonElement tempElement = tempElements.get(0);
+        JsonElement tempElement = tempElements.get("achievements");
 
         if (tempElement.isJsonNull()) throw new JsonEmptyException();
         if (!tempElement.isJsonArray()) throw new UnexpectedHtmlJsonException("获取到的Json不是列表", null, tempElements);
