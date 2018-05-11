@@ -1,8 +1,8 @@
 package cc.moecraft.irc.osubot.achievement.achievements;
 
 import cc.moecraft.irc.osubot.achievement.Achievement;
-import cc.moecraft.irc.osubot.osu.Mod;
 import cc.moecraft.irc.osubot.osu.Mods;
+import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/08 创建!
@@ -42,7 +42,7 @@ public class AchievementOverconfident extends Achievement
     public long getRecommendedMap() { return 434841; }
 
     @Override
-    public Mods getMods() { return new Mods(Mod.DoubleTime, Mod.HardRock); }
+    public Mods getMods() { return new Mods(DoubleTime, HardRock); }
 
     @Override
     public double getCompletionTimeInMinutes() { return 1; }
