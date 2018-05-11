@@ -1,8 +1,6 @@
 package cc.moecraft.irc.osubot.achievement;
 
 import cc.moecraft.irc.osubot.osu.Mods;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import lombok.NoArgsConstructor;
 
 /**
