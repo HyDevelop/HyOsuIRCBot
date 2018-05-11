@@ -86,4 +86,14 @@ public class StringUtils
     public static String guoHtml(String s) {
         return s.replaceAll("<[.[^<]]*>", "").trim();
     }
+
+    /**
+     * 首字母大写
+     * @param line 一行
+     * @return 首字母都大写了的一行
+     */
+    public static String capitalizeFirstLetterOfEachWord(String line)
+    {
+        return Character.toUpperCase(line.charAt(0)) + line.substring(1);
+    }
 }
