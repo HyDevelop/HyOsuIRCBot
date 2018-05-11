@@ -27,7 +27,7 @@ public class OsuHtmlUtilsAchievementsTest
     {
         OsuHtmlUtils htmlUtils = new OsuHtmlUtils(new DownloadUtils(5000));
 
-        ArrayList<AchievementData> data = htmlUtils.getAchievements("5093373");
+        ArrayList<AchievementData> data = htmlUtils.getAllAvailableAchievements();
 
         logger.debug("获取到的成就: " + data.toString());
     }
