@@ -20,6 +20,16 @@ public class Mods
     private long modsInDEC = 0;
 
     /**
+     * 封装构造器, 在构造之后直接添加mods
+     * @param mods mods
+     */
+    public Mods(Mod ... mods)
+    {
+        this();
+        add(mods);
+    }
+
+    /**
      * 判断一个Mod是否存在
      * @param mod mod
      * @return 是否存在
