@@ -130,4 +130,39 @@ public class Mods
 
         return builder.toString();
     }
+
+    /**
+     * 从短名字转换为Mods
+     * Ex: "HDDTHR"
+     *
+     * @param shortString 短名字
+     * @return Mods对象
+     */
+    public static Mods parseFromShortString(String shortString)
+    {
+        String split = shortString.replaceAll("..(?!$)", "$0 ");
+
+        return parseFromString(split);
+    }
+
+    /**
+     * 从名字转换为Mods
+     * Ex: "HD DT HR"
+     *
+     * @param name 名字
+     * @return Mods对象
+     */
+    public static Mods parseFromString(String name)
+    {
+        String[] split = name.split(" ");
+
+        Mods result = new Mods();
+
+        for (String oneName : split)
+        {
+            if (Mod.getModReferenceMap().containsKey(oneName)) result.add(Mod.getModReferenceMap().get(oneName));
+        }
+
+        return result;
+    }
 }
