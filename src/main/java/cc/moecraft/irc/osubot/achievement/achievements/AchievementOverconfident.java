@@ -39,14 +39,14 @@ public class AchievementOverconfident extends Achievement
     public String getTutorial() { return "任意谱面开DT+HR打出低于40%的准确率"; }
 
     @Override
-    public long getRecommendedMap() { return 434841; }
+    public Long getRecommendedMap() { return 434841L; }
 
     @Override
     public Mods getMods() { return new Mods(DoubleTime, HardRock); }
 
     @Override
-    public double getCompletionTimeInMinutes() { return 1; }
+    public String getCompletionTimeInMinutes() { return "1"; }
 
     @Override
-    public int getAverageRetryCount() { return 1; }
+    public String getAverageRetryCount() { return "1"; }
 }
