@@ -29,7 +29,7 @@ public class AchievementClassGenerator
 {
     private static DebugLogger logger = new DebugLogger("AchievementClassGenerator", true);
 
-    private static String generatePath = "./Generated/";
+    private static String generatePath = "./src/main/java/";
     private static String formatPath = "./src/test/resources/AchievementGeneratorFormat.java";
     private static String baseClassPackage = "cc.moecraft.irc.osubot.achievement.achievements";
     private static Pattern regexForFindingBeatmap = Pattern.compile("(?<=\"https://osu.ppy.sh/b/)(.*)(?=\")");
