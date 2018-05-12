@@ -5,21 +5,21 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:12 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:12!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:31:09 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:31:09!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
  *
  * @author Hykilpikonna
  */
-public class AchievementOverconfident extends Achievement
+public class AchievementThrillOfTheChase extends Achievement
 {
     @Override
-    public long getId() { return 177; }
+    public long getId() { return 170; }
 
     @Override
-    public String getName() { return "Overconfident"; }
+    public String getName() { return "Thrill of the Chase"; }
 
     @Override
     public String getGrouping() { return "Hush-Hush"; }
@@ -28,16 +28,16 @@ public class AchievementOverconfident extends Achievement
     public long getOrdering() { return 0; }
 
     @Override
-    public String getSlug() { return "osu-secret-overconfident"; }
+    public String getSlug() { return "all-secret-thrillofthechase"; }
 
     @Override
-    public String getDescription() { return "Try again later, maybe?"; }
+    public String getDescription() { return "My heart's beating, my hands are shaking, and I'm STILL clicking."; }
 
     @Override
-    public int getMode() { return 4; }
+    public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass a map with very low accuracy using DT or HR mod. Worked with 33.33% on <a href=\"https://osu.ppy.sh/b/417503\">Lena Park - Inori~You Raise Me Up (TV Size)</a> [Lanturn's Beginner]"; }
+    public String getTutorial() { return " Full combo <a href=\"https://osu.ppy.sh/b/1043382\">cYsmix - Classic Pursuit [Advanced]<a> with DT mod"; }
 
     @Override
     public Long getRecommendedMap() { return null; }
