@@ -66,7 +66,7 @@ public abstract class Achievement
      * 推荐的谱面
      * @return 谱面ID (不是组ID)
      */
-    public abstract long getRecommendedMap();
+    public abstract Long getRecommendedMap();
 
     /**
      * 推荐的mod名称
@@ -78,11 +78,11 @@ public abstract class Achievement
      * 一次性成功耗时
      * @return 耗时 (分钟)
      */
-    public abstract double getCompletionTimeInMinutes();
+    public abstract String getCompletionTimeInMinutes();
 
     /**
      * 平均重试次数
      * @return 重试次数
      */
-    public abstract int getAverageRetryCount();
+    public abstract String getAverageRetryCount();
 }
