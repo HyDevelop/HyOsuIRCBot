@@ -40,14 +40,14 @@ public class Achievement%name_capitalized% extends Achievement
     public String getTutorial() { return "%tutorial%"; }
 
     @Override
-    public long getRecommendedMap() { return %recommend%; }
+    public Long getRecommendedMap() { return %recommend%; }
 
     @Override
-    public Mods getMods() { return new Mods(%mods%); }
+    public Mods getMods() { return Mods.parseFromShortString("%mods%"); }
 
     @Override
-    public double getCompletionTimeInMinutes() { return %completion_time%; }
+    public String getCompletionTimeInMinutes() { return "%completion_time%"; }
 
     @Override
-    public int getAverageRetryCount() { return %average_retry%; }
+    public String getAverageRetryCount() { return "%average_retry%"; }
 }
