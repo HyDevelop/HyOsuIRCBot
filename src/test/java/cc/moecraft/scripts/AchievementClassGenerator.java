@@ -61,6 +61,18 @@ public class AchievementClassGenerator
                     .replace(",", "");
             String haitaiData = getHaitaiData(achievement, osuHtmlUtils);
 
+            switch (achievement.getMode())
+            {
+                case "osu":
+                    achievement.setMode("0");
+                case "taiko":
+                    achievement.setMode("1");
+                case "fruits":
+                    achievement.setMode("2");
+                case "mania":
+                    achievement.setMode("3");
+            }
+
             AchievementGenerateData generateData = AchievementGenerateData.builder()
                     .class_package(baseClassPackage + ".Achievement" + noSpaceName)
                     .current_date_and_time(new SimpleDateFormat("yyyy/MM/DD HH:mm:ss").format(new Date()))
