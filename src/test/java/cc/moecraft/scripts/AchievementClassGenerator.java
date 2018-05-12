@@ -81,7 +81,7 @@ public class AchievementClassGenerator
             }
 
             AchievementGenerateData generateData = AchievementGenerateData.builder()
-                    .class_package(baseClassPackage + ".Achievement" + noSpaceName)
+                    .class_package(baseClassPackage)
                     .current_date_and_time(new SimpleDateFormat("yyyy/MM/DD HH:mm:ss").format(new Date()))
                     .name_capitalized(noSpaceName)
                     .id(String.valueOf(achievement.getId()))
@@ -100,7 +100,7 @@ public class AchievementClassGenerator
 
             String fileContent = ReflectUtils.replaceReflectVariables(generateData, format, false, false);
 
-            File targetFile = new File(generatePath + generateData.getClass_package().replace(".", "/") + ".java");
+            File targetFile = new File(generatePath + (baseClassPackage + ".Achievement" + noSpaceName).replace(".", "/") + ".java");
 
             createFileOrOverride(targetFile);
 
