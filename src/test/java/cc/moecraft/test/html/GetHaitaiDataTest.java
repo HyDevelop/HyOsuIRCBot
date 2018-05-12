@@ -5,7 +5,6 @@ import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.logger.DebugLogger;
 import cc.moecraft.scripts.AchievementClassGenerator;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
