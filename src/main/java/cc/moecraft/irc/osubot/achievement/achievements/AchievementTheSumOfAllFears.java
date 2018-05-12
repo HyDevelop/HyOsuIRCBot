@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:01 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:01!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:45 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:45!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementTheSumOfAllFears extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Full combo but miss the last note.   <a href=\"https://osu.ppy.sh/b/34527\">Silver Forest - Marisa Spark</a> [Easy] <a href=\"https://osu.ppy.sh/b/7960\">Cold Play - Clocks</a> [Easy]"; }
+    public String getTutorial() { return " Full combo but miss the last note.   [https://osu.ppy.sh/b/34527 Silver Forest - Marisa Spark] [Easy] [https://osu.ppy.sh/b/7960 Cold Play - Clocks] [Easy]"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

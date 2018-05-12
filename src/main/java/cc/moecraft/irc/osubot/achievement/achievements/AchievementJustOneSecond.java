@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:30:55 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:30:55!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:38 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:38!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementJustOneSecond extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass AR9 map with HD+FL mods. <a href=\"https://osu.ppy.sh/b/10848\">ESTi feat. Various Artists - Zero Fill Love</a> [Insane+]"; }
+    public String getTutorial() { return " Pass AR9 map with HD+FL mods. [https://osu.ppy.sh/b/10848 ESTi feat. Various Artists - Zero Fill Love] [Insane+]"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

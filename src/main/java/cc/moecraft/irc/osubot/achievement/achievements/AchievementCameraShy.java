@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:01 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:01!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:44 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:44!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementCameraShy extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Get a play with NF+HD that WOULD have been in the top 500 leaderboard if not for the score reduction of NF. Just download any <a href=\"https://osu.ppy.sh/p/beatmaplist&s=4&r=0\">new map</a> and full combo any difficulty with NF+HD mods."; }
+    public String getTutorial() { return " Get a play with NF+HD that WOULD have been in the top 500 leaderboard if not for the score reduction of NF. Just download any [https://osu.ppy.sh/p/beatmaplist&s=4&r=0 new map] and full combo any difficulty with NF+HD mods."; }
 
     @Override
     public Long getRecommendedMap() { return null; }

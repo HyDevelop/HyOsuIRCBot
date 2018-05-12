@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:42 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:42!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:38:27 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:38:27!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!

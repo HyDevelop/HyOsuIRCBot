@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:03 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:03!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:46 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:46!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementSlowAndSteady extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass a 3+ star map with HT+PF mods. <a href=\"https://osu.ppy.sh/b/1059390\">Drop - Granat</a> [Insane] <a href=\"https://osu.ppy.sh/b/486513\">FELT - In my room</a> [Tranquility] <a href=\"https://osu.ppy.sh/b/569636&m=0\">Agressor Bunx - Tornado (Original Mix)</a>[Insane]"; }
+    public String getTutorial() { return " Pass a 3+ star map with HT+PF mods. [https://osu.ppy.sh/b/1059390 Drop - Granat] [Insane] [https://osu.ppy.sh/b/486513 FELT - In my room] [Tranquility] [https://osu.ppy.sh/b/569636&m=0 Agressor Bunx - Tornado (Original Mix)][Insane]"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

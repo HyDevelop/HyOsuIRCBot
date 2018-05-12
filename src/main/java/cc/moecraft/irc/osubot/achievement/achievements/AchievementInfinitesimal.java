@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:06 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:06!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:50 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:50!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementInfinitesimal extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Full combo a map with CS7.8 or higher. Use HR mod to increase Circle Size. You can also use HT mod for easier achievement. <a href=\"https://osu.ppy.sh/b/20382\">Bill Nye the Science Guy</a>[Hard] +HR <a href=\"https://osu.ppy.sh/b/860486&m=0\">toby fox - Quiet Water</a> [TheOnlyLeon's Flowing] +HR"; }
+    public String getTutorial() { return " Full combo a map with CS7.8 or higher. Use HR mod to increase Circle Size. You can also use HT mod for easier achievement. [https://osu.ppy.sh/b/20382 Bill Nye the Science Guy][Hard] +HR [https://osu.ppy.sh/b/860486&m=0 toby fox - Quiet Water] [TheOnlyLeon's Flowing] +HR"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

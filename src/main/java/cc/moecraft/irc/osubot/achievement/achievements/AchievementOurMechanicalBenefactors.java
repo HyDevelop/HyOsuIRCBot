@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:05 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:05!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:49 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:49!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementOurMechanicalBenefactors extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass <a href=\"https://osu.ppy.sh/b/260489\">Traktion - The Near Distant Future</a> with 90% or higher accuracy."; }
+    public String getTutorial() { return " Pass [https://osu.ppy.sh/b/260489 Traktion - The Near Distant Future] with 90% or higher accuracy."; }
 
     @Override
     public Long getRecommendedMap() { return null; }

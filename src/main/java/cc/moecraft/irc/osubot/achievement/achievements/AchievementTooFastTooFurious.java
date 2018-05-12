@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:11 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:11!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:55 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:55!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementTooFastTooFurious extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass any difficulty on <a href=\"https://osu.ppy.sh/b/1036654\">cYsmix - Fright March</a> with DT mod"; }
+    public String getTutorial() { return " Pass any difficulty on [https://osu.ppy.sh/b/1036654 cYsmix - Fright March] with DT mod"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

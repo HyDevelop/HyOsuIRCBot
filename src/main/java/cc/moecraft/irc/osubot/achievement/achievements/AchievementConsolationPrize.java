@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:30:49 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:30:49!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:33 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:33!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementConsolationPrize extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Exact solution not known. Pass any difficulty of any ranked map with a D rank and more than 100,000 score without using NF/HT/SO mods (EZ mod is allowed).  Recommended low HP drain maps: <a href=\"https://osu.ppy.sh/s/21323\">BoA - soundscape<a> [Hard] <a href=\"https://osu.ppy.sh/b/1147&m=0\">IOSYS - Marisa wa Taihen na Mono wo Nusunde Ikimashita<a> [Hard]  Some screenshots: <a href=\"http://haitai.jp/img/prize1.jpg\">http://haitai.jp/img/prize1.jpg</a> <a href=\"http://haitai.jp/img/prize2.jpg\">http://haitai.jp/img/prize2.jpg</a> <a href=\"http://haitai.jp/img/prize3.jpg\">http://haitai.jp/img/prize3.jpg</a> <a href=\"http://haitai.jp/img/prize4.jpg\">http://haitai.jp/img/prize4.jpg</a> <a href=\"http://haitai.jp/img/prize5.jpg\">http://haitai.jp/img/prize5.jpg</a>"; }
+    public String getTutorial() { return " Exact solution not known. Pass any difficulty of any ranked map with a D rank and more than 100,000 score without using NF/HT/SO mods (EZ mod is allowed).  Recommended low HP drain maps: [https://osu.ppy.sh/s/21323 BoA - soundscape<a> [Hard] [https://osu.ppy.sh/b/1147&m=0 IOSYS - Marisa wa Taihen na Mono wo Nusunde Ikimashita<a> [Hard]  Some screenshots: [http://haitai.jp/img/prize1.jpg http://haitai.jp/img/prize1.jpg] [http://haitai.jp/img/prize2.jpg http://haitai.jp/img/prize2.jpg] [http://haitai.jp/img/prize3.jpg http://haitai.jp/img/prize3.jpg] [http://haitai.jp/img/prize4.jpg http://haitai.jp/img/prize4.jpg] [http://haitai.jp/img/prize5.jpg http://haitai.jp/img/prize5.jpg]"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

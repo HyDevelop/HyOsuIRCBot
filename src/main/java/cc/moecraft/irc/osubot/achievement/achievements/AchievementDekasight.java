@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:02 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:02!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:45 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:45!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementDekasight extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Full combo a 3+ star map with EZ+HD+FL mods. <a href=\"https://osu.ppy.sh/s/141\">FAIRY FORE - Vivid</a> is only 13 seconds long."; }
+    public String getTutorial() { return " Full combo a 3+ star map with EZ+HD+FL mods. [https://osu.ppy.sh/s/141 FAIRY FORE - Vivid] is only 13 seconds long."; }
 
     @Override
     public Long getRecommendedMap() { return null; }

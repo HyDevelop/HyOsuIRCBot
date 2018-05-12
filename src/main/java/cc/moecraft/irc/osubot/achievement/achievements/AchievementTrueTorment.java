@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:10 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:10!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:54 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:54!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementTrueTorment extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass <a href=\"https://osu.ppy.sh/s/594751\">Helblinde - The Solace of Oblivion</a> in osu!standard mode"; }
+    public String getTutorial() { return " Pass [https://osu.ppy.sh/s/594751 Helblinde - The Solace of Oblivion] in osu!standard mode"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

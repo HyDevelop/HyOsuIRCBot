@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:30:54 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:30:54!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:37 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:37!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementTimeDilation extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass a map that is 10 minutes or longer with DT mod (check map time AFTER you put DT on). <a href=\"https://osu.ppy.sh/b/9007\">Yoko Ishida - paraparaMAX I</a> easy but long <a href=\"https://osu.ppy.sh/s/8338\">Lucky Star no Minna - Kumikyoku 'Lucky Star Douga'</a> medium <a href=\"https://osu.ppy.sh/b/247037\">Lucky Star no Minna - Kumikyoku 'Lucky Star Douga'</a> hard but short"; }
+    public String getTutorial() { return " Pass a map that is 10 minutes or longer with DT mod (check map time AFTER you put DT on). [https://osu.ppy.sh/b/9007 Yoko Ishida - paraparaMAX I] easy but long [https://osu.ppy.sh/s/8338 Lucky Star no Minna - Kumikyoku 'Lucky Star Douga'] medium [https://osu.ppy.sh/b/247037 Lucky Star no Minna - Kumikyoku 'Lucky Star Douga'] hard but short"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:41 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:41!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:38:26 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:38:26!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementBreakthrough extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Full combo a 4 star map without using EZ/NF/HT mods (don't miss slider ends). <a href=\"https://osu.ppy.sh/b/315\">FAIRY FORE - Vivid</a> [Insane]+DT (taiko)"; }
+    public String getTutorial() { return " Full combo a 4 star map without using EZ/NF/HT mods (don't miss slider ends). [https://osu.ppy.sh/b/315 FAIRY FORE - Vivid] [Insane]+DT (taiko)"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

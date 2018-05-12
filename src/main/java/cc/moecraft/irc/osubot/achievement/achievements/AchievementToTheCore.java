@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:30:56 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:30:56!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:39 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:39!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementToTheCore extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass any NIGHTCORE map with DT/NC mod. If you don't have any nightcore maps <a href=\"https://osu.ppy.sh/b/89547&m=0\"> here's one</a>."; }
+    public String getTutorial() { return " Pass any NIGHTCORE map with DT/NC mod. If you don't have any nightcore maps [https://osu.ppy.sh/b/89547&m=0  here's one]."; }
 
     @Override
     public Long getRecommendedMap() { return null; }

@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:30:53 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:30:53!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:36 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:36!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementAMeganekkoApproaches extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Meet Maria, the osu!mania mascot. Finish an osu!mania map with at least a 100 combo. Download <a href=\"https://osu.ppy.sh/b/741477\">this map</a> and play it with EZHT mods on ultra beginner difficulty. First 2 sliders should give you over 100 combo."; }
+    public String getTutorial() { return " Meet Maria, the osu!mania mascot. Finish an osu!mania map with at least a 100 combo. Download [https://osu.ppy.sh/b/741477 this map] and play it with EZHT mods on ultra beginner difficulty. First 2 sliders should give you over 100 combo."; }
 
     @Override
     public Long getRecommendedMap() { return null; }

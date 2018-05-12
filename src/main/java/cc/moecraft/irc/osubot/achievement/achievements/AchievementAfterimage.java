@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:30:55 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:30:55!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:38 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:38!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementAfterimage extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass any map with HT+HD mods. <a href=\"https://osu.ppy.sh/b/259\">TRF - Survival dAnce ~no no cry more~</a> is only 17 seconds for fast achievement."; }
+    public String getTutorial() { return " Pass any map with HT+HD mods. [https://osu.ppy.sh/b/259 TRF - Survival dAnce ~no no cry more~] is only 17 seconds for fast achievement."; }
 
     @Override
     public Long getRecommendedMap() { return null; }

@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:30:58 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:30:58!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:41 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:41!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementBeholdNoDeception extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Full combo a 4+ star map with EZ mod. <a href=\"https://osu.ppy.sh/s/141\">FAIRY FORE - Vivid</a>"; }
+    public String getTutorial() { return " Full combo a 4+ star map with EZ mod. [https://osu.ppy.sh/s/141 FAIRY FORE - Vivid]"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

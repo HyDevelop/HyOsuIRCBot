@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:06 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:06!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:49 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:49!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementMeticulous extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass a 3+ star map with EZ+PF mods. <a href=\"https://osu.ppy.sh/b/932223&m=0\">Mike Greene - Bill Nye the Science Guy Theme Song (Chinese Intro)</a> <a href=\"https://osu.ppy.sh/b/452185\">Disasterpeace - Jolly Frolic</a> <a href=\"https://osu.ppy.sh/s/2086\">Sonic X Intro</a>"; }
+    public String getTutorial() { return " Pass a 3+ star map with EZ+PF mods. [https://osu.ppy.sh/b/932223&m=0 Mike Greene - Bill Nye the Science Guy Theme Song (Chinese Intro)] [https://osu.ppy.sh/b/452185 Disasterpeace - Jolly Frolic] [https://osu.ppy.sh/s/2086 Sonic X Intro]"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

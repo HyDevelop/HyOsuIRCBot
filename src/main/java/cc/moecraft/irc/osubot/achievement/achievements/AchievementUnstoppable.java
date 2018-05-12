@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:00 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:00!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:43 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:43!
  *
  * Github: https://github.com/hykilpikonna
  * Meow!
@@ -37,7 +37,7 @@ public class AchievementUnstoppable extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass a map with AR11 OD11 HP11 and over 260BPM.   <a href=\"https://osu.ppy.sh/b/20737\">ERIKA - Destination Nowhere</a> [Hard] with HDDTHR unlocks this achievement."; }
+    public String getTutorial() { return " Pass a map with AR11 OD11 HP11 and over 260BPM.   [https://osu.ppy.sh/b/20737 ERIKA - Destination Nowhere] [Hard] with HDDTHR unlocks this achievement."; }
 
     @Override
     public Long getRecommendedMap() { return null; }
