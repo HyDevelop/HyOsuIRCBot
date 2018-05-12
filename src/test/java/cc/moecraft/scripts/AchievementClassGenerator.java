@@ -93,7 +93,7 @@ public class AchievementClassGenerator
                     .mode(achievement.getMode())
                     .tutorial(haitaiData.replace("\n", " ").replace("\"", "\\\""))
                     .mods(getMods(haitaiData))
-                    .recommend(haitaiData.contains("https://osu.ppy.sh/b/") ? regexForFindingBeatmap.matcher(haitaiData).matches() ? regexForFindingBeatmap.matcher(haitaiData).group() : "null" : "null")
+                    .recommend(haitaiData.contains("https://osu.ppy.sh/b/") ? regexForFindingBeatmap.matcher(haitaiData).matches() ? regexForFindingBeatmap.matcher(haitaiData).group() + "L" : "null" : "null")
                     .completion_time("未知")
                     .average_retry("未知")
                     .build();

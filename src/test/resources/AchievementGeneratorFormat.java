@@ -40,7 +40,7 @@ public class Achievement%name_capitalized% extends Achievement
     public String getTutorial() { return "%tutorial%"; }
 
     @Override
-    public Long getRecommendedMap() { return %recommend%L; }
+    public Long getRecommendedMap() { return %recommend%; }
 
     @Override
     public Mods getMods() { return Mods.parseFromShortString("%mods%"); }
