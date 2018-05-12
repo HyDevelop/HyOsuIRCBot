@@ -242,6 +242,8 @@ public class ReflectUtils
 
             try
             {
+                if (field.get(object) == null) continue;
+
                 String value = field.get(object).toString();
 
                 if (positiveSigns)

@@ -1,5 +1,7 @@
 package cc.moecraft.irc.osubot.utils;
 
+import java.util.Scanner;
+
 /**
  * 此类由 Hykilpikonna 在 2018/04/24 创建!
  * Created by Hykilpikonna on 2018/04/24!
@@ -88,12 +90,19 @@ public class StringUtils
     }
 
     /**
-     * 首字母大写
+     * 一行内所有首字母大写
      * @param line 一行
      * @return 首字母都大写了的一行
      */
     public static String capitalizeFirstLetterOfEachWord(String line)
     {
-        return Character.toUpperCase(line.charAt(0)) + line.substring(1);
+        StringBuilder result = new StringBuilder();
+        Scanner lineScan = new Scanner(line);
+        while(lineScan.hasNext())
+        {
+            String word = lineScan.next();
+            result.append(Character.toUpperCase(word.charAt(0))).append(word.substring(1)).append(" ");
+        }
+        return result.toString();
     }
 }

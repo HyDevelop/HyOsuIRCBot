@@ -5,8 +5,9 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/08 创建!
- * Created by Hykilpikonna on 2018/05/08!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:56 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:56!
+ *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
  *
@@ -15,38 +16,38 @@ import static cc.moecraft.irc.osubot.osu.Mod.*;
 public class AchievementOverconfident extends Achievement
 {
     @Override
-    public long getId() { return 0; }
+    public long getId() { return 177; }
 
     @Override
     public String getName() { return "Overconfident"; }
 
     @Override
-    public String getGrouping() { return null; }
+    public String getGrouping() { return "Hush-Hush"; }
 
     @Override
     public long getOrdering() { return 0; }
 
     @Override
-    public String getSlug() { return null; }
+    public String getSlug() { return "osu-secret-overconfident"; }
 
     @Override
-    public String getDescription() { return null; }
+    public String getDescription() { return "Try again later, maybe?"; }
 
     @Override
-    public int getMode() { return 0; }
+    public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return "任意谱面开DT+HR打出低于40%的准确率"; }
+    public String getTutorial() { return " Pass a map with very low accuracy using DT or HR mod. Worked with 33.33% on [https://osu.ppy.sh/b/417503 Lena Park - Inori~You Raise Me Up (TV Size)] [Lanturn's Beginner]"; }
 
     @Override
-    public long getRecommendedMap() { return 434841; }
+    public Long getRecommendedMap() { return null; }
 
     @Override
-    public Mods getMods() { return new Mods(DoubleTime, HardRock); }
+    public Mods getMods() { return Mods.parseFromShortString(""); }
 
     @Override
-    public double getCompletionTimeInMinutes() { return 1; }
+    public String getCompletionTimeInMinutes() { return "未知"; }
 
     @Override
-    public int getAverageRetryCount() { return 1; }
+    public String getAverageRetryCount() { return "未知"; }
 }
