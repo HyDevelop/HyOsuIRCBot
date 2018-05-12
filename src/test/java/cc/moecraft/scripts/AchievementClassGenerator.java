@@ -61,16 +61,23 @@ public class AchievementClassGenerator
                     .replace(",", "");
             String haitaiData = getHaitaiData(achievement, osuHtmlUtils);
 
-            switch (achievement.getMode())
+            if (achievement.getMode() != null)
             {
-                case "osu":
-                    achievement.setMode("0");
-                case "taiko":
-                    achievement.setMode("1");
-                case "fruits":
-                    achievement.setMode("2");
-                case "mania":
-                    achievement.setMode("3");
+                switch (achievement.getMode())
+                {
+                    case "osu":
+                        achievement.setMode("0");
+                    case "taiko":
+                        achievement.setMode("1");
+                    case "fruits":
+                        achievement.setMode("2");
+                    case "mania":
+                        achievement.setMode("3");
+                }
+            }
+            else
+            {
+                achievement.setMode("4"); // 全Mode兼容
             }
 
             AchievementGenerateData generateData = AchievementGenerateData.builder()
