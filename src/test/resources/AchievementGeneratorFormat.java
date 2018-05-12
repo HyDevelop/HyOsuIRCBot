@@ -43,11 +43,11 @@ public class Achievement%name_capitalized% extends Achievement
     public long getRecommendedMap() { return %recommend%; }
 
     @Override
-    public Mods getMods() { return %mods%; }
+    public Mods getMods() { return Mods.parseFromShortString("%mods%"); }
 
     @Override
-    public String getCompletionTimeInMinutes() { return %completion_time%; }
+    public String getCompletionTimeInMinutes() { return "%completion_time%"; }
 
     @Override
-    public String getAverageRetryCount() { return %average_retry%; }
+    public String getAverageRetryCount() { return "%average_retry%"; }
 }
