@@ -75,8 +75,8 @@ public class AchievementClassGenerator
                     .tutorial(haitaiData.replace("\n", " ").replace("\"", "\\\""))
                     .mods(getMods(haitaiData))
                     .recommend(haitaiData.contains("https://osu.ppy.sh/b/") ? regexForFindingBeatmap.matcher(haitaiData).matches() ? regexForFindingBeatmap.matcher(haitaiData).group() : "null" : "null")
-                    .completion_time("\"未知\"")
-                    .average_retry("\"未知\"")
+                    .completion_time("未知")
+                    .average_retry("未知")
                     .build();
 
             String fileContent = ReflectUtils.replaceReflectVariables(generateData, format, false, false);
@@ -173,13 +173,13 @@ public class AchievementClassGenerator
 
     private static String getMods(String haitaiData)
     {
-        if (haitaiData == null) return "null";
+        if (haitaiData == null) return "";
 
         haitaiData = haitaiData.replace("+", " ").replace(" ", "");
 
-        if (!regexForFindingMods.matcher(haitaiData).matches()) return "null"; // TODO: 改到格式里
+        if (!regexForFindingMods.matcher(haitaiData).matches()) return "";
 
-        return "Mods.parseFromShortString(" + regexForFindingMods.matcher(haitaiData).group() + ")";
+        return regexForFindingMods.matcher(haitaiData).group();
     }
 
     private static void createFileOrOverride(File file) throws IOException
