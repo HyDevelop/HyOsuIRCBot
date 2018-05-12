@@ -6,6 +6,7 @@ import cc.moecraft.logger.DebugLogger;
 import cc.moecraft.scripts.AchievementClassGenerator;
 
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -26,7 +27,7 @@ public class GetHaitaiDataTest
     {
         OsuHtmlUtils osuHtmlUtils = new OsuHtmlUtils(new DownloadUtils(5000));
 
-        HashMap<String, String> haitaiMap = AchievementClassGenerator.getHaitaiData(osuHtmlUtils, "dont-let-the-bunny-distract-you", new ArrayList<>(Collections.singletonList("<div id=\"solution\">")));
+        HashMap<String, String> haitaiMap = AchievementClassGenerator.getHaitaiData(osuHtmlUtils, new URL("http://haitai.jp/dont-let-the-bunny-distract-you/"), new ArrayList<>(Collections.singletonList("<div id=\"solution\">")));
 
         logger.debug("HaitaiMap = " + haitaiMap);
     }
