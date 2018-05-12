@@ -21,6 +21,7 @@ public class AchievementManager
 {
     @Getter
     private HashMap<String, Achievement> achievements = new HashMap<>();
+    private HashMap<Long, Achievement> achievementsById = new HashMap<>();
 
     public AchievementManager() throws InstantiationException, IllegalAccessException
     {
@@ -43,6 +44,7 @@ public class AchievementManager
             Achievement achievement = oneClass.newInstance();
 
             achievements.put(achievement.getName(), achievement);
+            achievementsById.put(achievement.getId(), achievement);
         }
     }
 
@@ -59,5 +61,25 @@ public class AchievementManager
         }
 
         throw new UnexpectedAchievementNotFoundException(achievementData);
+    }
+
+    /**
+     * 通过名字获取成就
+     * @param name 名字
+     * @return 成就
+     */
+    public Achievement findAchievementByName(String name)
+    {
+        return achievements.getOrDefault(name, null);
+    }
+
+    /**
+     * 通过id获取成就
+     * @param id id
+     * @return 成就
+     */
+    public Achievement findAchievementById(int id)
+    {
+        return achievementsById.getOrDefault(id, null);
     }
 }
