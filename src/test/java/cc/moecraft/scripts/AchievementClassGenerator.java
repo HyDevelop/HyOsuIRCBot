@@ -70,7 +70,7 @@ public class AchievementClassGenerator
                     .grouping(achievement.getGrouping())
                     .ordering(String.valueOf(achievement.getOrdering()))
                     .slug(achievement.getSlug())
-                    .description(achievement.getDescription())
+                    .description(achievement.getDescription().replace("<br>", ""))
                     .mode(achievement.getMode())
                     .tutorial(haitaiData.replace("\n", " ").replace("\"", "\\\""))
                     .mods(getMods(haitaiData))
