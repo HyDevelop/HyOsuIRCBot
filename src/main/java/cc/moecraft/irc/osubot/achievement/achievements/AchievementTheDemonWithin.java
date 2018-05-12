@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:29 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:29!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:38:13 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:38:13!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementTheDemonWithin extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass a 5 star map without using EZ/NF/HT mods. <a href=\"https://osu.ppy.sh/b/95733\">07th Expansion - rog-unlimitation [Insane]</a> (taiko)"; }
+    public String getTutorial() { return " Pass a 5 star map without using EZ/NF/HT mods. [https://osu.ppy.sh/b/95733 07th Expansion - rog-unlimitation [Insane]] (taiko)"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

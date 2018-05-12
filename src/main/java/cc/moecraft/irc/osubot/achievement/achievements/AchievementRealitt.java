@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:05 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:05!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:48 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:48!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementRealitt extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Get 90% or higher accuracy on <a href=\"https://osu.ppy.sh/s/227126\">LeaF - Evanescent</a> in osu!standard Requires S rank in osu!mania (95%+ accuracy) with 700k+ total score. 93%+ in osu!catch (could be lower?) does not work with HT/EZ/NF"; }
+    public String getTutorial() { return " Get 90% or higher accuracy on [https://osu.ppy.sh/s/227126 LeaF - Evanescent] in osu!standard Requires S rank in osu!mania (95%+ accuracy) with 700k+ total score. 93%+ in osu!catch (could be lower?) does not work with HT/EZ/NF"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

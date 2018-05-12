@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:34 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:34!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:38:19 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:38:19!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementDreamcatcher extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " <a href=\"https://osu.ppy.sh/b/104229\">Team Nekokan - Can't Defeat Airman</a> <a href=\"https://osu.ppy.sh/b/736215&m=0\">Panda Eyes & Teminite - Highscore</a> <a href=\"https://osu.ppy.sh/b/901854\">Sendan Life</a> <a href=\"https://osu.ppy.sh/b/95733\">rog-unlimitation [Insane]</a> +DT (taiko)"; }
+    public String getTutorial() { return " [https://osu.ppy.sh/b/104229 Team Nekokan - Can't Defeat Airman] [https://osu.ppy.sh/b/736215&m=0 Panda Eyes & Teminite - Highscore] [https://osu.ppy.sh/b/901854 Sendan Life] [https://osu.ppy.sh/b/95733 rog-unlimitation [Insane]] +DT (taiko)"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

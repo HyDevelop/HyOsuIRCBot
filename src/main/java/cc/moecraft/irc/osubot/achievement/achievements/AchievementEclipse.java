@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:30:57 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:30:57!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:40 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:40!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementEclipse extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass any map with FL+HD mods. <a href=\"https://osu.ppy.sh/b/34529\">Silver Forest - Marisa Spark</a> is a short map."; }
+    public String getTutorial() { return " Pass any map with FL+HD mods. [https://osu.ppy.sh/b/34529 Silver Forest - Marisa Spark] is a short map."; }
 
     @Override
     public Long getRecommendedMap() { return null; }

@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:09 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:09!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:52 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:52!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementThrillOfTheChase extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Full combo <a href=\"https://osu.ppy.sh/b/1043382\">cYsmix - Classic Pursuit [Advanced]<a> with DT mod"; }
+    public String getTutorial() { return " Full combo [https://osu.ppy.sh/b/1043382 cYsmix - Classic Pursuit [Advanced]<a> with DT mod"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

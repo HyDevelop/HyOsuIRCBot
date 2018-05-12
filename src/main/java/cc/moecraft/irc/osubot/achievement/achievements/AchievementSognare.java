@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:04 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:04!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:47 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:47!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementSognare extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Play <a href=\"https://osu.ppy.sh/b/529285\">LeaF - Evanescent</a> with HT+HD+NF mods (need to get 10,000 score minimum)."; }
+    public String getTutorial() { return " Play [https://osu.ppy.sh/b/529285 LeaF - Evanescent] with HT+HD+NF mods (need to get 10,000 score minimum)."; }
 
     @Override
     public Long getRecommendedMap() { return null; }

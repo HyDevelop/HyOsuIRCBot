@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:30:45 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:30:45!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:28 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:28!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementJuly2017Spotlight extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Clear all maps in July 2017 <a href=\"https://osu.ppy.sh/p/packlist?t=r\">Spotlight</a>. Any game mode and difficulty works. NF mod works but needs 10,000+ score to submit play. NF+DT these 3 maps in osu!mania mode to unlock achievement: <a href=\"https://osu.ppy.sh/s/207525\">1</a> <a href=\"https://osu.ppy.sh/s/426638\">2</a> <a href=\"https://osu.ppy.sh/s/459950\">3</a>"; }
+    public String getTutorial() { return " Clear all maps in July 2017 [https://osu.ppy.sh/p/packlist?t=r Spotlight]. Any game mode and difficulty works. NF mod works but needs 10,000+ score to submit play. NF+DT these 3 maps in osu!mania mode to unlock achievement: [https://osu.ppy.sh/s/207525 1] [https://osu.ppy.sh/s/426638 2] [https://osu.ppy.sh/s/459950 3]"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

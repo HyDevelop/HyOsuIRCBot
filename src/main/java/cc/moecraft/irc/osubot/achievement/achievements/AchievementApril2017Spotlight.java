@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:30:43 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:30:43!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:26 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:26!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementApril2017Spotlight extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Clear all maps in April 2017 <a href=\"https://osu.ppy.sh/p/packlist?t=r\">Spotlight</a>. Any game mode and difficulty works. NF mod works but needs 10,000+ score to submit play. Complete <a href=\"https://osu.ppy.sh/s/540175\">this map</a> in osu!mania with NF+DT to unlock achievement."; }
+    public String getTutorial() { return " Clear all maps in April 2017 [https://osu.ppy.sh/p/packlist?t=r Spotlight]. Any game mode and difficulty works. NF mod works but needs 10,000+ score to submit play. Complete [https://osu.ppy.sh/s/540175 this map] in osu!mania with NF+DT to unlock achievement."; }
 
     @Override
     public Long getRecommendedMap() { return null; }

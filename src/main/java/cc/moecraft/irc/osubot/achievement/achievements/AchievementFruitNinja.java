@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:34 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:34!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:38:18 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:38:18!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementFruitNinja extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass a 6 star map without using EZ/NF/HT mods. <a href=\"https://osu.ppy.sh/b/315\">FAIRY FORE - Vivid [Insane]</a> +DT  <a href=\"https://osu.ppy.sh/b/19990\">Silver Forest - Tsurupettan</a> +DT  <a href=\"https://osu.ppy.sh/b/296\">Wizards In Winter [Impossible]</a> +DT (taiko) "; }
+    public String getTutorial() { return " Pass a 6 star map without using EZ/NF/HT mods. [https://osu.ppy.sh/b/315 FAIRY FORE - Vivid [Insane]] +DT  [https://osu.ppy.sh/b/19990 Silver Forest - Tsurupettan] +DT  [https://osu.ppy.sh/b/296 Wizards In Winter [Impossible]] +DT (taiko) "; }
 
     @Override
     public Long getRecommendedMap() { return null; }

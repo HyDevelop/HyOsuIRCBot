@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:30:50 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:30:50!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:33 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:33!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementChallengeAccepted extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass an approved map. <a href=\"https://osu.ppy.sh/p/beatmaplist?m=-1&r=6&g=0&la=0&ra=\">LIST<a>. "; }
+    public String getTutorial() { return " Pass an approved map. [https://osu.ppy.sh/p/beatmaplist?m=-1&r=6&g=0&la=0&ra= LIST<a>. "; }
 
     @Override
     public Long getRecommendedMap() { return null; }

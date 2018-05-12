@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:30:49 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:30:49!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:32 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:32!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementNonStopDancer extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass <a href=\"https://osu.ppy.sh/b/9007&m=0\">Yoko Ishida - paraparaMAX I<a>. You don't need to full combo, NF mod does not work. "; }
+    public String getTutorial() { return " Pass [https://osu.ppy.sh/b/9007&m=0 Yoko Ishida - paraparaMAX I<a>. You don't need to full combo, NF mod does not work. "; }
 
     @Override
     public Long getRecommendedMap() { return null; }

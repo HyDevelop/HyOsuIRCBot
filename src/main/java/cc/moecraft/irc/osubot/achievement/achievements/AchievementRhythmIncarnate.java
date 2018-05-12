@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:30 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:30!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:38:14 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:38:14!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementRhythmIncarnate extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " <a href=\"https://osu.ppy.sh/b/111680\">xi - Ascension to Heaven</a> +DT <a href=\"https://osu.ppy.sh/b/39825\">IOSYS - Marisa wa Taihen na Kanbu de Tomatte Ikimashita</a> +DT <a href=\"https://osu.ppy.sh/s/418826\">DystopiaGround - AugoEidEs</a> +HR (osu!catch) <a href=\"https://osu.ppy.sh/b/553820\">MiddleIsland - Achromat</a> +DT (osu!mania)"; }
+    public String getTutorial() { return " [https://osu.ppy.sh/b/111680 xi - Ascension to Heaven] +DT [https://osu.ppy.sh/b/39825 IOSYS - Marisa wa Taihen na Kanbu de Tomatte Ikimashita] +DT [https://osu.ppy.sh/s/418826 DystopiaGround - AugoEidEs] +HR (osu!catch) [https://osu.ppy.sh/b/553820 MiddleIsland - Achromat] +DT (osu!mania)"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

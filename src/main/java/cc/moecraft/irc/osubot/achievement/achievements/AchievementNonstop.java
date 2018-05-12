@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:30:52 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:30:52!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:35 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:35!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementNonstop extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Full combo 10+ minutes of any map (drain time, not including rest time). Can break combo after 10 mins. Easiest way to do this is to full combo <a href=\"https://osu.ppy.sh/s/2916\">Hyadain - Megaman Mix</a> on osu!catch (CTB) mode with EZ mod. "; }
+    public String getTutorial() { return " Full combo 10+ minutes of any map (drain time, not including rest time). Can break combo after 10 mins. Easiest way to do this is to full combo [https://osu.ppy.sh/s/2916 Hyadain - Megaman Mix] on osu!catch (CTB) mode with EZ mod. "; }
 
     @Override
     public Long getRecommendedMap() { return null; }

@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:30:59 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:30:59!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:42 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:42!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementUpForTheChallenge extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Full combo a map with AR10, OD10, HP10. Use HR mod to increase map difficulty. <a href=\"https://osu.ppy.sh/b/55432\">Junichi Masuda - Biking Theme (HG/SS) [Victory Road]</a> +HR"; }
+    public String getTutorial() { return " Full combo a map with AR10, OD10, HP10. Use HR mod to increase map difficulty. [https://osu.ppy.sh/b/55432 Junichi Masuda - Biking Theme (HG/SS) [Victory Road]] +HR"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

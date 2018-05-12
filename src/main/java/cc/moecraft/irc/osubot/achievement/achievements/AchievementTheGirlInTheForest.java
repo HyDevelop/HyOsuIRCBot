@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:09 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:09!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:53 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:53!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementTheGirlInTheForest extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Get 95%+ acc and 151 max combo on <a href=\"https://osu.ppy.sh/s/40440\">S3RL - Pika Girl</a> Hard or Insane difficulty. Break combo after 151. "; }
+    public String getTutorial() { return " Get 95%+ acc and 151 max combo on [https://osu.ppy.sh/s/40440 S3RL - Pika Girl] Hard or Insane difficulty. Break combo after 151. "; }
 
     @Override
     public Long getRecommendedMap() { return null; }

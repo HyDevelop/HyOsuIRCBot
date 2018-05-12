@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:12 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:12!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:56 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:56!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementSpooked extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass any map with FL mod and get a D rank. <a href=\"https://osu.ppy.sh/b/857602&m=0\">toby fox - Quiet Water [Still]</a> <a href=\"https://osu.ppy.sh/b/315\">FAIRY FORE - Vivid [Insane]</a>"; }
+    public String getTutorial() { return " Pass any map with FL mod and get a D rank. [https://osu.ppy.sh/b/857602&m=0 toby fox - Quiet Water [Still]] [https://osu.ppy.sh/b/315 FAIRY FORE - Vivid [Insane]]"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

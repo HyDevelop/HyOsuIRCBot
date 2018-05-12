@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:30:54 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:30:54!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:37 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:37!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementPerseverance extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass any marathon map (probably 7+ minutes long). Do not use EZ/NF/HT/SO mods. <a href=\"https://osu.ppy.sh/s/97433\">Traktion - The Near Distant Future</a> unlocks this achievement <a href=\"https://osu.ppy.sh/s/2916\">Hyadain - Megaman Mix</a> (not tested)"; }
+    public String getTutorial() { return " Pass any marathon map (probably 7+ minutes long). Do not use EZ/NF/HT/SO mods. [https://osu.ppy.sh/s/97433 Traktion - The Near Distant Future] unlocks this achievement [https://osu.ppy.sh/s/2916 Hyadain - Megaman Mix] (not tested)"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

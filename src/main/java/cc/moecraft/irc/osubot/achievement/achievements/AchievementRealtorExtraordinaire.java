@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:04 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:04!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:48 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:48!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementRealtorExtraordinaire extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Full combo <a href=\"https://osu.ppy.sh/b/792693\">cYsmix - House With Legs</a> with HDDTHR mods (any difficulty)."; }
+    public String getTutorial() { return " Full combo [https://osu.ppy.sh/b/792693 cYsmix - House With Legs] with HDDTHR mods (any difficulty)."; }
 
     @Override
     public Long getRecommendedMap() { return null; }

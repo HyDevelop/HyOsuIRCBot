@@ -5,8 +5,8 @@ import cc.moecraft.irc.osubot.osu.Mods;
 import static cc.moecraft.irc.osubot.osu.Mod.*;
 
 /**
- * 此类由 Hykilpikonna 在 2018/05/132 17:31:08 用 AchievementClassGenerator 生成!
- * Created by Hykilpikonna on 2018/05/132 17:31:08!
+ * 此类由 Hykilpikonna 在 2018/05/132 17:37:51 用 AchievementClassGenerator 生成!
+ * Created by Hykilpikonna on 2018/05/132 17:37:51!
  *
  * Github: https://github.com/hykilpikonna
  * QQ: admin@moecraft.cc -OR- 871674895
@@ -37,7 +37,7 @@ public class AchievementElite extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Get 1337 combo (break combo after getting it). Not all maps work. <a href=\"https://osu.ppy.sh/b/651744\">supercell - Kimi no Shiranai Monogatari</a> unlocks this achievement. Miss the first reverse slider (3 combo lost in total), get 1337 combo and miss note 6 as shown in <a href=\"https://www.youtube.com/watch?v=ciATKv5Qfbs\">this video</a> You should have 1211 combo on your first map break. If you don't - you missed a slider end."; }
+    public String getTutorial() { return " Get 1337 combo (break combo after getting it). Not all maps work. [https://osu.ppy.sh/b/651744 supercell - Kimi no Shiranai Monogatari] unlocks this achievement. Miss the first reverse slider (3 combo lost in total), get 1337 combo and miss note 6 as shown in [https://www.youtube.com/watch?v=ciATKv5Qfbs this video] You should have 1211 combo on your first map break. If you don't - you missed a slider end."; }
 
     @Override
     public Long getRecommendedMap() { return null; }
