@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.Objects;
 
@@ -56,8 +57,20 @@ public class DownloadUtils
      */
     public static String downloadAsString(URL url, int timeout)
     {
-        return new String(Objects.requireNonNull(download(url, timeout)));
+        try
+        {
+            return new String(Objects.requireNonNull(download(url, timeout)));
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
         // return Jboot.httpPost(url.toString());
+    }
+
+    public static String jbootdownloadAsString(URL url)
+    {
+        return Jboot.httpPost(url.toString());
     }
 
     @Deprecated
@@ -80,6 +93,8 @@ public class DownloadUtils
             httpURLConnection.setConnectTimeout(timeout);
             httpURLConnection.setReadTimeout(timeout);
             httpURLConnection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+            httpURLConnection.setRequestProperty("Accept","*/*");
+            httpURLConnection.setRequestMethod("GET");
 
             InputStream inputStream = httpURLConnection.getInputStream();
 
@@ -88,7 +103,7 @@ public class DownloadUtils
 
             return data;
         } catch (IOException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
             return null;
         }
     }
