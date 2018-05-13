@@ -21,8 +21,7 @@ public class AchievementManager
 {
     @Getter
     private HashMap<String, Achievement> achievements = new HashMap<>();
-
-    @Getter
+    private HashMap<String, Achievement> achievementsByLowerCaseName = new HashMap<>();
     private HashMap<Long, Achievement> achievementsById = new HashMap<>();
 
     public AchievementManager() throws InstantiationException, IllegalAccessException
@@ -46,6 +45,7 @@ public class AchievementManager
             Achievement achievement = oneClass.newInstance();
 
             achievements.put(achievement.getName(), achievement);
+            achievementsByLowerCaseName.put(achievement.getName().toLowerCase(), achievement);
             achievementsById.put(achievement.getId(), achievement);
         }
     }
@@ -72,7 +72,7 @@ public class AchievementManager
      */
     public Achievement findAchievementByName(String name)
     {
-        return achievements.getOrDefault(name, null);
+        return achievements.getOrDefault(name.toLowerCase(), null);
     }
 
     /**

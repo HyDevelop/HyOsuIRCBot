@@ -74,7 +74,6 @@ public class CommandAchievement extends Command implements ChannelCommand
             }
 
             System.out.println("Achs = " + Main.getAchievementManager().getAchievements());
-            System.out.println("Ids = " + Main.getAchievementManager().getAchievementsById());
             System.out.println("Achievement = " + achievement);
             System.out.println("achievement.getId() = " + achievement.getId());
 
@@ -90,7 +89,7 @@ public class CommandAchievement extends Command implements ChannelCommand
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            e.printStackTrace(); //TODO 删除
         }
     }
 
