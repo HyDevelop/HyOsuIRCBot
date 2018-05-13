@@ -22,6 +22,7 @@ import org.reflections.Reflections;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -34,14 +35,16 @@ public class Main {
     // 配置/语言文件路径
     public static final String PATH = "src" + File.separator + "main" + File.separator + "resources"; // TODO: 这里分两个版本, 测试放现在这个路径, 发布的话放"./conf/"路径
 
+    private static ArrayList<PircBotX> osuBots; // 机器人对象
+
     @Getter
     private static BotConfig config; // 配置文件 ( 用来存用于IRC登陆的账号密码 )
 
     @Getter
-    private static PircBotX osuBot; // 机器人对象
+    private static CommandManager commandManager; // 指令管理器
 
     @Getter
-    private static CommandManager commandManager; // 指令管理器
+    private static CommandListener commandListener; // 指令监听器
 
     @Getter
     private static AchievementManager achievementManager; // 成就管理器
@@ -82,18 +85,9 @@ public class Main {
         debug = config.getBoolean("BotProperties.DebugLogging");
         logger.setDebug(debug);
 
-        ArrayList<BotAccount> accounts = config.getAccounts();
-
-        Configuration botConfig = new Configuration.Builder()
-                .setName(accounts.get(0).getUsername())
-                .addServer(config.getString("ServerProperties.Address"), config.getInt("ServerProperties.Port"))
-                .setServerPassword(accounts.get(0).getPassword())
-                .addAutoJoinChannels(config.getStringList("BotProperties.AutoJoinChannels"))
-                .addListener(new CommandListener())
-                .buildConfiguration();
-
         // 创建对象
-        osuBot = new PircBotX(botConfig);
+        commandListener = new CommandListener();
+        osuBots = createBots(config.getAccounts(), commandListener);
         commandManager = new CommandManager();
         messenger = new Messenger();
         permissionConfig = new PermissionConfig();
@@ -106,7 +100,7 @@ public class Main {
         registerAllCommands();
 
         // 连接服务器
-        osuBot.startBot();
+        osuBots.get(0).startBot();
     }
 
     /**
@@ -123,5 +117,35 @@ public class Main {
         // 循环注册
         for (Class<? extends Command> command : commands)
             commandManager.registerCommand(command.newInstance());
+    }
+
+    /**
+     * 创建多账号机器人列表
+     * @param accounts 账号列表
+     * @param listener 指令监听器
+     * @return 机器人列表
+     */
+    public static ArrayList<PircBotX> createBots(ArrayList<BotAccount> accounts, CommandListener listener)
+    {
+        ArrayList<PircBotX> osuBots = new ArrayList<>();
+
+        String serverAddress = config.getString("ServerProperties.Address");
+        int serverPort = config.getInt("ServerProperties.Port");
+        List<String> autoJoinChannels = config.getStringList("BotProperties.AutoJoinChannels");
+
+        for (BotAccount account : accounts)
+        {
+            Configuration botConfig = new Configuration.Builder()
+                    .addServer(serverAddress, serverPort)
+                    .addAutoJoinChannels(autoJoinChannels)
+                    .addListener(listener)
+                    .setName(account.getUsername())
+                    .setServerPassword(account.getPassword())
+                    .buildConfiguration();
+
+            osuBots.add(new PircBotX(botConfig));
+        }
+
+        return osuBots;
     }
 }
