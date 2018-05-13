@@ -72,7 +72,7 @@ public class AchievementManager
      */
     public Achievement findAchievementByName(String name)
     {
-        return achievements.getOrDefault(name.toLowerCase().replaceAll("[^A-Za-z0-9 ]", ""), null);
+        return achievementsByLowerCaseName.getOrDefault(name.toLowerCase().replaceAll("[^A-Za-z0-9 ]", ""), null);
     }
 
     /**
