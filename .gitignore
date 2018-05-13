@@ -1,6 +1,7 @@
 *.iml
 *.xml
-*.yml
+src/main/resources/*.yml
+Backup/*
 *.class
 *.html
 target/*
