@@ -1,7 +1,7 @@
 package cc.moecraft.test;
 
-import cc.moecraft.logger.DebugLogger;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.logger.DebugLogger;
 import org.reflections.Reflections;
 
 import java.util.Set;

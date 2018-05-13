@@ -1,7 +1,7 @@
 package com.dullwolf;
 
-import cc.moecraft.logger.DebugLogger;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
+import cc.moecraft.logger.DebugLogger;
 
 import java.net.MalformedURLException;
 import java.net.URL;

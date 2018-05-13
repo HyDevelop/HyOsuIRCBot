@@ -2,19 +2,19 @@ package com.dullwolf;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.commands.osu.CommandRecent;
+import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.OsuAPIWrapper;
 import cc.moecraft.irc.osubot.osu.data.BeatmapData;
 import cc.moecraft.irc.osubot.osu.data.UserRecentData;
 import cc.moecraft.irc.osubot.osu.data.UserScoreData;
+import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
 import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnoughException;
 import cc.moecraft.irc.osubot.osu.exceptions.RelatedScoreNotFoundException;
-import cc.moecraft.logger.DebugLogger;
-import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
-import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
 import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.irc.osubot.utils.PropertiesUtil;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
+import cc.moecraft.logger.DebugLogger;
 
 import java.net.MalformedURLException;
 import java.text.DecimalFormat;
