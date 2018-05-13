@@ -1,6 +1,5 @@
 package cc.moecraft.irc.osubot.command;
 
-import lombok.Getter;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;

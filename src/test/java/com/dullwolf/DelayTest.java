@@ -1,7 +1,7 @@
 package com.dullwolf;
 
-import cc.moecraft.logger.DebugLogger;
 import cc.moecraft.irc.osubot.utils.PropertiesUtil;
+import cc.moecraft.logger.DebugLogger;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/26 创建!
