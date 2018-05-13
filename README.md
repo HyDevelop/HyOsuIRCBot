@@ -42,7 +42,7 @@ Credits / 功劳
 * [Osu!Track](https://ameobea.me/osutrack/) for Player Data Tracking & Analysis
 
 <a name="license"></a>
-License / 开源协议(https://choosealicense.com/licenses/gpl-3.0/)
+[License / 开源协议](https://choosealicense.com/licenses/gpl-3.0/)
 --------
 
 * I know it's a link..... it's not a circle.... but still... CLICK IT!!
