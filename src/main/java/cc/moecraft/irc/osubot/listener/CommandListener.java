@@ -1,6 +1,8 @@
 package cc.moecraft.irc.osubot.listener;
 
 import cc.moecraft.irc.osubot.Main;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -14,8 +16,12 @@ import org.pircbotx.hooks.events.PrivateMessageEvent;
  * Github: https://github.com/hykilpikonna
  * Meow!
  */
+@AllArgsConstructor
 public class CommandListener extends ListenerAdapter
 {
+    @Getter
+    private boolean channel;
+
     @Override
     public void onConnect(ConnectEvent event) throws Exception
     {
@@ -29,6 +35,8 @@ public class CommandListener extends ListenerAdapter
     @Override
     public void onMessage(MessageEvent event)
     {
+        if (!channel) return;
+
         Channel channel = event.getChannel();
         User sender = event.getUser();
         String message = event.getMessage();

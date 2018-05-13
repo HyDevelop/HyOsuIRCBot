@@ -18,9 +18,9 @@ public class BotConfig extends Config
 {
     private Logger logger = LoggerFactory.getLogger(BotConfig.class);
 
-    private static final String ircName= PropertiesUtil.readKey("irc_name");
-    private static final String ircPassword=PropertiesUtil.readKey("irc_password");
-    private static final String osuKey=PropertiesUtil.readKey("osu_key");
+    private static final String ircName = PropertiesUtil.readKey("irc_name");
+    private static final String ircPassword = PropertiesUtil.readKey("irc_password");
+    private static final String osuKey = PropertiesUtil.readKey("osu_key");
 
     public BotConfig()
     {
@@ -30,42 +30,23 @@ public class BotConfig extends Config
     }
 
     /**
-     * 获取配置中的用户名
-     * irc的用户名就是Osu账号的用户名, 空格用"_"代替
-     * @return 用户名
+     * 获取用户列表
+     * @return 用户列表
      */
-    public String getUsername()
+    public ArrayList<BotAccount> getAccounts()
     {
-        return getString("AccountProperties.Username");
-    }
+        ArrayList<BotAccount> result = new ArrayList<>();
 
-    /**
-     * 设置用户名, 用来生成默认配置
-     * @param username 用户名
-     */
-    public void setUsername(String username)
-    {
-        addDefault("AccountProperties.Username", username);
-    }
+        for (String account : getKeys("Accounts"))
+        {
+            result.add(new BotAccount(
+                    getString("Accounts." + account + ".Username"),
+                    getString("Accounts." + account + ".Password"),
+                    getBoolean("Accounts." + account + ".Channel")
+            ));
+        }
 
-    /**
-     * 获取配置中的密码
-     * Osu有独立的irc密码, 不是Osu账号的登录密码
-     * 获取独立密码: https://osu.ppy.sh/p/irc
-     * @return 密码
-     */
-    public String getPassword()
-    {
-        return getString("AccountProperties.Password");
-    }
-
-    /**
-     * 设置密码, 用来生成默认配置
-     * @param password 密码
-     */
-    public void setPassword(String password)
-    {
-        addDefault("AccountProperties.Password", password);
+        return result;
     }
 
     /**
@@ -98,12 +79,13 @@ public class BotConfig extends Config
         addDefault("ServerProperties.Address", "irc.ppy.sh");
         addDefault("ServerProperties.Port", 6667);
 
-        setUsername(ircName);
-        setPassword(ircPassword);
+        addDefault("Accounts.default.Username", ircName);
+        addDefault("Accounts.default.Password", ircPassword);
+        addDefault("Accounts.default.Channel", true);
         setAdminUsernames(new ArrayList<>(Arrays.asList("Hykilpikonna", "dullwolf")));
 
-        addDefault("BotProperties.CommandPrefix", "!");
-        addDefault("BotProperties.EnabledCommandPrefixes", new String[]{";", "-", ".", "?", "*"});
+        addDefault("BotProperties.CommandPrefix", "~");
+        addDefault("BotProperties.EnabledCommandPrefixes", new String[]{"!", ";", "-", ".", "?", "*"});
         addDefault("BotProperties.AutoJoinChannels", new String[]{"#general", "#chinese"});
 
         addDefault("BotProperties.Download.Timeout", 3000);
