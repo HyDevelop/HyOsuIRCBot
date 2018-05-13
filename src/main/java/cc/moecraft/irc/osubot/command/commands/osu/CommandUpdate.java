@@ -74,10 +74,16 @@ public class CommandUpdate extends Command
             // 获取Mode名字
             String modeName = OsuAPIUtils.getModeNameWithMode(usernameAndMode.getMode());
 
-            Main.getMessenger().respond(event, getPrefix(osuTrackData) + ReflectUtils.replaceReflectVariables(osuTrackData,
-                    "[%m% - [%link% %username%]]: %pp_raw% pp | %level% lvl | %pp_rank% rank | %accuracy%% acc. | %playcount% 次游戏 ",
-                    true, true
-            ).replace("%m%", modeName).replace("%link%", OsuUser.getOsuTrackLink(usernameAndMode)));
+            String format = "[%cm% - [%clink% %username%]]: %pp_raw% pp | %level% lvl | %crank% rank | %accuracy%% acc. | %playcount% 次游戏";
+
+            format = ReflectUtils.replaceReflectVariables(osuTrackData, format, true, true);
+            format = format
+                    .replace("%cm%", modeName)
+                    .replace("%clink%", OsuUser.getOsuTrackLink(usernameAndMode))
+                    .replace("%crank%", (osuTrackData.getPpRank() < 0 ? "↑" : "↓") + Math.abs(osuTrackData.getPpRank()));
+            format = getPrefix(osuTrackData) + format;
+
+            Main.getMessenger().respond(event, format);
         } catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e) {
             Main.getMessenger().respond(event, "未知后台错误, 请联系me@hydev.org");
             e.printStackTrace();
@@ -108,15 +114,15 @@ public class CommandUpdate extends Command
      */
     public String getPrefix(OsuTrackData osuTrackData)
     {
-        if (osuTrackData.getPpRank() <= 0 && osuTrackData.getPpRaw() <= 0)
+        if (osuTrackData.getPpRaw() <= 0)
         {
             return "多玩玩再来看吧! ";
         }
-        else if (osuTrackData.getPpRank() <= 400 && osuTrackData.getPpRaw() <= 20)
+        else if (osuTrackData.getPpRaw() <= 20)
         {
             return "进步了.. 加油! ";
         }
-        else if (osuTrackData.getPpRank() > 400 && osuTrackData.getPpRaw() > 20)
+        else if (osuTrackData.getPpRaw() > 20)
         {
             return "w.. 大..大佬! ";
         }
