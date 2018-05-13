@@ -4,14 +4,11 @@ import cc.moecraft.irc.osubot.utils.FileUtils;
 import cc.moecraft.logger.DebugLogger;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import org.github.pcre.Pcre;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
