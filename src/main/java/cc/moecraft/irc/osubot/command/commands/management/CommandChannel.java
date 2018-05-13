@@ -57,7 +57,7 @@ public class CommandChannel extends Command
             }
             case "leave":
             {
-                List<Channel> channels = new ArrayList<>(Main.getOsuBot().getUserChannelDao().getAllChannels());
+                List<Channel> channels = new ArrayList<>(event.getBot().getUserChannelDao().getAllChannels());
 
                 Main.getMessenger().respond(event, "正在寻找频道离开... 如果成功会提示, 失败不会提示: ");
                 channels.forEach(oneChannel ->
@@ -72,7 +72,7 @@ public class CommandChannel extends Command
             }
             case "list": // 有个缓存bug
             {
-                List<Channel> channels = new ArrayList<>(Main.getOsuBot().getUserChannelDao().getAllChannels());
+                List<Channel> channels = new ArrayList<>(event.getBot().getUserChannelDao().getAllChannels());
 
                 List<String> channelNames = new ArrayList<>();
                 channels.forEach(oneChannel ->

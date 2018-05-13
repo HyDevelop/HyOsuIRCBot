@@ -11,6 +11,8 @@ import cc.moecraft.irc.osubot.osu.OsuAPIWrapper;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.logger.DebugLogger;
 import io.jboot.Jboot;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.pircbotx.Configuration;
@@ -20,7 +22,12 @@ import org.reflections.Reflections;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/20 创建!
@@ -32,11 +39,10 @@ public class Main {
     // 配置/语言文件路径
     public static final String PATH = "src" + File.separator + "main" + File.separator + "resources"; // TODO: 这里分两个版本, 测试放现在这个路径, 发布的话放"./conf/"路径
 
-    @Getter
-    private static BotConfig config; // 配置文件 ( 用来存用于IRC登陆的账号密码 )
+    private static ArrayList<PircBotX> osuBots; // 机器人对象
 
     @Getter
-    private static PircBotX osuBot; // 机器人对象
+    private static BotConfig config; // 配置文件 ( 用来存用于IRC登陆的账号密码 )
 
     @Getter
     private static CommandManager commandManager; // 指令管理器
@@ -73,23 +79,15 @@ public class Main {
 
     public static void main(String[] args) throws IOException, IrcException, InstantiationException, IllegalAccessException
     {
-        Jboot.run(args);
+        // Jboot.run(args);
         logger = new DebugLogger("HyOsuIRCBot", true);
 
         config = new BotConfig();
         debug = config.getBoolean("BotProperties.DebugLogging");
         logger.setDebug(debug);
 
-        Configuration botConfig = new Configuration.Builder()
-                .setName(config.getUsername())
-                .addServer(config.getString("ServerProperties.Address"), config.getInt("ServerProperties.Port"))
-                .setServerPassword(config.getPassword())
-                .addAutoJoinChannels(config.getStringList("BotProperties.AutoJoinChannels"))
-                .addListener(new CommandListener())
-                .buildConfiguration();
-
         // 创建对象
-        osuBot = new PircBotX(botConfig);
+        osuBots = createBots(config.getAccounts());
         commandManager = new CommandManager();
         messenger = new Messenger();
         permissionConfig = new PermissionConfig();
@@ -102,7 +100,15 @@ public class Main {
         registerAllCommands();
 
         // 连接服务器
-        osuBot.startBot();
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(
+                50,                  //核心池的大小（即线程池中的线程数目大于这个参数时，提交的任务会被放进任务缓存队列）
+                100,            //线程池最大能容忍的线程数
+                Long.MAX_VALUE,                    //线程存活时间
+                TimeUnit.NANOSECONDS,              //参数keepAliveTime的时间单位
+                new ArrayBlockingQueue<>(osuBots.size()) //任务缓存队列，用来存放等待执行的任务
+        );
+
+        startBots(osuBots, executor);
     }
 
     /**
@@ -119,5 +125,60 @@ public class Main {
         // 循环注册
         for (Class<? extends Command> command : commands)
             commandManager.registerCommand(command.newInstance());
+    }
+
+    /**
+     * 创建多账号机器人列表
+     * @param accounts 账号列表
+     * @return 机器人列表
+     */
+    public static ArrayList<PircBotX> createBots(ArrayList<BotAccount> accounts)
+    {
+        ArrayList<PircBotX> osuBots = new ArrayList<>();
+
+        String serverAddress = config.getString("ServerProperties.Address");
+        int serverPort = config.getInt("ServerProperties.Port");
+        List<String> autoJoinChannels = config.getStringList("BotProperties.AutoJoinChannels");
+
+        for (BotAccount account : accounts)
+        {
+            Configuration botConfig = new Configuration.Builder()
+                    .addServer(serverAddress, serverPort)
+                    .addAutoJoinChannels(autoJoinChannels)
+                    .addListener(new CommandListener(account.channel))
+                    .setName(account.getUsername())
+                    .setServerPassword(account.getPassword())
+                    .buildConfiguration();
+
+            osuBots.add(new PircBotX(botConfig));
+        }
+
+        return osuBots;
+    }
+
+    public static void startBots(ArrayList<PircBotX> bots, ThreadPoolExecutor executor)
+    {
+        for (PircBotX bot : bots)
+        {
+            executor.execute(new BotRunnable(bot));
+            System.out.println("已启动: " + bot.toString());
+        }
+    }
+
+    @AllArgsConstructor
+    public static class BotRunnable implements Runnable
+    {
+        private PircBotX bot;
+
+        @Override
+        public void run()
+        {
+            try {
+                bot.startBot();
+            } catch (IOException | IrcException e) {
+                e.printStackTrace();
+                System.out.println("启动失败");
+            }
+        }
     }
 }
