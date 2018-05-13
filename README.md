@@ -1,6 +1,7 @@
 <p align="center">
-    <img src="https://i.imgur.com/HpUdi8t.png"
-        height="300">
+    <a href="#!">
+        <img src="https://i.imgur.com/HpUdi8t.png" height="300">
+    </a>
 </p>
 <p align="center">
     <a href="https://circleci.com/gh/hykilpikonna/HyOsuIRCBot">
