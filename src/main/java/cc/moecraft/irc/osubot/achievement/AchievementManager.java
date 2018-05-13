@@ -45,7 +45,7 @@ public class AchievementManager
             Achievement achievement = oneClass.newInstance();
 
             achievements.put(achievement.getName(), achievement);
-            achievementsByLowerCaseName.put(achievement.getName().toLowerCase(), achievement);
+            achievementsByLowerCaseName.put(achievement.getName().toLowerCase().replaceAll("[^A-Za-z0-9 ]", ""), achievement);
             achievementsById.put(achievement.getId(), achievement);
         }
     }
@@ -72,7 +72,7 @@ public class AchievementManager
      */
     public Achievement findAchievementByName(String name)
     {
-        return achievements.getOrDefault(name.toLowerCase(), null);
+        return achievements.getOrDefault(name.toLowerCase().replaceAll("[^A-Za-z0-9 ]", ""), null);
     }
 
     /**
