@@ -21,6 +21,8 @@ public class AchievementManager
 {
     @Getter
     private HashMap<String, Achievement> achievements = new HashMap<>();
+
+    @Getter
     private HashMap<Long, Achievement> achievementsById = new HashMap<>();
 
     public AchievementManager() throws InstantiationException, IllegalAccessException
@@ -78,7 +80,7 @@ public class AchievementManager
      * @param id id
      * @return 成就
      */
-    public Achievement findAchievementById(int id)
+    public Achievement findAchievementById(long id)
     {
         return achievementsById.getOrDefault(id, null);
     }

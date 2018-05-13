@@ -51,32 +51,47 @@ public class CommandAchievement extends Command implements ChannelCommand
         process(event, args, true);
     }
 
-    public void process(GenericMessageEvent event, ArrayList<String> args, boolean isChannel)
+    public static void process(GenericMessageEvent event, ArrayList<String> args, boolean isChannel)
     {
-        if (args.size() < 1)
+        try
         {
-            if (!isChannel) Main.getMessenger().respond(event, "%prefix%achieve [成就名或成就ID]");
-            return;
+            if (args.size() < 1)
+            {
+                if (!isChannel) Main.getMessenger().respond(event, "%prefix%achieve [成就名或成就ID]");
+                return;
+            }
+
+            String achievementName = ArrayUtils.getTheRestArgsAsString(args, 0);
+            Achievement achievement;
+
+            if (StringUtils.isNumeric(achievementName))
+            {
+                achievement = Main.getAchievementManager().findAchievementById(Integer.parseInt(achievementName));
+                // TODO: 改成try catch
+            }
+            else
+            {
+                achievement = Main.getAchievementManager().findAchievementByName(achievementName);
+            }
+
+            System.out.println("Achs = " + Main.getAchievementManager().getAchievements());
+            System.out.println("Ids = " + Main.getAchievementManager().getAchievementsById());
+            System.out.println("Achievement = " + achievement);
+            System.out.println("achievement.getId() = " + achievement.getId());
+
+            Main.getMessenger().respond(event, String.format("成就: [%s (%s)]: %s",
+                    achievement.getName(),
+                    String.valueOf(achievement.getId()),
+                    achievement.getTutorial()));
+
+            if (!isChannel)
+            {
+                CommandMap.process(event, Math.toIntExact(achievement.getRecommendedMap()));
+            }
         }
-
-        String achievementName = ArrayUtils.getTheRestArgsAsString(args, 0);
-        Achievement achievement;
-
-        if (StringUtils.isNumeric(achievementName))
+        catch (Exception e)
         {
-            achievement = Main.getAchievementManager().findAchievementById(Integer.parseInt(achievementName));
-            // TODO: 改成try catch
-        }
-        else
-        {
-            achievement = Main.getAchievementManager().findAchievementByName(achievementName);
-        }
-
-        Main.getMessenger().respond(event, String.format("成就: [%s (%s)]: %s", achievement.getName(), achievement.getId(), achievement.getTutorial()));
-
-        if (!isChannel)
-        {
-            CommandMap.process(event, Math.toIntExact(achievement.getRecommendedMap()));
+            e.printStackTrace();
         }
     }
 
