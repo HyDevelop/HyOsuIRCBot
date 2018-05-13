@@ -64,12 +64,11 @@ public class CommandAchievement extends Command implements ChannelCommand
             String achievementName = ArrayUtils.getTheRestArgsAsString(args, 0);
             Achievement achievement;
 
-            if (StringUtils.isNumeric(achievementName))
+            try
             {
                 achievement = Main.getAchievementManager().findAchievementById(Integer.parseInt(achievementName));
-                // TODO: 改成try catch
             }
-            else
+            catch (NumberFormatException ignored)
             {
                 achievement = Main.getAchievementManager().findAchievementByName(achievementName);
             }
