@@ -100,7 +100,7 @@ public class Main {
         registerAllCommands();
 
         // 连接服务器
-        osuBots.get(0).startBot();
+        startBots(osuBots);
     }
 
     /**
@@ -147,5 +147,13 @@ public class Main {
         }
 
         return osuBots;
+    }
+
+    public static void startBots(ArrayList<PircBotX> bots) throws IOException, IrcException
+    {
+        for (PircBotX bot : bots)
+        {
+            bot.startBot();
+        }
     }
 }
