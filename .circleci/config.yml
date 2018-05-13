@@ -41,3 +41,6 @@ jobs:
       # run tests!
       - run: mvn integration-test
 
+      # - run: mvn -D<Package Name>=<Class Name> verify
+      - run: mvn -Dcc.moecraft.test=*Test verify
+
