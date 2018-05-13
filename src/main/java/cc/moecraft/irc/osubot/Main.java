@@ -44,9 +44,6 @@ public class Main {
     private static CommandManager commandManager; // 指令管理器
 
     @Getter
-    private static CommandListener commandListener; // 指令监听器
-
-    @Getter
     private static AchievementManager achievementManager; // 成就管理器
 
     @Getter @Setter
@@ -86,8 +83,7 @@ public class Main {
         logger.setDebug(debug);
 
         // 创建对象
-        commandListener = new CommandListener();
-        osuBots = createBots(config.getAccounts(), commandListener);
+        osuBots = createBots(config.getAccounts());
         commandManager = new CommandManager();
         messenger = new Messenger();
         permissionConfig = new PermissionConfig();
@@ -125,7 +121,7 @@ public class Main {
      * @param listener 指令监听器
      * @return 机器人列表
      */
-    public static ArrayList<PircBotX> createBots(ArrayList<BotAccount> accounts, CommandListener listener)
+    public static ArrayList<PircBotX> createBots(ArrayList<BotAccount> accounts)
     {
         ArrayList<PircBotX> osuBots = new ArrayList<>();
 
@@ -138,7 +134,7 @@ public class Main {
             Configuration botConfig = new Configuration.Builder()
                     .addServer(serverAddress, serverPort)
                     .addAutoJoinChannels(autoJoinChannels)
-                    .addListener(listener)
+                    .addListener(new CommandListener(account.channel))
                     .setName(account.getUsername())
                     .setServerPassword(account.getPassword())
                     .buildConfiguration();
