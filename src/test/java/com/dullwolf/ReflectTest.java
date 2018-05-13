@@ -1,8 +1,8 @@
 package com.dullwolf;
 
-import cc.moecraft.logger.DebugLogger;
 import cc.moecraft.irc.osubot.osu.data.UserData;
 import cc.moecraft.irc.osubot.utils.ReflectUtils;
+import cc.moecraft.logger.DebugLogger;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

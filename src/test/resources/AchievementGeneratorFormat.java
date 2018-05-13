@@ -1,8 +1,6 @@
-package %class_package%;
+package
 
-import cc.moecraft.irc.osubot.achievement.Achievement;
-import cc.moecraft.irc.osubot.osu.Mods;
-import static cc.moecraft.irc.osubot.osu.Mod.*;
+%class_package%;
 
 /**
  * 此类由 Hykilpikonna 在 %current_date_and_time% 用 AchievementClassGenerator 生成!

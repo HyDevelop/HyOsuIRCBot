@@ -1,12 +1,9 @@
 package cc.moecraft.irc.osubot.osu.exceptions;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**

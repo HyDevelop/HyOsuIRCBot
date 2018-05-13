@@ -1,7 +1,7 @@
 package com.dullwolf;
 
-import cc.moecraft.logger.DebugLogger;
 import cc.moecraft.irc.osubot.utils.ArrayUtils;
+import cc.moecraft.logger.DebugLogger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
