@@ -39,7 +39,11 @@ public class BotConfig extends Config
 
         for (String account : getKeys("Accounts"))
         {
-            result.add(new BotAccount(getString("Accounts." + account + ".Username"), getString("Accounts." + account + ".Password")));
+            result.add(new BotAccount(
+                    getString("Accounts." + account + ".Username"),
+                    getString("Accounts." + account + ".Password"),
+                    getBoolean("Accounts." + account + ".Channel")
+            ));
         }
 
         return result;
@@ -77,6 +81,7 @@ public class BotConfig extends Config
 
         addDefault("Accounts.default.Username", ircName);
         addDefault("Accounts.default.Password", ircPassword);
+        addDefault("Accounts.default.Channel", true);
         setAdminUsernames(new ArrayList<>(Arrays.asList("Hykilpikonna", "dullwolf")));
 
         addDefault("BotProperties.CommandPrefix", "~");

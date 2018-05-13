@@ -16,4 +16,5 @@ public class BotAccount
 {
     String username;
     String password;
+    boolean channel;
 }
