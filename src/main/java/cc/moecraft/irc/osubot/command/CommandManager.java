@@ -74,7 +74,7 @@ public class CommandManager
 
             if (!new OsuUser(user.getNick()).hasPermission(commandArgs.getCommandRunner().permissionRequired()))
             {
-                Main.getMessenger().respond(event, "NO PERM: 无法执行%prefix%" + commandArgs.getCommandName() + ", 因为缺少权限");
+                if (reply(isChannel)) Main.getMessenger().respond(event, "NO PERM: 无法执行%prefix%" + commandArgs.getCommandName() + ", 因为缺少权限");
                 return RunResult.NO_PERMISSION;
             }
 
@@ -105,14 +105,18 @@ public class CommandManager
         {
             if (Main.isEnableListening())
             {
-                if (isChannel)
-                    if (Main.getConfig().getBoolean("BotProperties.DisableChannelReply")) return RunResult.COMMAND_NOT_FOUND;
+                if (!reply(isChannel)) return RunResult.COMMAND_NOT_FOUND;
 
                 Main.getMessenger().respond(event, "UNKNOWN COMMAND: 未知指令 ( 输入%prefix%help显示帮助 )");
             }
 
             return RunResult.COMMAND_NOT_FOUND;
         }
+    }
+
+    public boolean reply(boolean isChannel)
+    {
+        return !(isChannel && Main.getConfig().getBoolean("BotProperties.DisableChannelReply"));
     }
 
     public enum RunResult
