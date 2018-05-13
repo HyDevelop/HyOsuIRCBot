@@ -1,4 +1,4 @@
-package java.cc.moecraft;
+package com.dullwolf;
 
 
 import io.jboot.Jboot;

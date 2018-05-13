@@ -1,4 +1,4 @@
-package java.cc.moecraft;
+package cc.moecraft.scripts;
 
 import cc.moecraft.irc.osubot.utils.FileUtils;
 import cc.moecraft.logger.DebugLogger;
