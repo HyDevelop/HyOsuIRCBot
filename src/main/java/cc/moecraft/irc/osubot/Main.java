@@ -11,6 +11,7 @@ import cc.moecraft.irc.osubot.osu.OsuAPIWrapper;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.logger.DebugLogger;
 import io.jboot.Jboot;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.pircbotx.Configuration;
@@ -20,6 +21,7 @@ import org.reflections.Reflections;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -80,10 +82,12 @@ public class Main {
         debug = config.getBoolean("BotProperties.DebugLogging");
         logger.setDebug(debug);
 
+        ArrayList<BotAccount> accounts = config.getAccounts();
+
         Configuration botConfig = new Configuration.Builder()
-                .setName(config.getUsername())
+                .setName(accounts.get(0).getUsername())
                 .addServer(config.getString("ServerProperties.Address"), config.getInt("ServerProperties.Port"))
-                .setServerPassword(config.getPassword())
+                .setServerPassword(accounts.get(0).getPassword())
                 .addAutoJoinChannels(config.getStringList("BotProperties.AutoJoinChannels"))
                 .addListener(new CommandListener())
                 .buildConfiguration();
