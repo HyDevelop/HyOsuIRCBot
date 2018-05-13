@@ -12,15 +12,9 @@
         <img src="https://img.shields.io/github/stars/hykilpikonna/HyOsuIRCBot.svg"></a>
 </p>
 
-### Credits:
-- PircBotX for IRC Bot Library
-    - Github: https://github.com/pircbotx/pircbotx
-    
-    
-- Uso Bot for Beatmap Suggestion Algorithm 
-    - Github: https://github.com/Renondedju/Uso_Bot_V2.0
-    
-    
-- Osu!Track for Player Data Tracking & Analysis 
-    - Website: https://ameobea.me/osutrack/
-    - Github: https://github.com/Ameobea/osutrack_irc_v2
+Credits
+--------
+
+* [PircBotX](https://github.com/pircbotx/pircbotx) for IRC Bot Library
+* [Uso Bot](https://github.com/Renondedju/Uso_Bot_V2.0) for Beatmap Suggestion Algorithm 
+* [Osu!Track](https://ameobea.me/osutrack/) for Player Data Tracking & Analysis
