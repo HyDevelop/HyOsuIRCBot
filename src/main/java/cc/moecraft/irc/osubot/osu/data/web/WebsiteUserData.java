@@ -8,7 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @AllArgsConstructor @Builder @NoArgsConstructor
+@Data @AllArgsConstructor @NoArgsConstructor
 public class WebsiteUserData
 {
     @SerializedName("id")
@@ -199,8 +199,8 @@ public class WebsiteUserData
     @Expose
     public List<UserAchievement> userAchievements = null;
 
-    @Data @AllArgsConstructor @Builder @NoArgsConstructor
-    public class Cover
+    @Data @AllArgsConstructor @NoArgsConstructor
+    public static class Cover
     {
         @SerializedName("custom_url")
         @Expose
@@ -215,8 +215,8 @@ public class WebsiteUserData
         public Object id;
     }
 
-    @Data @AllArgsConstructor @Builder @NoArgsConstructor
-    public class Country
+    @Data @AllArgsConstructor @NoArgsConstructor
+    public static class Country
     {
         @SerializedName("code")
         @Expose
@@ -227,8 +227,8 @@ public class WebsiteUserData
         public String name;
     }
 
-    @Data @AllArgsConstructor @Builder @NoArgsConstructor
-    public class GradeCounts
+    @Data @AllArgsConstructor @NoArgsConstructor
+    public static class GradeCounts
     {
         @SerializedName("ss")
         @Expose
@@ -251,8 +251,8 @@ public class WebsiteUserData
         public Long a;
     }
 
-    @Data @AllArgsConstructor @Builder @NoArgsConstructor
-    public class Kudosu
+    @Data @AllArgsConstructor @NoArgsConstructor
+    public static class Kudosu
     {
         @SerializedName("total")
         @Expose
@@ -263,8 +263,8 @@ public class WebsiteUserData
         public Long available;
     }
 
-    @Data @AllArgsConstructor @Builder @NoArgsConstructor
-    public class Level
+    @Data @AllArgsConstructor @NoArgsConstructor
+    public static class Level
     {
         @SerializedName("current")
         @Expose
@@ -275,8 +275,8 @@ public class WebsiteUserData
         public Long progress;
     }
 
-    @Data @AllArgsConstructor @Builder @NoArgsConstructor
-    public class MonthlyPlaycount
+    @Data @AllArgsConstructor @NoArgsConstructor
+    public static class MonthlyPlaycount
     {
         @SerializedName("start_date")
         @Expose
@@ -287,8 +287,8 @@ public class WebsiteUserData
         public Long count;
     }
 
-    @Data @AllArgsConstructor @Builder @NoArgsConstructor
-    public class Page
+    @Data @AllArgsConstructor @NoArgsConstructor
+    public static class Page
     {
         @SerializedName("html")
         @Expose
@@ -299,8 +299,8 @@ public class WebsiteUserData
         public String raw;
     }
 
-    @Data @AllArgsConstructor @Builder @NoArgsConstructor
-    public class Rank
+    @Data @AllArgsConstructor @NoArgsConstructor
+    public static class Rank
     {
         @SerializedName("global")
         @Expose
@@ -311,8 +311,8 @@ public class WebsiteUserData
         public Long country;
     }
 
-    @Data @AllArgsConstructor @Builder @NoArgsConstructor
-    public class ReplaysWatchedCount
+    @Data @AllArgsConstructor @NoArgsConstructor
+    public static class ReplaysWatchedCount
     {
         @SerializedName("start_date")
         @Expose
@@ -323,8 +323,8 @@ public class WebsiteUserData
         public Long count;
     }
 
-    @Data @AllArgsConstructor @Builder @NoArgsConstructor
-    public class ScoreRanks
+    @Data @AllArgsConstructor @NoArgsConstructor
+    public static class ScoreRanks
     {
         @SerializedName("XH")
         @Expose
@@ -347,8 +347,8 @@ public class WebsiteUserData
         public Long a;
     }
 
-    @Data @AllArgsConstructor @Builder @NoArgsConstructor
-    public class Statistics
+    @Data @AllArgsConstructor @NoArgsConstructor
+    public static class Statistics
     {
         @SerializedName("level")
         @Expose
@@ -411,8 +411,8 @@ public class WebsiteUserData
         public ScoreRanks scoreRanks;
     }
 
-    @Data @AllArgsConstructor @Builder @NoArgsConstructor
-    public class UserAchievement
+    @Data @AllArgsConstructor @NoArgsConstructor
+    public static class UserAchievement
     {
         @SerializedName("achieved_at")
         @Expose
