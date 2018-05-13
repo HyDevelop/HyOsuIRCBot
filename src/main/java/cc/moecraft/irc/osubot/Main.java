@@ -12,6 +12,7 @@ import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.logger.DebugLogger;
 import io.jboot.Jboot;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.pircbotx.Configuration;
@@ -24,6 +25,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/20 创建!
@@ -96,7 +100,15 @@ public class Main {
         registerAllCommands();
 
         // 连接服务器
-        startBots(osuBots);
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(
+                50,                  //核心池的大小（即线程池中的线程数目大于这个参数时，提交的任务会被放进任务缓存队列）
+                100,            //线程池最大能容忍的线程数
+                Long.MAX_VALUE,                    //线程存活时间
+                TimeUnit.NANOSECONDS,              //参数keepAliveTime的时间单位
+                new ArrayBlockingQueue<>(osuBots.size()) //任务缓存队列，用来存放等待执行的任务
+        );
+
+        startBots(osuBots, executor);
     }
 
     /**
@@ -118,7 +130,6 @@ public class Main {
     /**
      * 创建多账号机器人列表
      * @param accounts 账号列表
-     * @param listener 指令监听器
      * @return 机器人列表
      */
     public static ArrayList<PircBotX> createBots(ArrayList<BotAccount> accounts)
@@ -145,11 +156,29 @@ public class Main {
         return osuBots;
     }
 
-    public static void startBots(ArrayList<PircBotX> bots) throws IOException, IrcException
+    public static void startBots(ArrayList<PircBotX> bots, ThreadPoolExecutor executor)
     {
         for (PircBotX bot : bots)
         {
-            bot.startBot();
+            executor.execute(new BotRunnable(bot));
+            System.out.println("已启动: " + bot.toString());
+        }
+    }
+
+    @AllArgsConstructor
+    public static class BotRunnable implements Runnable
+    {
+        private PircBotX bot;
+
+        @Override
+        public void run()
+        {
+            try {
+                bot.startBot();
+            } catch (IOException | IrcException e) {
+                e.printStackTrace();
+                System.out.println("启动失败");
+            }
         }
     }
 }
