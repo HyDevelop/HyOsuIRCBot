@@ -40,3 +40,9 @@ Credits / 功劳
 * [PircBotX](https://github.com/pircbotx/pircbotx) for IRC Bot Library
 * [Uso Bot](https://github.com/Renondedju/Uso_Bot_V2.0) for Beatmap Suggestion Algorithm 
 * [Osu!Track](https://ameobea.me/osutrack/) for Player Data Tracking & Analysis
+
+<a name="license"></a>
+License / 开源协议(https://choosealicense.com/licenses/gpl-3.0/)
+--------
+
+* I know it's a link..... it's not a circle.... but still... CLICK IT!!
