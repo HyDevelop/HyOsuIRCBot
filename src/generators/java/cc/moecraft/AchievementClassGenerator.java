@@ -1,4 +1,4 @@
-package cc.moecraft.scripts;
+package java.cc.moecraft;
 
 import cc.moecraft.irc.osubot.osu.OsuHtmlUtils;
 import cc.moecraft.irc.osubot.osu.data.AchievementData;
