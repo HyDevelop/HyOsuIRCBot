@@ -89,15 +89,15 @@ public class CommandPcmd extends Command implements ChannelCommand
             {
                 bot.getInputParser().processCommand(
                         username, source, "PRIVMSG",
-                        String.format(":%s!cho@ppy.sh PRIVMSG %s :~%s", username, channel.getName(), command),
-                        Arrays.asList(username, "~" + command), tags.build());
+                        String.format(":%s!cho@ppy.sh PRIVMSG %s :~%s", username, channel.getName(), commandToExecute),
+                        Arrays.asList(username, "~" + commandToExecute), tags.build());
             }
             else
             {
                 bot.getInputParser().processCommand(
                         username, source, "PRIVMSG",
-                        String.format(":%s!cho@ppy.sh PRIVMSG %s :~%s", username, bot.getNick(), command),
-                        Arrays.asList(username, "~" + command), tags.build());
+                        String.format(":%s!cho@ppy.sh PRIVMSG %s :~%s", username, bot.getNick(), commandToExecute),
+                        Arrays.asList(username, "~" + commandToExecute), tags.build());
             }
         } catch (IOException e) {
             Main.getMessenger().respond(event, "文件异常: " + Arrays.toString(e.getStackTrace()));
