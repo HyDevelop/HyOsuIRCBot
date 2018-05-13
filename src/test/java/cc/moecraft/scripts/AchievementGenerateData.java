@@ -1,4 +1,4 @@
-package java.cc.moecraft;
+package cc.moecraft.scripts;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

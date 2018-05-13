@@ -1,4 +1,4 @@
-package java.cc.moecraft;
+package com.dullwolf;
 
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import com.google.gson.JsonElement;
