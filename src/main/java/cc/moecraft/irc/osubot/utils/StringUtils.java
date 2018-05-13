@@ -105,4 +105,14 @@ public class StringUtils
         }
         return result.toString();
     }
+
+    /**
+     * 判断字符串是不是数字
+     * @param string 字符串
+     * @return 是不是数字
+     */
+    public static boolean isNumeric(String string)
+    {
+        return string != null && string.matches("[-+]?\\d*\\.?\\d+");
+    }
 }

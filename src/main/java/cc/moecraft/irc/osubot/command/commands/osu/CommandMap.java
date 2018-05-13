@@ -66,48 +66,53 @@ public class CommandMap extends Command
                 Main.getMessenger().respond(event, "输入的谱面id必须是最大32位的数字形式");
             }
 
-            try
-            {
-                ArrayList<BeatmapData> beatmapData = Main.getWrapper().getBeatmap(BeatmapParameters.builder().b(String.valueOf(beatmapId)).build());
+            process(event, beatmapId);
+        }
+    }
 
-                BeatmapData data = beatmapData.get(0);
+    public static void process(GenericMessageEvent event, int beatmapId)
+    {
+        try
+        {
+            ArrayList<BeatmapData> beatmapData = Main.getWrapper().getBeatmap(BeatmapParameters.builder().b(String.valueOf(beatmapId)).build());
 
-                // 获取Mode名字
-                String modeName = OsuAPIUtils.getModeNameWithMode(data.getMode());
+            BeatmapData data = beatmapData.get(0);
 
-                // 四舍五入
-                ReflectUtils.roundAllNumbers(data, 1);
+            // 获取Mode名字
+            String modeName = OsuAPIUtils.getModeNameWithMode(data.getMode());
 
-                // 获取时间
-                String time = TimeUtils.convertToString("m:ss", data.getHitLength(), TimeUnits.Second);
+            // 四舍五入
+            ReflectUtils.roundAllNumbers(data, 1);
 
-                // 获取PP
-                String ppMsg;
+            // 获取时间
+            String time = TimeUtils.convertToString("m:ss", data.getHitLength(), TimeUnits.Second);
 
-                try {
-                    UserScoreData score = Main.getWrapper().getScore(data);
+            // 获取PP
+            String ppMsg;
 
-                    ppMsg = Math.round(score.getPp() * 100d) / 100d + " PP";
-                } catch (BeatmapScoreNotEnoughException e) {
-                    ppMsg = "无计分!";
-                    //TODO: 报错收集表
-                }
+            try {
+                UserScoreData score = Main.getWrapper().getScore(data);
 
-                String format = "[osu://b/%beatmap_id% [%cm%: %artist% - %title% (%version%)]]: %ppmsg% | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm% | AR %diff_approach% | CS %diff_size% | OD %diff_overall%";
-
-                format = ReflectUtils.replaceReflectVariables(data, format, false, true);
-                format = format.replace("%cm%", modeName);
-                format = format.replace("%ct%", time);
-                format = format.replace("%ppmsg%", ppMsg);
-
-                Main.getMessenger().respond(event, format);
-
-            } catch (JsonEmptyException e) {
-                Main.getMessenger().respond(event, "此谱面不存在!");
-            } catch (MalformedURLException | RequiredParamIsNullException | IllegalAccessException e) {
-                Main.getMessenger().respond(event, "未知后台错误, 请联系admin@moecraft.cc");
-                e.printStackTrace();
+                ppMsg = Math.round(score.getPp() * 100d) / 100d + " PP";
+            } catch (BeatmapScoreNotEnoughException e) {
+                ppMsg = "无计分!";
+                //TODO: 报错收集表
             }
+
+            String format = "[osu://b/%beatmap_id% [%cm%: %artist% - %title% (%version%)]]: %ppmsg% | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm% | AR %diff_approach% | CS %diff_size% | OD %diff_overall%";
+
+            format = ReflectUtils.replaceReflectVariables(data, format, false, true);
+            format = format.replace("%cm%", modeName);
+            format = format.replace("%ct%", time);
+            format = format.replace("%ppmsg%", ppMsg);
+
+            Main.getMessenger().respond(event, format);
+
+        } catch (JsonEmptyException e) {
+            Main.getMessenger().respond(event, "此谱面不存在!");
+        } catch (MalformedURLException | RequiredParamIsNullException | IllegalAccessException e) {
+            Main.getMessenger().respond(event, "未知后台错误, 请联系admin@moecraft.cc");
+            e.printStackTrace();
         }
     }
 
