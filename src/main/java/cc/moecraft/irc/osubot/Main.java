@@ -75,7 +75,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException, IrcException, InstantiationException, IllegalAccessException
     {
-        Jboot.run(args);
+        // Jboot.run(args);
         logger = new DebugLogger("HyOsuIRCBot", true);
 
         config = new BotConfig();
