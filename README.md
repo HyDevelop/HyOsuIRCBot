@@ -22,8 +22,16 @@ Key Features / 主要功能
 * 查询玩家信息 / Inquire player's information.
 * 查询最近成绩 / Inquire player's recent plays and scores.
 * 查询谱面信息 / Inquire beatmap information.
-* 给其他人推荐谱面 / Recommend recently played beatmaps to other players.
+* 给其他人推荐谱面 / Send or suggest recently played beatmaps to other players.
 * 更新&查看玩家进步 (归功于[@Ameobea](https://github.com/Ameobea/)) / Update player's information with the Osu!Track API provided by [@Ameobea](https://github.com/Ameobea/)
+
+<a name="todo"></a>
+Todo Features / 待完成功能 
+--------
+
+* (动态的TODO列表移到了issues里面 这里只是一部分)
+* 推荐谱面 / Beatmap recommendation.
+* 成就助手 / Achievement unlocking utilitiy.
 
 <a name="credits"></a>
 Credits / 功劳
