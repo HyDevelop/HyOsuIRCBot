@@ -85,7 +85,7 @@ public class BotConfig extends Config
         setAdminUsernames(new ArrayList<>(Arrays.asList("Hykilpikonna", "dullwolf")));
 
         addDefault("BotProperties.CommandPrefix", "~");
-        addDefault("BotProperties.EnabledCommandPrefixes", new String[]{"!", ";", "-", ".", "?", "*"});
+        addDefault("BotProperties.EnabledCommandPrefixes", new String[]{"!", ";", "-", ".", "?"});
         addDefault("BotProperties.AutoJoinChannels", new String[]{"#general", "#chinese"});
 
         addDefault("BotProperties.Download.Timeout", 3000);
