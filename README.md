@@ -12,6 +12,13 @@
         <img src="https://img.shields.io/github/stars/hykilpikonna/HyOsuIRCBot.svg"></a>
 </p>
 
+<p align="center">
+  <a href="#features">Features</a> •
+  <a href="./commands.md">Commands</a> •
+  <a href="#credits">Credits</a> •
+  <a href="#license">License</a>
+</p>
+
 Credits
 --------
 
