@@ -1,12 +1,12 @@
 package cc.moecraft.irc.osubot.language;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.lang.ArrayUtils;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/14 创建!
@@ -16,13 +16,15 @@ import java.util.Map;
  *
  * @author Hykilpikonna
  */
-@Data @RequiredArgsConstructor @AllArgsConstructor
+@RequiredArgsConstructor @AllArgsConstructor
 public class MultiLanguageText
 {
-    @NotNull
+    @NotNull @Getter
     private final String text;
+    @Getter
     private Type type = Type.DIRECT_TEXT;
-    private Map<String, String> args = new HashMap<>();
+    @Getter
+    private Map<String, String> variables = new HashMap<>();
 
     /**
      * 多语言对象
@@ -40,6 +42,58 @@ public class MultiLanguageText
         LANGUAGE_NODE,  // 语言节点形式
         DIRECT_TEXT,    // 消息形式
         EMPTY           // 空的
+    }
+
+    /**
+     * 添加/设置一个变量值
+     *
+     * 例子:
+     *  set("username", "Hykilpikonna");
+     *
+     * 注意:
+     *  后添加的变量值会覆盖先添加的变量值组
+     *
+     * @param variable 变量名
+     * @param value 值
+     */
+    public void putVariable(String variable, String value)
+    {
+        variables.put(variable, value);
+    }
+
+    /**
+     * 添加/设置一组变量值
+     *
+     * @param variables 变量值组
+     */
+    public void putVariables(Map<String, String> variables)
+    {
+        this.variables.putAll(variables);
+    }
+
+    /**
+     * 添加/设置一组变量值
+     *
+     * @param pojo POJO对象
+     */
+    public void putVariables(Object pojo)
+    {
+        Field[] allFields = (Field[]) ArrayUtils.addAll(pojo.getClass().getDeclaredFields(), pojo.getClass().getFields());
+
+        for (Field field : allFields)
+        {
+            field.setAccessible(true);
+
+            try
+            {
+                putVariable("%" + field.getName().toLowerCase() + "%", field.get(pojo).toString());
+            }
+            catch (IllegalAccessException e)
+            {
+                e.printStackTrace();
+            }
+            catch (NullPointerException ignored) {}
+        }
     }
 
     /**
