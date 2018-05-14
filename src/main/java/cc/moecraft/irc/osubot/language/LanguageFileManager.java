@@ -15,14 +15,8 @@ import java.util.Map;
  */
 public class LanguageFileManager
 {
-    private Map<String, LanguageFile> languageFileMap;
-
-    public static final String DEFAULT_LANG = "en";
-
-    private enum OfficiallySupportedLanguages
-    {
-        zh, en
-    }
+    private Map<String, LanguageFile> languageFileMap; // 语言名字对应文件
+    public static final String DEFAULT_LANG = "cn";
 
     public LanguageFileManager()
     {
@@ -56,15 +50,7 @@ public class LanguageFileManager
 
     public boolean hasLanguageFile(String lang)
     {
-        try
-        {
-            OfficiallySupportedLanguages.valueOf(lang);
-            return true;
-        }
-        catch (Exception ignored)
-        {
-            return new File("./" + Main.PATH + "/Language@" + lang + ".yml").exists();
-        }
+        return new LanguageFile(lang).exists();
     }
 
     public class LanguageFile extends Config
@@ -73,14 +59,28 @@ public class LanguageFileManager
 
         LanguageFile(String lang)
         {
-            super(Main.PATH, "Language", "yml", false, false);
+            super(Main.PATH + File.separator + "language", "Language@" + lang, "yml", false, false);
             this.lang = lang;
-            initialize();
+            if (exists() || DEFAULT_LANG.equals(lang)) initialize();
         }
 
-        public String get(String placeholder)
+        /**
+         * 判断语言文件是否存在
+         * @return 是否存在
+         */
+        public boolean exists()
         {
-            return getString(placeholder);
+            return getConfigFile().exists();
+        }
+
+        /**
+         * 获取语言消息
+         * @param languageNode 语言节点
+         * @return 语言消息
+         */
+        public String get(String languageNode)
+        {
+            return getString(languageNode);
         }
 
         @Override
@@ -93,36 +93,30 @@ public class LanguageFileManager
         {
             if (lang == null) return;
 
-            if (lang.equals(OfficiallySupportedLanguages.en.name()))
-            {
-                addDefault("Commands.Help.HELP_TEXT", new String[]{
-                        "<---------= HELP MENU =--------->",
-                        "<---= Commands:",
-                        "  [>= !help    Display this menu",
-                        "  [>= !cmd     List all available commands",
-                        "  [>= !ping    Pong!",
-                });
-                addDefault("Commands.Errors.NOT_A_COMMAND", "Not a command. (Type %shelp to show the help menu)");
-                addDefault("Commands.Errors.UNKNOWN_COMMAND", "Unknown command.  (Type %shelp to show the help menu)");
-                addDefault("Commands.CommandList.COMMANDS_TEXT", "Command List: %s");
-            }
-            else if (lang.equals(OfficiallySupportedLanguages.zh.name()))
-            {
-                addDefault("Commands.Help.HELP_TEXT", new String[]{
-                        "<---------= 帮助菜单 =--------->",
-                        "<---= 指令:",
-                        "  [>= !help    打开这个菜单",
-                        "  [>= !cmd     显示所有可用指令",
-                        "  [>= !ping    啪!",
-                });
-                addDefault("Commands.Errors.NOT_A_COMMAND", "NOT A COMMAND: 不是指令 ( 输入%shelp显示帮助 )");
-                addDefault("Commands.Errors.UNKNOWN_COMMAND", "UNKNOWN COMMAND: 未知指令 ( 输入%shelp显示帮助 )");
-                addDefault("Commands.CommandList.COMMANDS_TEXT", "所有指令: %s");
-            }
-            else
-            {
-                Main.getLogger().debug("ERROR - 不会有这种可能性");
-            }
+            addDefault("Commands.Help.HELP_TEXT", new String[]{
+                    "<---------= HELP MENU =--------->",
+                    "<---= Commands:",
+                    "  [>= !help    Display this menu",
+                    "  [>= !cmd     List all available commands",
+                    "  [>= !ping    Pong!",
+            });
+            addDefault("Commands.Errors.NOT_A_COMMAND", "Not a command. (Type %shelp to show the help menu)");
+            addDefault("Commands.Errors.UNKNOWN_COMMAND", "Unknown command.  (Type %shelp to show the help menu)");
+            addDefault("Commands.CommandList.COMMANDS_TEXT", "Command List: %s");
+        }
+
+        // 所有获取/写入的语言节点全用小写
+
+        @Override
+        public void addDefault(String path, Object value)
+        {
+            super.addDefault(path.toLowerCase(), value);
+        }
+
+        @Override
+        public String getString(String path)
+        {
+            return super.getString(path.toLowerCase());
         }
     }
 }
