@@ -21,6 +21,7 @@ public class LanguageFileManager
     public LanguageFileManager()
     {
         languageFileMap = new HashMap<>();
+        getFile(DEFAULT_LANG); // 创建默认语言文件
     }
 
     public String get(String lang, String placeholder)
