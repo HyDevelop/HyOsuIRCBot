@@ -20,6 +20,18 @@ public class MultiLanguageText
     @NotNull
     private final String text;
     private Type type = Type.DIRECT_TEXT;
+    private String[] args = null;
+
+    /**
+     * 多语言对象
+     * @param text 消息 / 语言节点
+     * @param type 类型 ( 决定上面到底是消息还是语言节点还是空 )
+     */
+    public MultiLanguageText(String text, Type type)
+    {
+        this.text = text;
+        this.type = type;
+    }
 
     public enum Type
     {
