@@ -87,7 +87,7 @@ public class CommandManager
                     return RunResult.CHANNEL_DISABLED;
             }
 
-            commandArgs.getCommandRunner().run(event, user, channel, commandArgs.getCommandName(), commandArgs.getArgs());
+            Main.getMessenger().respond(event, commandArgs.getCommandRunner().run(event, user, channel, commandArgs.getCommandName(), commandArgs.getArgs()));
 
             return RunResult.SUCCESS;
         }

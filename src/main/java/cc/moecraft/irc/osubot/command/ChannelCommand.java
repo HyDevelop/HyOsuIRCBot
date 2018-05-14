@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot.command;
 
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
@@ -23,6 +24,7 @@ public interface ChannelCommand
      * @param channel 频道
      * @param command 指令名 ( 不包含指令参数 )
      * @param args 指令参数 ( 不包含指令名 )
+     * @return 发送回去的消息
      */
-    void channel(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args);
+    public MultiLanguageText channel(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args);
 }
