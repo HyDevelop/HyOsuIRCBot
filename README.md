@@ -30,6 +30,7 @@ Todo Features / 待完成功能
 --------
 
 * (动态的TODO列表移到了issues里面 这里只是一部分)
+* 多语言支持 / Multilingual support.
 * 推荐谱面 / Beatmap recommendation.
 * 成就助手 / Achievement unlocking utilitiy.
 
