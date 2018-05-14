@@ -10,7 +10,7 @@
     <a href="#features"><img src="https://img.shields.io/badge/Features-功能-01D282.svg"></a>
     <a href="./commands.md"><img src="https://img.shields.io/badge/Commands-指令-02B5A1.svg"></a>
     <a href="#credits"><img src="https://img.shields.io/badge/Credits-功劳-039DBA.svg"></a>
-    <a href="#licence"><img src="https://img.shields.io/badge/License-开源协议-0577E5.svg"></a>
+    <a href="#licence"><img src="https://img.shields.io/badge/License-开源条款-0577E5.svg"></a>
 </p>
 
 <br>
@@ -42,7 +42,7 @@ Credits / 功劳
 * [Osu!Track](https://ameobea.me/osutrack/) for Player Data Tracking & Analysis
 
 <a name="license"></a>
-[License / 开源协议](https://choosealicense.com/licenses/gpl-3.0/)
+[License / 开源条款](https://choosealicense.com/licenses/gpl-3.0/)
 --------
 
 * I know it's a link..... it's not a circle.... but still... CLICK IT!!
