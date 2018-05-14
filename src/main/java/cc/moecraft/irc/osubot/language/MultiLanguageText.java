@@ -27,4 +27,32 @@ public class MultiLanguageText
         DIRECT_TEXT,    // 消息形式
         EMPTY           // 空的
     }
+
+    /**
+     * @return 一个空的多语言消息实例
+     */
+    public static MultiLanguageText empty()
+    {
+        return new MultiLanguageText("", Type.EMPTY);
+    }
+
+    /**
+     * 用语言节点创建一个多语言消息实例
+     * @param languageNode 语言节点
+     * @return 多语言实例
+     */
+    public static MultiLanguageText languageNode(String languageNode)
+    {
+        return new MultiLanguageText(languageNode, Type.LANGUAGE_NODE);
+    }
+
+    /**
+     * 创建一个消息多语言实例 ( 这样的话其实不是多语言, 而是固定的 )
+     * @param text 消息
+     * @return 多语言实例
+     */
+    public static MultiLanguageText directText(String text)
+    {
+        return new MultiLanguageText(text, Type.DIRECT_TEXT);
+    }
 }
