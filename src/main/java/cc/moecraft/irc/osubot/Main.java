@@ -3,6 +3,7 @@ package cc.moecraft.irc.osubot;
 import cc.moecraft.irc.osubot.achievement.AchievementManager;
 import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.command.CommandManager;
+import cc.moecraft.irc.osubot.language.LanguageFileManager;
 import cc.moecraft.irc.osubot.language.Messenger;
 import cc.moecraft.irc.osubot.listener.CommandListener;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
@@ -22,9 +23,7 @@ import org.reflections.Reflections;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -77,7 +76,7 @@ public class Main {
     @Getter
     private static int downloadMaxTries = 3; // 下载失败重试次数
 
-    public static void main(String[] args) throws IOException, IrcException, InstantiationException, IllegalAccessException
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException
     {
         // Jboot.run(args);
         logger = new DebugLogger("HyOsuIRCBot", true);
@@ -89,7 +88,7 @@ public class Main {
         // 创建对象
         osuBots = createBots(config.getAccounts());
         commandManager = new CommandManager();
-        messenger = new Messenger();
+        messenger = new Messenger(new LanguageFileManager(), getGlobalVariablesForMLT());
         permissionConfig = new PermissionConfig();
         downloader = new DownloadUtils(config.getInt("BotProperties.Download.Timeout"));
         osuAPIUtils = new OsuAPIUtils(config.getString("BotProperties.Download.Osu.APIKey"), downloader);
@@ -156,6 +155,11 @@ public class Main {
         return osuBots;
     }
 
+    /**
+     * 启动机器人
+     * @param bots 机器人列表
+     * @param executor 线程执行器
+     */
     public static void startBots(ArrayList<PircBotX> bots, ThreadPoolExecutor executor)
     {
         for (PircBotX bot : bots)
@@ -180,5 +184,14 @@ public class Main {
                 System.out.println("启动失败");
             }
         }
+    }
+
+    public static Map<String, String> getGlobalVariablesForMLT()
+    {
+        Map<String, String> globalVariables = new HashMap<>();
+
+        globalVariables.put("%prefix%", CommandManager.getPrefix());
+
+        return globalVariables;
     }
 }
