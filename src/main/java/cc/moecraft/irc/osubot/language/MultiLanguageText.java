@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/14 创建!
@@ -20,7 +22,7 @@ public class MultiLanguageText
     @NotNull
     private final String text;
     private Type type = Type.DIRECT_TEXT;
-    private String[] args = null;
+    private Map<String, String> args = new HashMap<>();
 
     /**
      * 多语言对象
