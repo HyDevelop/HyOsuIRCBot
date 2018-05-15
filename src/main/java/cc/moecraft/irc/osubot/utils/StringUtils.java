@@ -115,4 +115,16 @@ public class StringUtils
     {
         return string != null && string.matches("[-+]?\\d*\\.?\\d+");
     }
+
+    /**
+     * 替换最后一个
+     * @param text 源字符串
+     * @param regex 要替换从的
+     * @param replacement 要替换成的
+     * @return 替换后的字符串
+     */
+    public static String replaceLast(String text, String regex, String replacement)
+    {
+        return text.replaceFirst("(?s)"+regex+"(?!.*?"+regex+")", replacement);
+    }
 }
