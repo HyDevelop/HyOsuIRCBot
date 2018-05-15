@@ -63,6 +63,16 @@ public class Messenger
     }
 
     /**
+     * 用多语言对象给事件用户回复一条IRC消息
+     * @param event IRC事件
+     * @param multiLanguageText 多语言对象
+     */
+    public void respondIRC(GenericMessageEvent event, MultiLanguageText multiLanguageText)
+    {
+        respondIRCWithWebUserData(event, multiLanguageText, Main.getOsuHtmlUtils().getWebUserData(event.getUser().getNick()));
+    }
+
+    /**
      * 解析多语言对象为字符串
      * @param multiLanguageText 多语言对象
      * @param lang 语言
