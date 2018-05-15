@@ -1,6 +1,7 @@
 package cc.moecraft.irc.osubot.command.commands.debug;
 
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import cc.moecraft.irc.osubot.utils.ArrayUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
@@ -24,10 +25,11 @@ public class CommandSendRaw extends Command
     }
 
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
         String msg = ArrayUtils.getTheRestArgsAsString(args, 0);
         event.getBot().sendRaw().rawLine(msg);
+        return MultiLanguageText.empty();
     }
 
     @Override

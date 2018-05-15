@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.command.commands.management;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
@@ -39,35 +40,32 @@ public class CommandChannel extends Command
      * @param args 指令参数 ( 不包含指令名 )
      */
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
         if (args.size() < 1 || args.size() > 2)
-        {
-            Main.getMessenger().respond(event, "用法: !chan [join/leave/list] <频道名>");
-            return;
-        }
+            return MultiLanguageText.directText("用法: !chan [join/leave/list] <频道名>");
 
         switch (args.get(0).toLowerCase())
         {
             case "join":
             {
                 event.getBot().send().joinChannel(args.get(1));
-                Main.getMessenger().respond(event, "已加入频道: " + args.get(1));
-                break;
+                return MultiLanguageText.directText("已加入频道: " + args.get(1));
             }
             case "leave":
             {
                 List<Channel> channels = new ArrayList<>(event.getBot().getUserChannelDao().getAllChannels());
 
-                Main.getMessenger().respond(event, "正在寻找频道离开... 如果成功会提示, 失败不会提示: ");
-                channels.forEach(oneChannel ->
+                Main.getMessenger().respondIRC(event, MultiLanguageText.directText("正在寻找频道离开... 如果成功会提示, 失败不会提示: "));
+
+                for (Channel oneChannel : channels)
                 {
                     if (oneChannel.getName().equalsIgnoreCase(args.get(1)))
                     {
                         oneChannel.send().part();
-                        Main.getMessenger().respond(event, "已离开频道: " + args.get(1));
+                        return MultiLanguageText.directText("已离开频道: " + args.get(1));
                     }
-                });
+                }
                 break;
             }
             case "list": // 有个缓存bug
@@ -80,13 +78,13 @@ public class CommandChannel extends Command
                     channelNames.add(oneChannel.getName());
                 });
 
-                Main.getMessenger().respond(event, "已加入的频道: " + channelNames.toString());
-                break;
+                return MultiLanguageText.directText("已加入的频道: " + channelNames.toString());
             }
             default:
-                Main.getMessenger().respond(event, "用法: !chan [join/leave/list] <频道名>");
-                break;
+                return MultiLanguageText.directText("用法: !chan [join/leave/list] <频道名>");
         }
+
+        return MultiLanguageText.empty();
     }
 
     @Override

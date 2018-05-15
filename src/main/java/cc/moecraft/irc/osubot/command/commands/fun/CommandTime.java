@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.command.commands.fun;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
@@ -32,9 +33,9 @@ public class CommandTime extends Command
      * @param args 指令参数 ( 不包含指令名 )
      */
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        Main.getMessenger().respond(event, "当前时间: " + Main.getLogger().getCurrentTime());
+        return MultiLanguageText.directText(Main.getLogger().getCurrentTime());
     }
 
     @Override

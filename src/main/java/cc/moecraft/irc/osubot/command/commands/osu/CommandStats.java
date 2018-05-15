@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.command.commands.osu;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.OsuUser;
 import cc.moecraft.irc.osubot.osu.data.UserData;
@@ -46,17 +47,14 @@ public class CommandStats extends Command
      * @param args 指令参数 ( 不包含指令名 )
      */
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
         OsuUser.UsernameAndMode usernameAndMode = getUsernameAndModeWithArgs(sender, args);
 
         try
         {
             if (!Main.getOsuAPIUtils().isUserExisting(usernameAndMode.getUsername()))
-            {
-                Main.getMessenger().respond(event, "未知用户: " + usernameAndMode.getUsername());
-                return;
-            }
+                return MultiLanguageText.directText("未知用户: " + usernameAndMode.getUsername());
 
             UserData userData = OsuUser.getData(usernameAndMode);
 
@@ -70,17 +68,17 @@ public class CommandStats extends Command
             // 获取Mode名字
             String modeName = OsuAPIUtils.getModeNameWithMode(usernameAndMode.getMode());
 
-            Main.getMessenger().respond(event, ReflectUtils.replaceReflectVariables(userData,
+            return MultiLanguageText.directText(ReflectUtils.replaceReflectVariables(userData,
                     "[%mode% - %username% (%user_id%)]: %pp_raw%pp | lv.%level% | #%pp_rank% | %accuracy%% acc. | %count_rank_ss%ss | %count_rank_s%s |  %count_rank_a%a ",
                     false, true
             ).replace("%mode%", modeName));
         } catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e) {
-            Main.getMessenger().respond(event, "未知后台错误, 请联系admin@moecraft.cc");
             e.printStackTrace();
+            return MultiLanguageText.languageNode("CommandStats_77");
         } catch (JsonEmptyException e) {
-            Main.getMessenger().respond(event, "未找到用户: " + usernameAndMode.getUsername() + ", 如果确定该用户存在, 请联系admin@moecraft.cc");
-            // TODO: 报错收集系统
             e.printStackTrace();
+            return MultiLanguageText.languageNode("CommandStats_80");
+            // TODO: 报错收集系统
         }
     }
 

@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.command.commands.fun;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
@@ -40,7 +41,7 @@ public class CommandRoll extends Command
      * @param args 指令参数 ( 不包含指令名 )
      */
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
         int min = 0, max = 100, decimalPlace = 1;
 
@@ -52,7 +53,7 @@ public class CommandRoll extends Command
         }
         if (args.size() > 2) decimalPlace = Integer.parseInt(args.get(2));
 
-        Main.getMessenger().respond(event, String.format("Roll到的数: %s", getRandomNumber(min, max, decimalPlace)));
+        return MultiLanguageText.directText(String.format("Roll: %s", getRandomNumber(min, max, decimalPlace)));
     }
 
     /**
