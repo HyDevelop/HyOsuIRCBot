@@ -30,6 +30,12 @@
       <version>1.4.8</version>
     </dependency>
 
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.6</version>
+    </dependency>
+
     <!--验证器-->
     <dependency>
       <groupId>com.baidu.unbiz</groupId>
