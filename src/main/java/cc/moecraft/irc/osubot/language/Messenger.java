@@ -1,6 +1,8 @@
 package cc.moecraft.irc.osubot.language;
 
+import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.CommandManager;
+import cc.moecraft.irc.osubot.osu.data.web.WebsiteUserData;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -36,6 +38,28 @@ public class Messenger
         if (text.equals("")) return;
 
         event.respond(text);
+    }
+
+    /**
+     * 用多语言对象给用户回复一条IRC消息
+     * @param event IRC事件
+     * @param multiLanguageText 多语言对象
+     * @param user 用户对象
+     */
+    public void respondIRCWithWebUserData(GenericMessageEvent event, MultiLanguageText multiLanguageText, WebsiteUserData user)
+    {
+        respondIRC(event, multiLanguageText, user.getCountry().getCode());
+    }
+
+    /**
+     * 用多语言对象给用户回复一条IRC消息
+     * @param event IRC事件
+     * @param multiLanguageText 多语言对象
+     * @param username 用户名
+     */
+    public void respondIRCWithUsername(GenericMessageEvent event, MultiLanguageText multiLanguageText, String username)
+    {
+        respondIRCWithWebUserData(event, multiLanguageText, Main.getOsuHtmlUtils().getWebUserData(username));
     }
 
     /**
