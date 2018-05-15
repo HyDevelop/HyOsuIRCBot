@@ -3,6 +3,7 @@ package cc.moecraft.irc.osubot.command;
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.exceptions.CommandNotFoundException;
 import cc.moecraft.irc.osubot.command.exceptions.NotACommandException;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import cc.moecraft.irc.osubot.osu.OsuUser;
 import lombok.Getter;
 import org.pircbotx.Channel;
@@ -74,20 +75,20 @@ public class CommandManager
 
             if (!new OsuUser(user.getNick()).hasPermission(commandArgs.getCommandRunner().permissionRequired()))
             {
-                if (reply(isChannel)) Main.getMessenger().respond(event, "NO PERM: 无法执行%prefix%" + commandArgs.getCommandName() + ", 因为缺少权限");
+                if (reply(isChannel)) Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("CommandManager_76"));
                 return RunResult.NO_PERMISSION;
             }
 
             if (isChannel) // 频道
             {
                 if (commandArgs.getCommandRunner() instanceof ChannelCommand) // implement了频道指令方法的类
-                    ((ChannelCommand) commandArgs.getCommandRunner()).channel(event, user, channel, commandArgs.getCommandName(), commandArgs.getArgs());
+                    Main.getMessenger().respondIRC(event, ((ChannelCommand) commandArgs.getCommandRunner()).channel(event, user, channel, commandArgs.getCommandName(), commandArgs.getArgs()));
 
                 if (Main.getConfig().getBoolean("BotProperties.DisableChannelReply")) // 关闭了频道直接回复
                     return RunResult.CHANNEL_DISABLED;
             }
 
-            Main.getMessenger().respond(event, commandArgs.getCommandRunner().run(event, user, channel, commandArgs.getCommandName(), commandArgs.getArgs()));
+            Main.getMessenger().respondIRC(event, commandArgs.getCommandRunner().run(event, user, channel, commandArgs.getCommandName(), commandArgs.getArgs()));
 
             return RunResult.SUCCESS;
         }
@@ -97,7 +98,7 @@ public class CommandManager
                     !user.getNick().equals(event.getBot().getNick()) &&
                     !Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick().toLowerCase()) &&
                     Main.isEnableListening()) // 如果是私聊并且不是自己, 回复提示
-                    Main.getMessenger().respond(event, "NOT A COMMAND: 不是指令 ( 输入%prefix%help显示帮助 )");
+                Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("CommandManager_99"));
 
             return RunResult.NOT_A_COMMAND;
         }
@@ -107,7 +108,7 @@ public class CommandManager
             {
                 if (!reply(isChannel)) return RunResult.COMMAND_NOT_FOUND;
 
-                Main.getMessenger().respond(event, "UNKNOWN COMMAND: 未知指令 ( 输入%prefix%help显示帮助 )");
+                Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("CommandManager_109"));
             }
 
             return RunResult.COMMAND_NOT_FOUND;

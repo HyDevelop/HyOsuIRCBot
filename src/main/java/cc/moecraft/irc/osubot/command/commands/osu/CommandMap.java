@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.command.commands.osu;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.data.BeatmapData;
 import cc.moecraft.irc.osubot.osu.data.UserScoreData;
@@ -46,31 +47,31 @@ public class CommandMap extends Command
      * @param args 指令参数 ( 不包含指令名 )
      */
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
         if (args.size() < 1)
         {
-            Main.getMessenger().respond(event,"没有输入地图ID怎样找嘛...!");
+            return MultiLanguageText.languageNode("CommandMap_52");
         }
         else if (args.size() > 1)
         {
-            Main.getMessenger().respond(event, "哪里输错了...?");
+            return MultiLanguageText.languageNode("CommandMap_56");
         }
         else
         {
-            int beatmapId = 0;
+            int beatmapId;
             try
             {
                 beatmapId = Integer.parseInt(args.get(0));
             } catch (NumberFormatException e) {
-                Main.getMessenger().respond(event, "输入的谱面id必须是最大32位的数字形式");
+                return MultiLanguageText.languageNode("CommandMap_65");
             }
 
-            process(event, beatmapId);
+            return process(event, beatmapId);
         }
     }
 
-    public static void process(GenericMessageEvent event, int beatmapId)
+    public static MultiLanguageText process(GenericMessageEvent event, int beatmapId)
     {
         try
         {
@@ -106,13 +107,13 @@ public class CommandMap extends Command
             format = format.replace("%ct%", time);
             format = format.replace("%ppmsg%", ppMsg);
 
-            Main.getMessenger().respond(event, format);
+            return MultiLanguageText.directText(format);
 
         } catch (JsonEmptyException e) {
-            Main.getMessenger().respond(event, "此谱面不存在!");
+            return MultiLanguageText.languageNode("CommandMap_111");
         } catch (MalformedURLException | RequiredParamIsNullException | IllegalAccessException e) {
-            Main.getMessenger().respond(event, "未知后台错误, 请联系me@hydev.org");
             e.printStackTrace();
+            return MultiLanguageText.languageNode("CommandStats_77");
         }
     }
 

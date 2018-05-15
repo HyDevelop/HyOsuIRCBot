@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.command.commands.management.power;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
@@ -36,18 +37,18 @@ public class CommandRestart extends Command
      * @param args 指令参数 ( 不包含指令名 )
      */
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
         try
         {
-            Main.getMessenger().respond(event, "已执行重启命令, 重启成功不会发送通知, 重启失败会报错");
+            Main.getMessenger().respondIRC(event, MultiLanguageText.directText("已执行重启命令, 重启成功不会发送通知, 重启失败会报错"));
             restartApplication(null);
-            // 这里执行不到, 因为进程已经结束了
+            return MultiLanguageText.empty();
         }
         catch (IOException e)
         {
-            Main.getMessenger().respond(event, "重启命令执行失败, 报错请看后台");
             e.printStackTrace();
+            return MultiLanguageText.directText("重启命令执行失败, 报错请看后台");
         }
     }
 

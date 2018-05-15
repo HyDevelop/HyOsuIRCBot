@@ -2,11 +2,13 @@ package cc.moecraft.irc.osubot.command.commands.management.permissions;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/22 创建!
@@ -32,13 +34,10 @@ public class CommandSetAdmin extends Command
      * @param args 指令参数 ( 不包含指令名 )
      */
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
         if (args.size() != 1)
-        {
-            Main.getMessenger().respond(event, "指令参数错误");
-            return;
-        }
+            return MultiLanguageText.directText("指令参数错误");
 
         ArrayList<String> adminUsernames = Main.getConfig().getAdminUsernames();
 
@@ -46,7 +45,7 @@ public class CommandSetAdmin extends Command
 
         Main.getConfig().setAdminUsernames(adminUsernames);
 
-        Main.getMessenger().respond(event, "已设置用户" + args.get(0) + "为管理员");
+        return MultiLanguageText.directText("已设置用户" + args.get(0) + "为管理员");
     }
 
     @Override

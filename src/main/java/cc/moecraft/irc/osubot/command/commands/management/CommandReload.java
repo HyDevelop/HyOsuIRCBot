@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.command.commands.management;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
@@ -32,15 +33,15 @@ public class CommandReload extends Command
      * @param args 指令参数 ( 不包含指令名 )
      */
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        Main.getMessenger().respond(event, "开始重载...");
+        Main.getMessenger().respondIRC(event, MultiLanguageText.directText("开始重载..."));
         long start = System.currentTimeMillis();
 
         Main.getConfig().reload();
         Main.getPermissionConfig().reload();
 
-        Main.getMessenger().respond(event, "重载完成! 耗时: " + (System.currentTimeMillis() - start) + "ms");
+        return MultiLanguageText.directText("重载完成! 耗时: " + (System.currentTimeMillis() - start) + "ms");
     }
 
     @Override
