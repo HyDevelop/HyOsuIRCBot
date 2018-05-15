@@ -1,8 +1,10 @@
 package cc.moecraft.scripts;
 
 import cc.moecraft.irc.osubot.utils.FileUtils;
+import cc.moecraft.irc.osubot.utils.StringUtils;
 import cc.moecraft.logger.DebugLogger;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.shiro.crypto.hash.Hash;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -29,6 +31,7 @@ public class LanguageFileWriteMethodGenerator
     private static final File languageFileWriteMethodFileGeneratePath = new File("./languageFileConfig.txt");
     private static final File javaFileGenerateDir = new File("./JavaFiles/");
     private static final Pattern regexToFindLanguageText = Pattern.compile("(?<=Main\\.getMessenger\\(\\)\\.respond\\(event, \")(.*)(?=\"\\);)");
+    private static final Pattern regexToFindVariable = Pattern.compile("(?<= \\+ )(.*)(?= \\+ )");
 
     public static void main(String[] args) throws IOException
     {
@@ -68,6 +71,14 @@ public class LanguageFileWriteMethodGenerator
                     String text = matcher.group();
                     String languageNode = fileName + "_" + i;
 
+                    HashMap<String, String> variableDatas = getAllVariables(text);
+
+                    for (Map.Entry<String, String> variableDataEntry : variableDatas.entrySet())
+                    {
+                        text = text.replace(String.format("\" + %s + \"", variableDataEntry.getValue()), "%" + variableDataEntry.getKey() + "%");
+                        text = StringUtils.replaceLast(text, ";", String.format(".putVariable(\"%%%s%%\", %s);", variableDataEntry.getKey(), variableDataEntry.getValue()));
+                    }
+
                     result.putIfAbsent(text, languageNode); // 这里用消息对应语言节点是因为这样可以防止重复
 
                     languageNode = result.get(text);
@@ -90,6 +101,31 @@ public class LanguageFileWriteMethodGenerator
 
                 saveFile(targetFile, modifiedFileContentBuilder.toString());
             }
+        }
+
+        return result;
+    }
+
+    /**
+     * 获取所有变量
+     * @param text 文字消息
+     * @return 变量名对应变量数据
+     */
+    public static HashMap<String, String> getAllVariables(String text)
+    {
+        HashMap<String, String> result = new HashMap<>();
+        Matcher matcher = regexToFindVariable.matcher(text);
+
+        while (matcher.find())
+        {
+            String variableData = matcher.group();
+
+            result.putIfAbsent(variableData
+                    .replace("(", "")
+                    .replace(")", "")
+                    .replace(".", "_")
+                    .replace(" ", "_")
+                    , variableData);
         }
 
         return result;
