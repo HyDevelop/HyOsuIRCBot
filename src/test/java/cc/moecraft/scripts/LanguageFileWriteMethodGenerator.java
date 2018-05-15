@@ -2,6 +2,7 @@ package cc.moecraft.scripts;
 
 import cc.moecraft.logger.DebugLogger;
 import cc.moecraft.scripts.templib.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -44,7 +45,7 @@ public class LanguageFileWriteMethodGenerator
         {
             // 每个文件
 
-            String fileName = fileContentEntry.getKey().getName();
+            String fileName = FilenameUtils.removeExtension(fileContentEntry.getKey().getName());
             String[] fileContent = fileContentEntry.getValue().split("\n");
             StringBuilder modifiedFileContentBuilder = new StringBuilder();
             boolean modified = false;
