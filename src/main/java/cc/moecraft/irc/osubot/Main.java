@@ -9,6 +9,7 @@ import cc.moecraft.irc.osubot.listener.CommandListener;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.OsuAPIWrapper;
+import cc.moecraft.irc.osubot.osu.OsuHtmlUtils;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.logger.DebugLogger;
 import io.jboot.Jboot;
@@ -68,6 +69,9 @@ public class Main {
     private static OsuAPIWrapper wrapper; // Osu官方API数据获取器 封装
 
     @Getter
+    private static OsuHtmlUtils osuHtmlUtils; // Osu官网HTML数据获取器
+
+    @Getter
     private static boolean debug; // 是否开启测试
 
     @Getter @Setter
@@ -93,6 +97,7 @@ public class Main {
         downloader = new DownloadUtils(config.getInt("BotProperties.Download.Timeout"));
         osuAPIUtils = new OsuAPIUtils(config.getString("BotProperties.Download.Osu.APIKey"), downloader);
         wrapper = new OsuAPIWrapper(osuAPIUtils);
+        osuHtmlUtils = new OsuHtmlUtils(downloader);
         achievementManager = new AchievementManager();
 
         // 注册指令  优化: 2018-05-02
