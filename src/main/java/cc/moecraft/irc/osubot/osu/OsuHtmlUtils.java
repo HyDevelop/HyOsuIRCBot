@@ -1,6 +1,7 @@
 package cc.moecraft.irc.osubot.osu;
 
 import cc.moecraft.irc.osubot.osu.data.AchievementData;
+import cc.moecraft.irc.osubot.osu.data.web.WebsiteUserData;
 import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
 import cc.moecraft.irc.osubot.osu.exceptions.UnexpectedHtmlJsonException;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
@@ -182,5 +183,26 @@ public class OsuHtmlUtils
         array.forEach(element -> result.add(new Gson().fromJson(element, AchievementData.class)));
 
         return result;
+    }
+
+    /**
+     * 用用户名或者id从官网获取用户信息
+     * @param usernameOrId 用户名或者id
+     * @return 用户信息
+     */
+    public WebsiteUserData getWebUserData(String usernameOrId)
+    {
+        try
+        {
+            JsonElement jsonElement = getJsonElementFromUser(usernameOrId, "user").get("user");
+
+            return new Gson().fromJson(jsonElement, WebsiteUserData.class);
+        }
+        catch (MalformedURLException e)
+        {
+            // 这里永远不会发生
+            e.printStackTrace();
+            return null;
+        }
     }
 }
