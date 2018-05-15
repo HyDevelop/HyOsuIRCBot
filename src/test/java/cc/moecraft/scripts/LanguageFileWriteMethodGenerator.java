@@ -38,7 +38,7 @@ public class LanguageFileWriteMethodGenerator
 
         for (Map.Entry<String, String> languageNodeEntry : languageNodes.entrySet())
         {
-            fileContentBuilder.append(String.format("addDefault(\"%s\", \"%s\");", languageNodeEntry.getKey(), languageNodeEntry.getValue())).append("\n");
+            fileContentBuilder.append(String.format("addDefault(\"%s\", \"%s\");", languageNodeEntry.getValue(), languageNodeEntry.getKey())).append("\n");
         }
 
         saveFile(languageFileWriteMethodFileGeneratePath, fileContentBuilder.toString());
@@ -68,7 +68,10 @@ public class LanguageFileWriteMethodGenerator
                     String text = matcher.group();
                     String languageNode = fileName + "_" + i;
 
-                    result.put(text, languageNode);
+                    result.putIfAbsent(text, languageNode); // 这里用消息对应语言节点是因为这样可以防止重复
+
+                    languageNode = result.get(text);
+
                     modifiedFileContentBuilder.append(fileContent[i]
                             .replace("Main.getMessenger().respond(event, \"", "return MultiLanguageText.languageNode(\"")
                             .replaceAll("(?<=\")(.*)(?=\")", languageNode)).append("\n");
