@@ -56,9 +56,10 @@ public class MultiLanguageText
      * @param variable 变量名
      * @param value 值
      */
-    public void putVariable(String variable, String value)
+    public MultiLanguageText putVariable(String variable, String value)
     {
         variables.put(variable, value);
+        return this;
     }
 
     /**
@@ -66,9 +67,10 @@ public class MultiLanguageText
      *
      * @param variables 变量值组
      */
-    public void putVariables(Map<String, String> variables)
+    public MultiLanguageText putVariables(Map<String, String> variables)
     {
         this.variables.putAll(variables);
+        return this;
     }
 
     /**
@@ -76,7 +78,7 @@ public class MultiLanguageText
      *
      * @param pojo POJO对象
      */
-    public void putVariables(Object pojo)
+    public MultiLanguageText putVariables(Object pojo)
     {
         Field[] allFields = (Field[]) ArrayUtils.addAll(pojo.getClass().getDeclaredFields(), pojo.getClass().getFields());
 
@@ -94,6 +96,8 @@ public class MultiLanguageText
             }
             catch (NullPointerException ignored) {}
         }
+
+        return this;
     }
 
     /**
