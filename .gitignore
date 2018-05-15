@@ -7,3 +7,4 @@ Backup/*
 target/*
 *.xml___jb_tmp___
 *.md___jb_tmp___
+src/main/resources/language/Language@cn.yml

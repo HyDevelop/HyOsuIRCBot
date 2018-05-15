@@ -4,6 +4,7 @@ import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.achievement.Achievement;
 import cc.moecraft.irc.osubot.command.ChannelCommand;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import cc.moecraft.irc.osubot.utils.ArrayUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
@@ -38,24 +39,20 @@ public class CommandAchievement extends Command implements ChannelCommand
      * @param args 指令参数 ( 不包含指令名 )
      */
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        process(event, args, false);
+        return process(event, args, false);
     }
 
     @Override
-    public void channel(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText channel(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        process(event, args, true);
+        return process(event, args, true);
     }
 
-    public static void process(GenericMessageEvent event, ArrayList<String> args, boolean isChannel)
+    public static MultiLanguageText process(GenericMessageEvent event, ArrayList<String> args, boolean isChannel)
     {
-        if (args.size() < 1)
-        {
-            if (!isChannel) Main.getMessenger().respond(event, "%prefix%achieve [成就名或成就ID]");
-            return;
-        }
+        if (args.size() < 1 && !isChannel) return MultiLanguageText.languageNode("CommandAchievement_55");
 
         String achievementName = ArrayUtils.getTheRestArgsAsString(args, 0);
         Achievement achievement;
@@ -69,15 +66,17 @@ public class CommandAchievement extends Command implements ChannelCommand
             achievement = Main.getAchievementManager().findAchievementByName(achievementName);
         }
 
-        Main.getMessenger().respond(event, String.format("成就: [%s (%s)]: %s",
+        Main.getMessenger().respondIRC(event, MultiLanguageText.directText(String.format("成就: [%s (%s)]: %s",
                 achievement.getName(),
                 String.valueOf(achievement.getId()),
-                achievement.getTutorial()));
+                achievement.getTutorial())));
 
         if (!isChannel)
         {
             CommandMap.process(event, Math.toIntExact(achievement.getRecommendedMap()));
         }
+
+        return MultiLanguageText.empty();
     }
 
     @Override

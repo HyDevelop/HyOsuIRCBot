@@ -1,6 +1,8 @@
 package cc.moecraft.irc.osubot.command.commands.fun;
 
+import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
@@ -21,13 +23,13 @@ public class CommandEcho extends Command
     }
 
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
         StringBuilder text = new StringBuilder().append("*");
 
         args.forEach(arg -> text.append(arg).append(" "));
 
-        event.respond(text.toString());
+        return MultiLanguageText.directText(text.toString());
     }
 
     @Override

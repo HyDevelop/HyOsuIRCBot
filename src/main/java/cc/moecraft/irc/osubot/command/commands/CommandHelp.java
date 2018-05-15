@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.command.commands;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
@@ -28,9 +29,9 @@ public class CommandHelp extends Command
     }
 
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        Main.getMessenger().respond(event, "指令列表: [http://help.bot.hydev.org 点这里(help.bot.hydev.org)]");
+        return MultiLanguageText.languageNode("CommandHelp_32");
     }
 
     @Override

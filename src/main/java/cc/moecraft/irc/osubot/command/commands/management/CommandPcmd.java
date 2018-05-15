@@ -3,6 +3,7 @@ package cc.moecraft.irc.osubot.command.commands.management;
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.ChannelCommand;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import cc.moecraft.irc.osubot.utils.ArrayUtils;
 import com.google.common.collect.ImmutableMap;
 import org.pircbotx.Channel;
@@ -46,34 +47,28 @@ public class CommandPcmd extends Command implements ChannelCommand
      * @param args 指令参数 ( 不包含指令名 )
      */
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        process(event, sender, channel, command, args, false);
+        return process(event, sender, channel, command, args, false);
     }
 
     @Override
-    public void channel(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText channel(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        process(event, sender, channel, command, args, true);
+        return process(event, sender, channel, command, args, true);
     }
 
-    public void process(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args, boolean isChannel)
+    public MultiLanguageText process(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args, boolean isChannel)
     {
         if (args.size() < 1)
-        {
-            Main.getMessenger().respond(event, "用法: %prefix%pcmd \"[用户名]\" [指令]");
-            return;
-        }
+            return MultiLanguageText.directText("用法: %prefix%pcmd \"[用户名]\" [指令]");
 
         String arg = ArrayUtils.getTheRestArgsAsString(args, 0);
 
         Matcher matcher = regexToFindUsername.matcher(arg);
 
         if (!matcher.find())
-        {
-            Main.getMessenger().respond(event, "用户名要加引号");
-            return;
-        }
+            return MultiLanguageText.directText("用户名要加引号");
 
         String username = matcher.group();
         String commandToExecute = regexToRemoveUsername.matcher(arg).replaceAll("");
@@ -99,8 +94,10 @@ public class CommandPcmd extends Command implements ChannelCommand
                         Arrays.asList(username, "~" + commandToExecute), tags.build());
             }
         } catch (IOException e) {
-            Main.getMessenger().respond(event, "文件异常: " + Arrays.toString(e.getStackTrace()));
+            return MultiLanguageText.directText("文件异常: " + Arrays.toString(e.getStackTrace()));
         }
+
+        return MultiLanguageText.empty();
     }
 
     @Override
