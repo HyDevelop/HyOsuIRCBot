@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.command.commands;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
@@ -22,9 +23,9 @@ public class CommandCommands extends Command
     }
 
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        Main.getMessenger().respond(event, "所有指令: " + Main.getCommandManager().getCommandNameList().toString());
+        return MultiLanguageText.directText(Main.getCommandManager().getCommandNameList().toString());
     }
 
     @Override

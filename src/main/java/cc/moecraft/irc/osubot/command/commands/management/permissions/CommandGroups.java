@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.command.commands.management.permissions;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import cc.moecraft.irc.osubot.management.Permission;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
 import cc.moecraft.irc.osubot.management.PermissionGroup;
@@ -43,7 +44,7 @@ public class CommandGroups extends Command
      * @param args 指令参数 ( 不包含指令名 )
      */
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
         if (args.size() == 2)  // 创建移除查询权限组
         {
@@ -55,13 +56,11 @@ public class CommandGroups extends Command
 
                     Main.getPermissionConfig().setGroup(group);
 
-                    Main.getMessenger().respond(event, "权限组" + args.get(1) + "已成功创建");
-                    return;
+                    return MultiLanguageText.directText("权限组" + args.get(1) + "已成功创建");
                 }
                 else
                 {
-                    Main.getMessenger().respond(event, "无法创建, 权限组" + args.get(1) + "已存在");
-                    return;
+                    return MultiLanguageText.directText("无法创建, 权限组" + args.get(1) + "已存在");
                 }
             }
             else if (args.get(0).equals("remove"))
@@ -72,13 +71,11 @@ public class CommandGroups extends Command
 
                     Main.getPermissionConfig().removeGroup(group);
 
-                    Main.getMessenger().respond(event, "权限组" + args.get(1) + "已成功删除");
-                    return;
+                    return MultiLanguageText.directText("权限组" + args.get(1) + "已成功删除");
                 }
                 else
                 {
-                    Main.getMessenger().respond(event, "无法移除, 权限组" + args.get(1) + "不存在");
-                    return;
+                    return MultiLanguageText.directText("无法移除, 权限组" + args.get(1) + "不存在");
                 }
             }
             else if (args.get(0).equals("info"))
@@ -87,16 +84,14 @@ public class CommandGroups extends Command
                 {
                     PermissionGroup group = Main.getPermissionConfig().getGroup(args.get(1));
 
-                    Main.getMessenger().respond(event, "权限组" + args.get(1) + "信息:");
-                    Main.getMessenger().respond(event, "- 继承权限组: " + PermissionConfig.groupListToNameList(group.getContainings()));
-                    Main.getMessenger().respond(event, "- 单独权限:   " + PermissionConfig.permissionListToNameList(group.getThisGroupPermissions()));
-                    Main.getMessenger().respond(event, "- 所有权限:   " + PermissionConfig.permissionListToNameList(group.getAllPermissions()));
-                    return;
+                    return MultiLanguageText.directText("权限组" + args.get(1) + "信息: " +
+                            "[继承权限组: " + PermissionConfig.groupListToNameList(group.getContainings()) +
+                            ", 单独权限: " + PermissionConfig.permissionListToNameList(group.getThisGroupPermissions()) +
+                            ", 所有权限: " + PermissionConfig.permissionListToNameList(group.getAllPermissions()) + "]");
                 }
                 else
                 {
-                    Main.getMessenger().respond(event, "无法查询, 权限组" + args.get(1) + "不存在");
-                    return;
+                    return MultiLanguageText.directText("无法查询, 权限组" + args.get(1) + "不存在");
                 }
             }
         }
@@ -118,13 +113,11 @@ public class CommandGroups extends Command
 
                             Main.getPermissionConfig().setGroup(group);
 
-                            Main.getMessenger().respond(event, "已添加权限: " + permission.toString());
-                            return;
+                            return MultiLanguageText.directText("已添加权限: " + permission.toString());
                         }
                         else
                         {
-                            Main.getMessenger().respond(event, "无法添加, 权限" + permission.toString() + "已存在");
-                            return;
+                            return MultiLanguageText.directText("无法添加, 权限" + permission.toString() + "已存在");
                         }
                     }
                     else if (args.get(1).equals("remove"))
@@ -135,13 +128,11 @@ public class CommandGroups extends Command
 
                             Main.getPermissionConfig().setGroup(group);
 
-                            Main.getMessenger().respond(event, "已移除权限: " + permission.toString());
-                            return;
+                            return MultiLanguageText.directText("已移除权限: " + permission.toString());
                         }
                         else
                         {
-                            Main.getMessenger().respond(event, "无法移除, 权限" + permission.toString() + "不存在");
-                            return;
+                            return MultiLanguageText.directText("无法移除, 权限" + permission.toString() + "不存在");
                         }
                     }
                 }
@@ -151,8 +142,7 @@ public class CommandGroups extends Command
 
                     if (newGroup == null)
                     {
-                        Main.getMessenger().respond(event, "无法编辑, 权限组" + args.get(3) + "不存在");
-                        return;
+                        return MultiLanguageText.directText("无法编辑, 权限组" + args.get(3) + "不存在");
                     }
 
                     if (args.get(1).equals("add"))
@@ -163,13 +153,11 @@ public class CommandGroups extends Command
 
                             Main.getPermissionConfig().setGroup(group);
 
-                            Main.getMessenger().respond(event, "已添加权限组继承: " + newGroup.getGroupName());
-                            return;
+                            return MultiLanguageText.directText("已添加权限组继承: " + newGroup.getGroupName());
                         }
                         else
                         {
-                            Main.getMessenger().respond(event, "无法添加继承, 权限组" + newGroup.getGroupName() + "已存在");
-                            return;
+                            return MultiLanguageText.directText("无法添加继承, 权限组" + newGroup.getGroupName() + "已存在");
                         }
                     }
                     else if (args.get(1).equals("remove"))
@@ -180,24 +168,21 @@ public class CommandGroups extends Command
 
                             Main.getPermissionConfig().setGroup(group);
 
-                            Main.getMessenger().respond(event, "已移除权限组继承: " + newGroup.getGroupName());
-                            return;
+                            return MultiLanguageText.directText("已移除权限组继承: " + newGroup.getGroupName());
                         }
                         else
                         {
-                            Main.getMessenger().respond(event, "无法移除继承, 权限组" + newGroup.getGroupName() + "已存在");
-                            return;
+                            return MultiLanguageText.directText("无法移除继承, 权限组" + newGroup.getGroupName() + "已存在");
                         }
                     }
                 }
             }
             else
             {
-                Main.getMessenger().respond(event, "无法编辑, 权限组" + args.get(2) + "不存在");
-                return;
+                return MultiLanguageText.directText("无法编辑, 权限组" + args.get(2) + "不存在");
             }
         }
-        Main.getMessenger().respond(event, "指令参数错误");
+        return MultiLanguageText.directText("指令参数错误");
     }
 
     @Override

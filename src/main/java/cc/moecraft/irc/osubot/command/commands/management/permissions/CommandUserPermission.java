@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.command.commands.management.permissions;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
 import cc.moecraft.irc.osubot.management.PermissionGroup;
 import cc.moecraft.irc.osubot.osu.OsuUser;
@@ -11,6 +12,7 @@ import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.regex.Matcher;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/22 创建!
@@ -40,12 +42,11 @@ public class CommandUserPermission extends Command
      * @param args 指令参数 ( 不包含指令名 )
      */
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
         if (args.size() < 2)
         {
-            Main.getMessenger().respond(event, "指令参数错误");
-            return;
+            return MultiLanguageText.directText("指令参数错误");
         }
 
         OsuUser target = new OsuUser(args.get(1));
@@ -53,21 +54,17 @@ public class CommandUserPermission extends Command
 
         if (args.get(0).equals("info"))
         {
-            Main.getMessenger().respond(event, "用户" + args.get(1) + "信息:");
-            Main.getMessenger().respond(event, "- 管理员:     " + target.isAdmin());
-            Main.getMessenger().respond(event, "- 继承权限组: " + PermissionConfig.groupListToNameList(target.getGroups()));
-            Main.getMessenger().respond(event, "- 所有权限:   " + PermissionConfig.permissionListToNameList(target.getAllPermissions()));
-            return;
+            return MultiLanguageText.directText("用户" + args.get(1) + "信息: " +
+                    "[管理员: " + target.isAdmin() + ", " +
+                    "继承权限组: " + PermissionConfig.groupListToNameList(target.getGroups()) + ", " +
+                    "所有权限: " + PermissionConfig.permissionListToNameList(target.getAllPermissions()) + "]");
         }
         else if (args.size() == 3)
         {
             PermissionGroup permissionGroup = Main.getPermissionConfig().getGroup(args.get(2));
 
             if (permissionGroup == null)
-            {
-                Main.getMessenger().respond(event, "无法添加, 权限组" + args.get(2) + "不存在");
-                return;
-            }
+                return MultiLanguageText.directText("无法添加, 权限组" + args.get(2) + "不存在");
 
             AtomicBoolean haveGroup = new AtomicBoolean(false);
 
@@ -78,35 +75,26 @@ public class CommandUserPermission extends Command
             if (args.get(0).equals("add"))
             {
                 if (haveGroup.get())
-                {
-                    Main.getMessenger().respond(event, "添加失败, 玩家" + target.getUsername() + "已拥有权限组" + permissionGroup.getGroupName());
-                    return;
-                }
+                    return MultiLanguageText.directText("添加失败, 玩家" + target.getUsername() + "已拥有权限组" + permissionGroup.getGroupName());
 
                 target.getGroups().add(permissionGroup);
                 Main.getPermissionConfig().setUserPermissionGroups(target);
 
-                Main.getMessenger().respond(event, "添加成功, 权限组" + permissionGroup.getGroupName() + "已添加到玩家" + target.getUsername());
-                return;
+                return MultiLanguageText.directText("添加成功, 权限组" + permissionGroup.getGroupName() + "已添加到玩家" + target.getUsername());
             }
             else if (args.get(0).equals("remove"))
             {
                 if (!haveGroup.get())
-                {
-                    Main.getMessenger().respond(event, "移除失败, 玩家" + target.getUsername() + "没有权限组" + permissionGroup.getGroupName());
-                    return;
-                }
+                    return MultiLanguageText.directText("移除失败, 玩家" + target.getUsername() + "没有权限组" + permissionGroup.getGroupName());
 
                 target.getGroups().remove(permissionGroup);
                 Main.getPermissionConfig().setUserPermissionGroups(target);
 
-                Main.getMessenger().respond(event, "移除成功, 权限组" + permissionGroup.getGroupName() + "从玩家" + target.getUsername() + "移除");
-                return;
-
+                return MultiLanguageText.directText("移除成功, 权限组" + permissionGroup.getGroupName() + "从玩家" + target.getUsername() + "移除");
             }
         }
 
-        Main.getMessenger().respond(event, "指令参数错误");
+        return MultiLanguageText.directText("指令参数错误");
     }
 
     @Override

@@ -1,6 +1,8 @@
 package cc.moecraft.irc.osubot.command.commands.fun;
 
+import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
@@ -21,9 +23,9 @@ public class CommandNullpo extends Command
     }
 
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        event.respond("Gah!");
+        return MultiLanguageText.directText("Gah!");
     }
 
     @Override

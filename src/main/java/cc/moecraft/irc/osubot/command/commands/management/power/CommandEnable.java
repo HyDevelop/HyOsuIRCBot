@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.command.commands.management.power;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
@@ -34,10 +35,10 @@ public class CommandEnable extends Command
      * @param args 指令参数 ( 不包含指令名 )
      */
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
         Main.setEnableListening(true);
-        Main.getMessenger().respond(event, "监听已启用!");
+        return MultiLanguageText.directText("监听已启用!");
     }
 
     @Override

@@ -4,7 +4,6 @@ import cc.moecraft.irc.osubot.utils.FileUtils;
 import cc.moecraft.irc.osubot.utils.StringUtils;
 import cc.moecraft.logger.DebugLogger;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.shiro.crypto.hash.Hash;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -27,7 +26,7 @@ public class LanguageFileWriteMethodGenerator
 {
     private static DebugLogger logger = new DebugLogger("LanguageFileWriteMethodGenerator", true);
 
-    private static final File rootDir = new File("./src/main");
+    private static final File rootDir = new File("./generatorTemp/");
     private static final File languageFileWriteMethodFileGeneratePath = new File("./languageFileConfig.txt");
     private static final File javaFileGenerateDir = new File("./JavaFiles/");
     private static final Pattern regexToFindLanguageText = Pattern.compile("(?<=Main\\.getMessenger\\(\\)\\.respond\\(event, \")(.*)(?=\"\\);)");
@@ -37,11 +36,18 @@ public class LanguageFileWriteMethodGenerator
     {
         Map<String, String> languageNodes = generateLanguageNodesAsMap(getAllJavaFilesInString(String.valueOf(rootDir)));
 
+        Map<String, String> sortedNodes = new HashMap<>();
+
+        for(Map.Entry<String, String> entry : languageNodes.entrySet())
+        {
+            sortedNodes.put(entry.getValue(), entry.getKey()); // 按照节点排序
+        }
+
         StringBuilder fileContentBuilder = new StringBuilder();
 
-        for (Map.Entry<String, String> languageNodeEntry : languageNodes.entrySet())
+        for (Map.Entry<String, String> languageNodeEntry : sortedNodes.entrySet())
         {
-            fileContentBuilder.append(String.format("addDefault(\"%s\", \"%s\");", languageNodeEntry.getValue(), languageNodeEntry.getKey())).append("\n");
+            fileContentBuilder.append(String.format("addDefault(\"%s\", \"%s\");", languageNodeEntry.getKey(), languageNodeEntry.getValue())).append("\n");
         }
 
         saveFile(languageFileWriteMethodFileGeneratePath, fileContentBuilder.toString());

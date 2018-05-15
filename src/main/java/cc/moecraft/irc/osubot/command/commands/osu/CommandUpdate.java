@@ -2,6 +2,7 @@ package cc.moecraft.irc.osubot.command.commands.osu;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
+import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.OsuUser;
 import cc.moecraft.irc.osubot.osu.data.OsuTrackData;
@@ -46,17 +47,14 @@ public class CommandUpdate extends Command
      * @param args 指令参数 ( 不包含指令名 )
      */
     @Override
-    public void run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
+    public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
         OsuUser.UsernameAndMode usernameAndMode = getUsernameAndModeWithArgs(sender, args);
 
         try
         {
             if (!Main.getOsuAPIUtils().isUserExisting(usernameAndMode.getUsername()))
-            {
-                Main.getMessenger().respond(event, "未知用户: " + usernameAndMode.getUsername());
-                return;
-            }
+                return MultiLanguageText.directText("未知用户: " + usernameAndMode.getUsername());
 
             OsuTrackData osuTrackData = OsuUser.getOsuTrackData(usernameAndMode);
 
@@ -66,9 +64,8 @@ public class CommandUpdate extends Command
             // 新玩家 TODO： 检测数据库， 而不是OsuTrack服务器的数据库来判断是不是新玩家
             if (osuTrackData.getFirst() && usernameAndMode.isSelf())
             {
-                Main.getMessenger().respond(event, "欢迎新大佬使用HyIRC机器人! 这个指令是Ameo的[https://ameobea.me/osutrack/ Osu!Track]统计功能!");
-                Main.getMessenger().respond(event, "这个指令的数值代表着从上次输入指令到这次输入指令之间的进步!");
-                return;
+                Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("CommandUpdate_68"));
+                return MultiLanguageText.languageNode("CommandUpdate_69");
             }
 
             // 获取Mode名字
@@ -83,14 +80,14 @@ public class CommandUpdate extends Command
                     .replace("%crank%", (osuTrackData.getPpRank() < 0 ? "↑" : "↓") + Math.abs(osuTrackData.getPpRank()));
             format = getPrefix(osuTrackData) + format;
 
-            Main.getMessenger().respond(event, format);
+            return MultiLanguageText.directText(format);
         } catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e) {
-            Main.getMessenger().respond(event, "未知后台错误, 请联系admin@moecraft.cc");
             e.printStackTrace();
+            return MultiLanguageText.languageNode("CommandStats_77");
         } catch (JsonEmptyException e) {
-            Main.getMessenger().respond(event, "未找到用户: " + usernameAndMode.getUsername() + ", 如果确定该用户存在, 请联系admin@moecraft.cc");
-            // TODO: 报错收集系统
             e.printStackTrace();
+            return MultiLanguageText.languageNode("CommandStats_80");
+            // TODO: 报错收集系统
         }
     }
 
