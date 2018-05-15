@@ -1,7 +1,7 @@
 package cc.moecraft.scripts;
 
+import cc.moecraft.irc.osubot.utils.FileUtils;
 import cc.moecraft.logger.DebugLogger;
-import cc.moecraft.scripts.templib.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
@@ -34,7 +34,14 @@ public class LanguageFileWriteMethodGenerator
     {
         Map<String, String> languageNodes = generateLanguageNodesAsMap(getAllJavaFilesInString(String.valueOf(rootDir)));
 
-        logger.debug("Language Nodes: " + languageNodes);
+        StringBuilder fileContentBuilder = new StringBuilder();
+
+        for (Map.Entry<String, String> languageNodeEntry : languageNodes.entrySet())
+        {
+            fileContentBuilder.append(String.format("addDefault(\"%s\", \"%s\");", languageNodeEntry.getKey(), languageNodeEntry.getValue())).append("\n");
+        }
+
+        saveFile(languageFileWriteMethodFileGeneratePath, fileContentBuilder.toString());
     }
 
     public static HashMap<String, String> generateLanguageNodesAsMap(HashMap<File, String> fileContentMap) throws IOException
@@ -78,11 +85,7 @@ public class LanguageFileWriteMethodGenerator
             {
                 File targetFile = new File(javaFileGenerateDir, fileContentEntry.getKey().getPath());
 
-                createFileOrOverride(targetFile);
-
-                FileWriter fileWriter = new FileWriter(targetFile);
-                fileWriter.write(modifiedFileContentBuilder.toString());
-                fileWriter.close();
+                saveFile(targetFile, modifiedFileContentBuilder.toString());
             }
         }
 
@@ -115,7 +118,7 @@ public class LanguageFileWriteMethodGenerator
         return result;
     }
 
-    public static void createFileOrOverride(File file) throws IOException
+    public static void createFileOrOverride(File file)
     {
         if (!cc.moecraft.yaml.utils.FileUtils.createFile(file))
         {
@@ -124,5 +127,14 @@ public class LanguageFileWriteMethodGenerator
             file.delete();
             createFileOrOverride(file);
         }
+    }
+
+    public static void saveFile(File file, String content) throws IOException
+    {
+        createFileOrOverride(file);
+
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write(content);
+        fileWriter.close();
     }
 }
