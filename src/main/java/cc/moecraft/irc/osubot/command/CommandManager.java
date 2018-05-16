@@ -75,7 +75,7 @@ public class CommandManager
 
             if (!new OsuUser(user.getNick()).hasPermission(commandArgs.getCommandRunner().permissionRequired()))
             {
-                if (reply(isChannel)) Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("CommandManager_76"));
+                if (reply(isChannel)) Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("manager_error_no_perm"));
                 return RunResult.NO_PERMISSION;
             }
 
@@ -98,7 +98,7 @@ public class CommandManager
                     !user.getNick().equals(event.getBot().getNick()) &&
                     !Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick().toLowerCase()) &&
                     Main.isEnableListening()) // 如果是私聊并且不是自己, 回复提示
-                Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("CommandManager_99"));
+                Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("manager_not_a_command"));
 
             return RunResult.NOT_A_COMMAND;
         }
@@ -108,7 +108,7 @@ public class CommandManager
             {
                 if (!reply(isChannel)) return RunResult.COMMAND_NOT_FOUND;
 
-                Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("CommandManager_109"));
+                Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("manager_unknown_command"));
             }
 
             return RunResult.COMMAND_NOT_FOUND;
