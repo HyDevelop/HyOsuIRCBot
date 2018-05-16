@@ -52,7 +52,7 @@ public class CommandAchievement extends Command implements ChannelCommand
 
     public static MultiLanguageText process(GenericMessageEvent event, ArrayList<String> args, boolean isChannel)
     {
-        if (args.size() < 1 && !isChannel) return MultiLanguageText.languageNode("CommandAchievement_55");
+        if (args.size() < 1 && !isChannel) return MultiLanguageText.languageNode("achievement_help");
 
         String achievementName = ArrayUtils.getTheRestArgsAsString(args, 0);
         Achievement achievement;

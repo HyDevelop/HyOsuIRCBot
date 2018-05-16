@@ -33,7 +33,7 @@ public class CommandInfo extends Command implements ChannelCommand
         switch (args.get(0))
         {
             case "变色":
-                return MultiLanguageText.languageNode("CommandInfo_34");
+                return MultiLanguageText.languageNode("info_color_change");
         }
 
         return MultiLanguageText.empty();
