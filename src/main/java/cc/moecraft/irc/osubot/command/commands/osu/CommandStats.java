@@ -74,10 +74,10 @@ public class CommandStats extends Command
             ).replace("%mode%", modeName));
         } catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e) {
             e.printStackTrace();
-            return MultiLanguageText.languageNode("error_unknown_backend_error");
+            return MultiLanguageText.languageNode("errors.unknown_backend_error");
         } catch (JsonEmptyException e) {
             e.printStackTrace();
-            return MultiLanguageText.languageNode("error_unknown_username_2");
+            return MultiLanguageText.languageNode("errors.unknown_username");
             // TODO: 报错收集系统
         }
     }
