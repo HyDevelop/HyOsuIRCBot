@@ -113,7 +113,7 @@ public class CommandMap extends Command
             return MultiLanguageText.languageNode("map_error_unknown_map");
         } catch (MalformedURLException | RequiredParamIsNullException | IllegalAccessException e) {
             e.printStackTrace();
-            return MultiLanguageText.languageNode("error_unknown_backend_error");
+            return MultiLanguageText.languageNode("errors.unknown_backend_error");
         }
     }
 
