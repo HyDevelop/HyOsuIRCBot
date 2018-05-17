@@ -109,8 +109,9 @@ public class LanguageFileManager
             addDefault("achievement_help", "%prefix%achieve [成就名或成就ID]");
             addDefault("commands.fun.ping_text", "Pong!");
             addDefault("commands.fun.time_text", "当前时间: %time%");
+            addDefault("commands.osu.achievement", "成就%id%: %name% - %tutorial%");
             addDefault("push_error_input_username", "请输入用户名... 你不会真的想推荐给自己吧...");
-            addDefault("info_color_change", "浅黄：普通用户｜黄色：[https://osu.ppy.sh/p/support 捐赠玩家]｜红色：[https://osu.ppy.sh/wiki/QAT QAT（谱面质量保证团队）] 或是 [https://osu.ppy.sh/help/wiki/People/Global_Moderation_Team GMT（社群管理团队）]｜白色：你自己，或是一行使用 /me 指令的动作讯息｜深蓝色：私信｜绿色：有人提到你的名字（或是 Highlight）｜粉红色：IRC 萌萌机器人（ｂａｎｃｈｏｂｏｔ）");
+            addDefault("commands.fun.info_color_change", "浅黄：普通用户｜黄色：[https://osu.ppy.sh/p/support 捐赠玩家]｜红色：[https://osu.ppy.sh/wiki/QAT QAT（谱面质量保证团队）] 或是 [https://osu.ppy.sh/help/wiki/People/Global_Moderation_Team GMT（社群管理团队）]｜白色：你自己，或是一行使用 /me 指令的动作讯息｜深蓝色：私信｜绿色：有人提到你的名字（或是 Highlight）｜粉红色：IRC 萌萌机器人（ｂａｎｃｈｏｂｏｔ）");
             addDefault("update_message_newbie_1", "欢迎新大佬使用HyIRC机器人! 这个指令是Ameo的[https://ameobea.me/osutrack/ Osu!Track]统计功能!");
             addDefault("update_message_newbie_2", "这个指令的数值代表着从上次输入指令到这次输入指令之间的进步!");
         }
