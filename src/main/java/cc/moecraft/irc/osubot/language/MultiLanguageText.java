@@ -6,6 +6,8 @@ import javax.validation.constraints.NotNull;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
+
 import org.apache.commons.lang.ArrayUtils;
 
 /**
@@ -19,6 +21,7 @@ import org.apache.commons.lang.ArrayUtils;
 @RequiredArgsConstructor @AllArgsConstructor
 public class MultiLanguageText
 {
+    private static final Pattern regexToMatchVariable = Pattern.compile("%.*%");
     @NotNull @Getter
     private final String text;
     @Getter
@@ -58,6 +61,8 @@ public class MultiLanguageText
      */
     public MultiLanguageText putVariable(String variable, String value)
     {
+        if (!regexToMatchVariable.matcher(value).matches()) variable = "%" + variable + "%";
+
         variables.put(variable, value);
         return this;
     }
