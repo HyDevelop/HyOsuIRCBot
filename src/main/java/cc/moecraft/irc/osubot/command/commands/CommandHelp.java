@@ -30,7 +30,7 @@ public class CommandHelp extends Command
     @Override
     public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        return MultiLanguageText.languageNode("help_text");
+        return MultiLanguageText.languageNode("commands.general.help_text");
     }
 
     @Override
