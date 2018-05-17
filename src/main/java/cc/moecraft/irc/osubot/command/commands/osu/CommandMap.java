@@ -51,11 +51,11 @@ public class CommandMap extends Command
     {
         if (args.size() < 1)
         {
-            return MultiLanguageText.languageNode("CommandMap_52");
+            return MultiLanguageText.languageNode("map_error_no_args");
         }
         else if (args.size() > 1)
         {
-            return MultiLanguageText.languageNode("CommandMap_56");
+            return MultiLanguageText.languageNode("map_error_args_size");
         }
         else
         {
@@ -64,7 +64,7 @@ public class CommandMap extends Command
             {
                 beatmapId = Integer.parseInt(args.get(0));
             } catch (NumberFormatException e) {
-                return MultiLanguageText.languageNode("CommandMap_65");
+                return MultiLanguageText.languageNode("map_error_not_int");
             }
 
             return process(event, beatmapId);
@@ -110,10 +110,10 @@ public class CommandMap extends Command
             return MultiLanguageText.directText(format);
 
         } catch (JsonEmptyException e) {
-            return MultiLanguageText.languageNode("CommandMap_111");
+            return MultiLanguageText.languageNode("map_error_unknown_map");
         } catch (MalformedURLException | RequiredParamIsNullException | IllegalAccessException e) {
             e.printStackTrace();
-            return MultiLanguageText.languageNode("CommandStats_77");
+            return MultiLanguageText.languageNode("error_unknown_backend_error");
         }
     }
 
