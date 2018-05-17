@@ -58,7 +58,7 @@ public class CommandRecent extends Command
     {
         UsernameAndIndexAndMode info = getIndexAndModeWithArgs(sender, args);
 
-        if (info.getIndex() > 50) return MultiLanguageText.languageNode("recent_error_greater_than_50");
+        if (info.getIndex() > 50) return MultiLanguageText.languageNode("commands.osu.recent_error_greater_than_50");
 
         try {
             UserRecentData data = Main.getWrapper().getRecent(info);
@@ -97,9 +97,9 @@ public class CommandRecent extends Command
 
         } catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e) {
             e.printStackTrace();
-            return MultiLanguageText.languageNode("error_unknown_backend_error");
+            return MultiLanguageText.languageNode("errors.unknown_backend_error");
         } catch (JsonEmptyException e) {
-            return MultiLanguageText.languageNode("error_unknown_username");
+            return MultiLanguageText.languageNode("errors.unknown_username");
             // TODO: 报错收集系统
         } catch (RecentScoreNotEnoughException recentScoreNotEnough) {
             return MultiLanguageText.directText(String.format("现在你%s模式的近期成绩只有%s个... 无法获取第%s个, 多玩玩再来看看吧!", OsuAPIUtils.getModeNameWithMode(recentScoreNotEnough.getMode()), recentScoreNotEnough.getLimit(), recentScoreNotEnough.getRequested()));
