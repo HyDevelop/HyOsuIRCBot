@@ -113,11 +113,17 @@ public class CommandManager
         }
         catch (NotACommandException e)
         {
-            if (!isChannel &&
-                    !user.getNick().equals(event.getBot().getNick()) &&
-                    !Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick().toLowerCase()) &&
-                    Main.isEnableListening()) // 如果是私聊并且不是自己, 回复提示
-                Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("manager_not_a_command"));
+            // 频道里
+            if (isChannel) return RunResult.NOT_A_COMMAND;
+
+            // 机器人自己给自己发
+            if (!user.getNick().equals(event.getBot().getNick())) return RunResult.NOT_A_COMMAND;
+
+            // 配置里配置了忽略的用户名单
+            if (!Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick())) return RunResult.NOT_A_COMMAND;
+
+            // 如果启用了监听
+            if (Main.isEnableListening()) Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("manager_not_a_command"));
 
             return RunResult.NOT_A_COMMAND;
         }
