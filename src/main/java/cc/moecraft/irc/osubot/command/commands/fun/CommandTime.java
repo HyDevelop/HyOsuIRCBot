@@ -35,7 +35,7 @@ public class CommandTime extends Command
     @Override
     public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        return MultiLanguageText.directText(Main.getLogger().getCurrentTime());
+        return MultiLanguageText.languageNode("commands.fun.time_text").putVariable("time", Main.getLogger().getCurrentTime());
     }
 
     @Override
