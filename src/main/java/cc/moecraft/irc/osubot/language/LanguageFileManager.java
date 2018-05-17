@@ -105,7 +105,7 @@ public class LanguageFileManager
             addDefault("map_error_no_args", "没有输入地图ID怎样找嘛...!");
             addDefault("map_error_unknown_map", "此谱面不存在!");
             addDefault("commands.general.help_text", "指令列表: [http://help.bot.hydev.org 点这里(help.bot.hydev.org)]");
-            addDefault("achievement_help", "%prefix%achieve [成就名或成就ID]");
+            addDefault("commands.osu.achievement_help", "%prefix%achieve [成就名或成就ID]");
             addDefault("commands.fun.ping_text", "Pong!");
             addDefault("commands.fun.time_text", "当前时间: %time%");
             addDefault("commands.osu.push_command_channel", "%username%推荐给你们了刚刚在玩的谱面: [osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: %ppmsg% | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm%");
