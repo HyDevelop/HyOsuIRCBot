@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot.language;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
@@ -61,7 +62,10 @@ public class MultiLanguageText
      */
     public MultiLanguageText putVariable(String variable, String value)
     {
-        if (!regexToMatchVariable.matcher(value).matches()) variable = "%" + variable + "%";
+        if (!regexToMatchVariable.matcher(variable).matches())
+        {
+            variable = "%" + variable + "%";
+        }
 
         variables.put(variable, value);
         return this;
@@ -82,8 +86,9 @@ public class MultiLanguageText
      * 添加/设置一组变量值
      *
      * @param pojo POJO对象
+     * @param useGsonNames 是否用GSON的变量名
      */
-    public MultiLanguageText putVariables(Object pojo)
+    public MultiLanguageText putVariables(Object pojo, boolean useGsonNames)
     {
         Field[] allFields = (Field[]) ArrayUtils.addAll(pojo.getClass().getDeclaredFields(), pojo.getClass().getFields());
 
@@ -91,9 +96,19 @@ public class MultiLanguageText
         {
             field.setAccessible(true);
 
+            String fieldName;
+
+            if (useGsonNames)
+            {
+                if (field.isAnnotationPresent(SerializedName.class))
+                    fieldName = field.getAnnotation(SerializedName.class).value();
+                else continue;
+            }
+            else fieldName = field.getName();
+
             try
             {
-                putVariable("%" + field.getName().toLowerCase() + "%", field.get(pojo).toString());
+                putVariable("%" + fieldName.toLowerCase() + "%", field.get(pojo).toString());
             }
             catch (IllegalAccessException e)
             {
