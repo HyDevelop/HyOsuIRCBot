@@ -67,6 +67,25 @@ public class CommandManager
      */
     public RunResult runCommand(GenericMessageEvent event, String fullCommand, User user, Channel channel, boolean isChannel)
     {
+        return runCommand(event, fullCommand, user, channel, isChannel, false);
+    }
+
+    /**
+     * 自动找到注册过的指令对象运行
+     *
+     * 例子:
+     *  !ecHO hi there
+     *
+     * @param event 事件
+     * @param fullCommand 完整指令
+     * @param user 用户名
+     * @param channel 频道
+     * @param isChannel 是不是从频道发出的
+     * @param forceChannel 强制向频道回复
+     * @return 执行结果
+     */
+    public RunResult runCommand(GenericMessageEvent event, String fullCommand, User user, Channel channel, boolean isChannel, boolean forceChannel)
+    {
         try
         {
             CommandArgs commandArgs = CommandArgs.parse(fullCommand);
@@ -84,7 +103,7 @@ public class CommandManager
                 if (commandArgs.getCommandRunner() instanceof ChannelCommand) // implement了频道指令方法的类
                     Main.getMessenger().respondIRC(event, ((ChannelCommand) commandArgs.getCommandRunner()).channel(event, user, channel, commandArgs.getCommandName(), commandArgs.getArgs()));
 
-                if (Main.getConfig().getBoolean("BotProperties.DisableChannelReply")) // 关闭了频道直接回复
+                if (Main.getConfig().getBoolean("BotProperties.DisableChannelReply") && !forceChannel) // 关闭了频道直接回复
                     return RunResult.CHANNEL_DISABLED;
             }
 
