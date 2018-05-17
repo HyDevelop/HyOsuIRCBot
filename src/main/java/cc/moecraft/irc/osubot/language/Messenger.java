@@ -26,6 +26,17 @@ public class Messenger
     private Map<String, String> globalVariables;
 
     /**
+     * 获取一个多语言对象的消息文字
+     * @param event 事件
+     * @param multiLanguageText 多语言对象
+     * @return 消息文字
+     */
+    public String getText(GenericMessageEvent event, MultiLanguageText multiLanguageText)
+    {
+        return resolveMLT(multiLanguageText, Main.getOsuHtmlUtils().getWebUserData(event.getUser().getNick()).getCountry().getCode());
+    }
+
+    /**
      * 用多语言对象回复一条IRC消息
      * @param event IRC事件
      * @param multiLanguageText 多语言对象
