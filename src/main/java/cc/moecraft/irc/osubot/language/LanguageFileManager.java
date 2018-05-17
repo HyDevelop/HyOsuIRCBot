@@ -94,9 +94,9 @@ public class LanguageFileManager
         {
             if (lang == null) return;
 
-            addDefault("manager_unknown_command", "未知指令 ( 输入%prefix%help显示帮助 )");
-            addDefault("manager_error_no_perm", "无法执行%prefix%%commandArgs_getCommandName%, 因为缺少权限");
-            addDefault("manager_not_a_command", "不是指令 ( 输入%prefix%help显示帮助 )");
+            addDefault("manager.unknown_command", "未知指令 ( 输入%prefix%help显示帮助 )");
+            addDefault("manager.no_permission", "无法执行%prefix%%command%, 因为缺少权限");
+            addDefault("manager.not_command", "不是指令 ( 输入%prefix%help显示帮助 )");
             addDefault("error_unknown_backend_error", "未知后台错误, 请联系admin@moecraft.cc");
             addDefault("error_unknown_username", "未找到用户: %info_getUsername%, 如果确定该用户存在, 请联系admin@moecraft.cc");
             addDefault("error_unknown_username_2", "未找到用户: %usernameAndMode_getUsername%, 如果确定该用户存在, 请联系admin@moecraft.cc");
