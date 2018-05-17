@@ -94,9 +94,9 @@ public class LanguageFileManager
         {
             if (lang == null) return;
 
-            addDefault("manager_unknown_command", "未知指令 ( 输入%prefix%help显示帮助 )");
-            addDefault("manager_error_no_perm", "无法执行%prefix%%commandArgs_getCommandName%, 因为缺少权限");
-            addDefault("manager_not_a_command", "不是指令 ( 输入%prefix%help显示帮助 )");
+            addDefault("manager.unknown_command", "未知指令 ( 输入%prefix%help显示帮助 )");
+            addDefault("manager.no_permission", "无法执行%prefix%%command%, 因为缺少权限");
+            addDefault("manager.not_command", "不是指令 ( 输入%prefix%help显示帮助 )");
             addDefault("error_unknown_backend_error", "未知后台错误, 请联系admin@moecraft.cc");
             addDefault("error_unknown_username", "未找到用户: %info_getUsername%, 如果确定该用户存在, 请联系admin@moecraft.cc");
             addDefault("error_unknown_username_2", "未找到用户: %usernameAndMode_getUsername%, 如果确定该用户存在, 请联系admin@moecraft.cc");
@@ -107,9 +107,11 @@ public class LanguageFileManager
             addDefault("recent_error_greater_than_50", "请输入50以下的数字");
             addDefault("help_text", "指令列表: [http://help.bot.hydev.org 点这里(help.bot.hydev.org)]");
             addDefault("achievement_help", "%prefix%achieve [成就名或成就ID]");
-            addDefault("ping_pong", "Pong!");
+            addDefault("commands.fun.ping_text", "Pong!");
+            addDefault("commands.fun.time_text", "当前时间: %time%");
+            addDefault("commands.osu.achievement", "成就%id%: %name% - %tutorial%");
             addDefault("push_error_input_username", "请输入用户名... 你不会真的想推荐给自己吧...");
-            addDefault("info_color_change", "浅黄：普通用户｜黄色：[https://osu.ppy.sh/p/support 捐赠玩家]｜红色：[https://osu.ppy.sh/wiki/QAT QAT（谱面质量保证团队）] 或是 [https://osu.ppy.sh/help/wiki/People/Global_Moderation_Team GMT（社群管理团队）]｜白色：你自己，或是一行使用 /me 指令的动作讯息｜深蓝色：私信｜绿色：有人提到你的名字（或是 Highlight）｜粉红色：IRC 萌萌机器人（ｂａｎｃｈｏｂｏｔ）");
+            addDefault("commands.fun.info_color_change", "浅黄：普通用户｜黄色：[https://osu.ppy.sh/p/support 捐赠玩家]｜红色：[https://osu.ppy.sh/wiki/QAT QAT（谱面质量保证团队）] 或是 [https://osu.ppy.sh/help/wiki/People/Global_Moderation_Team GMT（社群管理团队）]｜白色：你自己，或是一行使用 /me 指令的动作讯息｜深蓝色：私信｜绿色：有人提到你的名字（或是 Highlight）｜粉红色：IRC 萌萌机器人（ｂａｎｃｈｏｂｏｔ）");
             addDefault("update_message_newbie_1", "欢迎新大佬使用HyIRC机器人! 这个指令是Ameo的[https://ameobea.me/osutrack/ Osu!Track]统计功能!");
             addDefault("update_message_newbie_2", "这个指令的数值代表着从上次输入指令到这次输入指令之间的进步!");
         }
