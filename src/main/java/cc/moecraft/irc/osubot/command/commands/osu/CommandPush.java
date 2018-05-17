@@ -72,7 +72,7 @@ public class CommandPush extends Command implements ChannelCommand
             username = ArrayUtils.getTheRestArgsAsString(args, 1);
         }
 
-        if (args.size() < 1) return MultiLanguageText.languageNode("CommandPush_75");
+        if (args.size() < 1) return MultiLanguageText.languageNode("push_error_input_username");
 
         return process(event, sender, mode, username.replace(" ", "_"),
                 "%username%推荐给你了刚刚在玩的谱面: [osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: %ppmsg% | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm%");
@@ -135,9 +135,9 @@ public class CommandPush extends Command implements ChannelCommand
 
         } catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e) {
             e.printStackTrace();
-            return MultiLanguageText.languageNode("CommandStats_77");
+            return MultiLanguageText.languageNode("error_unknown_backend_error");
         } catch (JsonEmptyException e) {
-            return MultiLanguageText.languageNode("CommandPush_141");
+            return MultiLanguageText.languageNode("error_unknown_username");
             // TODO: 报错收集系统
         } catch (RecentScoreNotEnoughException recentScoreNotEnough) {
             return MultiLanguageText.directText(String.format("现在你%s模式的近期成绩只有%s个... 无法获取第%s个, 多玩玩再来看看吧!", OsuAPIUtils.getModeNameWithMode(recentScoreNotEnough.getMode()), recentScoreNotEnough.getLimit(), recentScoreNotEnough.getRequested()));

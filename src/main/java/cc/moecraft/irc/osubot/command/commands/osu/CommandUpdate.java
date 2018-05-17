@@ -64,8 +64,8 @@ public class CommandUpdate extends Command
             // 新玩家 TODO： 检测数据库， 而不是OsuTrack服务器的数据库来判断是不是新玩家
             if (osuTrackData.getFirst() && usernameAndMode.isSelf())
             {
-                Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("CommandUpdate_68"));
-                return MultiLanguageText.languageNode("CommandUpdate_69");
+                Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("update_message_newbie_1"));
+                return MultiLanguageText.languageNode("update_message_newbie_2");
             }
 
             // 获取Mode名字
@@ -83,10 +83,10 @@ public class CommandUpdate extends Command
             return MultiLanguageText.directText(format);
         } catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e) {
             e.printStackTrace();
-            return MultiLanguageText.languageNode("CommandStats_77");
+            return MultiLanguageText.languageNode("error_unknown_backend_error");
         } catch (JsonEmptyException e) {
             e.printStackTrace();
-            return MultiLanguageText.languageNode("CommandStats_80");
+            return MultiLanguageText.languageNode("error_unknown_username_2");
             // TODO: 报错收集系统
         }
     }
