@@ -25,7 +25,7 @@ public class CommandPing extends Command
     @Override
     public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
-        return MultiLanguageText.languageNode("ping_pong");
+        return MultiLanguageText.languageNode("commands.fun.ping_text");
     }
 
     @Override
