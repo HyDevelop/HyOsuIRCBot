@@ -88,7 +88,7 @@ public class CommandManager
     {
         try
         {
-            CommandArgs commandArgs = CommandArgs.parse(fullCommand);
+            CommandArgs commandArgs = CommandArgs.parse(fullCommand, isChannel);
 
             if (!Main.isEnableListening() && !commandArgs.getCommandName().equalsIgnoreCase("enable")) return RunResult.LISTENING_DISABLED;
 
@@ -116,11 +116,8 @@ public class CommandManager
             // 频道里
             if (isChannel) return RunResult.NOT_A_COMMAND;
 
-            // 机器人自己给自己发
-            if (!user.getNick().equals(event.getBot().getNick())) return RunResult.NOT_A_COMMAND;
-
             // 配置里配置了忽略的用户名单
-            if (!Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick())) return RunResult.NOT_A_COMMAND;
+            if (Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick())) return RunResult.NOT_A_COMMAND;
 
             // 如果启用了监听
             if (Main.isEnableListening()) Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("manager.not_command"));
@@ -132,6 +129,9 @@ public class CommandManager
             if (Main.isEnableListening())
             {
                 if (!reply(isChannel)) return RunResult.COMMAND_NOT_FOUND;
+
+                // 配置里配置了忽略的用户名单
+                if (Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick())) return RunResult.COMMAND_NOT_FOUND;
 
                 Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("manager.unknown_command"));
             }

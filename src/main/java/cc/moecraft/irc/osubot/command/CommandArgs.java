@@ -28,13 +28,14 @@ public class CommandArgs
     /**
      * 从字符串消息转换为CommandArgs
      * @param fullCommand 完整字符串消息
+     * @param isChannel 是不是从频道发出来的
      * @return CommandArgs指令
      */
-    public static CommandArgs parse(String fullCommand) throws NotACommandException, CommandNotFoundException
+    public static CommandArgs parse(String fullCommand, boolean isChannel) throws NotACommandException, CommandNotFoundException
     {
         String prefix = getPrefix(fullCommand);
 
-        if (prefix == null) throw new NotACommandException(); // 不是指令
+        if (prefix.equals("") && isChannel) throw new NotACommandException(); // 不是指令
 
         ArrayList<String> args = new ArrayList<>(Arrays.asList(fullCommand.split(" "))); // String "!ecHO hi" -> ArrayList ["!ecHO", "hi", "there"]
         String command = args.get(0).replace(prefix, "").toLowerCase(); // "echo"
@@ -50,7 +51,7 @@ public class CommandArgs
     /**
      * 获取指令前缀
      * @param text 消息
-     * @return 是指令的话返回指令前缀, 不是指令的话返回null
+     * @return 是指令的话返回指令前缀, 不是指令的话返回""
      */
     private static String getPrefix(String text)
     {
@@ -61,6 +62,6 @@ public class CommandArgs
         for (String prefix : Main.getConfig().getStringList("BotProperties.EnabledCommandPrefixes"))
             if (text.startsWith(prefix)) return prefix;
 
-        return null;
+        return "";
     }
 }
