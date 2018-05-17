@@ -68,7 +68,7 @@
     <dependency>
       <groupId>com.github.hykilpikonna</groupId>
       <artifactId>HyLogger</artifactId>
-      <version>c697af4a68</version>
+      <version>1.0.1</version>
     </dependency>
 
     <!--在PircBotX里面的-->
