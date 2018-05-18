@@ -51,11 +51,11 @@ public class CommandMap extends Command
     {
         if (args.size() < 1)
         {
-            return MultiLanguageText.languageNode("map_error_no_args");
+            return MultiLanguageText.languageNode("commands.osu.map_error_no_args");
         }
         else if (args.size() > 1)
         {
-            return MultiLanguageText.languageNode("map_error_args_size");
+            return MultiLanguageText.languageNode("commands.osu.map_error_args_size");
         }
         else
         {
@@ -63,8 +63,10 @@ public class CommandMap extends Command
             try
             {
                 beatmapId = Integer.parseInt(args.get(0));
-            } catch (NumberFormatException e) {
-                return MultiLanguageText.languageNode("map_error_not_int");
+            }
+            catch (NumberFormatException e)
+            {
+                return MultiLanguageText.languageNode("commands.osu.map_error_not_int");
             }
 
             return process(event, beatmapId);
@@ -91,27 +93,29 @@ public class CommandMap extends Command
             // 获取PP
             String ppMsg;
 
-            try {
+            try
+            {
                 UserScoreData score = Main.getWrapper().getScore(data);
 
                 ppMsg = Math.round(score.getPp() * 100d) / 100d + " PP";
-            } catch (BeatmapScoreNotEnoughException e) {
-                ppMsg = "无计分!";
-                //TODO: 报错收集表
+            }
+            catch (BeatmapScoreNotEnoughException e)
+            {
+                ppMsg = Main.getMessenger().getText(event, MultiLanguageText.languageNode("keywords.unranked"));
             }
 
-            String format = "[osu://b/%beatmap_id% [%cm%: %artist% - %title% (%version%)]]: %ppmsg% | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm% | AR %diff_approach% | CS %diff_size% | OD %diff_overall%";
-
-            format = ReflectUtils.replaceReflectVariables(data, format, false, true);
-            format = format.replace("%cm%", modeName);
-            format = format.replace("%ct%", time);
-            format = format.replace("%ppmsg%", ppMsg);
-
-            return MultiLanguageText.directText(format);
-
-        } catch (JsonEmptyException e) {
-            return MultiLanguageText.languageNode("map_error_unknown_map");
-        } catch (MalformedURLException | RequiredParamIsNullException | IllegalAccessException e) {
+            return MultiLanguageText.languageNode("commands.osu.map_format")
+                    .putVariables(data, true)
+                    .putVariable("cm", modeName)
+                    .putVariable("ct", time)
+                    .putVariable("ppmsg", ppMsg);
+        }
+        catch (JsonEmptyException e)
+        {
+            return MultiLanguageText.languageNode("commands.osu.map_error_unknown_map");
+        }
+        catch (MalformedURLException | RequiredParamIsNullException | IllegalAccessException e)
+        {
             e.printStackTrace();
             return MultiLanguageText.languageNode("errors.unknown_backend_error");
         }
