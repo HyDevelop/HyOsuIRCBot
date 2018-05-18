@@ -70,16 +70,12 @@ public class CommandUpdate extends Command
             // 获取Mode名字
             String modeName = OsuAPIUtils.getModeNameWithMode(usernameAndMode.getMode());
 
-            String format = "[%cm% - [%clink% %username%]]: %pp_raw% pp | %level% lvl | %crank% rank | %accuracy%% acc. | %playcount% 次游戏";
-
-            format = ReflectUtils.replaceReflectVariables(osuTrackData, format, true, true);
-            format = format
-                    .replace("%cm%", modeName)
-                    .replace("%clink%", OsuUser.getOsuTrackLink(usernameAndMode))
-                    .replace("%crank%", (osuTrackData.getPpRank() < 0 ? "↑" : "↓") + Math.abs(osuTrackData.getPpRank()));
-            format = getPrefix(osuTrackData) + format;
-
-            return MultiLanguageText.directText(format);
+            return MultiLanguageText.languageNode("commands.osu.update_format")
+                    .putVariables(osuTrackData, true, true)
+                    .putVariable("%cm%", modeName)
+                    .putVariable("%clink%", OsuUser.getOsuTrackLink(usernameAndMode))
+                    .putVariable("%crank%", (osuTrackData.getPpRank() < 0 ? "↑" : "↓") + Math.abs(osuTrackData.getPpRank()))
+                    .setPrefix(getPrefix(osuTrackData));
         }
         catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e)
         {
