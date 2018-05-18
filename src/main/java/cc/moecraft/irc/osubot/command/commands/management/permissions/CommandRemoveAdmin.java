@@ -8,7 +8,6 @@ import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/22 创建!
