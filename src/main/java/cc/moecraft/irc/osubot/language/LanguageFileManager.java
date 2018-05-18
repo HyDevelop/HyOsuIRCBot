@@ -111,6 +111,7 @@ public class LanguageFileManager
             addDefault("commands.osu.map_format", "[osu://b/%beatmap_id% [%cm%: %artist% - %title% (%version%)]]: %ppmsg% | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm% | AR %diff_approach% | CS %diff_size% | OD %diff_overall%");
             addDefault("commands.osu.recent_format", "[osu://b/%beatmap_id% [%cm%: %artist% - %title% (%version%)]]: ★ %difficultyrating% | 成绩: %rank% | %ppmsg% | %ca%% | %cscore% | %maxcombo%x/%max_combo%x 连击");
             addDefault("commands.osu.stats_format", "[%mode% - %username% (%user_id%)]: %pp_raw%pp | lv.%level% | #%pp_rank% | %accuracy%% acc. | %count_rank_ss%ss | %count_rank_s%s |  %count_rank_a%a ");
+            addDefault("commands.osu.update_format", "[%cm% - [%clink% %username%]]: %pp_raw% pp | %level% lvl | %crank% rank | %accuracy%% acc. | %playcount% 次游戏");
             addDefault("commands.osu.achievement_help", "%prefix%achieve [成就名或成就ID]");
             addDefault("commands.osu.push_format_channel", "%username%推荐给你们了刚刚在玩的谱面: [osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: %ppmsg% | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm%");
             addDefault("commands.osu.push_format_user", "%username%推荐给你了刚刚在玩的谱面: [osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: %ppmsg% | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm%");
