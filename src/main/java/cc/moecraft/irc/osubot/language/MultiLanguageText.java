@@ -26,6 +26,8 @@ public class MultiLanguageText
     @NotNull @Getter
     private final String text;
     @Getter
+    private String prefix = "", suffix = "";
+    @Getter
     private Type type = Type.DIRECT_TEXT;
     @Getter
     private Map<String, String> variables = new HashMap<>();
@@ -169,5 +171,17 @@ public class MultiLanguageText
     public static MultiLanguageText directText(String text)
     {
         return new MultiLanguageText(text, Type.DIRECT_TEXT);
+    }
+
+    public MultiLanguageText setPrefix(String prefix)
+    {
+        this.prefix = prefix;
+        return this;
+    }
+
+    public MultiLanguageText setSuffix(String suffix)
+    {
+        this.suffix = suffix;
+        return this;
     }
 }
