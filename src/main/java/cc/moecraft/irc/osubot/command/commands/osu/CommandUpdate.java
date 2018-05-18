@@ -53,15 +53,14 @@ public class CommandUpdate extends Command
 
         try
         {
-            if (!Main.getOsuAPIUtils().isUserExisting(usernameAndMode.getUsername()))
-                return MultiLanguageText.directText("未知用户: " + usernameAndMode.getUsername());
-
             OsuTrackData osuTrackData = OsuUser.getOsuTrackData(usernameAndMode);
+
+            if (!osuTrackData.getExists()) throw new JsonEmptyException();
 
             // 四舍五入
             ReflectUtils.roundAllNumbers(osuTrackData, 1);
 
-            // 新玩家 TODO： 检测数据库， 而不是OsuTrack服务器的数据库来判断是不是新玩家
+            // 新玩家
             if (osuTrackData.getFirst() && usernameAndMode.isSelf())
             {
                 Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("update_message_newbie_1"));
@@ -81,13 +80,16 @@ public class CommandUpdate extends Command
             format = getPrefix(osuTrackData) + format;
 
             return MultiLanguageText.directText(format);
-        } catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e) {
+        }
+        catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e)
+        {
             e.printStackTrace();
             return MultiLanguageText.languageNode("errors.unknown_backend_error");
-        } catch (JsonEmptyException e) {
-            e.printStackTrace();
-            return MultiLanguageText.languageNode("errors.unknown_username");
-            // TODO: 报错收集系统
+        }
+        catch (JsonEmptyException e)
+        {
+            return MultiLanguageText.languageNode("errors.unknown_username")
+                    .putVariable("username", usernameAndMode.getUsername());
         }
     }
 
