@@ -1,15 +1,16 @@
 package cc.moecraft.irc.osubot.language;
 
 import com.google.gson.annotations.SerializedName;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang.ArrayUtils;
 
 import javax.validation.constraints.NotNull;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang.ArrayUtils;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/14 创建!

@@ -1,16 +1,11 @@
 package cc.moecraft.irc.osubot.language;
 
 import cc.moecraft.irc.osubot.Main;
-import cc.moecraft.irc.osubot.command.CommandManager;
 import cc.moecraft.irc.osubot.osu.data.web.WebsiteUserData;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
-import javax.annotation.security.DenyAll;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -108,7 +103,6 @@ public class Messenger
         text = replaceVariables(text, multiLanguageText.getVariables());
 
         return multiLanguageText.getPrefix() + text + multiLanguageText.getSuffix();
-        // return multiLanguageText.replace("%prefix%", CommandManager.getPrefix());
     }
 
     /**

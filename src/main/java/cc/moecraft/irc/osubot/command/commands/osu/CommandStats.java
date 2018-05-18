@@ -1,6 +1,5 @@
 package cc.moecraft.irc.osubot.command.commands.osu;
 
-import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.language.MultiLanguageText;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;

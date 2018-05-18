@@ -342,7 +342,6 @@ public class ReflectUtils
                 else
                 {
                     // 不是基础类, 递归
-                    System.out.println("递归: " + field.getType().getSimpleName());
                     assignHelper2(field.get(object), (JsonObject) element.get(field.getName()));
                 }
             }
