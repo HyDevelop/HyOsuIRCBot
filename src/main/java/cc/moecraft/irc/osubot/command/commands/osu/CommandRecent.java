@@ -104,7 +104,8 @@ public class CommandRecent extends Command
         }
         catch (JsonEmptyException e)
         {
-            return MultiLanguageText.languageNode("errors.unknown_username");
+            return MultiLanguageText.languageNode("errors.unknown_username")
+                    .putVariable("username", sender.getNick());
         }
         catch (RecentScoreNotEnoughException recentScoreNotEnough)
         {
