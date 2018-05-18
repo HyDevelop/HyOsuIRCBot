@@ -75,7 +75,7 @@ public class CommandPush extends Command implements ChannelCommand
         }
 
         return process(event, sender, mode, username.replace(" ", "_"),
-                MultiLanguageText.languageNode("commands.osu.push_command_user"));
+                MultiLanguageText.languageNode("commands.osu.push_format_user"));
     }
 
     @Override
@@ -89,7 +89,7 @@ public class CommandPush extends Command implements ChannelCommand
         if (mode == -1) return MultiLanguageText.empty();
 
         return process(event, sender, mode, channel.getName(),
-                MultiLanguageText.languageNode("commands.osu.push_command_channel"));
+                MultiLanguageText.languageNode("commands.osu.push_format_channel"));
     }
 
     public MultiLanguageText process(GenericMessageEvent event, User sender, int mode, String placeToSend, MultiLanguageText format)
