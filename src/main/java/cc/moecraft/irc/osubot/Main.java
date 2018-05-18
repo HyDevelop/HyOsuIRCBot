@@ -170,7 +170,7 @@ public class Main {
         for (PircBotX bot : bots)
         {
             executor.execute(new BotRunnable(bot));
-            System.out.println("已启动: " + bot.toString());
+            logger.log("已启动机器人账号: " + bot.getNick());
         }
     }
 
