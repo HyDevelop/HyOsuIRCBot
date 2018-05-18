@@ -53,9 +53,6 @@ public class CommandStats extends Command
 
         try
         {
-            if (!Main.getOsuAPIUtils().isUserExisting(usernameAndMode.getUsername()))
-                return MultiLanguageText.directText("未知用户: " + usernameAndMode.getUsername());
-
             UserData userData = OsuUser.getData(usernameAndMode);
 
             // 四舍五入
@@ -68,17 +65,19 @@ public class CommandStats extends Command
             // 获取Mode名字
             String modeName = OsuAPIUtils.getModeNameWithMode(usernameAndMode.getMode());
 
-            return MultiLanguageText.directText(ReflectUtils.replaceReflectVariables(userData,
-                    "[%mode% - %username% (%user_id%)]: %pp_raw%pp | lv.%level% | #%pp_rank% | %accuracy%% acc. | %count_rank_ss%ss | %count_rank_s%s |  %count_rank_a%a ",
-                    false, true
-            ).replace("%mode%", modeName));
-        } catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e) {
+            return MultiLanguageText.languageNode("commands.osu.stats_format")
+                    .putVariables(userData, true)
+                    .putVariable("mode", modeName);
+        }
+        catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e)
+        {
             e.printStackTrace();
             return MultiLanguageText.languageNode("errors.unknown_backend_error");
-        } catch (JsonEmptyException e) {
-            e.printStackTrace();
-            return MultiLanguageText.languageNode("errors.unknown_username");
-            // TODO: 报错收集系统
+        }
+        catch (JsonEmptyException e)
+        {
+            return MultiLanguageText.languageNode("errors.unknown_username")
+                    .putVariable("username", usernameAndMode.getUsername());
         }
     }
 
