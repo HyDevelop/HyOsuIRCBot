@@ -1,16 +1,11 @@
 package cc.moecraft.irc.osubot.language;
 
 import cc.moecraft.irc.osubot.Main;
-import cc.moecraft.irc.osubot.command.CommandManager;
 import cc.moecraft.irc.osubot.osu.data.web.WebsiteUserData;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
-import javax.annotation.security.DenyAll;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -24,6 +19,17 @@ public class Messenger
 {
     private LanguageFileManager languageFileManager;
     private Map<String, String> globalVariables;
+
+    /**
+     * 获取一个多语言对象的消息文字
+     * @param event 事件
+     * @param multiLanguageText 多语言对象
+     * @return 消息文字
+     */
+    public String getText(GenericMessageEvent event, MultiLanguageText multiLanguageText)
+    {
+        return resolveMLT(multiLanguageText, Main.getOsuHtmlUtils().getWebUserData(event.getUser().getNick()).getCountry().getCode());
+    }
 
     /**
      * 用多语言对象回复一条IRC消息
@@ -96,8 +102,7 @@ public class Messenger
         text = replaceVariables(text, globalVariables);
         text = replaceVariables(text, multiLanguageText.getVariables());
 
-        return text;
-        // return multiLanguageText.replace("%prefix%", CommandManager.getPrefix());
+        return multiLanguageText.getPrefix() + text + multiLanguageText.getSuffix();
     }
 
     /**

@@ -59,6 +59,8 @@ public class CommandPush extends Command implements ChannelCommand
     @Override
     public MultiLanguageText run(GenericMessageEvent event, User sender, Channel channel, String command, ArrayList<String> args)
     {
+        if (args.size() < 1) return MultiLanguageText.languageNode("commands.osu.push_error_input_username");
+
         int mode = ArgsUtils.getMode(args, 0);
         String username;
 
@@ -72,10 +74,8 @@ public class CommandPush extends Command implements ChannelCommand
             username = ArrayUtils.getTheRestArgsAsString(args, 1);
         }
 
-        if (args.size() < 1) return MultiLanguageText.languageNode("push_error_input_username");
-
         return process(event, sender, mode, username.replace(" ", "_"),
-                "%username%推荐给你了刚刚在玩的谱面: [osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: %ppmsg% | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm%");
+                MultiLanguageText.languageNode("commands.osu.push_format_user"));
     }
 
     @Override
@@ -89,10 +89,10 @@ public class CommandPush extends Command implements ChannelCommand
         if (mode == -1) return MultiLanguageText.empty();
 
         return process(event, sender, mode, channel.getName(),
-                "%username%推荐给你们了刚刚在玩的谱面: [osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: %ppmsg% | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm%");
+                MultiLanguageText.languageNode("commands.osu.push_format_channel"));
     }
 
-    public MultiLanguageText process(GenericMessageEvent event, User sender, int mode, String placeToSend, String format)
+    public MultiLanguageText process(GenericMessageEvent event, User sender, int mode, String placeToSend, MultiLanguageText format)
     {
         CommandRecent.UsernameAndIndexAndMode info = new CommandRecent.UsernameAndIndexAndMode(1, mode, sender.getNick());
 
@@ -116,31 +116,42 @@ public class CommandPush extends Command implements ChannelCommand
             // 获取PP
             String ppMsg;
 
-            try {
+            try
+            {
                 UserScoreData score = Main.getWrapper().getScore(beatmapData);
 
                 ppMsg = Math.round(score.getPp() * 100d) / 100d + " PP";
-            } catch (BeatmapScoreNotEnoughException e) {
-                ppMsg = "无计分!";
-                //TODO: 报错收集表
+            }
+            catch (BeatmapScoreNotEnoughException e)
+            {
+                ppMsg = Main.getMessenger().getText(event, MultiLanguageText.languageNode("keywords.unranked"));
             }
 
-            format = ReflectUtils.replaceReflectVariables(data, format, false, true);
-            format = ReflectUtils.replaceReflectVariables(beatmapData, format, false, true);
-            format = ReflectUtils.replaceReflectVariables(userData, format, false, true);
-            format = format.replace("%cm%", modeName).replace("%ct%", time);
-            format = format.replace("%ppmsg%", ppMsg);
+            format.putVariables(data, true)
+                    .putVariables(beatmapData, true)
+                    .putVariables(userData, true)
+                    .putVariable("cm", modeName)
+                    .putVariable("ct", time)
+                    .putVariable("%ppmsg%", ppMsg);
 
-            event.getBot().sendIRC().message(placeToSend, format);
-
-        } catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e) {
+            event.getBot().sendIRC().message(placeToSend, Main.getMessenger().getText(event, format));
+        }
+        catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e)
+        {
             e.printStackTrace();
-            return MultiLanguageText.languageNode("error_unknown_backend_error");
-        } catch (JsonEmptyException e) {
-            return MultiLanguageText.languageNode("error_unknown_username");
-            // TODO: 报错收集系统
-        } catch (RecentScoreNotEnoughException recentScoreNotEnough) {
-            return MultiLanguageText.directText(String.format("现在你%s模式的近期成绩只有%s个... 无法获取第%s个, 多玩玩再来看看吧!", OsuAPIUtils.getModeNameWithMode(recentScoreNotEnough.getMode()), recentScoreNotEnough.getLimit(), recentScoreNotEnough.getRequested()));
+            return MultiLanguageText.languageNode("errors.unknown_backend_error");
+        }
+        catch (JsonEmptyException e)
+        {
+            return MultiLanguageText.languageNode("errors.unknown_username")
+                    .putVariable("username", info.getUsername());
+        }
+        catch (RecentScoreNotEnoughException recentScoreNotEnough)
+        {
+            return MultiLanguageText.languageNode("errors.scores_not_enough")
+                    .putVariable("mode", OsuAPIUtils.getModeNameWithMode(recentScoreNotEnough.getMode()))
+                    .putVariable("max", String.valueOf(recentScoreNotEnough.getLimit()))
+                    .putVariable("current", String.valueOf(recentScoreNotEnough.getRequested()));
         }
         return MultiLanguageText.empty();
     }
