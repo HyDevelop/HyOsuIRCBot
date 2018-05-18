@@ -67,42 +67,51 @@ public class CommandRecent extends Command
 
             String ppMsg;
 
-            try {
+            try
+            {
                 UserScoreData scoreData = Main.getWrapper().getScore(info, data);
 
                 if (scoreData.getPp() == null)
-                    ppMsg = "未计分!";
+                    ppMsg = Main.getMessenger().getText(event, MultiLanguageText.languageNode("keywords.unranked"));
                 else
                     ppMsg = String.valueOf(Math.round(scoreData.getPp() * 100d) / 100d) + "pp";
-            } catch (RelatedScoreNotFoundException e) {
+            }
+            catch (RelatedScoreNotFoundException e)
+            {
                 // TODO: @dullwolf PP计算
-                ppMsg = "未计分!";
+                ppMsg = Main.getMessenger().getText(event, MultiLanguageText.languageNode("keywords.unranked"));
             }
 
             // 四舍五入
             ReflectUtils.roundAllNumbers(data, 1);
             ReflectUtils.roundAllNumbers(beatmapData, 1);
 
-            // TODO: PP显示, Mods显示
-            String format = "[osu://b/%beatmap_id% [%cm%: %artist% - %title% (%version%)]]: ★ %difficultyrating% | 成绩: %rank% | %ppmsg% | %ca%% | %cscore% | %maxcombo%x/%max_combo%x 连击";
+            // TODO: Mods显示
 
-            format = ReflectUtils.replaceReflectVariables(data, format, false, true);
-            format = ReflectUtils.replaceReflectVariables(beatmapData, format, false, true);
-            format = format.replace("%cm%", OsuAPIUtils.getModeNameWithMode(beatmapData.getMode()));
-            format = format.replace("%ca%", String.valueOf(Math.round(data.getAcc(Main.getWrapper(), beatmapData.getMode()) * 10000d) / 100d));
-            format = format.replace("%cscore%", new DecimalFormat("#,###").format(Math.round(data.getScore())));
-            format = format.replace("%ppmsg%", ppMsg);
+            return MultiLanguageText.languageNode("commands.osu.recent_format")
+                    .putVariables(data, true)
+                    .putVariables(beatmapData, true)
+                    .putVariable("%cm%", OsuAPIUtils.getModeNameWithMode(beatmapData.getMode()))
+                    .putVariable("%ca%", String.valueOf(Math.round(data.getAcc(Main.getWrapper(), beatmapData.getMode()) * 10000d) / 100d))
+                    .putVariable("%cscore%", new DecimalFormat("#,###").format(Math.round(data.getScore())))
+                    .putVariable("%ppmsg%", ppMsg);
 
-            return MultiLanguageText.directText(format);
-
-        } catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e) {
+        }
+        catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e)
+        {
             e.printStackTrace();
             return MultiLanguageText.languageNode("errors.unknown_backend_error");
-        } catch (JsonEmptyException e) {
+        }
+        catch (JsonEmptyException e)
+        {
             return MultiLanguageText.languageNode("errors.unknown_username");
-            // TODO: 报错收集系统
-        } catch (RecentScoreNotEnoughException recentScoreNotEnough) {
-            return MultiLanguageText.directText(String.format("现在你%s模式的近期成绩只有%s个... 无法获取第%s个, 多玩玩再来看看吧!", OsuAPIUtils.getModeNameWithMode(recentScoreNotEnough.getMode()), recentScoreNotEnough.getLimit(), recentScoreNotEnough.getRequested()));
+        }
+        catch (RecentScoreNotEnoughException recentScoreNotEnough)
+        {
+            return MultiLanguageText.languageNode("errors.scores_not_enough")
+                    .putVariable("mode", OsuAPIUtils.getModeNameWithMode(recentScoreNotEnough.getMode()))
+                    .putVariable("max", String.valueOf(recentScoreNotEnough.getLimit()))
+                    .putVariable("current", String.valueOf(recentScoreNotEnough.getRequested()));
         }
     }
 
