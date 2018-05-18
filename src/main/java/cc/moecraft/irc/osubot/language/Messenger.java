@@ -107,7 +107,7 @@ public class Messenger
         text = replaceVariables(text, globalVariables);
         text = replaceVariables(text, multiLanguageText.getVariables());
 
-        return text;
+        return multiLanguageText.getPrefix() + text + multiLanguageText.getSuffix();
         // return multiLanguageText.replace("%prefix%", CommandManager.getPrefix());
     }
 
