@@ -53,11 +53,11 @@ public class ReflectRoundingTest
             UserScoreData scoreData = wrapper.getScore(info, data);
 
             if (scoreData.getPp() == null)
-                ppMsg = "未计分!";
+                ppMsg = Main.getMessenger().getText(event, MultiLanguageText.languageNode("keywords.unranked"));
             else
                 ppMsg = String.valueOf(Math.round(scoreData.getPp() * 100d) / 100d) + "pp";
         } catch (RelatedScoreNotFoundException e) {
-            ppMsg = "未计分!";
+            ppMsg = Main.getMessenger().getText(event, MultiLanguageText.languageNode("keywords.unranked"));
         }
 
         ReflectUtils.roundAllNumbers(data, 1);
