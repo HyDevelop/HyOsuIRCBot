@@ -53,15 +53,14 @@ public class CommandUpdate extends Command
 
         try
         {
-            if (!Main.getOsuAPIUtils().isUserExisting(usernameAndMode.getUsername()))
-                return MultiLanguageText.directText("未知用户: " + usernameAndMode.getUsername());
-
             OsuTrackData osuTrackData = OsuUser.getOsuTrackData(usernameAndMode);
+
+            if (!osuTrackData.getExists()) throw new JsonEmptyException();
 
             // 四舍五入
             ReflectUtils.roundAllNumbers(osuTrackData, 1);
 
-            // 新玩家 TODO： 检测数据库， 而不是OsuTrack服务器的数据库来判断是不是新玩家
+            // 新玩家
             if (osuTrackData.getFirst() && usernameAndMode.isSelf())
             {
                 Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("update_message_newbie_1"));
@@ -71,23 +70,22 @@ public class CommandUpdate extends Command
             // 获取Mode名字
             String modeName = OsuAPIUtils.getModeNameWithMode(usernameAndMode.getMode());
 
-            String format = "[%cm% - [%clink% %username%]]: %pp_raw% pp | %level% lvl | %crank% rank | %accuracy%% acc. | %playcount% 次游戏";
-
-            format = ReflectUtils.replaceReflectVariables(osuTrackData, format, true, true);
-            format = format
-                    .replace("%cm%", modeName)
-                    .replace("%clink%", OsuUser.getOsuTrackLink(usernameAndMode))
-                    .replace("%crank%", (osuTrackData.getPpRank() < 0 ? "↑" : "↓") + Math.abs(osuTrackData.getPpRank()));
-            format = getPrefix(osuTrackData) + format;
-
-            return MultiLanguageText.directText(format);
-        } catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e) {
+            return MultiLanguageText.languageNode("commands.osu.update_format")
+                    .putVariables(osuTrackData, true, true)
+                    .putVariable("%cm%", modeName)
+                    .putVariable("%clink%", OsuUser.getOsuTrackLink(usernameAndMode))
+                    .putVariable("%crank%", (osuTrackData.getPpRank() < 0 ? "↑" : "↓") + Math.abs(osuTrackData.getPpRank()))
+                    .setPrefix(getPrefix(osuTrackData));
+        }
+        catch (IllegalAccessException | RequiredParamIsNullException | MalformedURLException e)
+        {
             e.printStackTrace();
-            return MultiLanguageText.languageNode("error_unknown_backend_error");
-        } catch (JsonEmptyException e) {
-            e.printStackTrace();
-            return MultiLanguageText.languageNode("error_unknown_username_2");
-            // TODO: 报错收集系统
+            return MultiLanguageText.languageNode("errors.unknown_backend_error");
+        }
+        catch (JsonEmptyException e)
+        {
+            return MultiLanguageText.languageNode("errors.unknown_username")
+                    .putVariable("username", usernameAndMode.getUsername());
         }
     }
 

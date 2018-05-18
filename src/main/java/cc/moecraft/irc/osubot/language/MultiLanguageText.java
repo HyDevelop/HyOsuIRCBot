@@ -1,14 +1,16 @@
 package cc.moecraft.irc.osubot.language;
 
-import lombok.*;
+import com.google.gson.annotations.SerializedName;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang.ArrayUtils;
 
 import javax.validation.constraints.NotNull;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang.ArrayUtils;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/14 创建!
@@ -24,6 +26,8 @@ public class MultiLanguageText
     private static final Pattern regexToMatchVariable = Pattern.compile("%.*%");
     @NotNull @Getter
     private final String text;
+    @Getter
+    private String prefix = "", suffix = "";
     @Getter
     private Type type = Type.DIRECT_TEXT;
     @Getter
@@ -61,7 +65,10 @@ public class MultiLanguageText
      */
     public MultiLanguageText putVariable(String variable, String value)
     {
-        if (!regexToMatchVariable.matcher(value).matches()) variable = "%" + variable + "%";
+        if (!regexToMatchVariable.matcher(variable).matches())
+        {
+            variable = "%" + variable + "%";
+        }
 
         variables.put(variable, value);
         return this;
@@ -82,8 +89,21 @@ public class MultiLanguageText
      * 添加/设置一组变量值
      *
      * @param pojo POJO对象
+     * @param gson 是否用GSON的变量名
      */
-    public MultiLanguageText putVariables(Object pojo)
+    public MultiLanguageText putVariables(Object pojo, boolean gson)
+    {
+        return putVariables(pojo, false, gson);
+    }
+
+    /**
+     * 添加/设置一组变量值
+     *
+     * @param pojo POJO对象
+     * @param positiveSigns 是否显示正负号
+     * @param gson 是否用GSON的变量名
+     */
+    public MultiLanguageText putVariables(Object pojo, boolean positiveSigns, boolean gson)
     {
         Field[] allFields = (Field[]) ArrayUtils.addAll(pojo.getClass().getDeclaredFields(), pojo.getClass().getFields());
 
@@ -91,9 +111,30 @@ public class MultiLanguageText
         {
             field.setAccessible(true);
 
+            String fieldName;
+
+            if (gson)
+            {
+                if (field.isAnnotationPresent(SerializedName.class))
+                    fieldName = field.getAnnotation(SerializedName.class).value();
+                else continue;
+            }
+            else fieldName = field.getName();
+
             try
             {
-                putVariable("%" + field.getName().toLowerCase() + "%", field.get(pojo).toString());
+                String value = field.get(pojo).toString();
+
+                if (positiveSigns)
+                {
+                    try
+                    {
+                        double numericValue = Double.parseDouble(value);
+                        if (numericValue >= 0D) value = "+" + value;
+                    } catch (Exception ignored) {} // 不是数字
+                }
+
+                putVariable("%" + fieldName.toLowerCase() + "%", value);
             }
             catch (IllegalAccessException e)
             {
@@ -131,5 +172,17 @@ public class MultiLanguageText
     public static MultiLanguageText directText(String text)
     {
         return new MultiLanguageText(text, Type.DIRECT_TEXT);
+    }
+
+    public MultiLanguageText setPrefix(String prefix)
+    {
+        this.prefix = prefix;
+        return this;
+    }
+
+    public MultiLanguageText setSuffix(String suffix)
+    {
+        this.suffix = suffix;
+        return this;
     }
 }

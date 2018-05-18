@@ -12,8 +12,6 @@ import cc.moecraft.irc.osubot.osu.OsuAPIWrapper;
 import cc.moecraft.irc.osubot.osu.OsuHtmlUtils;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.logger.DebugLogger;
-import io.jboot.Jboot;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -170,7 +168,7 @@ public class Main {
         for (PircBotX bot : bots)
         {
             executor.execute(new BotRunnable(bot));
-            System.out.println("已启动: " + bot.toString());
+            logger.log("已启动机器人账号: " + bot.getNick());
         }
     }
 
