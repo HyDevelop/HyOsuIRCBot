@@ -86,9 +86,21 @@ public class MultiLanguageText
      * 添加/设置一组变量值
      *
      * @param pojo POJO对象
-     * @param useGsonNames 是否用GSON的变量名
+     * @param gson 是否用GSON的变量名
      */
-    public MultiLanguageText putVariables(Object pojo, boolean useGsonNames)
+    public MultiLanguageText putVariables(Object pojo, boolean gson)
+    {
+        return putVariables(pojo, false, gson);
+    }
+
+    /**
+     * 添加/设置一组变量值
+     *
+     * @param pojo POJO对象
+     * @param positiveSigns 是否显示正负号
+     * @param gson 是否用GSON的变量名
+     */
+    public MultiLanguageText putVariables(Object pojo, boolean positiveSigns, boolean gson)
     {
         Field[] allFields = (Field[]) ArrayUtils.addAll(pojo.getClass().getDeclaredFields(), pojo.getClass().getFields());
 
@@ -98,7 +110,7 @@ public class MultiLanguageText
 
             String fieldName;
 
-            if (useGsonNames)
+            if (gson)
             {
                 if (field.isAnnotationPresent(SerializedName.class))
                     fieldName = field.getAnnotation(SerializedName.class).value();
@@ -108,7 +120,18 @@ public class MultiLanguageText
 
             try
             {
-                putVariable("%" + fieldName.toLowerCase() + "%", field.get(pojo).toString());
+                String value = field.get(pojo).toString();
+
+                if (positiveSigns)
+                {
+                    try
+                    {
+                        double numericValue = Double.parseDouble(value);
+                        if (numericValue >= 0D) value = "+" + value;
+                    } catch (Exception ignored) {} // 不是数字
+                }
+
+                putVariable("%" + fieldName.toLowerCase() + "%", value);
             }
             catch (IllegalAccessException e)
             {
