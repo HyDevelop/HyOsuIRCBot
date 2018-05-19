@@ -6,6 +6,7 @@ import cc.moecraft.irc.osubot.command.CommandManager;
 import cc.moecraft.irc.osubot.language.LanguageFileManager;
 import cc.moecraft.irc.osubot.language.Messenger;
 import cc.moecraft.irc.osubot.listener.CommandListener;
+import cc.moecraft.irc.osubot.listener.ExceptionListener;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.OsuAPIWrapper;
@@ -148,6 +149,7 @@ public class Main {
                     .addServer(serverAddress, serverPort)
                     .addAutoJoinChannels(autoJoinChannels)
                     .addListener(new CommandListener(account.channel))
+                    .addListener(new ExceptionListener())
                     .setName(account.getUsername())
                     .setServerPassword(account.getPassword())
                     .buildConfiguration();
