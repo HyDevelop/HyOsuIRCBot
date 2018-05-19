@@ -1,6 +1,7 @@
 package cc.moecraft.irc.osubot.listener;
 
 import cc.moecraft.irc.osubot.Main;
+import cc.moecraft.irc.osubot.command.exceptions.CommandNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.pircbotx.Channel;
@@ -33,7 +34,7 @@ public class CommandListener extends ListenerAdapter
      * @param event 事件
      */
     @Override
-    public void onMessage(MessageEvent event)
+    public void onMessage(MessageEvent event) throws Exception
     {
         if (!channel) return;
 
@@ -62,7 +63,7 @@ public class CommandListener extends ListenerAdapter
     }
 
     @Override
-    public void onPrivateMessage(PrivateMessageEvent event)
+    public void onPrivateMessage(PrivateMessageEvent event) throws Exception
     {
         User sender = event.getUser();
         String message = event.getMessage();
