@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot.language;
 
+import cc.moecraft.irc.osubot.Main;
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,10 +25,10 @@ import java.util.regex.Pattern;
 public class MultiLanguageText
 {
     private static final Pattern regexToMatchVariable = Pattern.compile("%.*%");
-    @NotNull @Getter
+    @NotNull
     private final String text;
     @Getter
-    private String prefix = "", suffix = "";
+    private MultiLanguageText prefix = null, suffix = null;
     @Getter
     private Type type = Type.DIRECT_TEXT;
     @Getter
@@ -42,6 +43,34 @@ public class MultiLanguageText
     {
         this.text = text;
         this.type = type;
+    }
+
+    /**
+     * 获取文字消息
+     * @return 消息
+     */
+    public String getText(String lang)
+    {
+        switch (getType())
+        {
+            case EMPTY:
+                return "";
+            case DIRECT_TEXT:
+                return text;
+            case LANGUAGE_NODE:
+                return Main.getMessenger().getLanguageFileManager().get(lang, text);
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * 获取未处理的消息/语言节点
+     * @return 消息
+     */
+    public String getTextRaw()
+    {
+        return text;
     }
 
     public enum Type
@@ -174,13 +203,13 @@ public class MultiLanguageText
         return new MultiLanguageText(text, Type.DIRECT_TEXT);
     }
 
-    public MultiLanguageText setPrefix(String prefix)
+    public MultiLanguageText setPrefix(MultiLanguageText prefix)
     {
         this.prefix = prefix;
         return this;
     }
 
-    public MultiLanguageText setSuffix(String suffix)
+    public MultiLanguageText setSuffix(MultiLanguageText suffix)
     {
         this.suffix = suffix;
         return this;
