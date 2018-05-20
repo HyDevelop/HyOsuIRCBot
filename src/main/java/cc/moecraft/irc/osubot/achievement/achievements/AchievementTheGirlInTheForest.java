@@ -36,7 +36,7 @@ public class AchievementTheGirlInTheForest extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Get 95%+ acc and 151 max combo on [https://osu.ppy.sh/s/40440 S3RL - Pika Girl] Hard or Insane difficulty. Break combo after 151. "; }
+    public String getTutorial() { return "achievement.thegirlintheforest"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

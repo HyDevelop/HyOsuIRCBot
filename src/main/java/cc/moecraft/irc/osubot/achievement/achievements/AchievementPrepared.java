@@ -36,7 +36,7 @@ public class AchievementPrepared extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Full combo any map with NF mod.[https://osu.ppy.sh/b/34529  Silver Forest - Marisa Spark] is only 21 seconds long."; }
+    public String getTutorial() { return "achievement.prepared"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

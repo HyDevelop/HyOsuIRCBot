@@ -36,7 +36,7 @@ public class AchievementDrumbreaker extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass a 6 star map without using EZ/NF/HT mods. [https://osu.ppy.sh/b/315 FAIRY FORE - Vivid [Insane]] +DT  [https://osu.ppy.sh/b/19990 Silver Forest - Tsurupettan] +DT  [https://osu.ppy.sh/b/296 Wizards In Winter [Impossible]] +DT (taiko) "; }
+    public String getTutorial() { return "achievement.drumbreaker"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

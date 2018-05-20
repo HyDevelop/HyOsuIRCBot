@@ -36,7 +36,7 @@ public class AchievementLordOfTheCatch extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " [https://osu.ppy.sh/b/111680 xi - Ascension to Heaven] +DT [https://osu.ppy.sh/b/39825 IOSYS - Marisa wa Taihen na Kanbu de Tomatte Ikimashita] +DT [https://osu.ppy.sh/s/418826 DystopiaGround - AugoEidEs] +HR (osu!catch) [https://osu.ppy.sh/b/553820 MiddleIsland - Achromat] +DT (osu!mania)"; }
+    public String getTutorial() { return "achievement.lordofthecatch"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

@@ -36,7 +36,7 @@ public class AchievementSupremacy extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " [https://osu.ppy.sh/b/104229 Team Nekokan - Can't Defeat Airman] [https://osu.ppy.sh/b/736215&m=0 Panda Eyes & Teminite - Highscore] [https://osu.ppy.sh/b/901854 Sendan Life] [https://osu.ppy.sh/b/95733 rog-unlimitation [Insane]] +DT (taiko)"; }
+    public String getTutorial() { return "achievement.supremacy"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

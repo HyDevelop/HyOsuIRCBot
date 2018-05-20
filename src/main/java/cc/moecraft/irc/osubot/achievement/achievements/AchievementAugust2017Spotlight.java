@@ -36,7 +36,7 @@ public class AchievementAugust2017Spotlight extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Clear all maps in August 2017 [https://osu.ppy.sh/p/packlist?t=r Spotlight]. Any game mode and difficulty works. NF mod works but needs 10,000+ score to submit play. NF+DT these 3 maps in osu!mania mode to unlock achievement: [https://osu.ppy.sh/s/300685 1] [https://osu.ppy.sh/s/453386 2] [https://osu.ppy.sh/s/613792 3]"; }
+    public String getTutorial() { return "achievement.august2017spotlight"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

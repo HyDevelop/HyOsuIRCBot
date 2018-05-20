@@ -36,7 +36,7 @@ public class AchievementEquilibrium extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Get an equal amount of 300's 100's 50's. Use of NF+HT is highly recommended. Minimum amount required is 15 of each type (15 300's, 15 100's, 15 50's) and misses do not count, so you can have less than 50% acc.  [https://osu.ppy.sh/b/188110&m=0 Chata - Papapapanda] [Easy]   In the map above you need to hit 1 full slider (300), ALL circles (300), 30 sliders (100), 30 sliders (50). Hitting 50's is very easy so it's recommended that you start hitting 100's on sliders first. [https://www.youtube.com/watch?v=eDM3ggDyogI&feature=youtu.be VIDEO OF ACHIEVEMENT]   "; }
+    public String getTutorial() { return "achievement.equilibrium"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

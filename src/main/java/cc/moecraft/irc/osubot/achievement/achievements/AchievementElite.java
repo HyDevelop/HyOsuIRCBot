@@ -36,7 +36,7 @@ public class AchievementElite extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Get 1337 combo (break combo after getting it). Not all maps work. [https://osu.ppy.sh/b/651744 supercell - Kimi no Shiranai Monogatari] unlocks this achievement. Miss the first reverse slider (3 combo lost in total), get 1337 combo and miss note 6 as shown in [https://www.youtube.com/watch?v=ciATKv5Qfbs this video] You should have 1211 combo on your first map break. If you don't - you missed a slider end."; }
+    public String getTutorial() { return "achievement.elite"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

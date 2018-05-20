@@ -36,7 +36,7 @@ public class Achievement5000Plays extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return "无教程信息"; }
+    public String getTutorial() { return "achievement.5000plays"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

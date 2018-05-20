@@ -36,7 +36,7 @@ public class AchievementTheFirmamentMoves extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass Normal difficulty on [https://osu.ppy.sh/b/1145134 cYsmix - Moonlight Sonata] with HDDTHR mods"; }
+    public String getTutorial() { return "achievement.thefirmamentmoves"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

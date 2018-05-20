@@ -36,7 +36,7 @@ public class AchievementJackOfAllTrades extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Exact solution not known. Get 5000+ playcount in all game modes (osu!standard/taiko/mania/catch the beat) "; }
+    public String getTutorial() { return "achievement.jackofalltrades"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

@@ -36,7 +36,7 @@ public class AchievementDekasight extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Full combo a 3+ star map with EZ+HD+FL mods. [https://osu.ppy.sh/s/141 FAIRY FORE - Vivid] is only 13 seconds long."; }
+    public String getTutorial() { return "achievement.dekasight"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

@@ -36,7 +36,7 @@ public class AchievementJackpot extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Get 222,222 (or 6,666,666 etc.) score on any ranked map."; }
+    public String getTutorial() { return "achievement.jackpot"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

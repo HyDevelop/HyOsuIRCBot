@@ -36,7 +36,7 @@ public class AchievementQuickening extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Full combo a 6 star map without using EZ/NF/HT mods (don't miss slider ends)."; }
+    public String getTutorial() { return "achievement.quickening"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

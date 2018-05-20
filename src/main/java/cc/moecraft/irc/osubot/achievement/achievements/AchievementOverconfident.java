@@ -36,7 +36,7 @@ public class AchievementOverconfident extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass a map with very low accuracy using DT or HR mod. Worked with 33.33% on [https://osu.ppy.sh/b/417503 Lena Park - Inori~You Raise Me Up (TV Size)] [Lanturn's Beginner]"; }
+    public String getTutorial() { return "achievement.overconfident"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

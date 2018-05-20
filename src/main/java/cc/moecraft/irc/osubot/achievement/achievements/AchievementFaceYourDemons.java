@@ -36,7 +36,7 @@ public class AchievementFaceYourDemons extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass a 4 star map without using EZ/NF/HT mods. [https://osu.ppy.sh/b/315 FAIRY FORE - Vivid] [Insane] (osu!standard) [https://osu.ppy.sh/b/315 FAIRY FORE - Vivid] [Insane]+DT (taiko)"; }
+    public String getTutorial() { return "achievement.faceyourdemons"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

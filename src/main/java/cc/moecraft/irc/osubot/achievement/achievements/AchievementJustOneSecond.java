@@ -36,7 +36,7 @@ public class AchievementJustOneSecond extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass AR9 map with HD+FL mods. [https://osu.ppy.sh/b/10848 ESTi feat. Various Artists - Zero Fill Love] [Insane+]"; }
+    public String getTutorial() { return "achievement.justonesecond"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

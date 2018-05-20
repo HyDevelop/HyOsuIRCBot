@@ -36,7 +36,7 @@ public class AchievementSweetRaveParty extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass any map with NC mod. Can use other mods in the same play."; }
+    public String getTutorial() { return "achievement.sweetraveparty"; }
 
     @Override
     public Long getRecommendedMap() { return null; }
