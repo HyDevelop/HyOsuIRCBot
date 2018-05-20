@@ -5,7 +5,9 @@ import cc.moecraft.yaml.Config;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/21 创建!
@@ -24,9 +26,21 @@ public class LanguageFileManager
         getFile(DEFAULT_LANG); // 创建默认语言文件
     }
 
-    public String get(String lang, String placeholder)
+    public String get(String lang, String languageNode)
     {
-        return getFile(lang).get(placeholder);
+        return getFile(lang).get(languageNode);
+    }
+
+    /**
+     * 随机获取一条消息
+     * @param lang 语言
+     * @param languageNode 语言节点
+     * @return List里的随机一条消息
+     */
+    public String getRandomInAList(String lang, String languageNode)
+    {
+        List<String> list = getFile(lang).getStringList(languageNode.toLowerCase());
+        return list.get(new Random().nextInt(list.size()));
     }
 
     public LanguageFile getFile(String lang)
@@ -112,6 +126,9 @@ public class LanguageFileManager
             addDefault("commands.osu.recent_format", "[osu://b/%beatmap_id% [%cm%: %artist% - %title% (%version%)]]: ★ %difficultyrating% | 成绩: %rank% | %ppmsg% | %ca%% | %cscore% | %maxcombo%x/%max_combo%x 连击");
             addDefault("commands.osu.stats_format", "[%mode% - %username% (%user_id%)]: %pp_raw%pp | lv.%level% | #%pp_rank% | %accuracy%% acc. | %count_rank_ss%ss | %count_rank_s%s |  %count_rank_a%a ");
             addDefault("commands.osu.update_format", "[%cm% - [%clink% %username%]]: %pp_raw% pp | %level% lvl | %crank% rank | %accuracy%% acc. | %playcount% 次游戏");
+            addDefault("commands.osu.update_prefix_0", new String[]{"多玩玩再来看吧! "});
+            addDefault("commands.osu.update_prefix_L20", new String[]{"进步了.. 加油! "});
+            addDefault("commands.osu.update_prefix_H20", new String[]{"w.. 大..大佬! "});
             addDefault("commands.osu.achievement_help", "%prefix%achieve [成就名或成就ID]");
             addDefault("commands.osu.push_format_channel", "%username%推荐给你们了刚刚在玩的谱面: [osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: %ppmsg% | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm%");
             addDefault("commands.osu.push_format_user", "%username%推荐给你了刚刚在玩的谱面: [osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: %ppmsg% | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm%");

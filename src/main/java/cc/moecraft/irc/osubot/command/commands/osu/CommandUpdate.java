@@ -3,6 +3,7 @@ package cc.moecraft.irc.osubot.command.commands.osu;
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.language.MultiLanguageText;
+import cc.moecraft.irc.osubot.language.RandomMLT;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.OsuUser;
 import cc.moecraft.irc.osubot.osu.data.OsuTrackData;
@@ -102,26 +103,25 @@ public class CommandUpdate extends Command
      *  +0  +0  ： “多玩玩再来看吧!”
      *  +20 +400： “进步了.. 加油!”
      *  +99 +999： “w.. 大..大佬!”
-     *  TODO: 随机消息列表
      *
      * @param osuTrackData 数据
      * @return 前缀消息
      */
-    public String getPrefix(OsuTrackData osuTrackData)
+    public RandomMLT getPrefix(OsuTrackData osuTrackData)
     {
         if (osuTrackData.getPpRaw() <= 0)
         {
-            return "多玩玩再来看吧! ";
+            return new RandomMLT("commands.osu.update_prefix_0");
         }
         else if (osuTrackData.getPpRaw() <= 20)
         {
-            return "进步了.. 加油! ";
+            return new RandomMLT("commands.osu.update_prefix_L20");
         }
         else if (osuTrackData.getPpRaw() > 20)
         {
-            return "w.. 大..大佬! ";
+            return new RandomMLT("commands.osu.update_prefix_H20");
         }
 
-        return "啊哈哈.... ";
+        return null; // 不可能发生的情况
     }
 }
