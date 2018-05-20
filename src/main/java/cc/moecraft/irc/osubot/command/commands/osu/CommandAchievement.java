@@ -69,9 +69,9 @@ public class CommandAchievement extends Command implements ChannelCommand
         Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("commands.osu.achievement")
                         .putVariable("name", achievement.getName())
                         .putVariable("id", String.valueOf(achievement.getId()))
-                        .putVariable("tutorial", achievement.getTutorial()));
+                        .setSuffix(MultiLanguageText.languageNode(achievement.getTutorial())));
 
-        if (!isChannel)
+        if (!isChannel && achievement.getRecommendedMap() != null)
         {
             CommandMap.process(event, Math.toIntExact(achievement.getRecommendedMap()));
         }
