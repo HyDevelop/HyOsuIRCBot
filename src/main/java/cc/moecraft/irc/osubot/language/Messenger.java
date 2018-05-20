@@ -4,6 +4,7 @@ import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.osu.data.web.WebsiteUserData;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.util.Map;
@@ -17,6 +18,7 @@ import java.util.Map;
 @AllArgsConstructor @Data
 public class Messenger
 {
+    @Getter
     private LanguageFileManager languageFileManager;
     private Map<String, String> globalVariables;
 
@@ -86,23 +88,17 @@ public class Messenger
      */
     public String resolveMLT(MultiLanguageText multiLanguageText, String lang)
     {
-        if (multiLanguageText.getType() == MultiLanguageText.Type.EMPTY) return "";
+        String text = multiLanguageText.getText(lang);
 
-        String text;
-
-        if (multiLanguageText.getType() == MultiLanguageText.Type.DIRECT_TEXT)
-        {
-            text = multiLanguageText.getText();
-        }
-        else // 是 LANGUAGE_NODE. 不用多判断一遍了
-        {
-            text = languageFileManager.get(lang, multiLanguageText.getText());
-        }
+        if (text.equals("")) return "";
 
         text = replaceVariables(text, globalVariables);
         text = replaceVariables(text, multiLanguageText.getVariables());
 
-        return multiLanguageText.getPrefix() + text + multiLanguageText.getSuffix();
+        if (multiLanguageText.getPrefix() != null) text = multiLanguageText.getPrefix().getText(lang) + text;
+        if (multiLanguageText.getSuffix() != null) text = text + multiLanguageText.getSuffix().getText(lang);
+
+        return text;
     }
 
     /**
