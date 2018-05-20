@@ -12,8 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static cc.moecraft.scripts.AchievementClassGenerator.getNoSpaceName;
-import static cc.moecraft.scripts.LanguageFileWriteMethodGenerator.createFileOrOverride;
-import static cc.moecraft.scripts.LanguageFileWriteMethodGenerator.getAllJavaFilesInString;
+import static cc.moecraft.scripts.LanguageFileWriteMethodGenerator.*;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/20 创建!
@@ -26,6 +25,7 @@ import static cc.moecraft.scripts.LanguageFileWriteMethodGenerator.getAllJavaFil
 public class AchievementsLanguageFileConverter
 {
     private static String srcPath = "./src/main/java/";
+    private static final File languageFileWriteMethodFileGeneratePath = new File("./languageFileConfig.txt");
     private static DebugLogger logger = new DebugLogger("AchievementsLanguageFileConverter", true);
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException, IOException {
@@ -77,7 +77,8 @@ public class AchievementsLanguageFileConverter
             //logger.log("----------------------------------------------------------------------------------------------------------------------");
         }
 
-        logger.log("Language File Write Method: " + languageFileWriteMethodBuilder.toString());
+        //logger.log("Language File Write Method: " + languageFileWriteMethodBuilder.toString());
+        saveFile(languageFileWriteMethodFileGeneratePath, languageFileWriteMethodBuilder.toString());
     }
 
     private static Map.Entry<File, String> getFileFromAchievement(HashMap<File, String> allFilesInString, Achievement achievement)
