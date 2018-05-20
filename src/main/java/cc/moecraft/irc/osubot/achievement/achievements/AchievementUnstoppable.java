@@ -36,7 +36,7 @@ public class AchievementUnstoppable extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass a map with AR11 OD11 HP11 and over 260BPM.   [https://osu.ppy.sh/b/20737 ERIKA - Destination Nowhere] [Hard] with HDDTHR unlocks this achievement."; }
+    public String getTutorial() { return "achievement.unstoppable"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

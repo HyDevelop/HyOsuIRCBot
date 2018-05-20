@@ -36,7 +36,7 @@ public class Achievement5050 extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Get 50 50's on any map. Get 100% accuracy [https://osu.ppy.sh/b/34529&m=2 Silver Forest - Marisa Spark [Normal]] in osu!catch mode. [https://osu.ppy.sh/b/21184 Rhapsody - Emerald Sword [Light]]. Start but don't complete sliders to get guaranteed 50 points.  NF/HT mods do not work."; }
+    public String getTutorial() { return "achievement.5050"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

@@ -36,7 +36,7 @@ public class AchievementRecklessAbandon extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Full combo a 3+ star map with SD+HR mods.  [https://osu.ppy.sh/b/97399&m=0 W.T. Orchestra - William Tell Overture[AngelHoney]]"; }
+    public String getTutorial() { return "achievement.recklessabandon"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

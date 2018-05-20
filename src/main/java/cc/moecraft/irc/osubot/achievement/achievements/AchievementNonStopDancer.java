@@ -36,7 +36,7 @@ public class AchievementNonStopDancer extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass [https://osu.ppy.sh/b/9007&m=0 Yoko Ishida - paraparaMAX I<a>. You don't need to full combo, NF mod does not work. "; }
+    public String getTutorial() { return "achievement.nonstopdancer"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

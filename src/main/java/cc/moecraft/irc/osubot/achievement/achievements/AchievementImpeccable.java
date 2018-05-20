@@ -36,7 +36,7 @@ public class AchievementImpeccable extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass a 4+ star map with DT+PF mods.   [https://osu.ppy.sh/b/150272 Hatsuki Yura - Yami no Kodomo tachi] [Hard] [https://osu.ppy.sh/b/382042 Hatsuki Yura - Nightmare -Overture-] [Insane]"; }
+    public String getTutorial() { return "achievement.impeccable"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

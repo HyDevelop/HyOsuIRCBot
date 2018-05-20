@@ -36,7 +36,7 @@ public class AchievementCameraShy extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Get a play with NF+HD that WOULD have been in the top 500 leaderboard if not for the score reduction of NF. Just download any [https://osu.ppy.sh/p/beatmaplist&s=4&r=0 new map] and full combo any difficulty with NF+HD mods."; }
+    public String getTutorial() { return "achievement.camerashy"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

@@ -36,7 +36,7 @@ public class AchievementSupersonic extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Full combo a 7 star map without using EZ/NF/HT mods (don't miss slider ends)."; }
+    public String getTutorial() { return "achievement.supersonic"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

@@ -36,7 +36,7 @@ public class AchievementInfinitesimal extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Full combo a map with CS7.8 or higher. Use HR mod to increase Circle Size. You can also use HT mod for easier achievement. [https://osu.ppy.sh/b/20382 Bill Nye the Science Guy][Hard] +HR [https://osu.ppy.sh/b/860486&m=0 toby fox - Quiet Water] [TheOnlyLeon's Flowing] +HR"; }
+    public String getTutorial() { return "achievement.infinitesimal"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

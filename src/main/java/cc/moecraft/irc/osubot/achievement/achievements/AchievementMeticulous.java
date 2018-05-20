@@ -36,7 +36,7 @@ public class AchievementMeticulous extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass a 3+ star map with EZ+PF mods. [https://osu.ppy.sh/b/932223&m=0 Mike Greene - Bill Nye the Science Guy Theme Song (Chinese Intro)] [https://osu.ppy.sh/b/452185 Disasterpeace - Jolly Frolic] [https://osu.ppy.sh/s/2086 Sonic X Intro]"; }
+    public String getTutorial() { return "achievement.meticulous"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

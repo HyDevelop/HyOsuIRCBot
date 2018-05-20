@@ -36,7 +36,7 @@ public class AchievementNonstop extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Full combo 10+ minutes of any map (drain time, not including rest time). Can break combo after 10 mins. Easiest way to do this is to full combo [https://osu.ppy.sh/s/2916 Hyadain - Megaman Mix] on osu!catch (CTB) mode with EZ mod. "; }
+    public String getTutorial() { return "achievement.nonstop"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

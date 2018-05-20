@@ -36,7 +36,7 @@ public class AchievementSognare extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Play [https://osu.ppy.sh/b/529285 LeaF - Evanescent] with HT+HD+NF mods (need to get 10,000 score minimum)."; }
+    public String getTutorial() { return "achievement.sognare"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

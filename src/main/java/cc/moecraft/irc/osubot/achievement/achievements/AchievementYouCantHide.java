@@ -36,7 +36,7 @@ public class AchievementYouCantHide extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Full combo a 4+ star map with HD+FL mods. [https://osu.ppy.sh/s/141 FAIRY FORE - Vivid] [Insane] unlocks this achievement"; }
+    public String getTutorial() { return "achievement.youcanthide"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

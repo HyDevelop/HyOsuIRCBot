@@ -36,7 +36,7 @@ public class AchievementMostImproved extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " On a mapset you never played before get a D rank with at least 100,000 score on first try and then S on the second try. "; }
+    public String getTutorial() { return "achievement.mostimproved"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

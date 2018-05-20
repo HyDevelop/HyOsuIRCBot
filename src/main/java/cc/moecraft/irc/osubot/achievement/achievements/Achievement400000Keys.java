@@ -36,7 +36,7 @@ public class Achievement400000Keys extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return "无教程信息"; }
+    public String getTutorial() { return "achievement.400000keys"; }
 
     @Override
     public Long getRecommendedMap() { return null; }
