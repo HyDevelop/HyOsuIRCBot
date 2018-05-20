@@ -39,7 +39,7 @@ public class LanguageFileManager
      */
     public String getRandomInAList(String lang, String languageNode)
     {
-        List<String> list = getFile(lang).getStringList(languageNode);
+        List<String> list = getFile(lang).getStringList(languageNode.toLowerCase());
         return list.get(new Random().nextInt(list.size()));
     }
 
