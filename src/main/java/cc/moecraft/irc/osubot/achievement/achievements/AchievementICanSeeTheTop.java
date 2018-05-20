@@ -36,7 +36,7 @@ public class AchievementICanSeeTheTop extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return "无教程信息"; }
+    public String getTutorial() { return "achievement.icanseethetop"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

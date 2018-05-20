@@ -36,7 +36,7 @@ public class AchievementMay2017Spotlight extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Clear all maps in May 2017 [https://osu.ppy.sh/p/packlist?t=r Spotlight]. Any game mode and difficulty works. NF mod works but needs 10,000+ score to submit play. NF+DT these 3 maps in osu!catch mode to unlock achievement: [https://osu.ppy.sh/s/429184 1] [https://osu.ppy.sh/s/536749 2] [https://osu.ppy.sh/s/594326 3]"; }
+    public String getTutorial() { return "achievement.may2017spotlight"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

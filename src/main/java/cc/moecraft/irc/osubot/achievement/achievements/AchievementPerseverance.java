@@ -36,7 +36,7 @@ public class AchievementPerseverance extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass any marathon map (probably 7+ minutes long). Do not use EZ/NF/HT/SO mods. [https://osu.ppy.sh/s/97433 Traktion - The Near Distant Future] unlocks this achievement [https://osu.ppy.sh/s/2916 Hyadain - Megaman Mix] (not tested)"; }
+    public String getTutorial() { return "achievement.perseverance"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

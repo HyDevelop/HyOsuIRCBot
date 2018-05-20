@@ -36,7 +36,7 @@ public class Achievement1000Combo extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return "无教程信息"; }
+    public String getTutorial() { return "achievement.1000combo"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

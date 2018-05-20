@@ -36,7 +36,7 @@ public class AchievementTheSumOfAllFears extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Full combo but miss the last note.   [https://osu.ppy.sh/b/34527 Silver Forest - Marisa Spark] [Easy] [https://osu.ppy.sh/b/7960 Cold Play - Clocks] [Easy]"; }
+    public String getTutorial() { return "achievement.thesumofallfears"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

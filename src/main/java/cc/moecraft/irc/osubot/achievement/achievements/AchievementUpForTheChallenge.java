@@ -36,7 +36,7 @@ public class AchievementUpForTheChallenge extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Full combo a map with AR10, OD10, HP10. Use HR mod to increase map difficulty. [https://osu.ppy.sh/b/55432 Junichi Masuda - Biking Theme (HG/SS) [Victory Road]] +HR"; }
+    public String getTutorial() { return "achievement.upforthechallenge"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

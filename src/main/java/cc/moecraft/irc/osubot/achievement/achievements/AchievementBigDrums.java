@@ -36,7 +36,7 @@ public class AchievementBigDrums extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Full combo a 3 star map without using EZ/NF/HT mods (don't miss slider ends). [https://osu.ppy.sh/b/315 FAIRY FORE - Vivid] [Insane] (taiko) "; }
+    public String getTutorial() { return "achievement.bigdrums"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

@@ -36,7 +36,7 @@ public class AchievementSpooked extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass any map with FL mod and get a D rank. [https://osu.ppy.sh/b/857602&m=0 toby fox - Quiet Water [Still]] [https://osu.ppy.sh/b/315 FAIRY FORE - Vivid [Insane]]"; }
+    public String getTutorial() { return "achievement.spooked"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

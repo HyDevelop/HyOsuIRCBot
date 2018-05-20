@@ -36,7 +36,7 @@ public class AchievementPerfectionist extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass any map with PF mod. Can't use any other mods."; }
+    public String getTutorial() { return "achievement.perfectionist"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

@@ -36,7 +36,7 @@ public class AchievementStumbler extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Full combo any map with B rank or lower. "; }
+    public String getTutorial() { return "achievement.stumbler"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

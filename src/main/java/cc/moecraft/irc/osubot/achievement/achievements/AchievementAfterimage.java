@@ -36,7 +36,7 @@ public class AchievementAfterimage extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass any map with HT+HD mods. [https://osu.ppy.sh/b/259 TRF - Survival dAnce ~no no cry more~] is only 17 seconds for fast achievement."; }
+    public String getTutorial() { return "achievement.afterimage"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

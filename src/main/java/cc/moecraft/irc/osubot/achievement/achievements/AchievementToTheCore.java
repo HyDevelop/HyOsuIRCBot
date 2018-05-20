@@ -36,7 +36,7 @@ public class AchievementToTheCore extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass any NIGHTCORE map with DT/NC mod. If you don't have any nightcore maps [https://osu.ppy.sh/b/89547&m=0  here's one]."; }
+    public String getTutorial() { return "achievement.tothecore"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

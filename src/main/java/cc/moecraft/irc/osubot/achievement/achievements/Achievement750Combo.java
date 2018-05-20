@@ -36,7 +36,7 @@ public class Achievement750Combo extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Get 750 combo on any difficulty ranked map, osu!standard mode only!"; }
+    public String getTutorial() { return "achievement.750combo"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

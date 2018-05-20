@@ -36,7 +36,7 @@ public class AchievementTunnelVision extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass a map with FL mod without getting more than 200 combo. NF+FL works."; }
+    public String getTutorial() { return "achievement.tunnelvision"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

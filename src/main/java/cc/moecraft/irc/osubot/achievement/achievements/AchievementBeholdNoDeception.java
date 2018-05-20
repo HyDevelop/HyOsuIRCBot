@@ -36,7 +36,7 @@ public class AchievementBeholdNoDeception extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Full combo a 4+ star map with EZ mod. [https://osu.ppy.sh/s/141 FAIRY FORE - Vivid]"; }
+    public String getTutorial() { return "achievement.beholdnodeception"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

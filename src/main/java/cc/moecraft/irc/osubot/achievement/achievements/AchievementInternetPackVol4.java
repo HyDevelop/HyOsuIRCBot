@@ -36,7 +36,7 @@ public class AchievementInternetPackVol4 extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return "无教程信息"; }
+    public String getTutorial() { return "achievement.internetpackvol4"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

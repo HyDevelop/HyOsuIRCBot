@@ -36,7 +36,7 @@ public class AchievementTimeDilation extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass a map that is 10 minutes or longer with DT mod (check map time AFTER you put DT on). [https://osu.ppy.sh/b/9007 Yoko Ishida - paraparaMAX I] easy but long [https://osu.ppy.sh/s/8338 Lucky Star no Minna - Kumikyoku 'Lucky Star Douga'] medium [https://osu.ppy.sh/b/247037 Lucky Star no Minna - Kumikyoku 'Lucky Star Douga'] hard but short"; }
+    public String getTutorial() { return "achievement.timedilation"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

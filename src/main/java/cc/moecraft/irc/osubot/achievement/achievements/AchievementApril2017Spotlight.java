@@ -36,7 +36,7 @@ public class AchievementApril2017Spotlight extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Clear all maps in April 2017 [https://osu.ppy.sh/p/packlist?t=r Spotlight]. Any game mode and difficulty works. NF mod works but needs 10,000+ score to submit play. Complete [https://osu.ppy.sh/s/540175 this map] in osu!mania with NF+DT to unlock achievement."; }
+    public String getTutorial() { return "achievement.april2017spotlight"; }
 
     @Override
     public Long getRecommendedMap() { return null; }
