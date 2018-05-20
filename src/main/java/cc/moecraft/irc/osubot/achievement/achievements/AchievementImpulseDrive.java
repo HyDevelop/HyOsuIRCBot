@@ -36,7 +36,7 @@ public class AchievementImpulseDrive extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass a 3 star map without using EZ/NF/HT mods. [https://osu.ppy.sh/b/315 FAIRY FORE - Vivid] [Insane] (taiko)"; }
+    public String getTutorial() { return "achievement.impulsedrive"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

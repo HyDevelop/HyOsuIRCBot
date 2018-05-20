@@ -36,7 +36,7 @@ public class AchievementSRanker extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Get five S ranks (or SS) in 24 hours "; }
+    public String getTutorial() { return "achievement.sranker"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

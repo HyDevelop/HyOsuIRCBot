@@ -36,7 +36,7 @@ public class AchievementSlowAndSteady extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass a 3+ star map with HT+PF mods. [https://osu.ppy.sh/b/1059390 Drop - Granat] [Insane] [https://osu.ppy.sh/b/486513 FELT - In my room] [Tranquility] [https://osu.ppy.sh/b/569636&m=0 Agressor Bunx - Tornado (Original Mix)][Insane]"; }
+    public String getTutorial() { return "achievement.slowandsteady"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

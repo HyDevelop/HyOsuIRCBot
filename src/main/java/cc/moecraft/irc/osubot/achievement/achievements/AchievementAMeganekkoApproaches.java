@@ -36,7 +36,7 @@ public class AchievementAMeganekkoApproaches extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Meet Maria, the osu!mania mascot. Finish an osu!mania map with at least a 100 combo. Download [https://osu.ppy.sh/b/741477 this map] and play it with EZHT mods on ultra beginner difficulty. First 2 sliders should give you over 100 combo."; }
+    public String getTutorial() { return "achievement.ameganekkoapproaches"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

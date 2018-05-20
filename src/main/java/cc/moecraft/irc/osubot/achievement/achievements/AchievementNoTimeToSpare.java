@@ -36,7 +36,7 @@ public class AchievementNoTimeToSpare extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Full combo any map with DT mod that is 30 seconds or less (any difficulty). [https://osu.ppy.sh/b/34527 Silver Forest - Marisa Spark] is only 16 seconds long."; }
+    public String getTutorial() { return "achievement.notimetospare"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

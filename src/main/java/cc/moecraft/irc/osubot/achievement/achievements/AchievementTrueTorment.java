@@ -36,7 +36,7 @@ public class AchievementTrueTorment extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass [https://osu.ppy.sh/s/594751 Helblinde - The Solace of Oblivion] in osu!standard mode"; }
+    public String getTutorial() { return "achievement.truetorment"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

@@ -36,7 +36,7 @@ public class AchievementVideoGamePackVol1 extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return "无教程信息"; }
+    public String getTutorial() { return "achievement.videogamepackvol1"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

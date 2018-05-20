@@ -36,7 +36,7 @@ public class AchievementObsessed extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Retry any ranked song 100 times and then pass/full combo it (must be done in 24 hours or less!). Make sure to track your plays using osu! website and NOT in-game playcount tracker. You need to get 10k+ score each play or it won't count. "; }
+    public String getTutorial() { return "achievement.obsessed"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

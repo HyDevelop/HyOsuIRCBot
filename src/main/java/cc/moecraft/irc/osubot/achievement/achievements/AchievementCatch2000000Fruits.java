@@ -36,7 +36,7 @@ public class AchievementCatch2000000Fruits extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return "无教程信息"; }
+    public String getTutorial() { return "achievement.catch2000000fruits"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

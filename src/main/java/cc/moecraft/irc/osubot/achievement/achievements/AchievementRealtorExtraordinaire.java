@@ -36,7 +36,7 @@ public class AchievementRealtorExtraordinaire extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Full combo [https://osu.ppy.sh/b/792693 cYsmix - House With Legs] with HDDTHR mods (any difficulty)."; }
+    public String getTutorial() { return "achievement.realtorextraordinaire"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

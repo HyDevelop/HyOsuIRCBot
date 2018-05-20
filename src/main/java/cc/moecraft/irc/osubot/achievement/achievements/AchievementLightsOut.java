@@ -36,7 +36,7 @@ public class AchievementLightsOut extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass any map with NC+FL mods (double click on DT mod to get NC)."; }
+    public String getTutorial() { return "achievement.lightsout"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

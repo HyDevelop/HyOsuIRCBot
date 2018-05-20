@@ -36,7 +36,7 @@ public class AchievementChallengeAccepted extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass an approved map. [https://osu.ppy.sh/p/beatmaplist?m=-1&r=6&g=0&la=0&ra= LIST<a>. "; }
+    public String getTutorial() { return "achievement.challengeaccepted"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

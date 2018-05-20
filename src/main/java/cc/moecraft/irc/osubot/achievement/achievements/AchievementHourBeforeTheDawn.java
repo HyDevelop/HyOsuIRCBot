@@ -36,7 +36,7 @@ public class AchievementHourBeforeTheDawn extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Full combo any difficulty on [https://osu.ppy.sh/b/373781 ginkiha - EOS]</noscript>."; }
+    public String getTutorial() { return "achievement.hourbeforethedawn"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

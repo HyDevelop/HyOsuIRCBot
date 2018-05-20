@@ -36,7 +36,7 @@ public class AchievementTooFastTooFurious extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass any difficulty on [https://osu.ppy.sh/b/1036654 cYsmix - Fright March] with DT mod"; }
+    public String getTutorial() { return "achievement.toofasttoofurious"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

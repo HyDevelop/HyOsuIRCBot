@@ -36,7 +36,7 @@ public class AchievementFinality extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Pass any map with SD mod. Can't use any other mods."; }
+    public String getTutorial() { return "achievement.finality"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

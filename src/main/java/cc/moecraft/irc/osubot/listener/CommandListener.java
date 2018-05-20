@@ -1,7 +1,6 @@
 package cc.moecraft.irc.osubot.listener;
 
 import cc.moecraft.irc.osubot.Main;
-import cc.moecraft.irc.osubot.command.exceptions.CommandNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.pircbotx.Channel;

@@ -36,7 +36,7 @@ public class AchievementThrillOfTheChase extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Full combo [https://osu.ppy.sh/b/1043382 cYsmix - Classic Pursuit [Advanced]<a> with DT mod"; }
+    public String getTutorial() { return "achievement.thrillofthechase"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

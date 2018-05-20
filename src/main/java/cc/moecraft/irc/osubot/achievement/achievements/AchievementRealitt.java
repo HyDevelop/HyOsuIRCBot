@@ -36,7 +36,7 @@ public class AchievementRealitt extends Achievement
     public int getMode() { return 4; }
 
     @Override
-    public String getTutorial() { return " Get 90% or higher accuracy on [https://osu.ppy.sh/s/227126 LeaF - Evanescent] in osu!standard Requires S rank in osu!mania (95%+ accuracy) with 700k+ total score. 93%+ in osu!catch (could be lower?) does not work with HT/EZ/NF"; }
+    public String getTutorial() { return "achievement.realitt"; }
 
     @Override
     public Long getRecommendedMap() { return null; }

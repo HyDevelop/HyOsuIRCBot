@@ -36,7 +36,7 @@ public class AchievementEclipse extends Achievement
     public int getMode() { return 3; }
 
     @Override
-    public String getTutorial() { return " Pass any map with FL+HD mods. [https://osu.ppy.sh/b/34529 Silver Forest - Marisa Spark] is a short map."; }
+    public String getTutorial() { return "achievement.eclipse"; }
 
     @Override
     public Long getRecommendedMap() { return null; }
