@@ -56,7 +56,10 @@ public class AchievementsLanguageFileConverter
                 continue;
             }
 
-            String languageNode = "achievement." + getNoSpaceName(achievement.getValue().getName()).toLowerCase();
+            String languageNode = "achievement." + getNoSpaceName(achievement.getValue().getName())
+                    .replaceAll("[^A-Za-z0-9 ]", "")
+                    .replace(",", "")
+                    .toLowerCase();
             String value = achievement.getValue().getTutorial();
 
             languageFileWriteMethodBuilder.append(String.format("addDefault(\"%s\", \"%s\");", languageNode, value)).append("\n");
