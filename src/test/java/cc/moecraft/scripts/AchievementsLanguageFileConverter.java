@@ -50,6 +50,12 @@ public class AchievementsLanguageFileConverter
 
             Map.Entry<File, String> file = getFileFromAchievement(allFilesInString, achievement.getValue());
 
+            if (file == null)
+            {
+                logger.error("成就: " + achievement.getKey() + "未找到对应文件");
+                continue;
+            }
+
             String languageNode = "achievement." + getNoSpaceName(achievement.getValue().getName()).toLowerCase();
             String value = achievement.getValue().getTutorial();
 
