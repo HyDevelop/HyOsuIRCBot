@@ -134,7 +134,7 @@ public class LanguageFileManager
             addDefault("commands.osu.push_format_user", "%username%推荐给你了刚刚在玩的谱面: [osu://b/%beatmap_id% [%cm%: %title% - %artist% (%version%)]]: %ppmsg% | ⏳ %ct% | ★ %difficultyrating% | BPM %bpm%");
             addDefault("commands.osu.push_error_input_username", "请输入用户名... 你不会真的想推荐给自己吧...");
             addDefault("commands.osu.recent_error_greater_than_50", "请输入50以下的数字");
-            addDefault("commands.osu.achievement", "成就%id%: %name% - %tutorial%");
+            addDefault("commands.osu.achievement", "成就%id%: %name% - ");
             addDefault("keywords.unranked", "无计分!");
             addDefault("update_message_newbie_1", "欢迎新大佬使用HyIRC机器人! 这个指令是Ameo的[https://ameobea.me/osutrack/ Osu!Track]统计功能!");
             addDefault("update_message_newbie_2", "这个指令的数值代表着从上次输入指令到这次输入指令之间的进步!");
