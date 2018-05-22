@@ -15,6 +15,10 @@ import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.
  */
 public class FingersAI
 {
+    /**
+     * 通过当前局面和获取到的玩家移动来计算玩家移动后的局面
+     * @return 玩家移动后的局面
+     */
     public static FingersData calculateNext(FingersData current, int fromPlayerFinger, int toBotFinger)
             throws DataSetInvalidException, PlayerInputInvalidException, InputNumberNotFoundException, GameEndedException
     {
@@ -27,18 +31,6 @@ public class FingersAI
         if (current.getBotHand()   [1] == 0 && current.getBotHand()   [2] == 0) throw new GameEndedException(GameEndedException.WinnerType.BOT);
 
         // 获取玩家移动后的局面
-        current = getPlayerMoveResult(current, fromPlayerFinger, toBotFinger);
-
-        return current; // TODO: 返回数据
-    }
-
-    /**
-     * 通过当前局面和获取到的玩家移动来计算玩家移动后的局面
-     * 注意: 这里传进来的数据必须是有效的
-     * @return 玩家移动后的局面
-     */
-    public static FingersData getPlayerMoveResult(FingersData current, int fromPlayerFinger, int toBotFinger) throws InputNumberNotFoundException
-    {
         int playerHandIndex = current.findPlayerIndex(fromPlayerFinger);
         int botHandIndex = current.findBotIndex(toBotFinger);
 
