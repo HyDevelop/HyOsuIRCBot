@@ -68,6 +68,6 @@ public class FingersData
      */
     public static boolean isValidNumber(int number)
     {
-        return number >= 1 && number <= 9;
+        return number >= 0 && number <= 9;
     }
 }
