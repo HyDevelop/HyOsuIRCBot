@@ -16,15 +16,15 @@ public class FingersData
 {
     public FingersData(int playerHand1, int playerHand2, int botHand1, int botHand2)
     {
-        playerHand[1] = playerHand1;
-        playerHand[2] = playerHand2;
+        playerHand[0] = playerHand1;
+        playerHand[1] = playerHand2;
 
-        botHand[1] = botHand1;
-        botHand[2] = botHand2;
+        botHand[0] = botHand1;
+        botHand[1] = botHand2;
     }
 
-    public int[] playerHand = new int[3];
-    public int[] botHand = new int[3];
+    public int[] playerHand = new int[2];
+    public int[] botHand = new int[2];
 
     /**
      * 找到数值对应的玩家的手的编号
@@ -34,8 +34,8 @@ public class FingersData
      */
     public int findPlayerIndex(int value) throws InputNumberNotFoundException
     {
+        if (playerHand[0] == value) return 0;
         if (playerHand[1] == value) return 1;
-        if (playerHand[2] == value) return 2;
         throw new InputNumberNotFoundException(InputNumberNotFoundException.Type.PLAYER);
     }
 
@@ -47,8 +47,8 @@ public class FingersData
      */
     public int findBotIndex(int value) throws InputNumberNotFoundException
     {
+        if (botHand[0] == value) return 0;
         if (botHand[1] == value) return 1;
-        if (botHand[2] == value) return 2;
         throw new InputNumberNotFoundException(InputNumberNotFoundException.Type.BOT);
     }
 
@@ -58,7 +58,7 @@ public class FingersData
      */
     public boolean isValid()
     {
-        return isValidNumber(playerHand[1]) && isValidNumber(playerHand[2]) && isValidNumber(botHand[1]) && isValidNumber(botHand[2]);
+        return isValidNumber(playerHand[0]) && isValidNumber(playerHand[1]) && isValidNumber(botHand[0]) && isValidNumber(botHand[1]);
     }
 
     /**
