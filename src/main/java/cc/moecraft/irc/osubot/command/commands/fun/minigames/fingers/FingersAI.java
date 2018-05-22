@@ -23,13 +23,27 @@ public class FingersAI
         if (!(FingersData.isValidNumber(fromPlayerFinger) && FingersData.isValidNumber(toBotFinger))) throw new PlayerInputInvalidException();
 
         // 判断游戏是否已经结束
-        if (current.playerHand1 == 0 && current.playerHand2 == 0) throw new GameEndedException(GameEndedException.WinnerType.PLAYER);
-        if (current.botHand1 == 0 && current.botHand2 == 0) throw new GameEndedException(GameEndedException.WinnerType.BOT);
+        if (current.getPlayerHand()[1] == 0 && current.getPlayerHand()[2] == 0) throw new GameEndedException(GameEndedException.WinnerType.PLAYER);
+        if (current.getBotHand()   [1] == 0 && current.getBotHand()   [2] == 0) throw new GameEndedException(GameEndedException.WinnerType.BOT);
 
-        // 判断输入内容是否在玩家或者机器人手中
-        if (current.playerHand1 != fromPlayerFinger && current.playerHand2 != fromPlayerFinger) throw new InputNumberNotFoundException(InputNumberNotFoundException.Type.PLAYER);
-        if (current.botHand1 != toBotFinger && current.botHand2 != toBotFinger) throw new InputNumberNotFoundException(InputNumberNotFoundException.Type.BOT);
+        // 获取玩家移动后的局面
+        current = getPlayerMoveResult(current, fromPlayerFinger, toBotFinger);
 
         return current; // TODO: 返回数据
+    }
+
+    /**
+     * 通过当前局面和获取到的玩家移动来计算玩家移动后的局面
+     * 注意: 这里传进来的数据必须是有效的
+     * @return 玩家移动后的局面
+     */
+    public static FingersData getPlayerMoveResult(FingersData current, int fromPlayerFinger, int toBotFinger) throws InputNumberNotFoundException
+    {
+        int playerHandIndex = current.findPlayerIndex(fromPlayerFinger);
+        int botHandIndex = current.findBotIndex(toBotFinger);
+
+        current.getPlayerHand()[playerHandIndex] = (fromPlayerFinger + toBotFinger) % 10;
+
+        return current;
     }
 }
