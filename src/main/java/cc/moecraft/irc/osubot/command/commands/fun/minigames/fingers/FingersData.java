@@ -18,4 +18,23 @@ public class FingersData
 
     public int botHand1;
     public int botHand2;
+
+    /**
+     * 验证这组数据是否合理
+     * @return 是否合理
+     */
+    public boolean isValid()
+    {
+        return isValidNumber(playerHand1) && isValidNumber(playerHand2) && isValidNumber(botHand1) && isValidNumber(botHand2);
+    }
+
+    /**
+     * 验证一个数字是否合理 ( 在1-9之间 )
+     * @param number 数字
+     * @return 是否合理
+     */
+    private boolean isValidNumber(int number)
+    {
+        return number >= 1 && number <= 9;
+    }
 }
