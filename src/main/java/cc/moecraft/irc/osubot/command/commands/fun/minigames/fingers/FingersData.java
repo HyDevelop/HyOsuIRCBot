@@ -35,7 +35,7 @@ public class FingersData
      * @param number 数字
      * @return 是否合理
      */
-    private static boolean isValidNumber(int number)
+    public static boolean isValidNumber(int number)
     {
         return number >= 1 && number <= 9;
     }
