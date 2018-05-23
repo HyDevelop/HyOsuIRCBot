@@ -11,4 +11,14 @@ package cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers;
 public enum FingersPlayerType
 {
     Player, Bot;
+
+    /**
+     * 获取另外一个
+     * @return 如果是玩家就返回Bot, 如果是Bot就返回玩家
+     */
+    public FingersPlayerType getTheOther()
+    {
+        if (this == Player) return Bot;
+        return Player;
+    }
 }
