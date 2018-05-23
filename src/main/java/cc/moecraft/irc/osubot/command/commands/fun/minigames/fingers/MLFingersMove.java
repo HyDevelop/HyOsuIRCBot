@@ -51,4 +51,27 @@ public class MLFingersMove
                 moveTo
         );
     }
+
+    /**
+     * 判断1v1胜败结果
+     * @param playerHand 玩家手上的数
+     * @param botHand 机器人手上的数
+     * @param whosTurn 该谁走
+     * @return 对于数组第一个数表示的玩家的胜败
+     */
+    public static FingersPlayerType get1v1Result(int playerHand, int botHand, FingersPlayerType whosTurn)
+    {
+        if (botHand == 1 && playerHand == 3) return null;
+        if (botHand == 3 && playerHand == 1) return null;
+        if (botHand == 2 && playerHand == 6) return null;
+        if (botHand == 6 && playerHand == 2) return null;
+
+        if (botHand == 0) return FingersPlayerType.Bot;
+        if (playerHand == 0) return FingersPlayerType.Player;
+
+        if (whosTurn == FingersPlayerType.Player) playerHand = (playerHand + botHand) % 10;
+        else botHand = (playerHand + botHand) % 10;
+
+        return get1v1Result(playerHand, botHand, whosTurn.getTheOther());
+    }
 }
