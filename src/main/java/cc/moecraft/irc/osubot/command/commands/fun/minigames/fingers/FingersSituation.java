@@ -3,6 +3,7 @@ package cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers;
 import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.InputNumberNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/22 创建!
@@ -12,7 +13,7 @@ import lombok.Data;
  *
  * @author Hykilpikonna
  */
-@Data @AllArgsConstructor
+@AllArgsConstructor
 public class FingersSituation
 {
     // TODO: 排序
@@ -23,10 +24,36 @@ public class FingersSituation
 
         botHand[0] = botHand1;
         botHand[1] = botHand2;
+
+        sort();
     }
 
     public int[] playerHand = new int[2];
     public int[] botHand = new int[2];
+
+    public int[] getBotHand()
+    {
+        sort();
+        return botHand;
+    }
+
+    public int[] getPlayerHand()
+    {
+        sort();
+        return playerHand;
+    }
+
+    public void setBotHand(int[] botHand)
+    {
+        this.botHand = botHand;
+        sort();
+    }
+
+    public void setPlayerHand(int[] playerHand)
+    {
+        this.playerHand = playerHand;
+        sort();
+    }
 
     /**
      * 找到数值对应的玩家的手的编号
@@ -36,6 +63,7 @@ public class FingersSituation
      */
     public int findPlayerIndex(int value) throws InputNumberNotFoundException
     {
+        sort();
         if (playerHand[0] == value) return 0;
         if (playerHand[1] == value) return 1;
         throw new InputNumberNotFoundException(FingersPlayerType.Player, this, value);
@@ -49,6 +77,7 @@ public class FingersSituation
      */
     public int findBotIndex(int value) throws InputNumberNotFoundException
     {
+        sort();
         if (botHand[0] == value) return 0;
         if (botHand[1] == value) return 1;
         throw new InputNumberNotFoundException(FingersPlayerType.Bot, this, value);
@@ -60,6 +89,7 @@ public class FingersSituation
      */
     public boolean isValid()
     {
+        sort();
         return isValidNumber(playerHand[0]) && isValidNumber(playerHand[1]) && isValidNumber(botHand[0]) && isValidNumber(botHand[1]);
     }
 
@@ -80,6 +110,7 @@ public class FingersSituation
     @Override
     public String toString()
     {
+        sort();
         return playerHand[0] + "" + playerHand[1] + "" + botHand[0] + "" + botHand[1];
     }
 
@@ -89,6 +120,7 @@ public class FingersSituation
      */
     public FingersSituation createDuplicate()
     {
+        sort();
         return new FingersSituation(playerHand[0], playerHand[1], botHand[0], botHand[1]);
     }
 
