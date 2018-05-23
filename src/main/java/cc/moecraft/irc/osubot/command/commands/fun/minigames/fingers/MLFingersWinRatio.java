@@ -20,9 +20,15 @@ public class MLFingersWinRatio
 
     public double getRatioInPercentage()
     {
-        if (lose == 0) return win;
+        long lose = getLose();
+        long win = getWin();
+        long draw = getDraw();
 
-        return (double) win / (double) lose; // TODO: 优化这个算法, 加入Draw
+        if (lose == 0) lose = 1;
+        if (win == 0) win = 1;
+        if (draw == 0) draw = 1;
+
+        return (double) win / ((double) lose + (double) draw);
     }
 
     @Override
