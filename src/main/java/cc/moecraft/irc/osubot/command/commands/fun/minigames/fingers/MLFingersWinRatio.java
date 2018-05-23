@@ -30,4 +30,20 @@ public class MLFingersWinRatio
     {
         return String.format("%s/%s/%s", win, lose, draw);
     }
+
+    /**
+     * 从字符串转换 ( 字符串必须是toString那个格式的 )
+     * @param stringValue 字符串
+     * @return 胜率对象
+     */
+    public static MLFingersWinRatio parse(String stringValue)
+    {
+        String[] split = stringValue.split("/");
+
+        return new MLFingersWinRatio(
+                Long.parseLong(split[0]),
+                Long.parseLong(split[1]),
+                Long.parseLong(split[2])
+        );
+    }
 }
