@@ -31,13 +31,21 @@ public class FingersBotPlayWithItself
 
     public static void main(String[] args) throws IOException
     {
+        byte multiple = 0;
+        
+        if (multiple == 0) startOneGame(true);
+        else while (true) startOneGame(false);
+    }
+
+    public static void startOneGame(boolean logging)
+    {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         MLFingersGame game = new MLFingersGame(MLFingersAI.getDatabase());
         long time = System.currentTimeMillis();
 
         try
         {
-            logger.log("开始游戏, 机器人和自己打");
+            if (logging) logger.log("开始游戏, 机器人和自己打");
 
             while (true)
             {
@@ -45,7 +53,7 @@ public class FingersBotPlayWithItself
                 {
                     MLFingersMove botMove = MLFingersAI.makeTheNextMove(game, FingersPlayerType.Player);
 
-                    logger.log("局面: " + game.getLastMove().getLastSituation().toString() + ", Bot 1: " + botMove.getMoveFrom() + " " + botMove.getMoveTo());
+                    if (logging) logger.log("局面: " + game.getLastMove().getLastSituation().toString() + ", Bot 1: " + botMove.getMoveFrom() + " " + botMove.getMoveTo());
                 }
                 catch (NotYourTurnException | PlayerInputInvalidException e)
                 {
@@ -57,7 +65,7 @@ public class FingersBotPlayWithItself
                 {
                     MLFingersMove botMove = MLFingersAI.makeTheNextMove(game, FingersPlayerType.Bot);
 
-                    logger.log("局面: " + game.getLastMove().getLastSituation().toString() + ", Bot 2: " + botMove.getMoveFrom() + " " + botMove.getMoveTo());
+                    if (logging) logger.log("局面: " + game.getLastMove().getLastSituation().toString() + ", Bot 2: " + botMove.getMoveFrom() + " " + botMove.getMoveTo());
                 }
                 catch (NotYourTurnException | PlayerInputInvalidException e)
                 {
@@ -68,10 +76,17 @@ public class FingersBotPlayWithItself
         }
         catch (GameEndedException e)
         {
-            if (e.getWinner() == null) logger.log("接下来继续玩的话会死循环, 算作平局结束了游戏");
-            else logger.log("游戏已经结束. " + (e.getWinner() == FingersPlayerType.Player ? "Bot 1" : "Bot 2") + "胜利!");
+            if (logging)
+            {
+                if (e.getWinner() == null) logger.log("接下来继续玩的话会死循环, 算作平局结束了游戏");
+                else logger.log("游戏已经结束. " + (e.getWinner() == FingersPlayerType.Player ? "Bot 1" : "Bot 2") + "胜利!");
 
-            logger.log("总耗时: " + (System.currentTimeMillis() - time) + "毫秒");
+                logger.log("总耗时: " + (System.currentTimeMillis() - time) + "毫秒");
+            }
+            else
+            {
+                logger.log("一局结束了, 获胜者: " + (e.getWinner() == null ? "死循环" : e.getWinner()) + ", 耗时: " + (System.currentTimeMillis() - time));
+            }
         }
     }
 }
