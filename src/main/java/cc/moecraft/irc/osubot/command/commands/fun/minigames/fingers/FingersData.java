@@ -81,4 +81,13 @@ public class FingersData
     {
         return playerHand[0] + "" + playerHand[1] + "" + botHand[0] + "" + botHand[1];
     }
+
+    /**
+     * 复制一份对象
+     * @return 新的同样值的对象
+     */
+    public FingersData createDuplicate()
+    {
+        return new FingersData(playerHand[0], playerHand[1], botHand[0], botHand[1]);
+    }
 }
