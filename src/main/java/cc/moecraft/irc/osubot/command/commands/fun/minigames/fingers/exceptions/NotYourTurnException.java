@@ -17,4 +17,6 @@ import lombok.EqualsAndHashCode;
 @Data @AllArgsConstructor
 public class NotYourTurnException extends Exception
 {
+    public FingersPlayerType whoIsRequested;
+    public FingersPlayerType whoItShouldBe;
 }
