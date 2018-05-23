@@ -27,6 +27,19 @@ public class MLFingersGame
     public boolean ended = false;
     public MLFingersDatabase database;
 
+    public MLFingersGame(MLFingersDatabase database)
+    {
+        this.database = database;
+
+        moves = new ArrayList<>();
+        lastMove = new MLFingersMove(
+                Bot,
+                new FingersSituation(1, 1, 1, 1),
+                new FingersSituation(1, 1, 1, 1),
+                -1, -1);
+        moves.add(lastMove);
+    }
+
     /**
      * 移动一步
      * @param moveFrom 移动者手上的数
