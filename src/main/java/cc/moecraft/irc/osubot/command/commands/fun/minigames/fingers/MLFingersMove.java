@@ -20,4 +20,25 @@ public class MLFingersMove
     public FingersSituation currentSituation; // 移动之后的局面
     public int moveFrom;
     public int moveTo;
+
+    /**
+     * 获取下一步对象
+     * @param playerType 玩家
+     * @param lastSituation 上一步的局面
+     * @param moveFrom 自己手上的数字
+     * @param moveTo 对面手上的数字
+     * @return 下一步的对象
+     * @throws InputNumberNotFoundException 输入数字不在手上
+     */
+    public static MLFingersMove nextMove(FingersPlayerType playerType, FingersSituation lastSituation, int moveFrom, int moveTo) throws InputNumberNotFoundException
+    {
+        int playerHandIndex = lastSituation.findPlayerIndex(playerType == FingersPlayerType.Player ? moveFrom : moveTo);
+        int botHandIndex = lastSituation.findBotIndex(playerType == FingersPlayerType.Bot ? moveFrom : moveTo);
+
+        FingersSituation newSituation = lastSituation.createDuplicate();
+        if (playerType == FingersPlayerType.Player) newSituation.getPlayerHand()[playerHandIndex] = (moveFrom + moveTo) % 10;
+        if (playerType == FingersPlayerType.Bot) newSituation.getBotHand()[botHandIndex] = (moveFrom + moveTo) % 10;
+
+        return new MLFingersMove(playerType, lastSituation, newSituation, moveFrom, moveTo);
+    }
 }
