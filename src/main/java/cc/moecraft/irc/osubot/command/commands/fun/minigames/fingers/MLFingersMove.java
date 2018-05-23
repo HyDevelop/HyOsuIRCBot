@@ -53,6 +53,15 @@ public class MLFingersMove
     }
 
     /**
+     * 判断1v1胜败结果 封装
+     * @return 1v1胜败结果
+     */
+    public FingersPlayerType get1v1Result()
+    {
+        return get1v1Result(currentSituation.playerHand[0], currentSituation.botHand[0], playerType.getTheOther());
+    }
+
+    /**
      * 判断1v1胜败结果
      * @param playerHand 玩家手上的数
      * @param botHand 机器人手上的数
