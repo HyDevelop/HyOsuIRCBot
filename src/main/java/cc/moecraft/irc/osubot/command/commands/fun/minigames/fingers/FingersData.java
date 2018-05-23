@@ -1,6 +1,7 @@
 package cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers;
 
 import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.InputNumberNotFoundException;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -11,7 +12,7 @@ import lombok.Data;
  *
  * @author Hykilpikonna
  */
-@Data
+@Data @AllArgsConstructor
 public class FingersData
 {
     public FingersData(int playerHand1, int playerHand2, int botHand1, int botHand2)
