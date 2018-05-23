@@ -71,4 +71,14 @@ public class FingersData
     {
         return number >= 0 && number <= 9;
     }
+
+    /**
+     * 例子: 1111
+     * @return 字符串形式的这个数据组
+     */
+    @Override
+    public String toString()
+    {
+        return playerHand[0] + "" + playerHand[1] + "" + botHand[0] + "" + botHand[1];
+    }
 }
