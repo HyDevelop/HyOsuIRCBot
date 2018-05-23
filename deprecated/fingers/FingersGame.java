@@ -1,5 +1,7 @@
 package cc.moecraft.consoleprograms;
 
+import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.FingersAI;
+import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.FingersData;
 import cc.moecraft.logger.DebugLogger;
 
 import java.io.BufferedReader;
@@ -31,7 +33,7 @@ public class FingersGame
 
             String[] in = reader.readLine().split("");
 
-            //logger.log(Arrays.toString(FingersAI.calculateBestMove(new FingersData(Integer.parseInt(in[0]), Integer.parseInt(in[1]), Integer.parseInt(in[2]), Integer.parseInt(in[3])))));
+            logger.log(Arrays.toString(FingersAI.calculateBestMove(new FingersData(Integer.parseInt(in[0]), Integer.parseInt(in[1]), Integer.parseInt(in[2]), Integer.parseInt(in[3])))));
         }
     }
 }
