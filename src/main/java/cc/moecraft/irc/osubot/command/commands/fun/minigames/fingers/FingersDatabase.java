@@ -38,6 +38,27 @@ public class FingersDatabase extends Config
                         move.getBotMoveData().getToPlayerFinger(),
                         move.getWin(), move.getLose(), move.getDraw()));
     }
+
+    /**
+     * 获取最佳移动数据
+     * @param data 当前局面
+     * @return 最佳移动数据
+     */
+    public FingersWinRatioData getBestMoveData(FingersData data)
+    {
+        String[] result = getString("D" + data.toString()).split("/");
+
+        return new FingersWinRatioData(
+                new FingersBotMoveData(
+                        data,
+                        Integer.parseInt(result[0]),
+                        Integer.parseInt(result[1])
+                ),
+                Integer.parseInt(result[2]),
+                Integer.parseInt(result[3]),
+                Integer.parseInt(result[4])
+        );
+    }
     @Override
     public void readConfig()
     {
