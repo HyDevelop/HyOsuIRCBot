@@ -20,6 +20,16 @@ public class MLFingersDatabase extends Config
         super(Main.PATH + File.separator + "experimental", "MLFingersDatabase", "yml", false, true);
     }
 
+    /**
+     * 一步是否存在
+     * @param move 一步
+     * @return 是否存在
+     */
+    public boolean containsWR(MLFingersMove move)
+    {
+        return contains(move.toString());
+    }
+
     @Override
     public void readConfig()
     {
