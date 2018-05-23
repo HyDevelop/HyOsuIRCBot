@@ -93,6 +93,15 @@ public class FingersSituation
     }
 
     /**
+     * 排序
+     */
+    public void sort()
+    {
+        if (playerHand[1] > playerHand[0]) playerHand = swap(playerHand);
+        if (botHand[1] > botHand[0]) botHand = swap(botHand);
+    }
+
+    /**
      * 翻转
      *
      * 例子:
