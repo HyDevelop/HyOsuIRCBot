@@ -1,20 +1,17 @@
 package cc.moecraft.consoleprograms;
 
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.FingersPlayerType;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.MLFingersAI;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.MLFingersGame;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.MLFingersMove;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.GameEndedException;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.InputNumberNotFoundException;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.NotYourTurnException;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.PlayerInputInvalidException;
-import cc.moecraft.logger.AnsiColor;
+import cc.moecraft.irc.osubot.minigames.fingers.FingersPlayerType;
+import cc.moecraft.irc.osubot.minigames.fingers.MLFingersAI;
+import cc.moecraft.irc.osubot.minigames.fingers.MLFingersGame;
+import cc.moecraft.irc.osubot.minigames.fingers.MLFingersMove;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.GameEndedException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.NotYourTurnException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.PlayerInputInvalidException;
 import cc.moecraft.logger.DebugLogger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 import static cc.moecraft.logger.AnsiColor.RESET;
 import static cc.moecraft.logger.AnsiColor.YELLOW;
@@ -43,7 +40,7 @@ public class FingersBotPlayWithItself
     public static void startOneGame(boolean logging)
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-        MLFingersGame game = new MLFingersGame(MLFingersAI.getDatabase());
+        MLFingersGame game = new MLFingersGame(MLFingersAI.getDatabase(), FingersPlayerType.Bot);
         long time = System.currentTimeMillis();
 
         try
