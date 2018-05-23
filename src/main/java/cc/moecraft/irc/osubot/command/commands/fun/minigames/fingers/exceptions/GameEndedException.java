@@ -18,4 +18,5 @@ import lombok.EqualsAndHashCode;
 @Data
 public class GameEndedException extends Exception
 {
+    private FingersPlayerType winner;
 }
