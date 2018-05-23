@@ -19,4 +19,19 @@ import lombok.EqualsAndHashCode;
 public class GameEndedException extends Exception
 {
     private FingersPlayerType winner;
+    private MLFingersGame game;
+
+    public GameEndedException(FingersPlayerType winner, MLFingersGame game)
+    {
+        this.winner = winner;
+        this.game = game;
+    }
+
+    /**
+     * 结束游戏, 保存数据库
+     */
+    public void end()
+    {
+        game.end(this);
+    }
 }
