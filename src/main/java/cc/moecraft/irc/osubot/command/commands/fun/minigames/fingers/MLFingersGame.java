@@ -62,6 +62,7 @@ public class MLFingersGame
 
         if (lastMove.currentSituation.getPlayerHand()[0] == 0 && lastMove.currentSituation.getPlayerHand()[1] == 0) throw new GameEndedException(Player, this);
         if (lastMove.currentSituation.getBotHand()   [0] == 0 && lastMove.currentSituation.getBotHand()   [1] == 0) throw new GameEndedException(Bot, this);
+        if (lastMove.getCurrentSituation().is1v1()) if (lastMove.get1v1Result() == null) throw new GameEndedException(null, this);
         return move;
     }
 
@@ -83,7 +84,7 @@ public class MLFingersGame
             if (database.containsWR(move)) winRatio = database.getWR(move);
             else winRatio = new MLFingersWinRatio(0, 0, 0);
 
-            // 如果做出这一步的人赢了, 胜+1, 输了的话, 败+1 TODO: 处理平局
+            // 如果做出这一步的人赢了, 胜+1, 输了的话, 败+1
             if (exception.getWinner() == null) winRatio.draw += 1;
             else if (move.getPlayerType() == exception.getWinner()) winRatio.win += 1;
             else winRatio.lose += 1;
