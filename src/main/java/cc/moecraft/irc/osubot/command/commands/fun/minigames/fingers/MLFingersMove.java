@@ -47,8 +47,8 @@ public class MLFingersMove
     {
         return String.format("S%s.M%s%s",
                 lastSituation.toString(),
-                moveFrom,
-                moveTo
+                playerType == FingersPlayerType.Player ? moveFrom : moveTo,
+                playerType == FingersPlayerType.Player ? moveTo : moveFrom
         );
     }
 
