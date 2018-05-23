@@ -97,7 +97,7 @@ public class FingersGame
         }
         catch (GameEndedException e)
         {
-            if (e.getWinner() == null) logger.log("游戏已经结束, 平局了");
+            if (e.getWinner() == null) logger.log("接下来继续玩的话会死循环, 算作平局结束了游戏");
             else logger.log("游戏已经结束. " + e.getWinner() + "胜利!");
         }
     }

@@ -45,7 +45,7 @@ public class FingersBotPlayWithItself
                 {
                     MLFingersMove botMove = MLFingersAI.makeTheNextMove(game, FingersPlayerType.Player);
 
-                    logger.log("Bot 1: " + botMove.getMoveFrom() + " " + botMove.getMoveTo() + ", 局面变成了: " + game.getLastMove().getCurrentSituation().toString());
+                    logger.log("局面: " + game.getLastMove().getLastSituation().toString() + ", Bot 1: " + botMove.getMoveFrom() + " " + botMove.getMoveTo());
                 }
                 catch (NotYourTurnException | PlayerInputInvalidException e)
                 {
@@ -57,7 +57,7 @@ public class FingersBotPlayWithItself
                 {
                     MLFingersMove botMove = MLFingersAI.makeTheNextMove(game, FingersPlayerType.Bot);
 
-                    logger.log("Bot 2: " + botMove.getMoveFrom() + " " + botMove.getMoveTo() + ", 局面变成了: " + game.getLastMove().getCurrentSituation().toString());
+                    logger.log("局面: " + game.getLastMove().getLastSituation().toString() + ", Bot 2: " + botMove.getMoveFrom() + " " + botMove.getMoveTo());
                 }
                 catch (NotYourTurnException | PlayerInputInvalidException e)
                 {
@@ -68,7 +68,7 @@ public class FingersBotPlayWithItself
         }
         catch (GameEndedException e)
         {
-            if (e.getWinner() == null) logger.log("游戏已经结束, 平局了");
+            if (e.getWinner() == null) logger.log("接下来继续玩的话会死循环, 算作平局结束了游戏");
             else logger.log("游戏已经结束. " + (e.getWinner() == FingersPlayerType.Player ? "Bot 1" : "Bot 2") + "胜利!");
 
             logger.log("总耗时: " + (System.currentTimeMillis() - time) + "毫秒");
