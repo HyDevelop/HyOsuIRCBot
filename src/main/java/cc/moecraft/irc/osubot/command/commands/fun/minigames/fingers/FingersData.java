@@ -15,6 +15,7 @@ import lombok.Data;
 @Data @AllArgsConstructor
 public class FingersData
 {
+    // TODO: 排序
     public FingersData(int playerHand1, int playerHand2, int botHand1, int botHand2)
     {
         playerHand[0] = playerHand1;

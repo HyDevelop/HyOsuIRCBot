@@ -3,6 +3,10 @@ package cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
+
 /**
  * 此类由 Hykilpikonna 在 2018/05/22 创建!
  * Created by Hykilpikonna on 2018/05/22!
@@ -15,12 +19,14 @@ import lombok.Data;
 public class FingersWinRatioData
 {
     public FingersBotMoveData botMoveData;
-    public int win;
-    public int lose;
-    public int draw;
+    public BigDecimal win;
+    public BigDecimal lose;
+    public BigDecimal draw;
 
-    public double getRatioInPercentage()
+    public BigDecimal getRatioInPercentage()
     {
-        return (double) win / (double) lose; // TODO: 优化这个算法, 加入Draw
+        if (lose.equals(BigDecimal.ZERO)) return win;
+
+        return win.divide(lose, 2, RoundingMode.HALF_UP); // TODO: 优化这个算法, 加入Draw
     }
 }

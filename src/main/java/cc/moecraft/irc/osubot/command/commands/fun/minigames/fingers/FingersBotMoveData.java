@@ -17,4 +17,10 @@ public class FingersBotMoveData
     public FingersData data;
     public int fromBotFinger;
     public int toPlayerFinger;
+
+    @Override
+    public String toString()
+    {
+        return String.format("[%s, %s]", getFromBotFinger(), getToPlayerFinger());
+    }
 }

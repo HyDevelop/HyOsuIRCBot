@@ -5,6 +5,9 @@ import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.
 import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.InputNumberNotFoundException;
 import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.PlayerInputInvalidException;
 
+import java.math.BigDecimal;
+import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,8 +64,8 @@ public class FingersAI
         }
         else
         {
-            int playerHandIndex = old.findPlayerIndex(moveFrom);
-            int botHandIndex = old.findBotIndex(moveTo);
+            int playerHandIndex = old.findPlayerIndex(moveTo);
+            int botHandIndex = old.findBotIndex(moveFrom);
 
             FingersData result = old.createDuplicate();
             result.getPlayerHand()[playerHandIndex] = (moveFrom + moveTo) % 10;
@@ -77,6 +80,8 @@ public class FingersAI
      */
     public static int[] calculateBestMove(FingersData data)
     {
+        long currentTime = System.currentTimeMillis();
+
         // 数据库记录过了, 直接返回
         if (database.containsBestMoveData(data))
         {
@@ -100,44 +105,43 @@ public class FingersAI
             // 列出所有可能的移动
             // 如果局面是 3281, 这里就有 [3, 8], [3, 1]. [2, 8], [2, 1]
             // 如果局面是 3280, 这里就有 [3, 8], [2, 8]
-            Map<Integer, Integer> allPossibilities = new HashMap<>();
+            ArrayList<Map.Entry<Integer, Integer>> allPossibilities = new ArrayList<>();
 
             for (int botHandMove : data.getBotHand())
             {
                 for (int playerHandMove : data.getPlayerHand())
                 {
-                    if (botHandMove != 0 && playerHandMove != 0) allPossibilities.put(botHandMove, playerHandMove);
+                    if (botHandMove != 0 && playerHandMove != 0)
+                        allPossibilities.add(new AbstractMap.SimpleEntry<>(botHandMove, playerHandMove));
                 }
             }
 
-            FingersWinRatioData result = new FingersWinRatioData(null, 0, 0, 0);
-            FingersWinRatioData max = new FingersWinRatioData(null, 0, 0, 0);
+            FingersWinRatioData result = new FingersWinRatioData(null, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
+            FingersWinRatioData max = new FingersWinRatioData(null, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
 
             // 循环每个
-            for (Map.Entry<Integer, Integer> possibility : allPossibilities.entrySet())
+            for (Map.Entry<Integer, Integer> possibility : allPossibilities)
             {
                 try
                 {
                     FingersWinRatioData subResult = calculateBestMove(
                             new FingersBotMoveData(
-                                    getDataAfterMove(
-                                            data,
-                                            possibility.getKey(),
-                                            possibility.getValue(),
-                                            true),
+                                    data,
                                     possibility.getKey(),
                                     possibility.getValue()),
-                            false,
-                            0);
+                            true,
+                            0,
+                            new ArrayList<>());
 
                     // 把每个的胜/败/循环数统计起来
-                    result.setWin(result.getWin() + subResult.getWin());
-                    result.setLose(result.getLose() + subResult.getLose());
-                    result.setDraw(result.getDraw() + subResult.getLose());
+                    result.setWin(result.getWin().add(subResult.getWin()));
+                    result.setLose(result.getLose().add(subResult.getLose()));
+                    result.setDraw(result.getDraw().add(subResult.getLose()));
 
-                    if (subResult.getRatioInPercentage() >= max.getRatioInPercentage()) max = subResult;
+                    if (subResult.getRatioInPercentage().compareTo(max.getRatioInPercentage()) >= 0) max = subResult;
                 }
-                catch (InputNumberNotFoundException e)
+                // catch (InputNumberNotFoundException e)
+                catch (Exception e)
                 {
                     // 理论上这里永远不会发生
                     e.printStackTrace();
@@ -145,8 +149,16 @@ public class FingersAI
             }
 
             // 计算当前胜率最高的一步记录数据库
-            result.setBotMoveData(max.getBotMoveData());
+            if (max.getBotMoveData() != null) result.setBotMoveData(max.getBotMoveData());
+            result.getBotMoveData().setData(data);
             database.setBestMoveData(result);
+            database.save();
+
+            System.out.println(String.format("计算完成, 当前局面: %s, 最佳一步: %s, 胜率: %s, 计算耗时: %s秒",
+                    result.getBotMoveData().getData().toString(),
+                    result.getBotMoveData().toString(),
+                    result.getRatioInPercentage().toString(),
+                    (System.currentTimeMillis() - (double) currentTime) / 1000d));
 
             return new int[]{result.getBotMoveData().getData().botHand[0], result.getBotMoveData().getData().playerHand[0]};
         }
@@ -157,87 +169,120 @@ public class FingersAI
      * @param last 递归上层的数据
      * @param botMove 是不是该机器人移动
      * @param count 递归第几层 ( 用来Debug的, 没有实际用途 )
+     * @param processed 处理过的, 用来防止无限死循环
      * @return 局面, 胜数, 败数, 循环数
      */
-    public static FingersWinRatioData calculateBestMove(FingersBotMoveData last, boolean botMove, int count)
+    public static FingersWinRatioData calculateBestMove(FingersBotMoveData last, boolean botMove, int count, ArrayList<String> processed)
     {
-        // 数据库记录过了, 直接返回
-        if (database.containsBestMoveData(last.getData()))
-            return database.getBestMoveData(last.getData());
+        // if (count > 5000) return new FingersWinRatioData(last, 0, 0, 0);
 
-        int zeroes = 0;
+        // 计算移动之后的
+        try {
+            FingersData this_ = getDataAfterMove(
+                    last.getData(),
+                    last.getFromBotFinger(),
+                    last.getToPlayerFinger(),
+                    botMove);
 
-        if (last.getData().playerHand[1] == 0) zeroes++;
-        if (last.getData().botHand   [1] == 0) zeroes++;
+            // 防止无限死循环
+            if (processed.contains(this_.toString()))
+                return new FingersWinRatioData(last, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
+            ArrayList<String> newProcessed = new ArrayList<>(processed);
+            newProcessed.add(this_.toString());
 
-        // 如果是1v1
-        if (zeroes == 2)
-        {
-            FingersGameResult _1v1Result = calculate1v1Result(new int[]{last.getData().botHand[1], last.getData().playerHand[1]}, botMove ? 0 : 1);
+            // 数据库记录过了, 直接返回
+            if (database.containsBestMoveData(last.getData()))
+                return database.getBestMoveData(last.getData());
 
-            FingersWinRatioData result = null;
+            int zeroes = 0;
 
-            if (_1v1Result == FingersGameResult.WIN) result = new FingersWinRatioData(last, 1, 0, 0);
-            if (_1v1Result == FingersGameResult.LOSE) result = new FingersWinRatioData(last, 0, 1, 0);
-            if (_1v1Result == FingersGameResult.DRAW) result = new FingersWinRatioData(last, 0, 0, 1);
+            for (int data : last.getData().playerHand) if (data == 0) zeroes++;
+            for (int data : last.getData().botHand   ) if (data == 0) zeroes++;
 
-            database.setBestMoveData(result);
-            return result;
+            if (last.getData().getBotHand()   [0] == 0 && last.getData().getBotHand()   [1] == 0)
+                return new FingersWinRatioData(last, BigDecimal.ONE, BigDecimal.ZERO, BigDecimal.ZERO);
+            if (last.getData().getPlayerHand()[0] == 0 && last.getData().getPlayerHand()[1] == 0)
+                return new FingersWinRatioData(last, BigDecimal.ZERO, BigDecimal.ONE, BigDecimal.ZERO);
+
+            // 如果是1v1
+            if (zeroes == 2)
+            {
+                FingersGameResult _1v1Result = calculate1v1Result(new int[]{this_.botHand[1], this_.playerHand[1]}, botMove ? 0 : 1);
+
+                FingersWinRatioData result = null;
+
+                if (_1v1Result == FingersGameResult.WIN) result = new FingersWinRatioData(last, BigDecimal.ONE, BigDecimal.ZERO, BigDecimal.ZERO);
+                if (_1v1Result == FingersGameResult.LOSE) result = new FingersWinRatioData(last, BigDecimal.ZERO, BigDecimal.ONE, BigDecimal.ZERO);
+                if (_1v1Result == FingersGameResult.DRAW) result = new FingersWinRatioData(last, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ONE);
+
+                database.setBestMoveData(result);
+                return result;
+            }
+            else // 如果是2v1 / 2v2
+            {
+                // System.out.println("当前递归层数: " + count + ": " + last.getData().toString());
+
+                // 列出所有可能的移动
+                // 如果局面是 3281, 这里就有 [3, 8], [3, 1]. [2, 8], [2, 1]
+                // 如果局面是 3280, 这里就有 [3, 8], [2, 8]
+                ArrayList<Map.Entry<Integer, Integer>> allPossibilities = new ArrayList<>();
+
+                for (int botHandMove : this_.getBotHand())
+                {
+                    for (int playerHandMove : this_.getPlayerHand())
+                    {
+                        if (botHandMove != 0 && playerHandMove != 0)
+                            allPossibilities.add(new AbstractMap.SimpleEntry<>(botHandMove, playerHandMove));
+                    }
+                }
+
+                FingersWinRatioData result = new FingersWinRatioData(last, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
+                FingersWinRatioData max = new FingersWinRatioData(null, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
+
+                // 循环每个
+                for (Map.Entry<Integer, Integer> possibility : allPossibilities)
+                {
+                    try
+                    {
+                        FingersWinRatioData subResult = calculateBestMove(
+                                new FingersBotMoveData(
+                                        this_,
+                                        possibility.getKey(),
+                                        possibility.getValue()),
+                                !botMove,
+                                ++count,
+                                newProcessed);
+
+                        // 可能是00的情况
+                        if (subResult == null) continue;
+
+                        // 把每个的胜/败/循环数统计起来
+                        result.setWin(result.getWin().add(subResult.getWin()));
+                        result.setLose(result.getLose().add(subResult.getLose()));
+                        result.setDraw(result.getDraw().add(subResult.getLose()));
+
+                        if (subResult.getRatioInPercentage().compareTo(max.getRatioInPercentage()) >= 0) max = subResult;
+                    }
+                    // catch (InputNumberNotFoundException e)
+                    catch (Exception e)
+                    {
+                        // 理论上这里永远不会发生
+                        e.printStackTrace();
+                    }
+                }
+
+                // 计算当前胜率最高的一步记录数据库
+                if (max.getBotMoveData() != null) result.setBotMoveData(max.getBotMoveData());
+                result.setBotMoveData(last);
+                database.setBestMoveData(result);
+
+                return result;
+            }
         }
-        else // 如果是2v1 / 2v2
+        catch (InputNumberNotFoundException e)
         {
-            // 列出所有可能的移动
-            // 如果局面是 3281, 这里就有 [3, 8], [3, 1]. [2, 8], [2, 1]
-            // 如果局面是 3280, 这里就有 [3, 8], [2, 8]
-            Map<Integer, Integer> allPossibilities = new HashMap<>();
-
-            for (int botHandMove : last.getData().getBotHand())
-            {
-                for (int playerHandMove : last.getData().getPlayerHand())
-                {
-                    if (botHandMove != 0 && playerHandMove != 0) allPossibilities.put(botHandMove, playerHandMove);
-                }
-            }
-
-            FingersWinRatioData result = new FingersWinRatioData(last, 0, 0, 0);
-            FingersWinRatioData max = new FingersWinRatioData(null, 0, 0, 0);
-
-            // 循环每个
-            for (Map.Entry<Integer, Integer> possibility : allPossibilities.entrySet())
-            {
-                try
-                {
-                    FingersWinRatioData subResult = calculateBestMove(
-                            new FingersBotMoveData(
-                                    getDataAfterMove(
-                                            last.getData(),
-                                            possibility.getKey(),
-                                            possibility.getValue(),
-                                            botMove),
-                                    possibility.getKey(),
-                                    possibility.getValue()),
-                            !botMove,
-                            ++count);
-
-                    // 把每个的胜/败/循环数统计起来
-                    result.setWin(result.getWin() + subResult.getWin());
-                    result.setLose(result.getLose() + subResult.getLose());
-                    result.setDraw(result.getDraw() + subResult.getLose());
-
-                    if (subResult.getRatioInPercentage() >= max.getRatioInPercentage()) max = subResult;
-                }
-                catch (InputNumberNotFoundException e)
-                {
-                    // 理论上这里永远不会发生
-                    e.printStackTrace();
-                }
-            }
-
-            // 计算当前胜率最高的一步记录数据库
-            result.setBotMoveData(max.getBotMoveData());
-            database.setBestMoveData(result);
-
-            return result;
+            e.printStackTrace();
+            return null;
         }
     }
 
