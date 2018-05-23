@@ -18,4 +18,9 @@ public class FingersWinRatioData
     public int win;
     public int lose;
     public int draw;
+
+    public double getRatioInPercentage()
+    {
+        return (double) win / (double) lose; // TODO: 优化这个算法, 加入Draw
+    }
 }
