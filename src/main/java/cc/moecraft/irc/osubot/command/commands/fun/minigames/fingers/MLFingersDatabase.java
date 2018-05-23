@@ -21,6 +21,26 @@ public class MLFingersDatabase extends Config
     }
 
     /**
+     * 设置一步的胜率信息
+     * @param move 一步
+     * @param winRatio 胜率信息
+     */
+    public void setWR(MLFingersMove move, MLFingersWinRatio winRatio)
+    {
+        set(move.toString(), winRatio.toString());
+    }
+
+    /**
+     * 获取一步的胜率信息
+     * @param move 一步
+     * @return 胜率信息
+     */
+    public MLFingersWinRatio getWR(MLFingersMove move)
+    {
+        return MLFingersWinRatio.parse(getString(move.toString()));
+    }
+
+    /**
      * 一步是否存在
      * @param move 一步
      * @return 是否存在
