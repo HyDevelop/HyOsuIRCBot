@@ -1,4 +1,4 @@
-package cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions;
+package cc.moecraft.irc.osubot.minigames.fingers.exceptions;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/22 创建!

@@ -1,18 +1,16 @@
-package cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers;
+package cc.moecraft.irc.osubot.minigames.fingers;
 
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.GameEndedException;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.InputNumberNotFoundException;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.NotYourTurnException;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.PlayerInputInvalidException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.GameEndedException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.InputNumberNotFoundException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.NotYourTurnException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.PlayerInputInvalidException;
 import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
-import static cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.FingersPlayerType.Bot;
-import static cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.FingersPlayerType.Player;
+import static cc.moecraft.irc.osubot.minigames.fingers.FingersPlayerType.Bot;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/23 创建!
