@@ -8,6 +8,7 @@ import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.
 import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.InputNumberNotFoundException;
 import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.NotYourTurnException;
 import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.PlayerInputInvalidException;
+import cc.moecraft.logger.AnsiColor;
 import cc.moecraft.logger.DebugLogger;
 
 import java.io.BufferedReader;
@@ -15,6 +16,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
+import static cc.moecraft.logger.AnsiColor.RESET;
+import static cc.moecraft.logger.AnsiColor.YELLOW;
 import static java.lang.System.in;
 
 /**
@@ -31,8 +34,8 @@ public class FingersBotPlayWithItself
 
     public static void main(String[] args) throws IOException
     {
-        byte multiple = 0;
-        
+        byte multiple = 1;
+
         if (multiple == 0) startOneGame(true);
         else while (true) startOneGame(false);
     }
@@ -49,11 +52,15 @@ public class FingersBotPlayWithItself
 
             while (true)
             {
+                if (game.getMoves().size() > 10000) new GameEndedException(null, game).end();
+
                 try
                 {
                     MLFingersMove botMove = MLFingersAI.makeTheNextMove(game, FingersPlayerType.Player);
 
-                    if (logging) logger.log("局面: " + game.getLastMove().getLastSituation().toString() + ", Bot 1: " + botMove.getMoveFrom() + " " + botMove.getMoveTo());
+                    if (logging) logger.log("局面: " + YELLOW + game.getLastMove().getLastSituation().toString() + RESET +
+                            ", Bot 1: " + YELLOW + botMove.getMoveFrom() + " " + botMove.getMoveTo() + RESET +
+                            (MLFingersAI.getDatabase().containsWR(botMove) ? ", 这一步的胜率: " + YELLOW + MLFingersAI.getDatabase().getWR(botMove).getRatioInPercentage() + RESET : ""));
                 }
                 catch (NotYourTurnException | PlayerInputInvalidException e)
                 {
@@ -65,7 +72,9 @@ public class FingersBotPlayWithItself
                 {
                     MLFingersMove botMove = MLFingersAI.makeTheNextMove(game, FingersPlayerType.Bot);
 
-                    if (logging) logger.log("局面: " + game.getLastMove().getLastSituation().toString() + ", Bot 2: " + botMove.getMoveFrom() + " " + botMove.getMoveTo());
+                    if (logging) logger.log("局面: " + YELLOW + game.getLastMove().getLastSituation().toString() + RESET +
+                            ", Bot 1: " + YELLOW + botMove.getMoveFrom() + " " + botMove.getMoveTo() + RESET +
+                            (MLFingersAI.getDatabase().containsWR(botMove) ? ", 这一步的胜率: " + YELLOW + MLFingersAI.getDatabase().getWR(botMove).getRatioInPercentage() + RESET : ""));
                 }
                 catch (NotYourTurnException | PlayerInputInvalidException e)
                 {
