@@ -59,6 +59,12 @@ public class FingersDatabase extends Config
                 Integer.parseInt(result[4])
         );
     }
+
+    public boolean containsBestMoveData(FingersData data)
+    {
+        return contains("D" + data.toString());
+    }
+
     @Override
     public void readConfig()
     {
