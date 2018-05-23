@@ -1,13 +1,13 @@
 package cc.moecraft.consoleprograms;
 
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.FingersPlayerType;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.MLFingersAI;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.MLFingersGame;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.MLFingersMove;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.GameEndedException;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.InputNumberNotFoundException;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.NotYourTurnException;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.PlayerInputInvalidException;
+import cc.moecraft.irc.osubot.minigames.fingers.FingersPlayerType;
+import cc.moecraft.irc.osubot.minigames.fingers.MLFingersAI;
+import cc.moecraft.irc.osubot.minigames.fingers.MLFingersGame;
+import cc.moecraft.irc.osubot.minigames.fingers.MLFingersMove;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.GameEndedException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.InputNumberNotFoundException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.NotYourTurnException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.PlayerInputInvalidException;
 import cc.moecraft.logger.DebugLogger;
 
 import java.io.BufferedReader;
@@ -32,66 +32,73 @@ public class FingersGame
     public static void main(String[] args) throws IOException
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-        MLFingersGame game = new MLFingersGame(MLFingersAI.getDatabase());
+
+        logger.log("谁先走? (Bot 或者 Player): ");
+
+        FingersPlayerType first = FingersPlayerType.valueOf(reader.readLine());
+
+        MLFingersGame game = new MLFingersGame(MLFingersAI.getDatabase(), first);
 
         try
         {
-            logger.log("你先走, 请输入位置 (例子: 11): ");
-            logger.log("好吧其实现在的局面大家都只有1所以只能走11... ");
-
             while (true)
             {
-                logger.log("该你走: ");
-
-                String[] in = reader.readLine().replace(" ", "").split("");
-
-                try
+                if (game.getLastMove().getPlayerType() == FingersPlayerType.Bot)
                 {
-                    MLFingersMove playerMove = MLFingersAI.playerMove(game, Integer.parseInt(in[0]), Integer.parseInt(in[1]));
+                    logger.log("该你走: ");
 
-                    logger.log("您移动了: " + playerMove.getMoveFrom() + " " + playerMove.getMoveTo());
-                    logger.log("- 玩家手上数字: " + playerMove.getCurrentSituation().getPlayerHand()[0] + " " + playerMove.getCurrentSituation().getPlayerHand()[1]);
-                    logger.log("- Bot 手上数字: " + playerMove.getCurrentSituation().getBotHand()[0] + " " + playerMove.getCurrentSituation().getBotHand()[1]);
+                    String[] in = reader.readLine().replace(" ", "").split("");
+
+                    try
+                    {
+                        MLFingersMove playerMove = MLFingersAI.playerMove(game, Integer.parseInt(in[0]), Integer.parseInt(in[1]));
+
+                        logger.log("您移动了: " + playerMove.getMoveFrom() + " " + playerMove.getMoveTo());
+                        logger.log("- 玩家手上数字: " + playerMove.getCurrentSituation().getPlayerHand()[0] + " " + playerMove.getCurrentSituation().getPlayerHand()[1]);
+                        logger.log("- Bot 手上数字: " + playerMove.getCurrentSituation().getBotHand()[0] + " " + playerMove.getCurrentSituation().getBotHand()[1]);
+                    }
+                    catch (InputNumberNotFoundException e)
+                    {
+                        if (e.getType() == FingersPlayerType.Player)
+                            logger.log("必须输入一个你手上有的数字, 您现在有: " + Arrays.toString(e.getSituation().getPlayerHand()) + ", 您输入的: " + e.getMove());
+                        if (e.getType() == FingersPlayerType.Bot)
+                            logger.log("必须输入一个机器人手上有的数字, 它现在有: " + Arrays.toString(e.getSituation().getBotHand()) + ", 您输入的: " + e.getMove());
+
+                        continue;
+                    }
+                    catch (NotYourTurnException e)
+                    {
+                        // 不可能发生
+                        e.printStackTrace();
+                    }
+                    catch (PlayerInputInvalidException e)
+                    {
+                        logger.log("您输入的数字 " + e.getInvalidInput() + " 不合理, 请重新输入 ( 必须为 1 到 9 )");
+
+                        continue;
+                    }
+                    catch (NumberFormatException | ArrayIndexOutOfBoundsException e)
+                    {
+                        logger.log("输入错误, 重新输入");
+
+                        continue;
+                    }
                 }
-                catch (InputNumberNotFoundException e)
+                else
                 {
-                    if (e.getType() == FingersPlayerType.Player)
-                        logger.log("必须输入一个你手上有的数字, 您现在有: " + Arrays.toString(e.getSituation().getPlayerHand()) + ", 您输入的: " + e.getMove());
-                    if (e.getType() == FingersPlayerType.Bot)
-                        logger.log("必须输入一个机器人手上有的数字, 它现在有: " + Arrays.toString(e.getSituation().getBotHand()) + ", 您输入的: " + e.getMove());
+                    try
+                    {
+                        MLFingersMove botMove = MLFingersAI.makeTheNextMove(game, FingersPlayerType.Bot);
 
-                    continue;
-                }
-                catch (NotYourTurnException e)
-                {
-                    // 不可能发生
-                    e.printStackTrace();
-                }
-                catch (PlayerInputInvalidException e)
-                {
-                    logger.log("您输入的数字 " + e.getInvalidInput() + " 不合理, 请重新输入 ( 必须为 1 到 9 )");
-
-                    continue;
-                }
-                catch (NumberFormatException | ArrayIndexOutOfBoundsException e)
-                {
-                    logger.log("输入错误, 重新输入");
-
-                    continue;
-                }
-
-                try
-                {
-                    MLFingersMove botMove = MLFingersAI.makeTheNextMove(game, FingersPlayerType.Bot);
-
-                    logger.log("机器人移动了: " + botMove.getMoveFrom() + " " + botMove.getMoveTo());
-                    logger.log("- 玩家手上数字: " + botMove.getCurrentSituation().getPlayerHand()[0] + " " + botMove.getCurrentSituation().getPlayerHand()[1]);
-                    logger.log("- Bot 手上数字: " + botMove.getCurrentSituation().getBotHand()[0] + " " + botMove.getCurrentSituation().getBotHand()[1]);
-                }
-                catch (NotYourTurnException | PlayerInputInvalidException e)
-                {
-                    // 不可能发生的情况
-                    e.printStackTrace();
+                        logger.log("机器人移动了: " + botMove.getMoveFrom() + " " + botMove.getMoveTo());
+                        logger.log("- 玩家手上数字: " + botMove.getCurrentSituation().getPlayerHand()[0] + " " + botMove.getCurrentSituation().getPlayerHand()[1]);
+                        logger.log("- Bot 手上数字: " + botMove.getCurrentSituation().getBotHand()[0] + " " + botMove.getCurrentSituation().getBotHand()[1]);
+                    }
+                    catch (NotYourTurnException | PlayerInputInvalidException e)
+                    {
+                        // 不可能发生的情况
+                        e.printStackTrace();
+                    }
                 }
             }
         }
