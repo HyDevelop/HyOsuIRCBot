@@ -51,4 +51,35 @@ public class MLFingersGame
         if (lastMove.currentSituation.getBotHand()   [0] == 0 && lastMove.currentSituation.getBotHand()   [1] == 0) throw new GameEndedException(Bot, this);
         return move;
     }
+
+    /**
+     * 结束游戏, 保存数据库
+     * @param exception 游戏结束时丢出的
+     */
+    public void end(GameEndedException exception)
+    {
+        if (isEnded()) return;
+
+        for (MLFingersMove move : moves)
+        {
+            if (move.getMoveFrom() == -1) continue;
+
+            MLFingersWinRatio winRatio;
+
+            // 如果数据库内存在, 读取已有的, 如果不存在, 创建0
+            if (database.containsWR(move)) winRatio = database.getWR(move);
+            else winRatio = new MLFingersWinRatio(0, 0, 0);
+
+            // 如果做出这一步的人赢了, 胜+1, 输了的话, 败+1 TODO: 处理平局
+            if (exception.getWinner() == null) winRatio.draw += 1;
+            else if (move.getPlayerType() == exception.getWinner()) winRatio.win += 1;
+            else winRatio.lose += 1;
+
+            // 存入数据库
+            database.setWR(move, winRatio);
+        }
+
+        database.save();
+        setEnded(true);
+    }
 }
