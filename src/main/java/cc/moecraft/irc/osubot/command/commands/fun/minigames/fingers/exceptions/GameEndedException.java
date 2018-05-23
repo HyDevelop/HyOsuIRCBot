@@ -25,6 +25,8 @@ public class GameEndedException extends Exception
     {
         this.winner = winner;
         this.game = game;
+
+        end();
     }
 
     /**
