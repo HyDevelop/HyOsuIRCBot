@@ -1,15 +1,15 @@
-package cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers;
+package cc.moecraft.irc.osubot.minigames.fingers;
 
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.GameEndedException;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.InputNumberNotFoundException;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.NotYourTurnException;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.PlayerInputInvalidException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.GameEndedException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.InputNumberNotFoundException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.NotYourTurnException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.PlayerInputInvalidException;
 import lombok.Data;
 
 import java.util.ArrayList;
 
-import static cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.FingersPlayerType.Bot;
-import static cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.FingersPlayerType.Player;
+import static cc.moecraft.irc.osubot.minigames.fingers.FingersPlayerType.Bot;
+import static cc.moecraft.irc.osubot.minigames.fingers.FingersPlayerType.Player;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/23 创建!
@@ -27,13 +27,18 @@ public class MLFingersGame
     public boolean ended = false;
     public MLFingersDatabase database;
 
-    public MLFingersGame(MLFingersDatabase database)
+    /**
+     * 创建一个碰数游戏对象
+     * @param database 深度学习数据库
+     * @param first 谁先走
+     */
+    public MLFingersGame(MLFingersDatabase database, FingersPlayerType first)
     {
         this.database = database;
 
         moves = new ArrayList<>();
         lastMove = new MLFingersMove(
-                Bot,
+                first.getTheOther(),
                 new FingersSituation(1, 1, 1, 1),
                 new FingersSituation(1, 1, 1, 1),
                 -1, -1);

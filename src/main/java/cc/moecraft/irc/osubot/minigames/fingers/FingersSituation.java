@@ -1,6 +1,6 @@
-package cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers;
+package cc.moecraft.irc.osubot.minigames.fingers;
 
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.InputNumberNotFoundException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.InputNumberNotFoundException;
 import lombok.AllArgsConstructor;
 
 /**

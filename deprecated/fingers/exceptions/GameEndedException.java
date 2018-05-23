@@ -1,4 +1,4 @@
-package cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions;
+package cc.moecraft.irc.osubot.minigames.fingers.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

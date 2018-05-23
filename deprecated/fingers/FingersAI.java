@@ -1,9 +1,9 @@
-package cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers;
+package cc.moecraft.irc.osubot.minigames.fingers;
 
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.DataSetInvalidException;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.GameEndedException;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.InputNumberNotFoundException;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.PlayerInputInvalidException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.DataSetInvalidException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.GameEndedException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.InputNumberNotFoundException;
+import cc.moecraft.irc.osubot.minigames.fingers.exceptions.PlayerInputInvalidException;
 
 import java.math.BigDecimal;
 import java.util.AbstractMap;

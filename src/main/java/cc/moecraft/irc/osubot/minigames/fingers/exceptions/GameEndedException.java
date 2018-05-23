@@ -1,8 +1,7 @@
-package cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions;
+package cc.moecraft.irc.osubot.minigames.fingers.exceptions;
 
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.FingersPlayerType;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.MLFingersGame;
-import lombok.AllArgsConstructor;
+import cc.moecraft.irc.osubot.minigames.fingers.FingersPlayerType;
+import cc.moecraft.irc.osubot.minigames.fingers.MLFingersGame;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

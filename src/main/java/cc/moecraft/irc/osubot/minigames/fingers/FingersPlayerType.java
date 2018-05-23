@@ -1,4 +1,4 @@
-package cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers;
+package cc.moecraft.irc.osubot.minigames.fingers;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/23 创建!
