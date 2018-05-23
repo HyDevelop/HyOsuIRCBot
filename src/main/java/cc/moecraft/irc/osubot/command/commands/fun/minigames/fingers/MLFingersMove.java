@@ -41,4 +41,14 @@ public class MLFingersMove
 
         return new MLFingersMove(playerType, lastSituation, newSituation, moveFrom, moveTo);
     }
+
+    @Override
+    public String toString()
+    {
+        return String.format("S%s.M%s%s",
+                lastSituation.toString(),
+                moveFrom,
+                moveTo
+        );
+    }
 }
