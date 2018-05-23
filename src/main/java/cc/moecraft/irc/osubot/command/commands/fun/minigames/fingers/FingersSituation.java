@@ -2,8 +2,6 @@ package cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers;
 
 import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.exceptions.InputNumberNotFoundException;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/22 创建!
@@ -16,7 +14,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class FingersSituation
 {
-    // TODO: 排序
     public FingersSituation(int playerHand1, int playerHand2, int botHand1, int botHand2)
     {
         playerHand[0] = playerHand1;
@@ -91,6 +88,16 @@ public class FingersSituation
     {
         sort();
         return isValidNumber(playerHand[0]) && isValidNumber(playerHand[1]) && isValidNumber(botHand[0]) && isValidNumber(botHand[1]);
+    }
+
+    /**
+     * 判定当前是不是1v1
+     * @return 是不是1v1
+     */
+    public boolean is1v1()
+    {
+        sort();
+        return playerHand[1] == 0 && botHand[1] == 0;
     }
 
     /**
