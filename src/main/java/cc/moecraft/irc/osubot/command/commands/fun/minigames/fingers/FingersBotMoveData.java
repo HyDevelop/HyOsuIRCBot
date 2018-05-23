@@ -1,5 +1,6 @@
 package cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -10,8 +11,8 @@ import lombok.Data;
  *
  * @author Hykilpikonna
  */
-@Data
-public class FingersBotMovedData
+@Data @AllArgsConstructor
+public class FingersBotMoveData
 {
     public FingersData data;
     public int fromBotFinger;
