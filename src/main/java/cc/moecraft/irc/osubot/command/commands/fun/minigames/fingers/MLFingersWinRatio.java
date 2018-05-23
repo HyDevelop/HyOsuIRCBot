@@ -24,4 +24,10 @@ public class MLFingersWinRatio
 
         return (double) win / (double) lose; // TODO: 优化这个算法, 加入Draw
     }
+
+    @Override
+    public String toString()
+    {
+        return String.format("%s/%s/%s", win, lose, draw);
+    }
 }
