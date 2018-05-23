@@ -91,4 +91,22 @@ public class FingersSituation
     {
         return new FingersSituation(playerHand[0], playerHand[1], botHand[0], botHand[1]);
     }
+
+    /**
+     * 翻转
+     *
+     * 例子:
+     *  传进去: 1, 0
+     *  结束之后: 0, 1
+     *
+     * @param variable 对象
+     */
+    private int[] swap(int[] variable)
+    {
+        int temp = variable[1];
+        variable[1] = variable[0];
+        variable[0] = temp;
+
+        return variable;
+    }
 }
