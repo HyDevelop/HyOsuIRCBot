@@ -4,6 +4,8 @@ import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.yaml.Config;
 import io.swagger.models.auth.In;
 
+import java.math.BigDecimal;
+
 /**
  * 此类由 Hykilpikonna 在 2018/05/22 创建!
  * Created by Hykilpikonna on 2018/05/22!
@@ -54,9 +56,9 @@ public class FingersDatabase extends Config
                         Integer.parseInt(result[0]),
                         Integer.parseInt(result[1])
                 ),
-                Integer.parseInt(result[2]),
-                Integer.parseInt(result[3]),
-                Integer.parseInt(result[4])
+                new BigDecimal(result[2]),
+                new BigDecimal(result[3]),
+                new BigDecimal(result[4])
         );
     }
 
