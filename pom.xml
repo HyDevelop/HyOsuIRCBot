@@ -36,6 +36,21 @@
       <version>2.6</version>
     </dependency>
 
+    <!-- dependency used for XLSX file format -->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>3.17</version>
+    </dependency>
+
+    <!-- dependency used for XLS older file format
+         (added for information) -->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>3.17</version>
+    </dependency>
+
     <!--验证器-->
     <dependency>
       <groupId>com.baidu.unbiz</groupId>
