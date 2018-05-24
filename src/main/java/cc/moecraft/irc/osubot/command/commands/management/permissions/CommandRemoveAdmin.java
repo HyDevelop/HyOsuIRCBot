@@ -40,11 +40,11 @@ public class CommandRemoveAdmin extends Command
             return MultiLanguageText.directText("指令参数错误");
         }
 
-        ArrayList<String> adminUsernames = Main.getConfig().getAdminUsernames();
+        ArrayList<String> adminUsernames = Main.getIrcConfig().getAdminUsernames();
 
         adminUsernames.remove(args.get(0));
 
-        Main.getConfig().setAdminUsernames(adminUsernames);
+        Main.getIrcConfig().setAdminUsernames(adminUsernames);
 
         return MultiLanguageText.directText("已取消用户" + args.get(0) + "的管理员权限");
     }

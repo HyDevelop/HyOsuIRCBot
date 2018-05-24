@@ -38,11 +38,11 @@ public class CommandSetAdmin extends Command
         if (args.size() != 1)
             return MultiLanguageText.directText("指令参数错误");
 
-        ArrayList<String> adminUsernames = Main.getConfig().getAdminUsernames();
+        ArrayList<String> adminUsernames = Main.getIrcConfig().getAdminUsernames();
 
         adminUsernames.add(args.get(0));
 
-        Main.getConfig().setAdminUsernames(adminUsernames);
+        Main.getIrcConfig().setAdminUsernames(adminUsernames);
 
         return MultiLanguageText.directText("已设置用户" + args.get(0) + "为管理员");
     }

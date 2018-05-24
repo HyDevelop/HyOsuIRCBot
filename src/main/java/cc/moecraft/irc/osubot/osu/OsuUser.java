@@ -102,16 +102,16 @@ public class OsuUser extends Permissible
     @Override
     public boolean isAdmin()
     {
-        return Main.getConfig().getAdminUsernames().contains(getUsername());
+        return Main.getIrcConfig().getAdminUsernames().contains(getUsername());
     }
 
     @Override
     public void setAdmin(boolean admin)
     {
-        if (admin) Main.getConfig().getAdminUsernames().add(getUsername());
-        else Main.getConfig().getAdminUsernames().remove(getUsername());
+        if (admin) Main.getIrcConfig().getAdminUsernames().add(getUsername());
+        else Main.getIrcConfig().getAdminUsernames().remove(getUsername());
 
-        Main.getConfig().save();
+        Main.getIrcConfig().save();
     }
 
     @Data

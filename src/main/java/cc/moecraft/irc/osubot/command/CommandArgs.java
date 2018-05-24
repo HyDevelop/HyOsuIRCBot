@@ -59,7 +59,7 @@ public class CommandArgs
 
         if (text.startsWith(defaultPrefix)) return defaultPrefix;
 
-        for (String prefix : Main.getConfig().getStringList("BotProperties.EnabledCommandPrefixes"))
+        for (String prefix : Main.getIrcConfig().getStringList("BotProperties.EnabledCommandPrefixes"))
             if (text.startsWith(prefix)) return prefix;
 
         return "";

@@ -1,32 +1,24 @@
 package cc.moecraft.irc.osubot;
 
-import cc.moecraft.irc.osubot.achievement.AchievementManager;
+import cc.moecraft.irc.osubot.osu.achievement.AchievementManager;
 import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.command.CommandManager;
 import cc.moecraft.irc.osubot.language.LanguageFileManager;
 import cc.moecraft.irc.osubot.language.Messenger;
-import cc.moecraft.irc.osubot.listener.CommandListener;
-import cc.moecraft.irc.osubot.listener.ExceptionListener;
 import cc.moecraft.irc.osubot.management.PermissionConfig;
 import cc.moecraft.irc.osubot.osu.OsuAPIUtils;
 import cc.moecraft.irc.osubot.osu.OsuAPIWrapper;
 import cc.moecraft.irc.osubot.osu.OsuHtmlUtils;
+import cc.moecraft.irc.osubot.platforms.irc.IrcConfig;
+import cc.moecraft.irc.osubot.platforms.irc.IrcManager;
 import cc.moecraft.irc.osubot.utils.DownloadUtils;
 import cc.moecraft.logger.DebugLogger;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.pircbotx.Configuration;
-import org.pircbotx.PircBotX;
-import org.pircbotx.exception.IrcException;
 import org.reflections.Reflections;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/20 创建!
@@ -38,10 +30,14 @@ public class Main {
     // 配置/语言文件路径
     public static final String PATH = "src" + File.separator + "main" + File.separator + "resources"; // TODO: 这里分两个版本, 测试放现在这个路径, 发布的话放"./conf/"路径
 
-    private static ArrayList<PircBotX> osuBots; // 机器人对象
+    @Getter
+    private static IrcManager ircBotsManager; // 机器人管理器
 
     @Getter
-    private static BotConfig config; // 配置文件 ( 用来存用于IRC登陆的账号密码 )
+    private static IrcConfig ircConfig; // IRC配置文件
+
+    @Getter
+    private static GeneralConfig generalConfig; // 其他配置文件
 
     @Getter
     private static CommandManager commandManager; // 指令管理器
@@ -84,17 +80,17 @@ public class Main {
         // Jboot.run(args);
         logger = new DebugLogger("HyOsuIRCBot", true);
 
-        config = new BotConfig();
-        debug = config.getBoolean("BotProperties.DebugLogging");
+        ircConfig = new IrcConfig();
+        generalConfig = new GeneralConfig();
+        debug = generalConfig.getBoolean("BotProperties.DebugLogging");
         logger.setDebug(debug);
 
         // 创建对象
-        osuBots = createBots(config.getAccounts());
         commandManager = new CommandManager();
         messenger = new Messenger(new LanguageFileManager(), getGlobalVariablesForMLT());
         permissionConfig = new PermissionConfig();
-        downloader = new DownloadUtils(config.getInt("BotProperties.Download.Timeout"));
-        osuAPIUtils = new OsuAPIUtils(config.getString("BotProperties.Download.Osu.APIKey"), downloader);
+        downloader = new DownloadUtils(generalConfig.getInt("BotProperties.Download.Timeout"));
+        osuAPIUtils = new OsuAPIUtils(generalConfig.getString("BotProperties.Download.Osu.APIKey"), downloader);
         wrapper = new OsuAPIWrapper(osuAPIUtils);
         osuHtmlUtils = new OsuHtmlUtils(downloader);
         achievementManager = new AchievementManager();
@@ -102,16 +98,7 @@ public class Main {
         // 注册指令  优化: 2018-05-02
         registerAllCommands();
 
-        // 连接服务器
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(
-                50,                  //核心池的大小（即线程池中的线程数目大于这个参数时，提交的任务会被放进任务缓存队列）
-                100,            //线程池最大能容忍的线程数
-                Long.MAX_VALUE,                    //线程存活时间
-                TimeUnit.NANOSECONDS,              //参数keepAliveTime的时间单位
-                new ArrayBlockingQueue<>(osuBots.size()) //任务缓存队列，用来存放等待执行的任务
-        );
-
-        startBots(osuBots, executor);
+        ircBotsManager = new IrcManager(ircConfig);
     }
 
     /**
@@ -128,67 +115,6 @@ public class Main {
         // 循环注册
         for (Class<? extends Command> command : commands)
             commandManager.registerCommand(command.newInstance());
-    }
-
-    /**
-     * 创建多账号机器人列表
-     * @param accounts 账号列表
-     * @return 机器人列表
-     */
-    public static ArrayList<PircBotX> createBots(ArrayList<BotAccount> accounts)
-    {
-        ArrayList<PircBotX> osuBots = new ArrayList<>();
-
-        String serverAddress = config.getString("ServerProperties.Address");
-        int serverPort = config.getInt("ServerProperties.Port");
-        List<String> autoJoinChannels = config.getStringList("BotProperties.AutoJoinChannels");
-
-        for (BotAccount account : accounts)
-        {
-            Configuration botConfig = new Configuration.Builder()
-                    .addServer(serverAddress, serverPort)
-                    .addAutoJoinChannels(autoJoinChannels)
-                    .addListener(new CommandListener(account.channel))
-                    .addListener(new ExceptionListener())
-                    .setName(account.getUsername())
-                    .setServerPassword(account.getPassword())
-                    .buildConfiguration();
-
-            osuBots.add(new PircBotX(botConfig));
-        }
-
-        return osuBots;
-    }
-
-    /**
-     * 启动机器人
-     * @param bots 机器人列表
-     * @param executor 线程执行器
-     */
-    public static void startBots(ArrayList<PircBotX> bots, ThreadPoolExecutor executor)
-    {
-        for (PircBotX bot : bots)
-        {
-            executor.execute(new BotRunnable(bot));
-            logger.log("已启动机器人账号: " + bot.getNick());
-        }
-    }
-
-    @AllArgsConstructor
-    public static class BotRunnable implements Runnable
-    {
-        private PircBotX bot;
-
-        @Override
-        public void run()
-        {
-            try {
-                bot.startBot();
-            } catch (IOException | IrcException e) {
-                e.printStackTrace();
-                System.out.println("启动失败");
-            }
-        }
     }
 
     public static Map<String, String> getGlobalVariablesForMLT()

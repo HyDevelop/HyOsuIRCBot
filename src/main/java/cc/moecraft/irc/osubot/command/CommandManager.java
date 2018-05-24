@@ -103,7 +103,7 @@ public class CommandManager
                 if (commandArgs.getCommandRunner() instanceof ChannelCommand) // implement了频道指令方法的类
                     Main.getMessenger().respondIRC(event, ((ChannelCommand) commandArgs.getCommandRunner()).channel(event, user, channel, commandArgs.getCommandName(), commandArgs.getArgs()));
 
-                if (Main.getConfig().getBoolean("BotProperties.DisableChannelReply") && !forceChannel) // 关闭了频道直接回复
+                if (Main.getIrcConfig().getBoolean("BotProperties.DisableChannelReply") && !forceChannel) // 关闭了频道直接回复
                     return RunResult.CHANNEL_DISABLED;
             }
 
@@ -117,7 +117,7 @@ public class CommandManager
             if (isChannel) return RunResult.NOT_A_COMMAND;
 
             // 配置里配置了忽略的用户名单
-            if (Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick())) return RunResult.NOT_A_COMMAND;
+            if (Main.getIrcConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick())) return RunResult.NOT_A_COMMAND;
 
             // 如果启用了监听
             if (Main.isEnableListening()) Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("manager.not_command"));
@@ -131,7 +131,7 @@ public class CommandManager
                 if (!reply(isChannel)) return RunResult.COMMAND_NOT_FOUND;
 
                 // 配置里配置了忽略的用户名单
-                if (Main.getConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick())) return RunResult.COMMAND_NOT_FOUND;
+                if (Main.getIrcConfig().getStringList("BotProperties.AntiSpam.NotACommandExcludedUsernames").contains(user.getNick())) return RunResult.COMMAND_NOT_FOUND;
 
                 Main.getMessenger().respondIRC(event, MultiLanguageText.languageNode("manager.unknown_command"));
             }
@@ -142,7 +142,7 @@ public class CommandManager
 
     public boolean reply(boolean isChannel)
     {
-        return !(isChannel && Main.getConfig().getBoolean("BotProperties.DisableChannelReply"));
+        return !(isChannel && Main.getIrcConfig().getBoolean("BotProperties.DisableChannelReply"));
     }
 
     public enum RunResult
@@ -159,7 +159,7 @@ public class CommandManager
      */
     public static String getPrefix()
     {
-        return Main.getConfig().getString("BotProperties.CommandPrefix");
+        return Main.getIrcConfig().getString("BotProperties.CommandPrefix");
     }
 
     /**

@@ -1,7 +1,7 @@
 package cc.moecraft.scripts;
 
-import cc.moecraft.irc.osubot.achievement.Achievement;
-import cc.moecraft.irc.osubot.achievement.AchievementManager;
+import cc.moecraft.irc.osubot.osu.achievement.Achievement;
+import cc.moecraft.irc.osubot.osu.achievement.AchievementManager;
 import cc.moecraft.logger.DebugLogger;
 
 import java.io.File;
