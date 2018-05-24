@@ -9,7 +9,7 @@
         <img src="https://circleci.com/gh/hykilpikonna/HyOsuIRCBot.svg?style=shield&circle-token=62fa0e3b9d4ac062f2d024bb9dedcbf036004c5d"></a>&nbsp;&nbsp;&nbsp;
     <a href="#features"><img src="https://img.shields.io/badge/Features-功能-01D282.svg"></a>
     <a href="./commands.md"><img src="https://img.shields.io/badge/Commands-指令-02B5A1.svg"></a>
-    <a href="#credits"><img src="https://img.shields.io/badge/Credits-功劳-039DBA.svg"></a>
+    <a href="#credits"><img src="https://img.shields.io/badge/Credits-鸣谢-039DBA.svg"></a>
     <a href="#licence"><img src="https://img.shields.io/badge/License-开源条款-0577E5.svg"></a>
 </p>
 
@@ -35,7 +35,7 @@ Todo Features / 待完成功能
 * 成就助手 / Achievement unlocking utilitiy.
 
 <a name="credits"></a>
-Credits / 功劳
+Credits / 鸣谢
 --------
 
 * [PircBotX](https://github.com/pircbotx/pircbotx) for IRC Bot Library
