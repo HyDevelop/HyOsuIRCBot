@@ -38,7 +38,7 @@ public class CommandReload extends Command
         Main.getMessenger().respondIRC(event, MultiLanguageText.directText("开始重载..."));
         long start = System.currentTimeMillis();
 
-        Main.getConfig().reload();
+        Main.getIrcConfig().reload();
         Main.getPermissionConfig().reload();
 
         return MultiLanguageText.directText("重载完成! 耗时: " + (System.currentTimeMillis() - start) + "ms");

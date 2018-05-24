@@ -31,7 +31,7 @@ public class AchievementClassGenerator
 
     private static String generatePath = "./src/main/java/";
     private static String formatPath = "./src/test/resources/AchievementGeneratorFormat.java";
-    private static String baseClassPackage = "cc.moecraft.irc.osubot.achievement.achievements";
+    private static String baseClassPackage = "cc.moecraft.irc.osubot.osu.achievement.achievements";
     private static Pattern regexForFindingBeatmap = Pattern.compile("(?<=\"https://osu.ppy.sh/b/)(.*)(?=\")");
     private static Pattern regexForFindingMods = Pattern.compile("(?<=with)(.*)(?=mods)");
     private static Map<String, URL> haitaiUrlMap = new HashMap<>();

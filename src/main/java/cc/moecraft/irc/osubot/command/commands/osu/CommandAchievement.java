@@ -1,7 +1,7 @@
 package cc.moecraft.irc.osubot.command.commands.osu;
 
 import cc.moecraft.irc.osubot.Main;
-import cc.moecraft.irc.osubot.achievement.Achievement;
+import cc.moecraft.irc.osubot.osu.achievement.Achievement;
 import cc.moecraft.irc.osubot.command.ChannelCommand;
 import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.language.MultiLanguageText;
