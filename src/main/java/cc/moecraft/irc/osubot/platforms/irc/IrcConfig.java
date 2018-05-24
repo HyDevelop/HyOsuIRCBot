@@ -81,6 +81,8 @@ public class IrcConfig extends Config
         addDefault("BotProperties.EnabledCommandPrefixes", new String[]{"!", ";", "-", ".", "?"});
         addDefault("BotProperties.AutoJoinChannels", new String[]{"#general", "#chinese"});
 
+        addDefault("BotProperties.DisableChannelReply", true);
+
         addDefault("BotProperties.AntiSpam.NotACommandExcludedUsernames", new String[]{"dullwolf", "Hykilpikonna", "BanchoBot", "Tillerino", "Ameo"});
 
         save();

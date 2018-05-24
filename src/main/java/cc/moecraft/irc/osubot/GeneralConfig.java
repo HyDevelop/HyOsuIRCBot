@@ -34,7 +34,6 @@ public class GeneralConfig extends Config
         addDefault("BotProperties.Download.Timeout", 3000);
         addDefault("BotProperties.Download.Osu.APIKey", PropertiesUtil.readKey("osu_key")); // https://github.com/ppy/osu-api/wiki
 
-        addDefault("BotProperties.DisableChannelReply", true);
         addDefault("BotProperties.DebugLogging", false);
 
         save();
