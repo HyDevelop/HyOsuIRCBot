@@ -4,7 +4,7 @@ import cc.moecraft.irc.osubot.utils.FileUtils;
 import cc.moecraft.logger.DebugLogger;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.github.pcre.Pcre;
+import cc.moecraft.irc.osubot.utils.PcreUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -152,8 +152,8 @@ public class CommandsMdGenerator
             {
                 DataSet dataSet = new DataSet("", "", file);
 
-                String permissionAndTheRest = Pcre.preg_match_all(regexFindPermission, content)[0];
-                dataSet.setPermission(permissionAndTheRest.contains("\";") ? Pcre.preg_match_all("(.*)(?=\\\"\\;\\n    \\})", permissionAndTheRest)[0] : permissionAndTheRest);
+                String permissionAndTheRest = PcreUtils.preg_match_all(regexFindPermission, content)[0];
+                dataSet.setPermission(permissionAndTheRest.contains("\";") ? PcreUtils.preg_match_all("(.*)(?=\\\"\\;\\n    \\})", permissionAndTheRest)[0] : permissionAndTheRest);
                 logger.debug("Perm: " + dataSet.getPermission());
 
                 Matcher matcherJDoc = regexFindJavaDocComments.matcher(content);
