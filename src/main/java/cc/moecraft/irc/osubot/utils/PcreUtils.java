@@ -1,4 +1,4 @@
-package org.github.pcre;
+package cc.moecraft.irc.osubot.utils;
 
 import java.util.Arrays;
 import java.util.SortedSet;
@@ -7,10 +7,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * PCRE Regex Utils
  *
  * @author Raimon Bosch
  */
-public class Pcre {
+public class PcreUtils {
 
     public static String siu = "siu";
     public static String u = "u";
@@ -79,11 +80,11 @@ public class Pcre {
     };
 
     /** Creates a new instance of RegexFinder */
-    public Pcre() {
+    public PcreUtils() {
     }
 
     public static int preg_match(String pattern, String subject) {
-        Pattern p = Pcre.compile(pattern);
+        Pattern p = PcreUtils.compile(pattern);
         return preg_match(p, subject);
     }
 
@@ -100,7 +101,7 @@ public class Pcre {
     }
 
     public static String preg_match(String pattern, String subject, boolean return_matches) {
-        Pattern p = Pcre.compile(pattern);
+        Pattern p = PcreUtils.compile(pattern);
         return  preg_match(p, subject, return_matches);
     }
 
@@ -116,7 +117,7 @@ public class Pcre {
     }
 
     public static String[] preg_match_all(String pattern, String subject) {
-        Pattern p = Pcre.compile(pattern);
+        Pattern p = PcreUtils.compile(pattern);
         return preg_match_all(p, subject);
     }
 
@@ -135,7 +136,7 @@ public class Pcre {
     }
 
     public static String[] preg_match_all(String pattern, String subject, int groups) {
-        Pattern p = Pcre.compile(Pcre.getPatternWithoutFlags(pattern));
+        Pattern p = PcreUtils.compile(PcreUtils.getPatternWithoutFlags(pattern));
         return preg_match_all(p, subject, groups);
     }
 
@@ -160,7 +161,7 @@ public class Pcre {
     }
 
     public static String preg_replace(String pattern, String replacement, String subject) {
-        Pattern p = Pcre.compile(pattern);
+        Pattern p = PcreUtils.compile(pattern);
         return preg_replace(p, replacement, subject);
     }
 
@@ -197,7 +198,7 @@ public class Pcre {
 
     public static String preg_replace(String[] patterns, String[] replacements, String subject) {
         for (int i = 0; i < patterns.length; i++) {
-            subject = Pcre.preg_replace(patterns[i], (replacements[i] != null) ? replacements[i] : "", subject);
+            subject = PcreUtils.preg_replace(patterns[i], (replacements[i] != null) ? replacements[i] : "", subject);
         }
 
         return subject;
@@ -207,7 +208,7 @@ public class Pcre {
         //Simplified preg_replace multiple using an indexOf array. If indexOf[i] exists in subject we will perform the regular expression at i
         for (int i = 0; i < patterns.length; i++) {
             if (subject.indexOf(indexof[i]) != -1) {
-                subject = Pcre.preg_replace(patterns[i], replacements[i], subject);
+                subject = PcreUtils.preg_replace(patterns[i], replacements[i], subject);
             }
         }
 
@@ -218,7 +219,7 @@ public class Pcre {
         //Simplified preg_replace multiple using an indexOf array. If indexOf[i] exists in subject we will perform the regular expression at i
         for (int i = 0; i < patterns.length; i++) {
             if (subject.indexOf(indexof[i]) != -1) {
-                subject = Pcre.preg_replace(patterns[i], replacements[i], subject);
+                subject = PcreUtils.preg_replace(patterns[i], replacements[i], subject);
             }
         }
 
@@ -227,7 +228,7 @@ public class Pcre {
 
     public static String preg_replace(String[] patterns, String replacement, String subject) {
         for (int i = 0; i < patterns.length; i++) {
-            subject = Pcre.preg_replace(patterns[i], replacement, subject);
+            subject = PcreUtils.preg_replace(patterns[i], replacement, subject);
         }
 
         return subject;
@@ -235,7 +236,7 @@ public class Pcre {
 
     public static String preg_replace(Pattern[] patterns, String replacement, String subject) {
         for (int i = 0; i < patterns.length; i++) {
-            subject = Pcre.preg_replace(patterns[i], replacement, subject);
+            subject = PcreUtils.preg_replace(patterns[i], replacement, subject);
         }
 
         return subject;
@@ -263,7 +264,7 @@ public class Pcre {
   }*/
 
     public static String preg_quote(String str) {
-        return Pcre.str_replace(Pcre.SLASH_CHARACTERS, Pcre.SLASH_CHARACTERS_SUBSTITUTION, str);
+        return PcreUtils.str_replace(PcreUtils.SLASH_CHARACTERS, PcreUtils.SLASH_CHARACTERS_SUBSTITUTION, str);
     }
 
     public static String[] array_merge(String[] array1, String[] array2) {
@@ -291,7 +292,7 @@ public class Pcre {
 
     public static Pattern compile(String pattern) {
         //System.out.println("compile(pattern:" + pattern + ") => woFlags:'" + Pcre.getPatternWithoutFlags(pattern) + "', flags: " + Pcre.getPatternFlags(pattern));
-        return Pattern.compile(Pcre.getPatternWithoutFlags(pattern), Pcre.getPatternFlags(pattern));
+        return Pattern.compile(PcreUtils.getPatternWithoutFlags(pattern), PcreUtils.getPatternFlags(pattern));
     }
 
     public static String getPatternWithoutFlags(String pattern) {
