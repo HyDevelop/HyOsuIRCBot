@@ -1,7 +1,7 @@
 package cc.moecraft.consoleprograms;
 
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.FingersAI;
-import cc.moecraft.irc.osubot.command.commands.fun.minigames.fingers.FingersData;
+import cc.moecraft.irc.osubot.minigames.fingers.FingersAI;
+import cc.moecraft.irc.osubot.minigames.fingers.FingersData;
 import cc.moecraft.logger.DebugLogger;
 
 import java.io.BufferedReader;
