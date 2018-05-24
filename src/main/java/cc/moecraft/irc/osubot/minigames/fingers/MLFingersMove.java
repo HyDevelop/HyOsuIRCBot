@@ -70,8 +70,8 @@ public class MLFingersMove
      */
     public static FingersPlayerType get1v1Result(int playerHand, int botHand, FingersPlayerType whosTurn)
     {
-        if (botHand == 1 && playerHand == 3) return null;
-        if (botHand == 3 && playerHand == 1) return null;
+        if (botHand == 1 && playerHand == 3 && whosTurn == FingersPlayerType.Bot) return null;
+        if (botHand == 3 && playerHand == 1 && whosTurn == FingersPlayerType.Player) return null;
         if (botHand == 2 && playerHand == 6) return null;
         if (botHand == 6 && playerHand == 2) return null;
 
