@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-    <a href="https://circleci.com/gh/hykilpikonna/HyOsuIRCBot">
-        <img src="https://circleci.com/gh/hykilpikonna/HyOsuIRCBot.svg?style=shield&circle-token=62fa0e3b9d4ac062f2d024bb9dedcbf036004c5d"></a>&nbsp;&nbsp;&nbsp;
+    <a href="https://circleci.com/gh/HyDevelop/HyOsuIRCBot">
+        <img src="https://circleci.com/gh/HyDevelop/HyOsuIRCBot.svg?style=shield&circle-token=62fa0e3b9d4ac062f2d024bb9dedcbf036004c5d"></a>&nbsp;&nbsp;&nbsp;
     <a href="#features"><img src="https://img.shields.io/badge/Features-功能-01D282.svg"></a>
     <a href="./commands.md"><img src="https://img.shields.io/badge/Commands-指令-02B5A1.svg"></a>
     <a href="#credits"><img src="https://img.shields.io/badge/Credits-鸣谢-039DBA.svg"></a>
