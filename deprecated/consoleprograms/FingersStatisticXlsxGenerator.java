@@ -2,16 +2,12 @@ package cc.moecraft.scripts;
 
 import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.minigames.fingers.FingersPlayerType;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * 此类由 Hykilpikonna 在 2018/05/24 创建!
@@ -96,7 +92,7 @@ public class FingersStatisticXlsxGenerator
             }
         }
 
-        FileOutputStream fileOut = new FileOutputStream(Main.PATH + File.separator + "experimental" + File.separator + "result2.xlsx");
+        FileOutputStream fileOut = new FileOutputStream(Main.PATH + File.separator + "deprecated/experimental" + File.separator + "result2.xlsx");
         workbook.write(fileOut);
         fileOut.close();
     }

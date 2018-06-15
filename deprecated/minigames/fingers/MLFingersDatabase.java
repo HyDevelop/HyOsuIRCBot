@@ -17,7 +17,7 @@ public class MLFingersDatabase extends Config
 {
     public MLFingersDatabase()
     {
-        super(Main.PATH + File.separator + "experimental", "MLFingersDatabase", "yml", false, true);
+        super(Main.PATH + File.separator + "deprecated/experimental", "MLFingersDatabase", "yml", false, true);
     }
 
     /**
