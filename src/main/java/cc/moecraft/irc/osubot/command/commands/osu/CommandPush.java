@@ -15,6 +15,7 @@ import cc.moecraft.irc.osubot.osu.exceptions.JsonEmptyException;
 import cc.moecraft.irc.osubot.osu.exceptions.RecentScoreNotEnoughException;
 import cc.moecraft.irc.osubot.osu.exceptions.RequiredParamIsNullException;
 import cc.moecraft.irc.osubot.utils.*;
+import cc.moecraft.utils.ArrayUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;
@@ -61,7 +62,7 @@ public class CommandPush extends Command implements ChannelCommand
     {
         if (args.size() < 1) return MultiLanguageText.languageNode("commands.osu.push_error_input_username");
 
-        int mode = ArgsUtils.getMode(args, 0);
+        int mode = OsuArgsUtils.getMode(args, 0);
         String username;
 
         if (mode == -1)
@@ -83,7 +84,7 @@ public class CommandPush extends Command implements ChannelCommand
     {
         int mode;
         if (args.size() == 0) mode = 0;
-        else if (args.size() == 1) mode = ArgsUtils.getMode(args, 0);
+        else if (args.size() == 1) mode = OsuArgsUtils.getMode(args, 0);
         else return MultiLanguageText.empty();
 
         if (mode == -1) return MultiLanguageText.empty();

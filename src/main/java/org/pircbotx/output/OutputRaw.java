@@ -18,7 +18,7 @@
 package org.pircbotx.output;
 
 import cc.moecraft.irc.osubot.Main;
-import cc.moecraft.irc.osubot.utils.ArrayUtils;
+import cc.moecraft.utils.ArrayUtils;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

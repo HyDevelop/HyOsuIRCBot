@@ -4,7 +4,7 @@ import cc.moecraft.irc.osubot.Main;
 import cc.moecraft.irc.osubot.command.ChannelCommand;
 import cc.moecraft.irc.osubot.command.Command;
 import cc.moecraft.irc.osubot.language.MultiLanguageText;
-import cc.moecraft.irc.osubot.utils.ArrayUtils;
+import cc.moecraft.utils.ArrayUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.types.GenericMessageEvent;

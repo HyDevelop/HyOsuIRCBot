@@ -17,7 +17,7 @@ import org.pircbotx.hooks.types.GenericMessageEvent;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
-import static cc.moecraft.irc.osubot.utils.ArrayUtils.getUsernameAndModeWithArgs;
+import static cc.moecraft.irc.osubot.utils.OsuArgsUtils.getUsernameAndModeWithArgs;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/23 创建!
