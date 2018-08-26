@@ -9,3 +9,5 @@ chmod +x ./target/app/bin/*
 cd ./target/app/bin/
 
 nohup ./jboot &
+
+tail -f ./target/app/bin/nohup.out
